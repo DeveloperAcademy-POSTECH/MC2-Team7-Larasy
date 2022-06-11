@@ -43,11 +43,7 @@ struct SearchView: View {
             List {
                 ForEach(viewModel.musicList, id: \.self) { music in
                     HStack {
-                        Image(systemName: "photo")
-                            .cornerRadius(5)
-                            .frame(width: 55, height: 55)
-                            .overlay(RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 4))
+                        URLImage(urlString: music.artworkUrl100)
                         
                         VStack(alignment: .leading) {
                             Text(music.trackName)
@@ -67,7 +63,38 @@ struct SearchView: View {
     }
 }
 
-
+struct URLImage: View {
+    
+    @State var data: Data?
+    let urlString: String
+    var body: some View {
+        if let data = data, let uiimage = UIImage(data: data) {
+            Image(uiImage: uiimage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 55, height: 55)
+                .cornerRadius(5)
+                .background(.gray)
+        } else {
+            Image(systemName: "photo")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 55, height: 55)
+                .onAppear() {
+                    fetchData()
+                }
+        }
+    }
+    
+    private func fetchData() {
+        guard let url = URL(string: urlString) else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+            self.data = data
+        }
+        task.resume()
+    }
+}
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
