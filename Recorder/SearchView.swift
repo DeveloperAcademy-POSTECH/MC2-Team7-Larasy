@@ -32,7 +32,7 @@ struct SearchView: View {
                             viewModel.getSearchResults(search: search)
                         }
                 }
-                .foregroundColor(.gray)
+                .foregroundColor(.titleGray)
                 .padding(13)
             }
             .frame(height: 40)
