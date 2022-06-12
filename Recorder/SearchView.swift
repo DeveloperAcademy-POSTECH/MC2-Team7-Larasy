@@ -41,6 +41,17 @@ struct SearchView: View {
                             .onSubmit {
                                 viewModel.getSearchResults(search: search)
                             }
+                        if search != "" {
+                            Image(systemName: "xmark.circle.fill")
+                                        .imageScale(.medium)
+                                        .foregroundColor(Color(.systemGray3))
+                                        .padding(3)
+                                        .onTapGesture {
+                                            withAnimation {
+                                                self.search = ""
+                                              }
+                                        }
+                        }
                     }
                     .foregroundColor(.darkgray)
                     .padding(13)
@@ -70,9 +81,10 @@ struct SearchView: View {
                                 .foregroundColor(.darkgray)
                             }
                         }
-                        .padding(3)
+                        .listRowBackground(Color.background)
+                        .listRowSeparator(.hidden)
+                        .padding(8)
                     }
-                    .listStyle(.sidebar)
                     .onAppear { UITableView.appearance().contentInset.top = -35 }
                 }
             }
