@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "HomeBG.pdf",
+      "idiom" : "iphone"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
