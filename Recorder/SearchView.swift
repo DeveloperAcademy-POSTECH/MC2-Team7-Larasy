@@ -16,50 +16,68 @@ struct SearchView: View {
     init() { UITableView.appearance().backgroundColor = UIColor.clear }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("기록을 통해 기억하고 싶은 음악을 알려주세요")
-                .frame(width: 300)
-                .font(.system(size: 24, weight: .bold))
+        ZStack {
+            Color("background")
+                .ignoresSafeArea()
             
-            //search bar
-            ZStack {
-                Rectangle()
-                    .foregroundColor(.white)
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    TextField("기록하고 싶은 음악, 가수를 입력하세요", text: $search)
-                        .onSubmit {
-                            viewModel.getSearchResults(search: search)
-                        }
-                }
-                .foregroundColor(.gray)
-                .padding(13)
-            }
-            .frame(height: 40)
-            .cornerRadius(10)
-            .padding(20)
-            
-            // result view
-            List {
-                ForEach(viewModel.musicList, id: \.self) { music in
+            VStack(alignment: .leading) {
+                Text("오랫동안 간직하고 싶은 나만의 음악을 알려주세요")
+                    .frame(width: 300)
+                    .font(.system(size: 24, weight: .bold))
+                    .padding(.top, 40)
+                    .padding(.leading, 20)
+                    
+                
+                //search bar
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.lightgray)
+                    
                     HStack {
-                        URLImage(urlString: music.artworkUrl100)
+                        Image(systemName: "magnifyingglass")
                         
-                        VStack(alignment: .leading) {
-                            Text(music.trackName)
-                                .font(.system(size: 17, weight: .bold))
-                                .padding(6)
-                                .lineLimit(1)
-                            Text(music.artistName)
-                                .font(.system(size: 17))
-                                .padding(6)
-                        }
+                        TextField("기록하고 싶은 음악, 가수를 입력하세요", text: $search)
+                            .foregroundColor(.darkgray)
+                            .onSubmit {
+                                viewModel.getSearchResults(search: search)
+                            }
                     }
+                    .foregroundColor(.darkgray)
+                    .padding(13)
                 }
-                .padding()
+                .frame(height: 40)
+                .cornerRadius(10)
+                .padding(20)
+                
+                
+                // result view
+                GeometryReader { geometry in
+                    List {
+                        ForEach(viewModel.musicList, id: \.self) { music in
+                            HStack {
+                                URLImage(urlString: music.artworkUrl100)
+                                    .cornerRadius(5)
+                                
+                                VStack(alignment: .leading) {
+                                    Text(music.trackName)
+                                        .font(.system(size: 17, weight: .bold))
+                                        .lineLimit(1)
+                                        .padding(.bottom, 2)
+                                    Text(music.artistName)
+                                        .font(.system(size: 15))
+                                }
+                                .padding(.leading, 10)
+                                .foregroundColor(.darkgray)
+                            }
+                        }
+                        .padding(3)
+                    }
+                    .listStyle(.sidebar)
+                    .onAppear { UITableView.appearance().contentInset.top = -35 }
+                }
             }
-            .listStyle(.sidebar)
         }
+        .navigationBarTitle("음악 선택", displayMode: .inline)
     }
 }
 
@@ -67,17 +85,19 @@ struct URLImage: View {
     
     @State var data: Data?
     let urlString: String
+    
     var body: some View {
+        
         if let data = data, let uiimage = UIImage(data: data) {
             Image(uiImage: uiimage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 55, height: 55)
-                .cornerRadius(5)
                 .background(.gray)
+            
         } else {
-            Image(systemName: "photo")
-                .resizable()
+            Rectangle()
+                .foregroundColor(.lightgray)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 55, height: 55)
                 .onAppear() {
