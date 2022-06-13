@@ -12,10 +12,12 @@ struct SearchView: View {
     
     @StateObject var musicAPI = MusicAPI()
     @State var search = ""
+    private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
     
     init() { UITableView.appearance().backgroundColor = UIColor.clear }
     
     var body: some View {
+        
         ZStack {
             Color("background")
                 .ignoresSafeArea()
@@ -26,76 +28,85 @@ struct SearchView: View {
                     .font(.system(size: 24, weight: .bold))
                     .padding(.top, 40)
                     .padding(.leading, 20)
-                    
                 
-                //search bar
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.titleLightgray)
-                    
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                        
-                        TextField("기록하고 싶은 음악, 가수를 입력하세요", text: $search)
-                            .foregroundColor(.titleDarkgray)
-                            .onSubmit {
-                                musicAPI.getSearchResults(search: search)
-                            }
-                        if search != "" {
-                            Image(systemName: "xmark.circle.fill")
-                                        .imageScale(.medium)
-                                        .foregroundColor(Color(.systemGray3))
-                                        .padding(3)
-                                        .onTapGesture {
-                                            withAnimation {
-                                                self.search = ""
-                                              }
-                                        }
-                        }
-                    }
-                    .foregroundColor(.titleDarkgray)
-                    .padding(13)
-                }
-                .frame(height: 40)
-                .cornerRadius(10)
-                .padding(20)
+                SearchBar
                 
-                
-                // result view
-                GeometryReader { geometry in
-                    List {
-                        ForEach(musicAPI.musicList, id: \.self) { music in
-                            HStack {
-                                URLImage(urlString: music.albumArt)
-                                    .cornerRadius(5)
-                                
-                                NavigationLink(destination: TestSoiView(music: music)) {
-                                    VStack(alignment: .leading) {
-                                        Text(music.title) // 노래제목
-                                            .font(.system(size: 17, weight: .bold))
-                                            .lineLimit(1)
-                                            .padding(.bottom, 2)
-                                        
-                                        Text(music.artist) // 가수명
-                                            .font(.system(size: 15))
-                                            .lineLimit(1)
-                                }
-                                .padding(.leading, 10)
-                                .foregroundColor(.titleDarkgray)
-                            }
-                                .buttonStyle(PlainButtonStyle())
-                            }
-                        }
-                        .listRowBackground(Color.background)
-                        .listRowSeparator(.hidden)
-                        .padding([.bottom, .top], 10)
-                        .padding([.leading], -20)
-                    }
-                    .onAppear { UITableView.appearance().contentInset.top = -35 }
-                }
+                ResultView
             }
         }
         .navigationBarTitle("음악 선택", displayMode: .inline)
+    }
+    
+    
+    var SearchBar: some View {
+        ZStack {
+            Rectangle()
+                .foregroundColor(.titleLightgray)
+            
+            HStack {
+                Image(systemName: "magnifyingglass")
+                
+                TextField(placeholer, text: $search)
+                    .foregroundColor(.titleDarkgray)
+                    .onSubmit {
+                        musicAPI.getSearchResults(search: search)
+                    }
+                
+                if search != "" {
+                    Image(systemName: "xmark.circle.fill")
+                        .imageScale(.medium)
+                        .foregroundColor(Color(.systemGray3))
+                        .padding(3)
+                        .onTapGesture {
+                            withAnimation {
+                                self.search = ""
+                            }
+                        }
+                }
+            }
+            .foregroundColor(.titleDarkgray)
+            .padding(13)
+        }
+        .frame(height: 40)
+        .cornerRadius(10)
+        .padding(20)
+    }
+    
+    
+    var ResultView: some View {
+        
+        GeometryReader { geometry in
+            List {
+                ForEach(musicAPI.musicList, id: \.self) { music in
+                    
+                    HStack {
+                        URLImage(urlString: music.albumArt)
+                            .cornerRadius(5)
+                        
+                        NavigationLink(destination: TestSoiView(music: music)) {
+                            VStack(alignment: .leading) {
+                                Text(music.title) // 노래제목
+                                    .font(.system(size: 17, weight: .bold))
+                                    .lineLimit(1)
+                                    .padding(.bottom, 2)
+                                
+                                Text(music.artist) // 가수명
+                                    .font(.system(size: 15))
+                                    .lineLimit(1)
+                            }
+                            .padding(.leading, 10)
+                            .foregroundColor(.titleDarkgray)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                }
+                .listRowBackground(Color.background)
+                .listRowSeparator(.hidden)
+                .padding([.bottom, .top], 10)
+                .padding([.leading], -20)
+            }
+            .onAppear { UITableView.appearance().contentInset.top = -35 }
+        }
     }
 }
 
