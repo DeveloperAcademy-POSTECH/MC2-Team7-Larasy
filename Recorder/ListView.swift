@@ -9,18 +9,28 @@ import SwiftUI
 
 struct ListView: View {
     
-    @State var isLighting : Bool = true
+    @State private var isRotated : Bool = false
+    
+    var animation: Animation {
+        Animation.easeInOut(duration: 2)
+            //.repeatForever(autoreverses: false)
+    }
     
     var body: some View {
-        ZStack{
-            Image("lampTop")
-                .blur(radius: isLighting ? 25 : 0)
-                .padding(.bottom,50)
-            Image("lamp")
-        }.onTapGesture {
-            isLighting.toggle()
+        VStack{
+            Button("CD ListView"){
+                self.isRotated.toggle()
+            }
+            Image("HomeCD")
+                .rotationEffect(Angle.degrees(isRotated ? 360 : 0))
+                .animation(animation)
+                .onTapGesture {
+                    isRotated.toggle()
+                }
+                .offset(x: 30, y: 30)
+            Rectangle()
+                .frame(width: 200, height: 200)
         }
-        
         
     }
 }

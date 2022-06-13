@@ -12,17 +12,19 @@ extension Color {
     // foreground(.black) 이런식으로 사용하시면 돼요!
     
     //title 색상
-    static let black = Color("black")
-    static let darkgray = Color("darkgray")
-    static let gray = Color("gray")
-    static let lightgray = Color("lightgray")
+    static let titleBlack = Color("black")
+    static let titleDarkgray = Color("darkgray")
+    static let titleGray = Color("gray")
+    static let titleLightgray = Color("lightgray")
     
     //point color
-    static let blue = Color("blue")
-    static let orange = Color("orange")
-    static let yellow = Color("yellow")
+    static let pointBlue = Color("blue")
+    static let pointOrange = Color("orange")
+    static let pointYellow = Color("yellow")
     
     //etc
     static let background = Color("background")
     static let cdplayer = Color("cdplayer")
+    static let darkbg = Color("darkbg")
+
 }
