@@ -10,7 +10,7 @@ import UIKit
 
 struct SearchView: View {
     
-    @StateObject var viewModel = ViewModel()
+    @StateObject var musicAPI = MusicAPI()
     @State var search = ""
     
     init() { UITableView.appearance().backgroundColor = UIColor.clear }
@@ -28,34 +28,18 @@ struct SearchView: View {
                     .padding(.leading, 20)
                     
                 
-            //search bar
-            ZStack {
-                Rectangle()
-                    .foregroundColor(.white)
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    TextField("기록하고 싶은 음악, 가수를 입력하세요", text: $search)
-                        .onSubmit {
-                            viewModel.getSearchResults(search: search)
-                        }
-                }
-                .foregroundColor(.titleGray)
-                .padding(13)
-            }
-            .frame(height: 40)
-            .cornerRadius(10)
-            .padding(20)
-            
-            // result view
-            List {
-                ForEach(viewModel.musicList, id: \.self) { music inx
+                //search bar
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.titleLightgray)
+                    
                     HStack {
                         Image(systemName: "magnifyingglass")
                         
                         TextField("기록하고 싶은 음악, 가수를 입력하세요", text: $search)
-                            .foregroundColor(.darkgray)
+                            .foregroundColor(.titleDarkgray)
                             .onSubmit {
-                                viewModel.getSearchResults(search: search)
+                                musicAPI.getSearchResults(search: search)
                             }
                         if search != "" {
                             Image(systemName: "xmark.circle.fill")
@@ -69,7 +53,7 @@ struct SearchView: View {
                                         }
                         }
                     }
-                    .foregroundColor(.darkgray)
+                    .foregroundColor(.titleDarkgray)
                     .padding(13)
                 }
                 .frame(height: 40)
@@ -80,26 +64,32 @@ struct SearchView: View {
                 // result view
                 GeometryReader { geometry in
                     List {
-                        ForEach(viewModel.musicList, id: \.self) { music in
+                        ForEach(musicAPI.musicList, id: \.self) { music in
                             HStack {
-                                URLImage(urlString: music.artworkUrl100)
+                                URLImage(urlString: music.albumArt)
                                     .cornerRadius(5)
                                 
-                                VStack(alignment: .leading) {
-                                    Text(music.trackName)
-                                        .font(.system(size: 17, weight: .bold))
-                                        .lineLimit(1)
-                                        .padding(.bottom, 2)
-                                    Text(music.artistName)
-                                        .font(.system(size: 15))
+                                NavigationLink(destination: TestSoiView(music: music)) {
+                                    VStack(alignment: .leading) {
+                                        Text(music.title) // 노래제목
+                                            .font(.system(size: 17, weight: .bold))
+                                            .lineLimit(1)
+                                            .padding(.bottom, 2)
+                                        
+                                        Text(music.artist) // 가수명
+                                            .font(.system(size: 15))
+                                            .lineLimit(1)
                                 }
                                 .padding(.leading, 10)
-                                .foregroundColor(.darkgray)
+                                .foregroundColor(.titleDarkgray)
+                            }
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
                         .listRowBackground(Color.background)
                         .listRowSeparator(.hidden)
-                        .padding(8)
+                        .padding([.bottom, .top], 10)
+                        .padding([.leading], -20)
                     }
                     .onAppear { UITableView.appearance().contentInset.top = -35 }
                 }
@@ -125,7 +115,7 @@ struct URLImage: View {
             
         } else {
             Rectangle()
-                .foregroundColor(.lightgray)
+                .foregroundColor(.titleLightgray)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 55, height: 55)
                 .onAppear() {
