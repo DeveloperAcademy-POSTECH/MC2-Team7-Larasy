@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct CdListViewApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            PracticeView()
+            HomeView()
         }
     }
 }

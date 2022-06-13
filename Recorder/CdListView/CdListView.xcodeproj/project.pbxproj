@@ -7,28 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B2666CC22854C77600F1A1A8 /* CdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CC12854C77600F1A1A8 /* CdListView.swift */; };
 		B2666CC42854C77800F1A1A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2666CC32854C77800F1A1A8 /* Assets.xcassets */; };
 		B2666CC72854C77800F1A1A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2666CC62854C77800F1A1A8 /* Preview Assets.xcassets */; };
 		B2666CCE2854CEBA00F1A1A8 /* CdListViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CCD2854CEBA00F1A1A8 /* CdListViewApp.swift */; };
-		B2666CD028552B1A00F1A1A8 /* SnapCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CCF28552B1A00F1A1A8 /* SnapCarousel.swift */; };
-		B2666CD228552CA300F1A1A8 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CD128552CA300F1A1A8 /* Album.swift */; };
-		B2666CD6285658D300F1A1A8 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CD5285658D300F1A1A8 /* CarouselViewController.swift */; };
-		B2666CD82856594900F1A1A8 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CD72856594900F1A1A8 /* CarouselView.swift */; };
-		B2666CDA2856650300F1A1A8 /* NewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CD92856650300F1A1A8 /* NewView.swift */; };
+		B2666CDA2856650300F1A1A8 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CD92856650300F1A1A8 /* SnapCarouselView.swift */; };
+		B2666CDC28566CE600F1A1A8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CDB28566CE600F1A1A8 /* HomeView.swift */; };
+		B2666CDE2856D57C00F1A1A8 /* CdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2666CDD2856D57C00F1A1A8 /* CdListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B2666CBC2854C77600F1A1A8 /* CdListView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CdListView.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2666CC12854C77600F1A1A8 /* CdListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdListView.swift; sourceTree = "<group>"; };
 		B2666CC32854C77800F1A1A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2666CC62854C77800F1A1A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B2666CCD2854CEBA00F1A1A8 /* CdListViewApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CdListViewApp.swift; sourceTree = "<group>"; };
-		B2666CCF28552B1A00F1A1A8 /* SnapCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarousel.swift; sourceTree = "<group>"; };
-		B2666CD128552CA300F1A1A8 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
-		B2666CD5285658D300F1A1A8 /* CarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
-		B2666CD72856594900F1A1A8 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
-		B2666CD92856650300F1A1A8 /* NewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewView.swift; sourceTree = "<group>"; };
+		B2666CD92856650300F1A1A8 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
+		B2666CDB28566CE600F1A1A8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B2666CDD2856D57C00F1A1A8 /* CdListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +39,6 @@
 		B2666CB32854C77600F1A1A8 = {
 			isa = PBXGroup;
 			children = (
-				B2666CD5285658D300F1A1A8 /* CarouselViewController.swift */,
 				B2666CBE2854C77600F1A1A8 /* CdListView */,
 				B2666CBD2854C77600F1A1A8 /* Products */,
 			);
@@ -62,12 +55,10 @@
 		B2666CBE2854C77600F1A1A8 /* CdListView */ = {
 			isa = PBXGroup;
 			children = (
-				B2666CD92856650300F1A1A8 /* NewView.swift */,
-				B2666CD72856594900F1A1A8 /* CarouselView.swift */,
-				B2666CC12854C77600F1A1A8 /* CdListView.swift */,
 				B2666CCD2854CEBA00F1A1A8 /* CdListViewApp.swift */,
-				B2666CCF28552B1A00F1A1A8 /* SnapCarousel.swift */,
-				B2666CD128552CA300F1A1A8 /* Album.swift */,
+				B2666CDB28566CE600F1A1A8 /* HomeView.swift */,
+				B2666CDD2856D57C00F1A1A8 /* CdListView.swift */,
+				B2666CD92856650300F1A1A8 /* SnapCarouselView.swift */,
 				B2666CC32854C77800F1A1A8 /* Assets.xcassets */,
 				B2666CC52854C77800F1A1A8 /* Preview Content */,
 			);
@@ -152,13 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2666CD028552B1A00F1A1A8 /* SnapCarousel.swift in Sources */,
-				B2666CC22854C77600F1A1A8 /* CdListView.swift in Sources */,
+				B2666CDC28566CE600F1A1A8 /* HomeView.swift in Sources */,
+				B2666CDE2856D57C00F1A1A8 /* CdListView.swift in Sources */,
 				B2666CCE2854CEBA00F1A1A8 /* CdListViewApp.swift in Sources */,
-				B2666CD6285658D300F1A1A8 /* CarouselViewController.swift in Sources */,
-				B2666CDA2856650300F1A1A8 /* NewView.swift in Sources */,
-				B2666CD82856594900F1A1A8 /* CarouselView.swift in Sources */,
-				B2666CD228552CA300F1A1A8 /* Album.swift in Sources */,
+				B2666CDA2856650300F1A1A8 /* SnapCarouselView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

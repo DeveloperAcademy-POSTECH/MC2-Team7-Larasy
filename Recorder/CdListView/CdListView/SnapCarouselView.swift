@@ -12,47 +12,60 @@ struct SnapCarousel: View {
     
     var body: some View {
         let spacing: CGFloat = 16
-        let widthOfHiddenCards: CGFloat = 32 /// UIScreen.main.bounds.width - 10
+        let widthOfHiddenCards: CGFloat = 70 /// UIScreen.main.bounds.width - 10
         let cardHeight: CGFloat = 279
         
         let items = [
-            Card(id: 0, name: "Hey"),
-            Card(id: 1, name: "Ho"),
-            Card(id: 2, name: "Lets"),
-            Card(id: 3, name: "Go")
+            Card(id: 0, name: "Ohio", image: Image("album1")),
+            Card(id: 1, name: "Lady Bird", image: Image("album2")),
+            Card(id: 2, name: "Queen", image: Image("album3")),
+            Card(id: 3, name: "BTS", image: Image("album4"))
         ]
         
         return Canvas {
             /// TODO: find a way to avoid passing same arguments to Carousel and Item
-            Carousel(
-                numberOfItems: CGFloat(items.count),
-                spacing: spacing,
-                widthOfHiddenCards: widthOfHiddenCards
-            ) {
-                ForEach(items, id: \.self.id) { item in
-                    Item(
-                        _id: Int(item.id),
-                        spacing: spacing,
-                        widthOfHiddenCards: widthOfHiddenCards,
-                        cardHeight: cardHeight
-                    ) {
-                        Text("\(item.name)")
+            VStack {
+                Carousel(
+                    numberOfItems: CGFloat(items.count),
+                    spacing: spacing,
+                    widthOfHiddenCards: widthOfHiddenCards
+                ) {
+                    ForEach(items, id: \.self.id) { item in
+                        Item(
+                            _id: Int(item.id),
+                            spacing: spacing,
+                            widthOfHiddenCards: widthOfHiddenCards,
+                            cardHeight: cardHeight
+                        ) {
+                            VStack {
+                                Text("\(item.name)")
+                                    .foregroundColor(Color.black)
+                                    .padding(.bottom, 30)
+    //                            Image("\(item.image)")
+    //                                .resizable()
+    //                                .clipShape(Circle())
+    //                                .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                                Circle()
+                                    .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                            }
+                        }
+                        .transition(AnyTransition.slide)
+                        .animation(.spring())
                     }
-                    .foregroundColor(Color.white)
-                    .background(Color("surface"))
-                    .cornerRadius(8)
-                    .shadow(color: Color("shadow1"), radius: 4, x: 0, y: 4)
-                    .transition(AnyTransition.slide)
-                    .animation(.spring())
                 }
+                .padding(.top, 100)
+                Spacer()
+                Image("CdPlayer")
             }
+            .ignoresSafeArea()
         }
     }
 }
 
-struct Card: Decodable, Hashable, Identifiable {
+struct Card: Identifiable {
     var id: Int
     var name: String = ""
+    var image: Image
 }
 
 public class UIStateModel: ObservableObject {
@@ -171,6 +184,6 @@ struct Item<Content: View>: View {
 
 struct SnapCarousel_Previews: PreviewProvider {
     static var previews: some View {
-        SnapCarousel()
+        SnapCarousel().environmentObject(UIStateModel())
     }
 }
