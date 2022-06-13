@@ -15,7 +15,7 @@ class MusicAPI: ObservableObject {
         
         self.musicList = []
         
-        guard var urlComponents = URLComponents(string: "https://itunes.apple.com/search") else { return }
+        guard var urlComponents = URLComponents(string: "https://itunes.apple.com/kr/search") else { return }
         
         urlComponents.query = "media=music&entity=song&term=\(search)"
         
