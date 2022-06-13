@@ -9,7 +9,7 @@ import SwiftUI
 
 extension Color {
     // 피그마에 등록된 색상 보시고, 사용하시면 됩니다!
-    // foreground(.black) 이런식으로 사용하시면 돼요!
+    // foreground(.titleBlack) 이런식으로 사용하시면 돼요!
     
     //title 색상
     static let titleBlack = Color("black")
