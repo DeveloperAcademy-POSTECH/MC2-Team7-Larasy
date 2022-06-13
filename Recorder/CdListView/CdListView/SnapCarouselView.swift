@@ -11,15 +11,15 @@ struct SnapCarousel: View {
     @EnvironmentObject var UIState: UIStateModel
     
     var body: some View {
-        let spacing: CGFloat = 20
+        let spacing: CGFloat = 16
         let widthOfHiddenCards: CGFloat = 70 /// UIScreen.main.bounds.width - 10
         let cardHeight: CGFloat = 279
         
         let items = [
-            Card(id: 0, name: "Ohio - HYUKOH", image: Image("album1")),
-            Card(id: 1, name: "Lady Bird - Jon Brion", image: Image("album2")),
-            Card(id: 2, name: "Love of my life - Queen", image: Image("album3")),
-            Card(id: 3, name: "Butter - BTS", image: Image("album4"))
+            Card(id: 0, name: "Ohio", image: Image("album1")),
+            Card(id: 1, name: "Lady Bird", image: Image("album2")),
+            Card(id: 2, name: "Queen", image: Image("album3")),
+            Card(id: 3, name: "BTS", image: Image("album4"))
         ]
         
         return Canvas {
@@ -41,10 +41,10 @@ struct SnapCarousel: View {
                                 Text("\(item.name)")
                                     .foregroundColor(Color.black)
                                     .padding(.bottom, 30)
-//                                Image("\(item.image)")
-//                                    .resizable()
-//                                    .clipShape(Circle())
-//                                    .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+    //                            Image("\(item.image)")
+    //                                .resizable()
+    //                                .clipShape(Circle())
+    //                                .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
                                 Circle()
                                     .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
                             }
@@ -53,7 +53,7 @@ struct SnapCarousel: View {
                         .animation(.spring())
                     }
                 }
-                .padding(.top, 130)
+                .padding(.top, 100)
                 Spacer()
                 Image("CdPlayer")
             }
