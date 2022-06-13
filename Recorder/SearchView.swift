@@ -14,7 +14,7 @@ struct SearchView: View {
     @State var search = ""
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
     
-    init() { UITableView.appearance().backgroundColor = UIColor.clear }
+    init() { UITableView.appearance().backgroundColor = UIColor.clear } // 리스트 배경색 설정
     
     var body: some View {
         
@@ -38,6 +38,7 @@ struct SearchView: View {
     }
     
     
+    // 검색 바
     var SearchBar: some View {
         ZStack {
             Rectangle()
@@ -49,10 +50,10 @@ struct SearchView: View {
                 TextField(placeholer, text: $search)
                     .foregroundColor(.titleDarkgray)
                     .onSubmit {
-                        musicAPI.getSearchResults(search: search)
+                        musicAPI.getSearchResults(search: search) // 음악 API 불러오기
                     }
                 
-                if search != "" {
+                if search != "" { // 지우기 버튼 활성화
                     Image(systemName: "xmark.circle.fill")
                         .imageScale(.medium)
                         .foregroundColor(Color(.systemGray3))
@@ -73,6 +74,7 @@ struct SearchView: View {
     }
     
     
+    // 검색 결과 리스트
     var ResultView: some View {
         
         GeometryReader { geometry in
@@ -80,10 +82,10 @@ struct SearchView: View {
                 ForEach(musicAPI.musicList, id: \.self) { music in
                     
                     HStack {
-                        URLImage(urlString: music.albumArt)
+                        URLImage(urlString: music.albumArt) // 앨범커버
                             .cornerRadius(5)
                         
-                        NavigationLink(destination: TestSoiView(music: music)) {
+                        NavigationLink(destination: TestSoiView(music: music)) { // 현재 임시뷰로 연결, 추후 작성뷰로 전환
                             VStack(alignment: .leading) {
                                 Text(music.title) // 노래제목
                                     .font(.system(size: 17, weight: .bold))
@@ -110,6 +112,8 @@ struct SearchView: View {
     }
 }
 
+
+// 앨범 커버 불러오기
 struct URLImage: View {
     
     @State var data: Data?
