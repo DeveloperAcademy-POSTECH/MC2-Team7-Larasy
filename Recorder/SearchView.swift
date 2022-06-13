@@ -28,11 +28,27 @@ struct SearchView: View {
                     .padding(.leading, 20)
                     
                 
-                //search bar
-                ZStack {
-                    Rectangle()
-                        .foregroundColor(.lightgray)
-                    
+            //search bar
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.white)
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                    TextField("기록하고 싶은 음악, 가수를 입력하세요", text: $search)
+                        .onSubmit {
+                            viewModel.getSearchResults(search: search)
+                        }
+                }
+                .foregroundColor(.titleGray)
+                .padding(13)
+            }
+            .frame(height: 40)
+            .cornerRadius(10)
+            .padding(20)
+            
+            // result view
+            List {
+                ForEach(viewModel.musicList, id: \.self) { music inx
                     HStack {
                         Image(systemName: "magnifyingglass")
                         
