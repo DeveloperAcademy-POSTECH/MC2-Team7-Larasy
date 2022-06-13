@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-class ViewModel: ObservableObject {
+class MusicAPI: ObservableObject {
     @Published var musicList: [Music] = []
     
     func getSearchResults(search: String) {
@@ -35,12 +35,9 @@ class ViewModel: ObservableObject {
                     
                     let searchResults = jsonObject["results"] as! [NSDictionary]
                     searchResults.forEach { result in
-                        let searchResult = Music(artistName: result["artistName"] as! String,
-                                                 trackName: result["trackName"] as! String,
-                                                 albumName: result["collectionName"] as! String,
-                                                 releaseDate: result["releaseDate"] as! String,
-                                                 previewUrl: result["previewUrl"] as! String,
-                                                 artworkUrl100: result["artworkUrl100"] as! String)
+                        let searchResult = Music(artist: result["artistName"] as! String,
+                                                 title: result["trackName"] as! String,
+                                                 albumArt: result["artworkUrl100"] as! String)
                         
                         self.musicList.append(searchResult)
                     }
@@ -56,10 +53,7 @@ class ViewModel: ObservableObject {
 
 
 struct Music: Hashable, Codable {
-    var artistName: String
-    var trackName: String
-    var albumName: String
-    var releaseDate: String
-    var previewUrl: String
-    var artworkUrl100: String
+    var artist: String // 가수
+    var title: String // 제목
+    var albumArt: String //앨범커버
 }

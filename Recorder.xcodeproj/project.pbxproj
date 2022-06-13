@@ -15,6 +15,7 @@
 		8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8715A79A2855479E001AB4F5 /* MusicAPI.swift */; };
 		8715A79D2855B5AC001AB4F5 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8715A79C2855B5AC001AB4F5 /* Colors.xcassets */; };
 		8715A79F2855B775001AB4F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8715A79E2855B775001AB4F5 /* Extension.swift */; };
+		876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876BC4A22857189D009ACC90 /* TestSoiView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		8715A79A2855479E001AB4F5 /* MusicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAPI.swift; sourceTree = "<group>"; };
 		8715A79C2855B5AC001AB4F5 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		8715A79E2855B775001AB4F5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		876BC4A22857189D009ACC90 /* TestSoiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSoiView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				794AD0062851EEA700414667 /* RecorderApp.swift */,
 				794AD0082851EEA700414667 /* ContentView.swift */,
 				8715A797285531AB001AB4F5 /* SearchView.swift */,
+				876BC4A22857189D009ACC90 /* TestSoiView.swift */,
 				794AD00A2851EEA900414667 /* Assets.xcassets */,
 				794AD00C2851EEA900414667 /* Preview Content */,
 				8715A79C2855B5AC001AB4F5 /* Colors.xcassets */,
@@ -160,6 +163,7 @@
 			files = (
 				8715A79F2855B775001AB4F5 /* Extension.swift in Sources */,
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
+				876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */,
 				794AD0092851EEA700414667 /* ContentView.swift in Sources */,
 				8715A798285531AB001AB4F5 /* SearchView.swift in Sources */,
 				794AD0072851EEA700414667 /* RecorderApp.swift in Sources */,
@@ -291,6 +295,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Recorder/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -319,6 +324,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Recorder/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
