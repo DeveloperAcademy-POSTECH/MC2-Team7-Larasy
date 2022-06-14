@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7906EFED28577D950064056F /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7906EFEC28577D950064056F /* WriteView.swift */; };
 		13C0E4A02857267D004ABE1D /* RecordResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0E49F2857267D004ABE1D /* RecordResultView.swift */; };
 		13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0E4A128573795004ABE1D /* RecordDetailView.swift */; };
+		7906EFED28577D950064056F /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7906EFEC28577D950064056F /* WriteView.swift */; };
+		79418F7B2858C17C00F844BD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79418F7A2858C17C00F844BD /* ImagePicker.swift */; };
 		794AD0072851EEA700414667 /* RecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0062851EEA700414667 /* RecorderApp.swift */; };
 		794AD0092851EEA700414667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0082851EEA700414667 /* ContentView.swift */; };
 		794AD00B2851EEA900414667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794AD00A2851EEA900414667 /* Assets.xcassets */; };
@@ -18,15 +19,16 @@
 		8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8715A79A2855479E001AB4F5 /* MusicAPI.swift */; };
 		8715A79D2855B5AC001AB4F5 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8715A79C2855B5AC001AB4F5 /* Colors.xcassets */; };
 		8715A79F2855B775001AB4F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8715A79E2855B775001AB4F5 /* Extension.swift */; };
+		876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876BC4A22857189D009ACC90 /* TestSoiView.swift */; };
 		A01413222855F4E60000EA59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01413212855F4E60000EA59 /* HomeView.swift */; };
 		A0F567F128563066008F2D2E /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F567F028563066008F2D2E /* ListView.swift */; };
-		876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876BC4A22857189D009ACC90 /* TestSoiView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7906EFEC28577D950064056F /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 		13C0E49F2857267D004ABE1D /* RecordResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordResultView.swift; sourceTree = "<group>"; };
 		13C0E4A128573795004ABE1D /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
+		7906EFEC28577D950064056F /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
+		79418F7A2858C17C00F844BD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		794AD0032851EEA700414667 /* Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794AD0062851EEA700414667 /* RecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderApp.swift; sourceTree = "<group>"; };
 		794AD0082851EEA700414667 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,9 +38,9 @@
 		8715A79A2855479E001AB4F5 /* MusicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAPI.swift; sourceTree = "<group>"; };
 		8715A79C2855B5AC001AB4F5 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		8715A79E2855B775001AB4F5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		876BC4A22857189D009ACC90 /* TestSoiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSoiView.swift; sourceTree = "<group>"; };
 		A01413212855F4E60000EA59 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A0F567F028563066008F2D2E /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		876BC4A22857189D009ACC90 /* TestSoiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSoiView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				A0F567F028563066008F2D2E /* ListView.swift */,
 				876BC4A22857189D009ACC90 /* TestSoiView.swift */,
 				7906EFEC28577D950064056F /* WriteView.swift */,
+				79418F7A2858C17C00F844BD /* ImagePicker.swift */,
 				13C0E49F2857267D004ABE1D /* RecordResultView.swift */,
 				13C0E4A128573795004ABE1D /* RecordDetailView.swift */,
 				794AD00A2851EEA900414667 /* Assets.xcassets */,
@@ -185,6 +188,7 @@
 				A01413222855F4E60000EA59 /* HomeView.swift in Sources */,
 				8715A798285531AB001AB4F5 /* SearchView.swift in Sources */,
 				13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */,
+				79418F7B2858C17C00F844BD /* ImagePicker.swift in Sources */,
 				794AD0072851EEA700414667 /* RecorderApp.swift in Sources */,
 				7906EFED28577D950064056F /* WriteView.swift in Sources */,
 			);
@@ -318,6 +322,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "please access photo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -347,6 +352,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "please access photo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

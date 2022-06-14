@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct WriteView: View {
-    @State var isSelected : Bool = false
+    @State private var image: Image?                        // 선택된 사진, 어떤 이미지인지
+    @State private var showingImagePicker = false   // 클릭됐는지 확인
+    @State private var inputImage: UIImage?
     
     var body: some View {
         NavigationView {
@@ -38,11 +40,29 @@ struct WriteView: View {
                     
                     HStack(alignment: .center) {
                         
-                        Button(action: {}, // TODO: action 내에 클릭시 모달을 통해 이미지 띄우는 기능 추가 예정
-                               label: {
+                        ZStack{ // TODO: action 내에 클릭시 모달을 통해 이미지 띄우는 기능 추가 예정
+                            
                             Image("PhotoComp") // 이미지 삽입
                                 .padding()
-                        }).offset(y: -70)
+                            
+                            Image(systemName: "photo")
+                                .foregroundColor(.white)
+                                .offset(y: -15)
+                            
+                            image?
+                                .resizable()
+                                .frame(width: 95, height: 105)
+                                .scaleEffect()
+                                .offset(y: -15)
+                            
+                        }
+//                        .frame(width: 150, height: 120)
+                        .onTapGesture {
+                            showingImagePicker = true
+                        }
+                        .offset(y: -70)
+                        .zIndex(1)
+                        
                         Spacer()
                         
                         Button(action: {}, label: { // TODO: CD돌아가는 애니메이션 출력..?
@@ -65,15 +85,22 @@ struct WriteView: View {
                     }.offset(y: -20)
                     Spacer()
                     
-                }
+                }.onChange(of: inputImage) { _ in loadImage() }
+                    .sheet(isPresented: $showingImagePicker) {
+                        ImagePicker(image: $inputImage)
+                    }
             }// 본문 ZStack End
-                .navigationBarItems(leading: NavigationLink(destination: SearchView(), label: {
-                    Image(systemName: "chevron.backward")
-                    Text("Music")
-                }))
+            .navigationBarItems(leading: NavigationLink(destination: SearchView(), label: {
+                Image(systemName: "chevron.backward")
+                Text("Music")
+            }))
             
         } // Navigation View 출력
     } // View End
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
+    }
 } // RecordResultView End
 
 struct WriteView_Previews: PreviewProvider {
