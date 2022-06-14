@@ -24,8 +24,10 @@ struct SearchView: View {
             
             VStack(alignment: .leading) {
                 Text("오랫동안 간직하고 싶은 나만의 음악을 알려주세요")
-                    .frame(width: 300)
-                    .font(.system(size: 24, weight: .bold))
+                    .frame(width: 250)
+                    .font(.customTitle2())
+                    .lineSpacing(7)
+                    .foregroundColor(.titleBlack)
                     .padding(.top, 40)
                     .padding(.leading, 20)
                 
@@ -49,6 +51,7 @@ struct SearchView: View {
                 
                 TextField(placeholer, text: $search)
                     .foregroundColor(.titleDarkgray)
+                    .font(.customBody2())
                     .onSubmit {
                         musicAPI.getSearchResults(search: search) // 음악 API 불러오기
                     }
@@ -67,10 +70,11 @@ struct SearchView: View {
             }
             .foregroundColor(.titleDarkgray)
             .padding(13)
+            
         }
         .frame(height: 40)
         .cornerRadius(10)
-        .padding(20)
+        .padding(10)
     }
     
     
@@ -88,12 +92,12 @@ struct SearchView: View {
                         NavigationLink(destination: TestSoiView(music: music)) { // 현재 임시뷰로 연결, 추후 작성뷰로 전환
                             VStack(alignment: .leading) {
                                 Text(music.title) // 노래제목
-                                    .font(.system(size: 17, weight: .bold))
+                                    .font(.customHeadline())
                                     .lineLimit(1)
                                     .padding(.bottom, 2)
                                 
                                 Text(music.artist) // 가수명
-                                    .font(.system(size: 15))
+                                    .font(.customBody2())
                                     .lineLimit(1)
                             }
                             .padding(.leading, 10)
