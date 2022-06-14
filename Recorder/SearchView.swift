@@ -21,7 +21,7 @@ struct SearchView: View {
     var body: some View {
         
         ZStack {
-            Color("background") // 배경색 설정
+            Color.background // 배경색 설정
                 .ignoresSafeArea()
             
             VStack(alignment: .leading) {
@@ -67,7 +67,7 @@ struct SearchView: View {
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지
                         .imageScale(.medium)
-                        .foregroundColor(Color(.systemGray3))
+                        .foregroundColor(.titleGray)
                         .padding(3)
                         .onTapGesture {
                             withAnimation {
