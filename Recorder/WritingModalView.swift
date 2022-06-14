@@ -16,7 +16,7 @@ struct WritingModalView: View {
     
     var body: some View {
         ZStack {
-            Color("black")
+            Color.titleBlack //Background Color
                 .opacity(0.95)
                 .ignoresSafeArea()
             
@@ -24,37 +24,40 @@ struct WritingModalView: View {
                 
                 // 나의 음악 이야기 & x 버튼 시작
                 HStack {
-                    Text("나의 음악 이야기")
+                    Text("나의 음악 이야기") // 상단 나의 음악 이야기 Text 텍스트 출력
                         .foregroundColor(.white)
                         .font(.customTitle2())
                     Spacer()
-                    Image(systemName: "xmark")
+                    
+                    Image(systemName: "xmark") // 상단 X 버튼 출력 (물론 아직 클릭 안됨, 버튼도 아님)
                         .imageScale(.large)
                         .foregroundColor(.white)
                     
                 }
-                .padding(.horizontal, 48.0) //41이 양쪽 마진 딱 맞음
+                .padding(.horizontal, 48.0)
                 // 나의 음악 이야기 & x 버튼 시작 끝
                 
                 // Modal Background Frame & Color 시작
                 ZStack {
+                    
                     VStack{
                         
-                        // 이야기 작성 TextEditor & PlaceHoler 시작
+                        // 이야기 작성 TextEditor & PlaceHolder 시작
                         ZStack {
-                            if self.content.isEmpty {
+                            if self.content.isEmpty { // PlaceHolder 출력
                                 TextEditor (text: $placeholderText)
-                                    .font(.body)
-                                    .foregroundColor(.titleBlack)
+                                    .font(.customBody1())
+                                    .foregroundColor(.titleGray)
                                     .disabled(true)
                                     .padding()
                             }
-                            TextEditor (text: $content)
+                            TextEditor (text: $content) // TextEditor 출력
                                 .onReceive(content.publisher.collect()) {
                                     let s = String($0.prefix(characterLimit))
                                     if content != s { content = s }
                                 }
-                                .font(.body)
+                                .font(.customBody1())
+                                .foregroundColor(.titleDarkgray)
                                 .opacity(self.content.isEmpty ? 0.25 :1)
                                 .padding()
                             
@@ -66,12 +69,26 @@ struct WritingModalView: View {
                         
                         // 완료 버튼 시작
                         HStack {
+                            
                             Spacer()
-
+                            
+                            if self.content.isEmpty {
+                             
                             Button("완료") {
+                                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                            }
+                            .font(.customSubhead())
+                            .foregroundColor(.titleGray)
                                 
                             }
-                            .disabled(true)
+                            else {
+                                Button("완료") {
+                                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                                }
+                                .font(.customSubhead())
+                                .foregroundColor(.pointBlue)
+                            }
+
                         }
                         .padding(20)
                         // 완료 버튼 끝(날예정)
@@ -84,7 +101,7 @@ struct WritingModalView: View {
             } // Modal Background Frame & Color 끝
             
             
-        } // Background Color
+        }
     }
 }
 
