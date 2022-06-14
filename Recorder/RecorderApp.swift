@@ -11,8 +11,7 @@ import SwiftUI
 struct RecorderApp: App {
     var body: some Scene {
         WindowGroup {
-            //ContentView()
-            WritingModalView()
+            ContentView()
         }
     }
 }
