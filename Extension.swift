@@ -25,7 +25,6 @@ extension Color {
     //etc
     static let background = Color("background")
     static let cdplayer = Color("cdplayer")
-    static let darkbg = Color("darkbg")
 
 }
 

@@ -9,39 +9,31 @@ import SwiftUI
 
 struct HomeView: View {
     
-    //램프 클릭시 라이팅됨
+    //lamp lighting animation control var
     @State var isLighting : Bool = false
-    //씨디 클릭시 돌아감
+    //cd rotate animation angle var
     @State private var angle = 0.0
     
     var body: some View {
+        //Nav View Start
         NavigationView{
-            //백그라운드 컬러
             ZStack {
-                Color("background")
+                    Color.background
                     .ignoresSafeArea()
-//                if isLighting {
-//                    Color("darkbg")
-//                        .ignoresSafeArea()
-//                } else {
-//                    Color("background")
-//                        .ignoresSafeArea()
-//                }
-                //다크모드 스킨
-                //백그라운드 창문 이미지
+                //Contents Start
                 ZStack (alignment: .leading){
-                    Image("HomeBG")
-                    //로고 이미지
+                    Image("HomeBG")     //Background fix Image (창문 및 가구)
+                    //Logo Start
                     VStack {
-                        Image("Logo")
-                        
+                        Image("Logo")       //Logo Image (RE:CORD)
                             .padding(.top,94)
                             .padding(.leading,34)
                         Spacer()
                     }
-                    //씨디 돌아가는 애니메이션
+                    //Logo End
+                    //CD Rotate ani Start
                     VStack {
-                        Image("HomeCD")
+                        Image("HomeCD")     //CD Image
                             .frame(width: 80, height: 80)
                             .rotationEffect(.degrees(self.angle))
                             .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
@@ -51,33 +43,32 @@ struct HomeView: View {
                         Spacer()
                     }.padding(.leading,232)
                         .padding(.top,167)
-                    //내 음악 보러 가기
+                    //CD Rotate ani End
+                    //'CDListView' Navlink Start
                     VStack{
                         Text("내 음악 보러 가기")
                             .foregroundColor(.titleDarkgray)
-                            .font(.body)
-                            .fontWeight(.bold)
-                            .lineSpacing(25)
+                            .font(Font.customHeadline())
                             .padding(-15)
+                        //cdcase img 클릭시 CDListView로 이동하는 Navlink
                         NavigationLink(destination: ListView()){
-                            Image("cdcase")
+                            Image("cdcase")     //cdcase Image
                         }
                     }
                     .padding(.bottom, 105)
                     .padding(.leading, 30)
-                    //내 음악 보러 가기 끝
-                    //음악 기록하기
+                    //'CDListView' Navlink End
+                    //'SearchView' Navlink Start
                     VStack(alignment: .trailing) {
                         Spacer()
                         Text("음악 기록하기")
                             .foregroundColor(.titleDarkgray)
-                            .font(.body)
-                            .fontWeight(.bold)
-                            .lineSpacing(25)
+                            .font(Font.customHeadline())
                             .padding([.top, .trailing], 35.0)
                             .padding(-5)
-                        //램프,노트 이미지 배치
+                        //lamp & note Image 배치 Start
                         HStack {
+                            //lamp lighting ani Start
                             ZStack{
                                 Image("lampTop")
                                     .blur(radius: isLighting ? 25 : 0)
@@ -88,21 +79,25 @@ struct HomeView: View {
                             }.onTapGesture {
                                 isLighting.toggle()
                             }
+                            //lamp lighting ani End
+                            //note Image 클릭시 SearchView로 이동하는 Navlink
                             VStack {
                                 NavigationLink(destination: SearchView()){
                                     Image("note")
                                 }
                             }.padding(.bottom,73)
                         }
+                        //lamp & note Image 배치 End
                     }
-                    //음악 기록하기 끝
                 }
+                //Contents End
             }.navigationBarHidden(true)
-            //백그라운드 컬러 끝
-        }//.accentColor(.blue)
-        //네비게이션 뷰 끝
+        }.accentColor(.pointBlue)   //Nav button point color
+        //Nav View End
     }
+    //View End
 }
+//HomeView End
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
