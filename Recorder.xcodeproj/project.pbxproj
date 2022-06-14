@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7906EFED28577D950064056F /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7906EFEC28577D950064056F /* WriteView.swift */; };
 		794AD0072851EEA700414667 /* RecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0062851EEA700414667 /* RecorderApp.swift */; };
 		794AD0092851EEA700414667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0082851EEA700414667 /* ContentView.swift */; };
 		794AD00B2851EEA900414667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794AD00A2851EEA900414667 /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7906EFEC28577D950064056F /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 		794AD0032851EEA700414667 /* Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794AD0062851EEA700414667 /* RecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderApp.swift; sourceTree = "<group>"; };
 		794AD0082851EEA700414667 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				794AD0082851EEA700414667 /* ContentView.swift */,
 				8715A797285531AB001AB4F5 /* SearchView.swift */,
 				876BC4A22857189D009ACC90 /* TestSoiView.swift */,
+				7906EFEC28577D950064056F /* WriteView.swift */,
 				794AD00A2851EEA900414667 /* Assets.xcassets */,
 				794AD00C2851EEA900414667 /* Preview Content */,
 				8715A79C2855B5AC001AB4F5 /* Colors.xcassets */,
@@ -167,6 +170,7 @@
 				794AD0092851EEA700414667 /* ContentView.swift in Sources */,
 				8715A798285531AB001AB4F5 /* SearchView.swift in Sources */,
 				794AD0072851EEA700414667 /* RecorderApp.swift in Sources */,
+				7906EFED28577D950064056F /* WriteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
