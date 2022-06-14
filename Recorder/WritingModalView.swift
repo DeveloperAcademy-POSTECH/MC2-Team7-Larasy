@@ -29,9 +29,13 @@ struct WritingModalView: View {
                         .font(.customTitle2())
                     Spacer()
                     
-                    Image(systemName: "xmark") // 상단 X 버튼 출력 (물론 아직 클릭 안됨, 버튼도 아님)
-                        .imageScale(.large)
-                        .foregroundColor(.white)
+                    Button(action: {
+                                }) {
+                        Image(systemName: "xmark")
+                                        .imageScale(.large)
+                                        .foregroundColor(.white)
+                    } // 상단 X 버튼 출력 - 연결필요
+                        
                     
                 }
                 .padding(.horizontal, 48.0)
