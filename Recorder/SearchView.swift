@@ -10,56 +10,92 @@ import UIKit
 
 struct SearchView: View {
     
-    @StateObject var viewModel = ViewModel()
+    @StateObject var musicAPI = MusicAPI()
     @State var search = ""
     
     init() { UITableView.appearance().backgroundColor = UIColor.clear }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("기록을 통해 기억하고 싶은 음악을 알려주세요")
-                .frame(width: 300)
-                .font(.system(size: 24, weight: .bold))
+        ZStack {
+            Color("background")
+                .ignoresSafeArea()
             
-            //search bar
-            ZStack {
-                Rectangle()
-                    .foregroundColor(.white)
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    TextField("기록하고 싶은 음악, 가수를 입력하세요", text: $search)
-                        .onSubmit {
-                            viewModel.getSearchResults(search: search)
-                        }
-                }
-                .foregroundColor(.gray)
-                .padding(13)
-            }
-            .frame(height: 40)
-            .cornerRadius(10)
-            .padding(20)
-            
-            // result view
-            List {
-                ForEach(viewModel.musicList, id: \.self) { music in
+            VStack(alignment: .leading) {
+                Text("오랫동안 간직하고 싶은 나만의 음악을 알려주세요")
+                    .frame(width: 300)
+                    .font(.system(size: 24, weight: .bold))
+                    .padding(.top, 40)
+                    .padding(.leading, 20)
+                    
+                
+                //search bar
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.titleLightgray)
+                    
                     HStack {
-                        URLImage(urlString: music.artworkUrl100)
+                        Image(systemName: "magnifyingglass")
                         
-                        VStack(alignment: .leading) {
-                            Text(music.trackName)
-                                .font(.system(size: 17, weight: .bold))
-                                .padding(6)
-                                .lineLimit(1)
-                            Text(music.artistName)
-                                .font(.system(size: 17))
-                                .padding(6)
+                        TextField("기록하고 싶은 음악, 가수를 입력하세요", text: $search)
+                            .foregroundColor(.titleDarkgray)
+                            .onSubmit {
+                                musicAPI.getSearchResults(search: search)
+                            }
+                        if search != "" {
+                            Image(systemName: "xmark.circle.fill")
+                                        .imageScale(.medium)
+                                        .foregroundColor(Color(.systemGray3))
+                                        .padding(3)
+                                        .onTapGesture {
+                                            withAnimation {
+                                                self.search = ""
+                                              }
+                                        }
                         }
                     }
+                    .foregroundColor(.titleDarkgray)
+                    .padding(13)
                 }
-                .padding()
+                .frame(height: 40)
+                .cornerRadius(10)
+                .padding(20)
+                
+                
+                // result view
+                GeometryReader { geometry in
+                    List {
+                        ForEach(musicAPI.musicList, id: \.self) { music in
+                            HStack {
+                                URLImage(urlString: music.albumArt)
+                                    .cornerRadius(5)
+                                
+                                NavigationLink(destination: TestSoiView(music: music)) {
+                                    VStack(alignment: .leading) {
+                                        Text(music.title) // 노래제목
+                                            .font(.system(size: 17, weight: .bold))
+                                            .lineLimit(1)
+                                            .padding(.bottom, 2)
+                                        
+                                        Text(music.artist) // 가수명
+                                            .font(.system(size: 15))
+                                            .lineLimit(1)
+                                }
+                                .padding(.leading, 10)
+                                .foregroundColor(.titleDarkgray)
+                            }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                        .listRowBackground(Color.background)
+                        .listRowSeparator(.hidden)
+                        .padding([.bottom, .top], 10)
+                        .padding([.leading], -20)
+                    }
+                    .onAppear { UITableView.appearance().contentInset.top = -35 }
+                }
             }
-            .listStyle(.sidebar)
         }
+        .navigationBarTitle("음악 선택", displayMode: .inline)
     }
 }
 
@@ -67,17 +103,19 @@ struct URLImage: View {
     
     @State var data: Data?
     let urlString: String
+    
     var body: some View {
+        
         if let data = data, let uiimage = UIImage(data: data) {
             Image(uiImage: uiimage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 55, height: 55)
-                .cornerRadius(5)
                 .background(.gray)
+            
         } else {
-            Image(systemName: "photo")
-                .resizable()
+            Rectangle()
+                .foregroundColor(.titleLightgray)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 55, height: 55)
                 .onAppear() {
