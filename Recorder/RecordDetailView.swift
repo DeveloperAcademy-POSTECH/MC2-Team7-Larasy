@@ -23,22 +23,22 @@ struct RecordDetailView: View {
             } // BackgroundView용 VStack End
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Dun Dun Dance") // music.title
+                    Text("Dun Dun Dance") // "music.title"
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.titleBlack)
                         .multilineTextAlignment(.leading)
                         .padding(.bottom)
                     
-                    Text("오마이걸(OH MY GIRL)") // music.artist
+                    Text("오마이걸(OH MY GIRL)") // "music.artist"
                         .font(.body)
                         .fontWeight(.regular)
                         .foregroundColor(.titleDarkgray)
                     Spacer()
                 }// MusicInform VStack End
-                
+                .padding()
                 Spacer()
-            }.padding()
+            }.padding() // MusicImform HStack End
             VStack {
     
                 HStack(alignment: .center) {

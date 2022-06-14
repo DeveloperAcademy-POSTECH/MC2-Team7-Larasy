@@ -14,7 +14,7 @@ struct RecordResultView: View {
         NavigationView {
             RecordDetailView()// 본문뷰 노출예정
                 .navigationBarItems(leading:
-                                        NavigationLink(destination: SearchView(),
+                                        NavigationLink(destination: SearchView(), // ListView destination예정
                                                        label: {
                    Image(systemName: "chevron.backward")
                     Text("List")
@@ -24,13 +24,13 @@ struct RecordResultView: View {
                 ,
                                         trailing:
                                         Menu(content: {
-                    Button(action: {}) {
+                    Button(action: {}) { // antion내에 편집 기능 예정
                         Label("수정", systemImage: "pencil")
                     }
-                    Button(action: {}) {
+                    Button(action: {}) { // Soi코딩 중인 스크린샷 기능 예정
                         Label("이미지로 저장", systemImage: "square.and.arrow.down")
                     }
-                    Button(role: .destructive, action: {}) {
+                    Button(role: .destructive, action: {}) { // action에 삭제 Alert띄우기 및 삭제 기능 예정
                         Label("삭제", systemImage: "trash")
                     }
                 }, label: {
