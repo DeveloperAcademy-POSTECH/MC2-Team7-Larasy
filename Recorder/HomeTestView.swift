@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeTestView: View {
+    
     var body: some View {
         NavigationView {
             NavigationLink(destination: CdListView()) {
@@ -17,8 +18,8 @@ struct HomeTestView: View {
     }
 }
 
-struct HomeTestView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeTestView()
-    }
-}
+//struct HomeTestView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeTestView()
+//    }
+//}

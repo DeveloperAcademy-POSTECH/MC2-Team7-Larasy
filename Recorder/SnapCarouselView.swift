@@ -8,64 +8,130 @@
 import SwiftUI
 
 struct SnapCarousel: View {
+    @State private var angle = 0.0 // cd ratation angle 초기값
     @EnvironmentObject var UIState: UIStateModel
+    @State var showCd = false // cd player에 cd 나타나기
+    @State var showDetailView = false // detailView 나타나기
     
     var body: some View {
-        let spacing: CGFloat = 16
-        let widthOfHiddenCards: CGFloat = 70 /// UIScreen.main.bounds.width - 10
-        let cardHeight: CGFloat = 279
+        let spacing: CGFloat = -20
+        let widthOfHiddenCds: CGFloat = 100
+        let cdHeight: CGFloat = 279
         
+        // 기록물 id, 곡제목, 가수명, 앨범커버 배열 예시
         let items = [
-            Card(id: 0, name: "Ohio", image: Image("album1")),
-            Card(id: 1, name: "Lady Bird", image: Image("album2")),
-            Card(id: 2, name: "Queen", image: Image("album3")),
-            Card(id: 3, name: "BTS", image: Image("album4"))
+                    Cd(id: 0, musicTitle: "노래제목1", singer: "가수명1", image: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"),
+                    Cd(id: 1, musicTitle: "노래제목2", singer: "가수명2", image: "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/17/ff/63/17ff63de-3aba-0f2d-63e7-50d66f900ebb/21UMGIM43558.rgb.jpg/100x100bb.jpg"),
+                    Cd(id: 2, musicTitle: "노래제목3", singer: "가수명3", image: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"),
+                    Cd(id: 3, musicTitle: "노래제목4", singer: "가수명4", image: "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/17/ff/63/17ff63de-3aba-0f2d-63e7-50d66f900ebb/21UMGIM43558.rgb.jpg/100x100bb.jpg"),
+                    Cd(id: 4, musicTitle: "노래제목5", singer: "가수명5", image: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg")
         ]
         
+        // https://gist.github.com/xtabbas/97b44b854e1315384b7d1d5ccce20623.js 의 샘플코드를 참고했습니다.
         return Canvas {
-            /// TODO: find a way to avoid passing same arguments to Carousel and Item
-            VStack {
-                Carousel(
-                    numberOfItems: CGFloat(items.count),
-                    spacing: spacing,
-                    widthOfHiddenCards: widthOfHiddenCards
-                ) {
-                    ForEach(items, id: \.self.id) { item in
-                        Item(
-                            _id: Int(item.id),
-                            spacing: spacing,
-                            widthOfHiddenCards: widthOfHiddenCards,
-                            cardHeight: cardHeight
-                        ) {
-                            VStack {
-                                Text("\(item.name)")
-                                    .foregroundColor(Color.black)
-                                    .padding(.bottom, 30)
-    //                            Image("\(item.image)")
-    //                                .resizable()
-    //                                .clipShape(Circle())
-    //                                .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
-                                Circle()
-                                    .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+            if showDetailView {
+                DetailView()
+                    .transition(AnyTransition.opacity.animation(.easeInOut)) // 자연스러운 뷰 전환
+            }else {
+            ZStack {
+                Color("background")
+                    .ignoresSafeArea()
+                // Carousel 슬라이더 기능
+                // ForEach로 items마다 Item() 뷰를 각각 불러옴
+                VStack {
+                    Carousel(
+                        numberOfItems: CGFloat(items.count),
+                        spacing: spacing,
+                        widthOfHiddenCds: widthOfHiddenCds
+                    ) {
+                        ForEach(items, id: \.self.id) { item in
+                            Item(
+                                _id: Int(item.id),
+                                spacing: spacing,
+                                widthOfHiddenCds: widthOfHiddenCds,
+                                cdHeight: cdHeight
+                            ) {
+                                VStack {
+                                    Text("\(item.musicTitle) - \(item.singer)")
+                                        .foregroundColor(Color.black)
+                                        .padding(.bottom, 30)
+                                    Button( action: {
+                                        showCd = true // cdPlayer에 cd 보이기
+                                    }) {
+                                        ZStack {
+                                          URLImage(urlString: item.image)
+                                            .aspectRatio(contentMode: .fit)
+                                            .clipShape(Circle())
+                                            .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+//                                            Circle()
+//                                                .foregroundColor(.white)
+//                                                .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                                            Circle()
+                                                .frame(width: 40, height: 40)
+                                                .foregroundColor(.background)
+                                        }
+                                    } // 버튼
+                                } // V 스택
                             }
-                        }
-                        .transition(AnyTransition.slide)
-                        .animation(.spring())
+                            .transition(AnyTransition.slide)
+                            .animation(.spring())
+                        } // ForEach
                     }
-                }
-                .padding(.top, 100)
-                Spacer()
-                Image("CdPlayer")
-            }
-            .ignoresSafeArea()
-        }
-    }
+                    .padding(.top, 150)
+                    Spacer()
+                    // CdPlayer
+                        ZStack {
+                            Image("CdPlayer")
+                            // cd 클릭시, cdPlayer에 cd 나타남
+                            VStack {
+                                if showCd == true {
+                                    URLImage(urlString: items[UIState.activeCard].image)
+                                        .clipShape(Circle())
+                                        .frame(width: 110, height: 110)
+                                        .rotationEffect(.degrees(self.angle))
+                                        .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
+                                        .onTapGesture {
+                                            self.angle += Double.random(in: 1800..<1980)
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                showDetailView = true
+                                            }
+                                        }
+                                }
+                            }
+                            .padding(.bottom, 180)
+                            .padding(.leading, 2) // CdPlayer를 그림자 포함해서 뽑아서 전체 CdPlayer와 정렬 맞추기 위함
+                            // cdPlayer 가운데 원
+                            VStack {
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(.titleLightgray)
+                                        .frame(width: 30 , height: 30)
+                                    Circle()
+                                        .foregroundColor(.titleDarkgray)
+                                        .frame(width: 15 , height: 15)
+                                        .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                                    Circle()
+                                        .foregroundColor(.background)
+                                        .frame(width: 3 , height: 3)
+                                } // Z스택
+                            } // V스택
+                            .padding(.bottom, 180)
+                            .padding(.leading, 4)
+                        } // Z스택
+                    } // V스택
+                    .ignoresSafeArea()
+                } // Z스택
+            } // if문
+        } // Canvas
+    } // 바디 뷰
 }
 
-struct Card: Identifiable {
+// 기록한 Cd 구조체
+struct Cd: Identifiable, Hashable {
     var id: Int
-    var name: String = ""
-    var image: Image
+    var musicTitle: String = ""
+    var singer: String = ""
+    var image: String = ""
 }
 
 public class UIStateModel: ObservableObject {
@@ -75,29 +141,28 @@ public class UIStateModel: ObservableObject {
 
 struct Carousel<Items : View> : View {
     let items: Items
-    let numberOfItems: CGFloat //= 8
-    let spacing: CGFloat //= 16
-    let widthOfHiddenCards: CGFloat //= 32
+    let numberOfItems: CGFloat
+    let spacing: CGFloat
+    let widthOfHiddenCards: CGFloat
     let totalSpacing: CGFloat
     let cardWidth: CGFloat
     
-    @GestureState var isDetectingLongPress = false
+    @GestureState var isDetectingLongPress = false // 드래그하고 있는지 파악하기 위함
     
     @EnvironmentObject var UIState: UIStateModel
         
     @inlinable public init(
         numberOfItems: CGFloat,
         spacing: CGFloat,
-        widthOfHiddenCards: CGFloat,
+        widthOfHiddenCds: CGFloat,
         @ViewBuilder _ items: () -> Items) {
         
         self.items = items()
         self.numberOfItems = numberOfItems
         self.spacing = spacing
-        self.widthOfHiddenCards = widthOfHiddenCards
+        self.widthOfHiddenCards = widthOfHiddenCds
         self.totalSpacing = (numberOfItems - 1) * spacing
-        self.cardWidth = UIScreen.main.bounds.width - (widthOfHiddenCards*2) - (spacing*2) //279
-        
+        self.cardWidth = UIScreen.main.bounds.width - (widthOfHiddenCds * 2) - (spacing * 2)
     }
     
     var body: some View {
@@ -124,17 +189,17 @@ struct Carousel<Items : View> : View {
             
         }.onEnded { value in
             self.UIState.screenDrag = 0
-            
-            if (value.translation.width < -50) {
+            // 뒤로 스크롤
+            if (value.translation.width < -50 && CGFloat(self.UIState.activeCard) < numberOfItems - 1) {
                 self.UIState.activeCard = self.UIState.activeCard + 1
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
+                impactMed.impactOccurred() // haptic 피드백
             }
-            
-            if (value.translation.width > 50) {
+            // 앞으로 스크롤
+            if (value.translation.width > 50 && CGFloat(self.UIState.activeCard) > 0) {
                 self.UIState.activeCard = self.UIState.activeCard - 1
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
+                impactMed.impactOccurred() // haptic 피드백
             }
         })
     }
@@ -151,14 +216,14 @@ struct Canvas<Content : View> : View {
     var body: some View {
         content
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-            .background(Color.white.edgesIgnoringSafeArea(.all))
+            .background(Color.background.edgesIgnoringSafeArea(.all))
     }
 }
 
 struct Item<Content: View>: View {
     @EnvironmentObject var UIState: UIStateModel
-    let cardWidth: CGFloat
-    let cardHeight: CGFloat
+    let cdWidth: CGFloat
+    let cdHeight: CGFloat
 
     var _id: Int
     var content: Content
@@ -166,24 +231,18 @@ struct Item<Content: View>: View {
     @inlinable public init(
         _id: Int,
         spacing: CGFloat,
-        widthOfHiddenCards: CGFloat,
-        cardHeight: CGFloat,
+        widthOfHiddenCds: CGFloat,
+        cdHeight: CGFloat,
         @ViewBuilder _ content: () -> Content
     ) {
         self.content = content()
-        self.cardWidth = UIScreen.main.bounds.width - (widthOfHiddenCards*2) - (spacing*2) //279
-        self.cardHeight = cardHeight
+        self.cdWidth = UIScreen.main.bounds.width - (widthOfHiddenCds*2) - (spacing*2) // 중심에 있는 cd 넓이
+        self.cdHeight = cdHeight
         self._id = _id
     }
 
     var body: some View {
         content
-            .frame(width: cardWidth, height: _id == UIState.activeCard ? cardHeight : cardHeight - 60, alignment: .center)
-    }
-}
-
-struct SnapCarousel_Previews: PreviewProvider {
-    static var previews: some View {
-        SnapCarousel().environmentObject(UIStateModel())
+            .frame(width: cdWidth, height: _id == UIState.activeCard ? cdHeight : cdHeight - 60, alignment: .center) // 양옆에 있는 cd는 높이만 줄여줌
     }
 }
