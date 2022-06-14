@@ -12,7 +12,8 @@ struct RecordResultView: View {
     
     var body: some View {
         NavigationView {
-            RecordDetailView()// 본문뷰 노출예정
+            RecordDetailView()
+            // 본문뷰 노출예정
                 .navigationBarItems(leading:
                                         NavigationLink(destination: SearchView(), // ListView destination예정
                                                        label: {

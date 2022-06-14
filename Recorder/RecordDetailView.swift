@@ -23,39 +23,51 @@ struct RecordDetailView: View {
             } // BackgroundView용 VStack End
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Dun Dun Dance") // "music.title"
+                    Text("일이삼사오육칠팔구십일이삼사오육") // "music.title"
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.titleBlack)
                         .multilineTextAlignment(.leading)
-                        .padding(.bottom)
+                        .padding(.bottom, 3)
                     
-                    Text("오마이걸(OH MY GIRL)") // "music.artist"
+                    Text("일이삼사오육칠팔구십일이삼사오육칠팔구십일") // "music.artist"
                         .font(.body)
                         .fontWeight(.regular)
                         .foregroundColor(.titleDarkgray)
                     Spacer()
                 }// MusicInform VStack End
-                .padding()
+                .padding(.leading, 5)
                 Spacer()
-            }.padding() // MusicImform HStack End
+            } // MusicImform HStack End
+            .padding(.leading, 23)
             VStack {
     
                 HStack(alignment: .center) {
-                        Image("PhotoComp") // 이미지 삽입
+                    
+                    Button(action: {}, // action 내에 클릭시 모달을 통해 이미지 띄우는 기능 추가 예정
+                           label: {
+                    Image("PhotoComp") // 이미지 삽입
                         .padding()
-                        .offset(y: -70)
+                    }).offset(y: -70)
                         Spacer()
+                    
+                    Button(action: {}, label: { // CD돌아가는 애니메이션 출력..?
                         Image("CdPlayer")
-                            .padding(.trailing, 20.0)
+                        .padding(.trailing, 20.0)
+                    })
                     }.offset(y: 110)
                     .padding()
-                    VStack(alignment: .leading) {
+                    
+                VStack(alignment: .leading) {
                         Spacer()
+                        
+                        Button(action: {}, label: { // action 내에 클릭시 모달을 통해 StoryView 추가 예정
                         Image("StoryComp") // 스토리 입력
-                            .offset(x: 20,y: -50)
+                        }).offset(x: 20,y: -50)
+                        
+                    Button(action: {}, label: { // action 내에 클릭시 모달을 통해 이미지 띄우는 기능 추가 예정
                         Image("LylicComp") // 가사 입력
-                            .offset(y: -30)
+                    }).offset(y: -30)
                     }.offset(y: -20)
             Spacer()
             
