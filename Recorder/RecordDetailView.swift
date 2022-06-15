@@ -47,7 +47,7 @@ struct RecordDetailView: View {
                     
                     Button(action: {}, label: { // TODO: CD돌아가는 애니메이션 출력..?
                         CDPlayerComp()
-                    })
+                    }).offset(y: -10)
                 }.offset(y: 80)
                     .padding()
                 
