@@ -52,17 +52,9 @@ struct SnapCarousel: View {
                                 cdHeight: cdHeight
                             ) {
                                 VStack {
-                                    // activeCard를 id값으로 가진 가운데 cd만 타이틀을 가짐
-                                    // 그 외의 카드는 높이를 동일하게 줄여주기 위해 빈 공간을 Item 범위에 포함시킴
-                                    if(item.id == UIState.activeCard ) {
-                                        Text("\(item.musicTitle) - \(item.singer)")
-                                            .foregroundColor(Color.black)
-                                            .padding(.bottom, 30)
-                                    } else {
-                                        Spacer()
-                                            .frame(height: 50)
-                                    }
-                                    // cd(Item) 자체가 버튼으로 작동
+                                    Text("\(item.musicTitle) - \(item.singer)")
+                                        .foregroundColor(Color.black)
+                                        .padding(.bottom, 30)
                                     Button( action: {
                                         showCd = true // cdPlayer에 cd 보이기
                                     }) {
@@ -71,9 +63,12 @@ struct SnapCarousel: View {
                                             .aspectRatio(contentMode: .fit)
                                             .clipShape(Circle())
                                             .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
-                                        Circle()
-                                            .frame(width: 40, height: 40)
-                                            .foregroundColor(.background)
+//                                            Circle()
+//                                                .foregroundColor(.white)
+//                                                .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                                            Circle()
+                                                .frame(width: 40, height: 40)
+                                                .foregroundColor(.background)
                                         }
                                     } // 버튼
                                 } // V 스택
@@ -86,7 +81,7 @@ struct SnapCarousel: View {
                     Spacer()
                     // CdPlayer
                         ZStack {
-                            Image("cdPlayer")
+                            Image("CdPlayer")
                             // cd 클릭시, cdPlayer에 cd 나타남
                             VStack {
                                 if showCd == true {
@@ -131,7 +126,7 @@ struct SnapCarousel: View {
     } // 바디 뷰
 }
 
-// 기록한 Cd의 데이터 구조체
+// 기록한 Cd 구조체
 struct Cd: Identifiable, Hashable {
     var id: Int
     var musicTitle: String = ""
@@ -140,11 +135,10 @@ struct Cd: Identifiable, Hashable {
 }
 
 public class UIStateModel: ObservableObject {
-    @Published var activeCard: Int = 0 // 가운데 위치한 cd의 id 값
-    @Published var screenDrag: Float = 0.0 // 드래그하고 있는지 파악하기 위한 값
+    @Published var activeCard: Int = 0
+    @Published var screenDrag: Float = 0.0
 }
 
-// 기록한 cd의 carousel 스크롤 뷰
 struct Carousel<Items : View> : View {
     let items: Items
     let numberOfItems: CGFloat
@@ -195,13 +189,13 @@ struct Carousel<Items : View> : View {
             
         }.onEnded { value in
             self.UIState.screenDrag = 0
-            // 터치가 뒤로 50 이동(뒤로 드래그)하면서 activeCard가 마지막 값이 아닐때 다음 cd가 나옴
+            // 뒤로 스크롤
             if (value.translation.width < -50 && CGFloat(self.UIState.activeCard) < numberOfItems - 1) {
                 self.UIState.activeCard = self.UIState.activeCard + 1
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                 impactMed.impactOccurred() // haptic 피드백
             }
-            // 터치가 앞으로 50 이동(뒤로 드래그)하면서 activeCard가 처음 값이 아닐때 이전 cd가 나옴
+            // 앞으로 스크롤
             if (value.translation.width > 50 && CGFloat(self.UIState.activeCard) > 0) {
                 self.UIState.activeCard = self.UIState.activeCard - 1
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
@@ -211,7 +205,6 @@ struct Carousel<Items : View> : View {
     }
 }
 
-// 스크롤되는 뷰
 struct Canvas<Content : View> : View {
     let content: Content
     @EnvironmentObject var UIState: UIStateModel
@@ -227,7 +220,6 @@ struct Canvas<Content : View> : View {
     }
 }
 
-// 기록한 cd의 뷰
 struct Item<Content: View>: View {
     @EnvironmentObject var UIState: UIStateModel
     let cdWidth: CGFloat
@@ -249,9 +241,8 @@ struct Item<Content: View>: View {
         self._id = _id
     }
 
-    // 양옆에 있는 cd 높이만 줄여줌
     var body: some View {
         content
-            .frame(width: cdWidth, height: _id == UIState.activeCard ? cdHeight : cdHeight - 60, alignment: .center)
+            .frame(width: cdWidth, height: _id == UIState.activeCard ? cdHeight : cdHeight - 60, alignment: .center) // 양옆에 있는 cd는 높이만 줄여줌
     }
 }
