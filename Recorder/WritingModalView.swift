@@ -10,6 +10,8 @@ import Combine
 
 struct WritingModalView: View {
     
+    @Environment(\.presentationMode) var presentation
+    
     @State var placeholderText : String = "이 음악과 관련된 짧은 이야기를\n기록해보세요 (글자수 200자 제한)"
     @State var content : String = ""
     var characterLimit = 200
@@ -29,12 +31,13 @@ struct WritingModalView: View {
                         .font(.customTitle2())
                     Spacer()
                     
-                    Button(action: {
+                    Button(action: { // 상단 X 버튼
+                        presentation.wrappedValue.dismiss()
                                 }) {
                         Image(systemName: "xmark")
                                         .imageScale(.large)
                                         .foregroundColor(.white)
-                    } // 상단 X 버튼 출력 - 연결필요
+                    } // 상단 X 버튼 끝
                         
                     
                 }
@@ -87,7 +90,7 @@ struct WritingModalView: View {
                             }
                             else {
                                 Button("완료") {
-                                    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                                    presentation.wrappedValue.dismiss()
                                 }
                                 .font(.customSubhead())
                                 .foregroundColor(.pointBlue)
