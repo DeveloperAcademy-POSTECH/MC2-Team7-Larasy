@@ -11,9 +11,9 @@ struct SnapCarousel: View {
     //    @State var tapGesture: Bool = false
     
     var body: some View {
-        let spacing: CGFloat = -20
+        let spacing: CGFloat = -10
         let widthOfHiddenCds: CGFloat = 100
-        let cdHeight: CGFloat = 279
+        let cdHeight: CGFloat = 300
         
         // 기록물 id, 곡제목, 가수명, 앨범커버 배열 예시
         let cds = [
@@ -27,7 +27,7 @@ struct SnapCarousel: View {
         // https://gist.github.com/xtabbas/97b44b854e1315384b7d1d5ccce20623.js 의 샘플코드를 참고했습니다.
         return Canvas {
             ZStack {
-                Color("background")
+                Image("listViewBack")
                     .ignoresSafeArea()
                 // Carousel 슬라이더 기능
                 // ForEach로 items마다 Item() 뷰를 각각 불러옴
@@ -46,13 +46,17 @@ struct SnapCarousel: View {
                             ) {
                                 VStack {
                                     if (content.id == UIState.activeCard) {
-                                        Text("\(content.musicTitle) - \(content.singer)")
+                                        Text("\(content.musicTitle)")
                                             .foregroundColor(Color.titleBlack)
                                             .font(Font.customTitle3())
+                                            .padding(.bottom, 5)
+                                        Text("\(content.singer)")
+                                            .foregroundColor(Color.titleDarkgray)
+                                            .font(Font.customBody2())
                                             .padding(.bottom, 30)
                                     } else {
                                         Spacer()
-                                            .frame(height: 50)
+                                            .frame(height: 70)
                                     }
                                     Button(action: {
                                         if self.showCd {
@@ -88,7 +92,7 @@ struct SnapCarousel: View {
                             .animation(.spring())
                         } // ForEach
                     }
-                    .padding(.top, 150)
+                    .padding(.top, 140)
                     
                     Spacer()
                     // CdPlayer
