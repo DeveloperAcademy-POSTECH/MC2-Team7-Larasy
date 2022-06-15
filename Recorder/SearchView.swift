@@ -110,14 +110,14 @@ struct URLImage: View {
             Image(uiImage: uiimage)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 55, height: 55)
+//                .frame(width: 55, height: 55)
                 .background(.gray)
             
         } else {
             Rectangle()
                 .foregroundColor(.titleLightgray)
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 55, height: 55)
+//                .frame(width: 55, height: 55)
                 .onAppear() {
                     fetchData()
                 }
