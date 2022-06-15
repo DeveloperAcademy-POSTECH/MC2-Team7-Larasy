@@ -17,9 +17,11 @@
 		8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8715A79A2855479E001AB4F5 /* MusicAPI.swift */; };
 		8715A79D2855B5AC001AB4F5 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8715A79C2855B5AC001AB4F5 /* Colors.xcassets */; };
 		8715A79F2855B775001AB4F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8715A79E2855B775001AB4F5 /* Extension.swift */; };
-		A01413222855F4E60000EA59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01413212855F4E60000EA59 /* HomeView.swift */; };
-		A0F567F128563066008F2D2E /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F567F028563066008F2D2E /* ListView.swift */; };
 		876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876BC4A22857189D009ACC90 /* TestSoiView.swift */; };
+		A01413222855F4E60000EA59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01413212855F4E60000EA59 /* HomeView.swift */; };
+		B277EC132859A667001A97B1 /* HomeTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC122859A667001A97B1 /* HomeTestView.swift */; };
+		B277EC152859A671001A97B1 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC142859A671001A97B1 /* SnapCarouselView.swift */; };
+		B277EC172859A679001A97B1 /* CdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC162859A679001A97B1 /* CdListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,9 +36,11 @@
 		8715A79A2855479E001AB4F5 /* MusicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAPI.swift; sourceTree = "<group>"; };
 		8715A79C2855B5AC001AB4F5 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		8715A79E2855B775001AB4F5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		A01413212855F4E60000EA59 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		A0F567F028563066008F2D2E /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		876BC4A22857189D009ACC90 /* TestSoiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSoiView.swift; sourceTree = "<group>"; };
+		A01413212855F4E60000EA59 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B277EC122859A667001A97B1 /* HomeTestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTestView.swift; sourceTree = "<group>"; };
+		B277EC142859A671001A97B1 /* SnapCarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
+		B277EC162859A679001A97B1 /* CdListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CdListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,10 +76,12 @@
 			isa = PBXGroup;
 			children = (
 				794AD0062851EEA700414667 /* RecorderApp.swift */,
+				A01413212855F4E60000EA59 /* HomeView.swift */,
+				B277EC162859A679001A97B1 /* CdListView.swift */,
+				B277EC142859A671001A97B1 /* SnapCarouselView.swift */,
+				B277EC122859A667001A97B1 /* HomeTestView.swift */,
 				794AD0082851EEA700414667 /* ContentView.swift */,
 				8715A797285531AB001AB4F5 /* SearchView.swift */,
-				A01413212855F4E60000EA59 /* HomeView.swift */,
-				A0F567F028563066008F2D2E /* ListView.swift */,
 				876BC4A22857189D009ACC90 /* TestSoiView.swift */,
 				13C0E49F2857267D004ABE1D /* RecordResultView.swift */,
 				13C0E4A128573795004ABE1D /* RecordDetailView.swift */,
@@ -174,14 +180,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				13C0E4A02857267D004ABE1D /* RecordResultView.swift in Sources */,
+				B277EC172859A679001A97B1 /* CdListView.swift in Sources */,
+				A01413222855F4E60000EA59 /* HomeView.swift in Sources */,
 				8715A79F2855B775001AB4F5 /* Extension.swift in Sources */,
-				B2711D5C28570A3B0012E0BE /* CdListView.swift in Sources */,
+				B277EC132859A667001A97B1 /* HomeTestView.swift in Sources */,
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
-				B2711D5E28589A2F0012E0BE /* DetailView.swift in Sources */,
 				876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */,
+				B277EC152859A671001A97B1 /* SnapCarouselView.swift in Sources */,
 				794AD0092851EEA700414667 /* ContentView.swift in Sources */,
-				B2711D58285709C20012E0BE /* HomeTestView.swift in Sources */,
-				B2711D5A285709D20012E0BE /* SnapCarouselView.swift in Sources */,
 				8715A798285531AB001AB4F5 /* SearchView.swift in Sources */,
 				13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */,
 				794AD0072851EEA700414667 /* RecorderApp.swift in Sources */,
@@ -313,7 +319,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Recorder/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8HXUXMV396;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -342,7 +348,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Recorder/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8HXUXMV396;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

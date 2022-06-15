@@ -33,7 +33,7 @@ struct RecordResultView: View {
                     Image(systemName: "ellipsis")
                         .foregroundColor(.pointBlue)
                 }) // Menu 출력
-                ) // NavigationVarItem 설정
+            ) // NavigationVarItem 설정
         } // Navigation View 출력
     } // View End
 } // RecordResultView End
