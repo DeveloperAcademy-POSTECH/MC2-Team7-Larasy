@@ -66,9 +66,9 @@ struct WriteView: View {
                                 ImagePicker(image: $inputImage)
                             }
                         //MARK: - 이미지 가져오는 부분 끝
-                        
                         Spacer()
                         
+                        //MARK: - CD 플레어이 뷰 시작
                         Button(action: {}, label: { // TODO: CD돌아가는 애니메이션 출력..?
                             Image("CdPlayer")
                                 .padding(.trailing, 20.0)
@@ -115,7 +115,7 @@ struct WriteView: View {
                 Text("Music")
                     .font(Font.customSubhead())
             }), trailing: NavigationLink(destination: EmptyView(), label: {
-                Text("저장")
+                Text("저장")                              // TODO: 저장 기능 추가 예정
                     .font(Font.customSubhead())
             }))
             
