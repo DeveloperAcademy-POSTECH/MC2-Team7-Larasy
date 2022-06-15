@@ -113,6 +113,10 @@ struct WriteView: View {
             .navigationBarItems(leading: NavigationLink(destination: SearchView(), label: {
                 Image(systemName: "chevron.backward")
                 Text("Music")
+                    .font(Font.customSubhead())
+            }), trailing: NavigationLink(destination: EmptyView(), label: {
+                Text("저장")
+                    .font(Font.customSubhead())
             }))
             
         } // Navigation View 출력
