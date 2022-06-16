@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WriteView: View {
+    @State var music: Music
     @State private var image: Image?                        // 선택된 사진, 어떤 이미지인지
     @State private var showingImagePicker = false   // 클릭됐는지 확인
     @State private var inputImage: UIImage?
@@ -20,14 +21,14 @@ struct WriteView: View {
                 RecordBackground()
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("일이삼사오육칠팔구십일이삼사오육") // TODO: "music.title"
+                        Text("\(music.title)") // MARK: "music.title"
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 3)
                         
-                        Text("일이삼사오육칠팔구십일이삼사오육칠팔구십일") // TODO: "music.artist"
+                        Text("\(music.artist)") //MARK: "music.artist"
                             .font(.body)
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
@@ -77,7 +78,7 @@ struct WriteView: View {
                     
                     VStack(alignment: .leading) {
                         
-                        //MARK: - 가사 입력 받는 부분
+                        //MARK: - 가사 입력 받는 뷰 시작
                         ZStack {
                             Image("LylicComp") // 가사 입력
                                 .offset(y: 130)
@@ -128,6 +129,6 @@ struct WriteView: View {
 
 struct WriteView_Previews: PreviewProvider {
     static var previews: some View {
-        WriteView()
+        WriteView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
     }
 }
