@@ -186,7 +186,6 @@
 				A01413222855F4E60000EA59 /* HomeView.swift in Sources */,
 				8715A79F2855B775001AB4F5 /* Extension.swift in Sources */,
 				B29723B0285B192C0065FD36 /* SnapCarouselView.swift in Sources */,
-				8715A79F2855B775001AB4F5 /* Extension.swift in Sources */,
 				87FB281D285A04680036A5BB /* Screenshot.swift in Sources */,
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
 				13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */,
