@@ -7,6 +7,9 @@
 
 import CoreData
 
+
+// MARK: - CoreData
+
 struct PersistenceController {
     
     static let shared = PersistenceController()
@@ -16,20 +19,19 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
             let newItem = Content(context: viewContext)
-            newItem.lylic = "1"
-            newItem.artist = "2"
-            newItem.albumArt = "3"
-            newItem.story = "4"
+            newItem.lylic = ""
+            newItem.artist = ""
+            newItem.albumArt = ""
+            newItem.story = ""
             newItem.id = UUID()
-            newItem.image = "5"
-            newItem.title = "6"
+            newItem.image = ""
+            newItem.title = ""
             newItem.date = Date()
         }
         do {
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            // TODO: Error 처리
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
@@ -45,17 +47,11 @@ struct PersistenceController {
         }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
+                // TODO: Error 처리
+                /* Error 발생 경우
+                    - 파일을 만들 수 없거나, 쓰기를 허용하지 않았을 때
+                    - 장치의 공간이 부족할 때 */
+                
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })

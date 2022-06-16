@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 
-// MA 음악 검색 View
+// MARK: - 음악 검색 View
 struct SearchView: View {
     
     @StateObject var musicAPI = MusicAPI()

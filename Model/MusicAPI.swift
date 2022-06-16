@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-// MARK: 음악 API 불러오기
+// MARK: - 음악 API 불러오기
 class MusicAPI: ObservableObject {
     @Published var musicList: [Music] = []
     
