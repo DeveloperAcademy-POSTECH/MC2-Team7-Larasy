@@ -48,7 +48,6 @@ struct RecordDetailView: View {
                     }).offset(y: -110)
                     Spacer()
                     
-//                    Button(action: {}, label: { // TODO: CD돌아가는 애니메이션 출력..?
                         CDPlayerComp(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
                     .offset(y: -10)
                 }.offset(y: 80)
