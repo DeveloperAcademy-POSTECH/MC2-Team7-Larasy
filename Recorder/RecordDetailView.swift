@@ -75,7 +75,14 @@ struct RecordDetailView: View {
                 Button(action: {}) { // TODO: antion내에 편집 기능 예정
                     Label("편집", systemImage: "square.and.pencil")
                 }
-                Button(action: {}) { // TODO: Soi코딩 중인 스크린샷 기능 예정
+            
+            // MARK: 이미지 저장 기능
+                Button(action: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        let image = body.screenshot()
+                        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                    }
+                }) {
                     Label("이미지 저장", systemImage: "square.and.arrow.down")
                 }
                 Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
