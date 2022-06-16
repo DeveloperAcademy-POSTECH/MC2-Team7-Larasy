@@ -11,7 +11,7 @@ struct WritingModalView: View {
     @Environment(\.presentationMode) var presentation
     
     @State var placeholderText : String = "이 음악과 관련된 짧은 이야기를\n기록해보세요 (글자수 200자 제한)"
-    @State var content : String = ""
+    @Binding var content : String
     var characterLimit = 200
     
     var body: some View {
@@ -112,6 +112,6 @@ struct WritingModalView: View {
 
 struct WritingModalView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingModalView()
+        WritingModalView(content: .constant(""))
     }
 }

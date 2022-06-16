@@ -10,11 +10,11 @@ import SwiftUI
 struct WriteView: View {
     @State var music: Music
     @State private var image: Image?                       // 선택된 사진, 어떤 이미지인지
-    @State private var showingImagePicker = false           // 클릭됐는지 확인
+    @State private var showingImagePicker = false           // 이미지 클릭됐는지 확인
+    @State private var savestory = false                    // 이야기 클릭됐는지 확인
     @State private var inputImage: UIImage?
     @State private var lyrics = ""
-    //    @ObservedObject private var kGuardian = KeyboardGuardian(textFieldCount: 1)
-    //    private let charLimited = 39
+    @State private var content = ""
     
     var body: some View {
         
@@ -79,7 +79,7 @@ struct WriteView: View {
                         
                         //MARK: - CD 플레어이 뷰 시작
                         
-                        CDPlayerComp(music: music) //TODO: SearchView에서 music 받아와야함
+                        CDPlayerComp(music: music) //MARK: SearchView에서 music 받아옴
                             .offset(y: -10)
                     }.offset(y: 80)
                         .padding()
@@ -111,11 +111,28 @@ struct WriteView: View {
                         
                         Spacer()
                         
-                        Button(action: {}, label: { // TODO: action 내에 클릭시 모달을 통해 StoryView 추가 예정
+                        // MARK: - 모달을 통해 이야기 작성하는 뷰 시작
+                        Button(action: { savestory.toggle()
+                            UIView.setAnimationsEnabled(false)},
+                               label: {
                             Image("StoryComp") // 스토리 입력
-                        }).offset(x: 20,y: -100)
-                        //MARK: - 가사 입력 받는 ZStack 끝
+                                .fullScreenCover(isPresented: $savestory, onDismiss: { savestory = false }, content: {
+                                    WritingModalView(content: $content)
+                                })
+                            if !content.isEmpty {
+                                Text(content)
+                                    .font(Font.customBody1())
+                                    .foregroundColor(.titleDarkgray)
+                                    .lineLimit(5)
+                                    .truncationMode(.tail)
+                                    .frame(width: 130)
+                                    .offset(x: -160)
+                            }
+                        })
+                        .offset(x: 20,y: -100)
+                        //MARK: - 이야기 입력 받는 Button 끝
                     }.offset(y: -20)
+                    
                     Spacer()
                     
                 }
@@ -125,12 +142,13 @@ struct WriteView: View {
             }))
         }.ignoresSafeArea(.keyboard, edges: .bottom)
         
-//            .navigationBarHidden(true)
     } // View End
-    func loadImage() {
+    
+    func loadImage() {      // 이미지 저장하는 함수
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
     }
+    
 } // RecordResultView End
 
 struct WriteView_Previews: PreviewProvider {
