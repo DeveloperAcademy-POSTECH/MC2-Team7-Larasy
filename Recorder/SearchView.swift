@@ -130,7 +130,7 @@ struct SearchView: View {
                             .cornerRadius(5)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: TestSoiView(music: music)) { // 현재 임시뷰로 연결, 추후 작성뷰로 전환
+                        NavigationLink(destination: WriteView(music: music)) { // 현재 임시뷰로 연결, 추후 작성뷰로 전환
                             
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {

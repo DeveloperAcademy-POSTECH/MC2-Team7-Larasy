@@ -13,15 +13,20 @@ struct WriteView: View {
     @State private var showingImagePicker = false   // 클릭됐는지 확인
     @State private var inputImage: UIImage?
     @State private var lyrics = ""
-//    @ObservedObject private var kGuardian = KeyboardGuardian(textFieldCount: 1)
-//    private let charLimited = 39
+    //    @ObservedObject private var kGuardian = KeyboardGuardian(textFieldCount: 1)
+    //    private let charLimited = 39
     
     var body: some View {
-        NavigationView {
-            GeometryReader { _ in
+        
+        GeometryReader { _ in
             ZStack {
                 Color.background.edgesIgnoringSafeArea(.all)
                 RecordBackground()
+                VStack{
+                    HStack{
+                        Spacer()
+                    }.padding(.trailing)
+                }
                 HStack {
                     VStack(alignment: .leading) {
                         Text("\(music.title)") // MARK: "music.title"
@@ -73,9 +78,9 @@ struct WriteView: View {
                         Spacer()
                         
                         //MARK: - CD 플레어이 뷰 시작
-                        Button(action: {}, label: { // TODO: CD돌아가는 애니메이션 출력..?
-                            CDPlayerComp(music: Music(artist: "Cat", title: "sunwoojunga", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg")) //TODO: SearchView에서 music 받아와야함
-                        }).offset(y: -10)
+                        
+                        CDPlayerComp(music: music) //TODO: SearchView에서 music 받아와야함
+                            .offset(y: -10)
                     }.offset(y: 80)
                         .padding()
                     
@@ -114,19 +119,13 @@ struct WriteView: View {
                     Spacer()
                     
                 }
-            }// 본문 ZStack End
-            //TODO:
-            .navigationBarItems(leading: NavigationLink(destination: SearchView(), label: {
-                Image(systemName: "chevron.backward")
-                Text("Music")
-                    .font(Font.customSubhead())
-            }), trailing: NavigationLink(destination: EmptyView(), label: {
+            }.navigationBarItems( trailing: NavigationLink(destination: EmptyView(), label: {
                 Text("저장")                              // TODO: 저장 기능 추가 예정
                     .font(Font.customSubhead())
             }))
-            }.ignoresSafeArea(.keyboard, edges: .bottom)
-        } // Navigation View 출력
-        .navigationBarHidden(true)
+        }.ignoresSafeArea(.keyboard, edges: .bottom)
+        
+//            .navigationBarHidden(true)
     } // View End
     func loadImage() {
         guard let inputImage = inputImage else { return }
