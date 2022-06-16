@@ -18,6 +18,7 @@ struct WriteView: View {
     
     var body: some View {
         NavigationView {
+            GeometryReader { _ in
             ZStack {
                 Color.background.edgesIgnoringSafeArea(.all)
                 RecordBackground()
@@ -123,7 +124,7 @@ struct WriteView: View {
                 Text("저장")                              // TODO: 저장 기능 추가 예정
                     .font(Font.customSubhead())
             }))
-            
+            }.ignoresSafeArea(.keyboard, edges: .bottom)
         } // Navigation View 출력
         .navigationBarHidden(true)
     } // View End
