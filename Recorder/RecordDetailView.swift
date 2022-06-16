@@ -10,48 +10,23 @@ import SwiftUI
 
 struct RecordDetailView: View {
     
+    let music: Music
     
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
             RecordBackground()
             VStack {
-                HStack{
-                    Spacer()
-                    Menu(content: {
-                        Button(action: {}) { // TODO: antion내에 편집 기능 예정
-                            Label("수정", systemImage: "pencil")
-                        }
-                        
-                        // MARK: 이미지 저장 기능
-                        Button(action: {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                let image = body.screenshot()
-                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                            }
-                        }) {
-                            Label("이미지로 저장", systemImage: "square.and.arrow.down")
-                        }
-                        
-                        Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
-                            Label("삭제", systemImage: "trash")
-                        }
-                    }, label: {
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(.pointBlue)
-                    })
-                }.padding(.trailing)
-                
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("일이삼사오육칠팔구십일이삼사오육") // TODO: "music.title"
+                        Text(music.title) // TODO: "music.title"
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 3)
                         
-                        Text("일이삼사오육칠팔구십일이삼사오육칠팔구십일") // TODO: "music.artist"
+                        Text(music.artist) // TODO: "music.artist"
                             .font(.body)
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
@@ -73,9 +48,8 @@ struct RecordDetailView: View {
                     }).offset(y: -110)
                     Spacer()
                     
-                    Button(action: {}, label: { // TODO: CD돌아가는 애니메이션 출력..?
-                        CDPlayerComp()
-                    }).offset(y: -10)
+                        CDPlayerComp(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
+                    .offset(y: -10)
                 }.offset(y: 80)
                     .padding()
                 
@@ -96,23 +70,60 @@ struct RecordDetailView: View {
                 Spacer()
                 
             }
-        }// 본문 ZStack End
+        }.navigationBarItems(trailing:
+            Menu(content: {
+                Button(action: {}) { // TODO: antion내에 편집 기능 예정
+                    Label("편집", systemImage: "square.and.pencil")
+                }
+                Button(action: {}) { // TODO: Soi코딩 중인 스크린샷 기능 예정
+                    Label("이미지 저장", systemImage: "square.and.arrow.down")
+                }
+                Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
+                    Label("제거", systemImage: "trash")
+                }
+            }, label: {
+                Image(systemName: "ellipsis")
+                    .foregroundColor(.pointBlue)
+            }))
+        // 본문 ZStack End
     }
 }
 
 struct RecordDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordDetailView()
+        RecordDetailView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
     }
 }
 
 struct CDPlayerComp: View {
+    
+    let music: Music
+    @State private var angle = 0.0
     var body: some View {
         ZStack {
             Image("CdPlayer")
                 .padding(.trailing, 20.0)
-            
-            
+                
+            ZStack(alignment: .center) {
+                URLImage(urlString: music.albumArt)
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+                    .scaleEffect(1.7)
+                    .rotationEffect(.degrees(self.angle))
+                    .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
+                    .onTapGesture {
+                        self.angle += Double.random(in: 3600..<3960)
+                    } // albumArt를 불러오는 URLImage
+    
+                Circle()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.background)
+                    .overlay(
+                        Circle()
+                            .stroke(.background, lineWidth: 0.1)
+                            .shadow(color: .titleDarkgray, radius: 2, x: 3, y: 3)
+                    )
+            }.offset(x: -10.6, y: -133) // albumArt를 CD모양으로 불러오는 ZStack
             
             ZStack {
                 Circle()
@@ -125,8 +136,7 @@ struct CDPlayerComp: View {
                 Circle()
                     .foregroundColor(.background)
                     .frame(width: 3 , height: 3)
-            }.offset(x: -9.5, y: -130)
-            // Z스택
+            }.offset(x: -10.6, y: -133)
             
         }// ZStack End
     }
