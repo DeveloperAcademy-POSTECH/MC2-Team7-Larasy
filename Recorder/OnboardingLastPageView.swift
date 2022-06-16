@@ -7,27 +7,14 @@
 
 import SwiftUI
 
-//초기 시작화면을 결정하는 뷰
-struct OnboardingStartView: View{
-    
-    @State var StartButton: Bool = false
-    //스타트 버튼을 누르기 전까지는 else. 즉 온보딩 뷰가 보임
-    var body: some View {
-        if StartButton {
-            HomeView()
-        } else {
-            OnboardingView(StartButton: $StartButton)
-        }
-    }
-}
-
 //홈 뷰로 가기위한 마지막 온보딩 뷰
 struct OnboardingLastPageView: View {
     
     //이미지 fadein 애니메이션
     @State var isShown = false
-    //스타트 버튼 바인딩
-    @Binding var StartButton: Bool
+    //앱 최초 실행 바인딩
+    @Binding var isFriestLaunching: Bool
+
     
     var body: some View {
         ZStack {
@@ -51,7 +38,7 @@ struct OnboardingLastPageView: View {
             //Image Fadein Animation End
             //Button Start
             Button(action: {
-                StartButton.toggle()
+                isFriestLaunching.toggle()
             }) {
                 Text("음악 기록 시작하기")
                     .foregroundColor(.white)
@@ -71,7 +58,7 @@ struct OnboardingLastPageView: View {
 
 struct OnboardingLastPageView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingLastPageView(StartButton: .constant(false))
+        OnboardingLastPageView(isFriestLaunching: .constant(false))
     }
 }
 
