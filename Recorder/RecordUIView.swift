@@ -10,6 +10,9 @@ import SwiftUI
 struct RecordUIView: View {
     
     var body: some View {
+        
+        GeometryReader { _ in
+        
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
             RecordBackground()
@@ -47,7 +50,7 @@ struct RecordUIView: View {
                     
                     Spacer()
                     
-                    CDPlayerComp()
+                    CDPlayerComp(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
                         .offset(y: -10)
                 }.offset(y: 80)
                     .padding()
@@ -69,6 +72,7 @@ struct RecordUIView: View {
                 
             }
         }// 본문 ZStack End
+        }.ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
 

@@ -116,7 +116,7 @@ struct SnapCarousel: View {
                         // cd 클릭시, cdPlayer에 cd 나타남
                         VStack {
                             if showCd == true {
-                                NavigationLink(destination: RecordDetailView(), isActive: $showDetailView) {
+                                NavigationLink(destination: RecordDetailView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg")), isActive: $showDetailView) {
                                     URLImage(urlString: cds[selectedCd].image)
                                         .clipShape(Circle())
                                         .frame(width: 110, height: 110)
@@ -128,7 +128,7 @@ struct SnapCarousel: View {
                                         }
                                 }
                             } else {
-                                NavigationLink(destination: RecordDetailView(), isActive: $showDetailView) {
+                                NavigationLink(destination: RecordDetailView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg")), isActive: $showDetailView) {
                                     URLImage(urlString: cds[selectedCd].image)
                                         .clipShape(Circle())
                                         .frame(width: 110, height: 110)
