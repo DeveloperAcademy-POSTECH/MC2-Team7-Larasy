@@ -12,7 +12,7 @@ struct OnboardingLastPageView: View {
     
     //이미지 fadein 애니메이션
     @State var isShown = false
-    //앱 최초 실행 바인딩
+    //앱최초 실행 바인딩
     @Binding var isFriestLaunching: Bool
 
     
@@ -46,7 +46,7 @@ struct OnboardingLastPageView: View {
                     .frame(width: 200, height: 60)
                     .background(Color.pointBlue)
                     .cornerRadius(30)
-                    .shadow(color: .gray, radius: 10, x: 0, y: 3)
+                    .shadow(color: .gray, radius: 5, x: 0, y: 3)
             }
             .padding(.top,650)
             //Button End
