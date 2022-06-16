@@ -27,16 +27,9 @@ struct CdListView: View {
     //                    //go to WriteView
     //                }
     //                Spacer()
-    //                Image("CdPlayer")
+    //                Image("ListViewCdPlayer")
                 }.ignoresSafeArea()
             }
             .navigationBarTitle("List", displayMode: .inline)
     }
 }
-
-
-//struct CdListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CdListView().environmentObject(UIStateModel())
-//    }
-//}

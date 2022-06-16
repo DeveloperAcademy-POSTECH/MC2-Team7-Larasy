@@ -100,7 +100,7 @@ struct SnapCarousel: View {
                     Spacer()
                     // CdPlayer
                     ZStack {
-                        Image("CdPlayer")
+                        Image("ListViewCdPlayer")
                         
                         // cd 클릭시, cdPlayer에 cd 나타남
                         VStack {
@@ -156,6 +156,8 @@ struct SnapCarousel: View {
             } // Z스택
         } // Canvas
         .navigationBarTitle("List", displayMode: .inline)
+        
+        
     } // 바디 뷰
     
     // 네비게이션 링크로 이동되는 RecordResultView를 딜레이시키고 애니메이션을 보여주기 위한 타임 카운터
