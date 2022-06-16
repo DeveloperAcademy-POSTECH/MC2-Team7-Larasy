@@ -74,7 +74,7 @@ struct WriteView: View {
                         
                         //MARK: - CD 플레어이 뷰 시작
                         Button(action: {}, label: { // TODO: CD돌아가는 애니메이션 출력..?
-                            CDPlayerComp()
+                            CDPlayerComp(music: Music(artist: "Cat", title: "sunwoojunga", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg")) //TODO: SearchView에서 music 받아와야함
                         }).offset(y: -10)
                     }.offset(y: 80)
                         .padding()

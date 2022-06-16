@@ -180,7 +180,7 @@ struct URLImage: View {
             Image(uiImage: uiimage) // URL Image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 55, height: 55)
+//                .frame(width: 55, height: 55)
                 .background(.gray)
             
         } else { // 이미지 불러오기 실패
@@ -188,7 +188,7 @@ struct URLImage: View {
             Rectangle() // 회색 박스
                 .foregroundColor(.titleLightgray)
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 55, height: 55)
+//                .frame(width: 55, height: 55)
                 .onAppear() {
                     fetchData()
                 }
