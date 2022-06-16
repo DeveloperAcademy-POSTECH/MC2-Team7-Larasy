@@ -22,7 +22,9 @@
 		87A0D9B4285BAF42006D0D3B /* Recorder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87A0D9B2285BAF42006D0D3B /* Recorder.xcdatamodeld */; };
 		87FB281D285A04680036A5BB /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB281C285A04680036A5BB /* Screenshot.swift */; };
 		A01413222855F4E60000EA59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01413212855F4E60000EA59 /* HomeView.swift */; };
-		A0F567F128563066008F2D2E /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F567F028563066008F2D2E /* ListView.swift */; };
+		B277EC152859A671001A97B1 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC142859A671001A97B1 /* Carousel.swift */; };
+		B277EC172859A679001A97B1 /* CdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC162859A679001A97B1 /* CdListView.swift */; };
+		B29723B0285B192C0065FD36 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29723AF285B192C0065FD36 /* SnapCarouselView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +44,9 @@
 		87A0D9B3285BAF42006D0D3B /* Recored.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Recored.xcdatamodel; sourceTree = "<group>"; };
 		87FB281C285A04680036A5BB /* Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screenshot.swift; sourceTree = "<group>"; };
 		A01413212855F4E60000EA59 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		A0F567F028563066008F2D2E /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		B277EC142859A671001A97B1 /* Carousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
+		B277EC162859A679001A97B1 /* CdListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CdListView.swift; sourceTree = "<group>"; };
+		B29723AF285B192C0065FD36 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +82,12 @@
 			isa = PBXGroup;
 			children = (
 				794AD0062851EEA700414667 /* RecorderApp.swift */,
+				A01413212855F4E60000EA59 /* HomeView.swift */,
+				B277EC162859A679001A97B1 /* CdListView.swift */,
+				B29723AF285B192C0065FD36 /* SnapCarouselView.swift */,
+				B277EC142859A671001A97B1 /* Carousel.swift */,
 				794AD0082851EEA700414667 /* ContentView.swift */,
 				8715A797285531AB001AB4F5 /* SearchView.swift */,
-				A01413212855F4E60000EA59 /* HomeView.swift */,
-				A0F567F028563066008F2D2E /* ListView.swift */,
 				876BC4A22857189D009ACC90 /* TestSoiView.swift */,
 				13C0E4A128573795004ABE1D /* RecordDetailView.swift */,
 				794AD00A2851EEA900414667 /* Assets.xcassets */,
@@ -182,15 +188,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B277EC172859A679001A97B1 /* CdListView.swift in Sources */,
+				A01413222855F4E60000EA59 /* HomeView.swift in Sources */,
 				8715A79F2855B775001AB4F5 /* Extension.swift in Sources */,
+				B29723B0285B192C0065FD36 /* SnapCarouselView.swift in Sources */,
 				87FB281D285A04680036A5BB /* Screenshot.swift in Sources */,
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
 				87A0D9B4285BAF42006D0D3B /* Recorder.xcdatamodeld in Sources */,
 				13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */,
 				876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */,
+				B277EC152859A671001A97B1 /* Carousel.swift in Sources */,
 				794AD0092851EEA700414667 /* ContentView.swift in Sources */,
-				A0F567F128563066008F2D2E /* ListView.swift in Sources */,
-				A01413222855F4E60000EA59 /* HomeView.swift in Sources */,
 				8715A798285531AB001AB4F5 /* SearchView.swift in Sources */,
 				87A0D9B1285BAEF8006D0D3B /* Persistence.swift in Sources */,
 				13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */,
@@ -323,7 +331,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Recorder/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8HXUXMV396;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -352,7 +360,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Recorder/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8HXUXMV396;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

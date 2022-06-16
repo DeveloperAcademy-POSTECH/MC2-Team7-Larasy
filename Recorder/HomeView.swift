@@ -51,9 +51,10 @@ struct HomeView: View {
                             .font(Font.customHeadline())
                             .padding(-15)
                         //cdcase img 클릭시 CDListView로 이동하는 Navlink
-                        NavigationLink(destination: ListView()){
+                        NavigationLink(destination: CdListView()){
                             Image("cdcase")     //cdcase Image
-                        }
+                        }.navigationBarTitle("Home")
+
                     }
                     .padding(.bottom, 105)
                     .padding(.leading, 30)
