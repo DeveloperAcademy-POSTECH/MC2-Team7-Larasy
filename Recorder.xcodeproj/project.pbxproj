@@ -19,7 +19,6 @@
 		8715A79F2855B775001AB4F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8715A79E2855B775001AB4F5 /* Extension.swift */; };
 		876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876BC4A22857189D009ACC90 /* TestSoiView.swift */; };
 		A01413222855F4E60000EA59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01413212855F4E60000EA59 /* HomeView.swift */; };
-		B277EC132859A667001A97B1 /* HomeTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC122859A667001A97B1 /* HomeTestView.swift */; };
 		B277EC152859A671001A97B1 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC142859A671001A97B1 /* SnapCarouselView.swift */; };
 		B277EC172859A679001A97B1 /* CdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC162859A679001A97B1 /* CdListView.swift */; };
 /* End PBXBuildFile section */
@@ -38,7 +37,6 @@
 		8715A79E2855B775001AB4F5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		876BC4A22857189D009ACC90 /* TestSoiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSoiView.swift; sourceTree = "<group>"; };
 		A01413212855F4E60000EA59 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		B277EC122859A667001A97B1 /* HomeTestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTestView.swift; sourceTree = "<group>"; };
 		B277EC142859A671001A97B1 /* SnapCarouselView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
 		B277EC162859A679001A97B1 /* CdListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CdListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,7 +77,6 @@
 				A01413212855F4E60000EA59 /* HomeView.swift */,
 				B277EC162859A679001A97B1 /* CdListView.swift */,
 				B277EC142859A671001A97B1 /* SnapCarouselView.swift */,
-				B277EC122859A667001A97B1 /* HomeTestView.swift */,
 				794AD0082851EEA700414667 /* ContentView.swift */,
 				8715A797285531AB001AB4F5 /* SearchView.swift */,
 				876BC4A22857189D009ACC90 /* TestSoiView.swift */,
@@ -183,7 +180,6 @@
 				B277EC172859A679001A97B1 /* CdListView.swift in Sources */,
 				A01413222855F4E60000EA59 /* HomeView.swift in Sources */,
 				8715A79F2855B775001AB4F5 /* Extension.swift in Sources */,
-				B277EC132859A667001A97B1 /* HomeTestView.swift in Sources */,
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
 				876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */,
 				B277EC152859A671001A97B1 /* SnapCarouselView.swift in Sources */,
