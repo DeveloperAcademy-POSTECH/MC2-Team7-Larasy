@@ -10,7 +10,7 @@ import SwiftUI
 struct WriteView: View {
     @State var music: Music
     @State private var image: Image?                       // 선택된 사진, 어떤 이미지인지
-    @State private var showingImagePicker = false   // 클릭됐는지 확인
+    @State private var showingImagePicker = false           // 클릭됐는지 확인
     @State private var inputImage: UIImage?
     @State private var lyrics = ""
     //    @ObservedObject private var kGuardian = KeyboardGuardian(textFieldCount: 1)

@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0E4A128573795004ABE1D /* RecordDetailView.swift */; };
+		13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E0DA9F285A3764008714A6 /* RecordUIView.swift */; };
 		7906EFED28577D950064056F /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7906EFEC28577D950064056F /* WriteView.swift */; };
 		790FF14B285B008A00931CCF /* MusicList.json in Resources */ = {isa = PBXBuildFile; fileRef = 790FF14A285B008A00931CCF /* MusicList.json */; };
 		79418F7B2858C17C00F844BD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79418F7A2858C17C00F844BD /* ImagePicker.swift */; };
-		13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E0DA9F285A3764008714A6 /* RecordUIView.swift */; };
+		7949F34E285B88120093579B /* WritingModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7949F34D285B88120093579B /* WritingModalView.swift */; };
 		794AD0072851EEA700414667 /* RecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0062851EEA700414667 /* RecorderApp.swift */; };
 		794AD0092851EEA700414667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0082851EEA700414667 /* ContentView.swift */; };
 		794AD00B2851EEA900414667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794AD00A2851EEA900414667 /* Assets.xcassets */; };
@@ -30,10 +31,11 @@
 
 /* Begin PBXFileReference section */
 		13C0E4A128573795004ABE1D /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
+		13E0DA9F285A3764008714A6 /* RecordUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUIView.swift; sourceTree = "<group>"; };
 		7906EFEC28577D950064056F /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
 		790FF14A285B008A00931CCF /* MusicList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MusicList.json; sourceTree = "<group>"; };
 		79418F7A2858C17C00F844BD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		13E0DA9F285A3764008714A6 /* RecordUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUIView.swift; sourceTree = "<group>"; };
+		7949F34D285B88120093579B /* WritingModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingModalView.swift; sourceTree = "<group>"; };
 		794AD0032851EEA700414667 /* Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794AD0062851EEA700414667 /* RecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderApp.swift; sourceTree = "<group>"; };
 		794AD0082851EEA700414667 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,8 +102,8 @@
 				8715A797285531AB001AB4F5 /* SearchView.swift */,
 				876BC4A22857189D009ACC90 /* TestSoiView.swift */,
 				7906EFEC28577D950064056F /* WriteView.swift */,
+				7949F34D285B88120093579B /* WritingModalView.swift */,
 				79418F7A2858C17C00F844BD /* ImagePicker.swift */,
-				13C0E49F2857267D004ABE1D /* RecordResultView.swift */,
 				13C0E4A128573795004ABE1D /* RecordDetailView.swift */,
 				790FF149285AFF9100931CCF /* JSON */,
 				794AD00A2851EEA900414667 /* Assets.xcassets */,
@@ -214,6 +216,7 @@
 				8715A798285531AB001AB4F5 /* SearchView.swift in Sources */,
 				13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */,
 				79418F7B2858C17C00F844BD /* ImagePicker.swift in Sources */,
+				7949F34E285B88120093579B /* WritingModalView.swift in Sources */,
 				794AD0072851EEA700414667 /* RecorderApp.swift in Sources */,
 				7906EFED28577D950064056F /* WriteView.swift in Sources */,
 			);
