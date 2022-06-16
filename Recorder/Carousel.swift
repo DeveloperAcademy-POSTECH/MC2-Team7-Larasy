@@ -1,5 +1,6 @@
 import SwiftUI
 
+// 네비게이션 링크 지연시키기 위한 코드
 extension UINavigationController {
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -15,6 +16,7 @@ struct Cd: Identifiable, Hashable {
     var image: String = ""
 }
 
+// 가운데 오는 cd의 id값과 드래그하는지를 추적하기 위한 클래스입니다!
 public class UIStateModel: ObservableObject {
     @Published var activeCard: Int = 0
     @Published var screenDrag: Float = 0.0
@@ -86,6 +88,7 @@ struct Carousel<Items : View> : View {
     }
 }
 
+// SmapCarouselView에 cd 리스트를 드래그할때 들어가는 뷰입니다!
 struct Canvas<Content : View> : View {
     let content: Content
     @EnvironmentObject var UIState: UIStateModel
@@ -101,6 +104,7 @@ struct Canvas<Content : View> : View {
     }
 }
 
+// cd 하나를 나타내는 뷰입니다!
 struct Item<Content: View>: View {
     @EnvironmentObject var UIState: UIStateModel
     let cdWidth: CGFloat

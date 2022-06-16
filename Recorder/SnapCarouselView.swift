@@ -16,7 +16,6 @@ struct SnapCarousel: View {
     @State var value: Int = 0
     @State var selectedCd: Int = 0
     @State var currentCd: Int = 0
-    //    @State var tapGesture: Bool = false
     
     var body: some View {
         let spacing: CGFloat = -10
@@ -24,7 +23,7 @@ struct SnapCarousel: View {
         let cdHeight: CGFloat = 300
         
         // 기록물 id, 곡제목, 가수명, 앨범커버 배열 예시
-        let cds = [
+        var cds = [
             Cd(id: 0, musicTitle: "노래제목1", singer: "가수명1", image: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/500x500bb.jpg"),
             Cd(id: 1, musicTitle: "노래제목2", singer: "가수명2", image: "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/17/ff/63/17ff63de-3aba-0f2d-63e7-50d66f900ebb/21UMGIM43558.rgb.jpg/500x500bb.jpg"),
             Cd(id: 2, musicTitle: "노래제목3", singer: "가수명3", image: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/500x500bb.jpg"),
