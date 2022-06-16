@@ -97,6 +97,22 @@ struct RecordDetailView: View {
                 
             }
         }// 본문 ZStack End
+        
+        .navigationBarItems(trailing:
+                                Menu(content: {
+            Button(action: {}) { // TODO: antion내에 편집 기능 예정
+                Label("수정", systemImage: "pencil")
+            }
+            Button(action: {}) { // TODO: Soi코딩 중인 스크린샷 기능 예정
+                Label("이미지로 저장", systemImage: "square.and.arrow.down")
+            }
+            Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
+                Label("삭제", systemImage: "trash")
+            }
+        }, label: {
+            Image(systemName: "ellipsis")
+                .foregroundColor(.pointBlue)
+        }))
     }
 }
 
