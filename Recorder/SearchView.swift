@@ -69,7 +69,7 @@ struct SearchView: View {
                                 URLImage(urlString: music.albumArt)
                                     .cornerRadius(5)
                                 
-                                NavigationLink(destination: TestSoiView(music: music)) {
+                                NavigationLink(destination: WriteView(music: music)) {
                                     VStack(alignment: .leading) {
                                         Text(music.title) // 노래제목
                                             .font(.system(size: 17, weight: .bold))

@@ -120,6 +120,7 @@ struct WriteView: View {
             }))
             
         } // Navigation View 출력
+        .navigationBarHidden(true)
     } // View End
     func loadImage() {
         guard let inputImage = inputImage else { return }
