@@ -106,9 +106,9 @@ struct CDPlayerComp: View {
                 
             ZStack(alignment: .center) {
                 URLImage(urlString: music.albumArt)
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
                     .clipShape(Circle())
-                    .scaleEffect(1.7)
+                    .scaleEffect(0.46)
                     .rotationEffect(.degrees(self.angle))
                     .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
                     .onTapGesture {
