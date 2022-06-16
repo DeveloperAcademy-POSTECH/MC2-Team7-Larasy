@@ -101,6 +101,7 @@ struct SearchView: View {
                     HStack {
                         URLImage(urlString: music.albumArt) // 앨범커버
                             .cornerRadius(5)
+                            .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
                         NavigationLink(destination: TestSoiView(music: music)) { // 현재 임시뷰로 연결, 추후 작성뷰로 전환
