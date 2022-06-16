@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct RecorderApp: App {
+    
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
-            //ContentView()
             HomeView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
