@@ -19,40 +19,40 @@ struct RecordDetailView: View {
                 HStack{
                     Spacer()
                     Menu(content: {
-    Button(action: {}) { // TODO: antion내에 편집 기능 예정
-        Label("수정", systemImage: "pencil")
-    }
-    Button(action: {}) { // TODO: Soi코딩 중인 스크린샷 기능 예정
-        Label("이미지로 저장", systemImage: "square.and.arrow.down")
-    }
-    Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
-        Label("삭제", systemImage: "trash")
-    }
-}, label: {
-    Image(systemName: "ellipsis")
-        .foregroundColor(.pointBlue)
-})
+                        Button(action: {}) { // TODO: antion내에 편집 기능 예정
+                            Label("수정", systemImage: "pencil")
+                        }
+                        Button(action: {}) { // TODO: Soi코딩 중인 스크린샷 기능 예정
+                            Label("이미지로 저장", systemImage: "square.and.arrow.down")
+                        }
+                        Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
+                            Label("삭제", systemImage: "trash")
+                        }
+                    }, label: {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.pointBlue)
+                    })
                 }.padding(.trailing)
                 
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("일이삼사오육칠팔구십일이삼사오육") // TODO: "music.title"
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.titleBlack)
-                        .multilineTextAlignment(.leading)
-                        .padding(.bottom, 3)
-                    
-                    Text("일이삼사오육칠팔구십일이삼사오육칠팔구십일") // TODO: "music.artist"
-                        .font(.body)
-                        .fontWeight(.regular)
-                        .foregroundColor(.titleDarkgray)
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("일이삼사오육칠팔구십일이삼사오육") // TODO: "music.title"
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.titleBlack)
+                            .multilineTextAlignment(.leading)
+                            .padding(.bottom, 3)
+                        
+                        Text("일이삼사오육칠팔구십일이삼사오육칠팔구십일") // TODO: "music.artist"
+                            .font(.body)
+                            .fontWeight(.regular)
+                            .foregroundColor(.titleDarkgray)
+                        Spacer()
+                    }// MusicInform VStack End
+                    .padding(.top, 10)
                     Spacer()
-                }// MusicInform VStack End
-                .padding(.top, 10)
-                Spacer()
-            } // MusicImform HStack End
-            .padding(.leading, 28)
+                } // MusicImform HStack End
+                .padding(.leading, 28)
             }
             
             ZStack {
@@ -96,18 +96,6 @@ struct RecordDetailView_Previews: PreviewProvider {
     static var previews: some View {
         RecordDetailView()
     }
-}
-
-struct RecordBackground: View {
-    var body: some View {
-    VStack {
-        HStack {
-            Spacer()
-            Image("backwindow")
-        }.padding(.top, 60.0)
-        Spacer()
-    }
-}
 }
 
 struct CDPlayerComp: View {
