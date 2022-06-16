@@ -13,7 +13,7 @@ struct RecorderApp: App {
         WindowGroup {
             //ContentView()
            // HomeView()
-            OnboardingView()
+            OnboardingStartView()
         }
     }
 }
