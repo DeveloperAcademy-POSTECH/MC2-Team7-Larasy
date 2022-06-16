@@ -18,6 +18,7 @@
 		8715A79D2855B5AC001AB4F5 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8715A79C2855B5AC001AB4F5 /* Colors.xcassets */; };
 		8715A79F2855B775001AB4F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8715A79E2855B775001AB4F5 /* Extension.swift */; };
 		876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876BC4A22857189D009ACC90 /* TestSoiView.swift */; };
+		87FB281D285A04680036A5BB /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB281C285A04680036A5BB /* Screenshot.swift */; };
 		A01413222855F4E60000EA59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01413212855F4E60000EA59 /* HomeView.swift */; };
 		B277EC152859A671001A97B1 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC142859A671001A97B1 /* Carousel.swift */; };
 		B277EC172859A679001A97B1 /* CdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC162859A679001A97B1 /* CdListView.swift */; };
@@ -37,6 +38,7 @@
 		8715A79C2855B5AC001AB4F5 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		8715A79E2855B775001AB4F5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		876BC4A22857189D009ACC90 /* TestSoiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSoiView.swift; sourceTree = "<group>"; };
+		87FB281C285A04680036A5BB /* Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screenshot.swift; sourceTree = "<group>"; };
 		A01413212855F4E60000EA59 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B277EC142859A671001A97B1 /* Carousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		B277EC162859A679001A97B1 /* CdListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CdListView.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				8715A79A2855479E001AB4F5 /* MusicAPI.swift */,
+				87FB281C285A04680036A5BB /* Screenshot.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,6 +186,8 @@
 				A01413222855F4E60000EA59 /* HomeView.swift in Sources */,
 				8715A79F2855B775001AB4F5 /* Extension.swift in Sources */,
 				B29723B0285B192C0065FD36 /* SnapCarouselView.swift in Sources */,
+				8715A79F2855B775001AB4F5 /* Extension.swift in Sources */,
+				87FB281D285A04680036A5BB /* Screenshot.swift in Sources */,
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
 				13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */,
 				876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */,
