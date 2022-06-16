@@ -9,10 +9,12 @@ import SwiftUI
 
 struct WriteView: View {
     @State var music: Music
-    @State private var image: Image?                        // 선택된 사진, 어떤 이미지인지
+    @State private var image: Image?                       // 선택된 사진, 어떤 이미지인지
     @State private var showingImagePicker = false   // 클릭됐는지 확인
     @State private var inputImage: UIImage?
     @State private var lyrics = ""
+//    @ObservedObject private var kGuardian = KeyboardGuardian(textFieldCount: 1)
+//    private let charLimited = 39
     
     var body: some View {
         NavigationView {
@@ -63,15 +65,15 @@ struct WriteView: View {
                         .offset(y: -110)
                         .zIndex(1)
                         .onChange(of: inputImage) { _ in loadImage() }
-                            .sheet(isPresented: $showingImagePicker) {
-                                ImagePicker(image: $inputImage)
-                            }
+                        .sheet(isPresented: $showingImagePicker) {
+                            ImagePicker(image: $inputImage)
+                        }
                         //MARK: - 이미지 가져오는 부분 끝
                         Spacer()
                         
                         //MARK: - CD 플레어이 뷰 시작
                         Button(action: {}, label: { // TODO: CD돌아가는 애니메이션 출력..?
-                           CDPlayerComp()
+                            CDPlayerComp()
                         }).offset(y: -10)
                     }.offset(y: 80)
                         .padding()
@@ -86,15 +88,17 @@ struct WriteView: View {
                                 
                                 if lyrics == "" {
                                     Image(systemName: "music.mic")
-                                        .offset(x: 35)
+                                        .offset(x: 55)
                                         .foregroundColor(.titleGray)
                                 }
+                                
                                 TextField("기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
                                           text: $lyrics)
                                 .font(Font.customBody1())
-                                .lineLimit(1)
+                                .disableAutocorrection(true)
                                 .multilineTextAlignment(.center)
-                                .frame(width: 200,alignment: .center)
+                                .frame(width: 240,alignment: .center)
+                                
                             }
                             .offset(y: 130)
                         }
@@ -110,6 +114,7 @@ struct WriteView: View {
                     
                 }
             }// 본문 ZStack End
+            //TODO:
             .navigationBarItems(leading: NavigationLink(destination: SearchView(), label: {
                 Image(systemName: "chevron.backward")
                 Text("Music")

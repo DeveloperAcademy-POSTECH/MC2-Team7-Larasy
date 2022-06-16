@@ -117,7 +117,6 @@ struct CDPlayerComp: View {
                 .padding(.trailing, 20.0)
             
             
-            
             ZStack {
                 Circle()
                     .foregroundColor(.titleLightgray)
