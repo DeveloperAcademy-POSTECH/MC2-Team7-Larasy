@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13C0E4A02857267D004ABE1D /* RecordResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0E49F2857267D004ABE1D /* RecordResultView.swift */; };
 		13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0E4A128573795004ABE1D /* RecordDetailView.swift */; };
+		13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E0DA9F285A3764008714A6 /* RecordUIView.swift */; };
 		794AD0072851EEA700414667 /* RecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0062851EEA700414667 /* RecorderApp.swift */; };
 		794AD0092851EEA700414667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0082851EEA700414667 /* ContentView.swift */; };
 		794AD00B2851EEA900414667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794AD00A2851EEA900414667 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		13C0E49F2857267D004ABE1D /* RecordResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordResultView.swift; sourceTree = "<group>"; };
 		13C0E4A128573795004ABE1D /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
+		13E0DA9F285A3764008714A6 /* RecordUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUIView.swift; sourceTree = "<group>"; };
 		794AD0032851EEA700414667 /* Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794AD0062851EEA700414667 /* RecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderApp.swift; sourceTree = "<group>"; };
 		794AD0082851EEA700414667 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				794AD00A2851EEA900414667 /* Assets.xcassets */,
 				794AD00C2851EEA900414667 /* Preview Content */,
 				8715A79C2855B5AC001AB4F5 /* Colors.xcassets */,
+				13E0DA9F285A3764008714A6 /* RecordUIView.swift */,
 			);
 			path = Recorder;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				8715A79F2855B775001AB4F5 /* Extension.swift in Sources */,
 				87FB281D285A04680036A5BB /* Screenshot.swift in Sources */,
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
+				13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */,
 				876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */,
 				794AD0092851EEA700414667 /* ContentView.swift in Sources */,
 				A0F567F128563066008F2D2E /* ListView.swift in Sources */,
