@@ -33,12 +33,12 @@ struct WriteView: View {
                             .foregroundColor(.titleDarkgray)
                         Spacer()
                     }// MusicInform VStack End
-                    .padding(.leading, 5)
+                    .padding(.top, 10)
                     Spacer()
                 } // MusicImform HStack End
-                .padding(.leading, 23)
-                VStack {
-                    
+                .padding(.leading, 28)
+                
+                ZStack {
                     HStack(alignment: .center) {
                         //MARK: - // 클릭시 모달을 통해 이미지 띄우는 부분
                         ZStack{
@@ -59,7 +59,7 @@ struct WriteView: View {
                         .onTapGesture {
                             showingImagePicker = true
                         }
-                        .offset(y: -70)
+                        .offset(y: -110)
                         .zIndex(1)
                         .onChange(of: inputImage) { _ in loadImage() }
                             .sheet(isPresented: $showingImagePicker) {
@@ -70,23 +70,17 @@ struct WriteView: View {
                         
                         //MARK: - CD 플레어이 뷰 시작
                         Button(action: {}, label: { // TODO: CD돌아가는 애니메이션 출력..?
-                            Image("CdPlayer")
-                                .padding(.trailing, 20.0)
-                        })
-                    }.offset(y: 110)
+                           CDPlayerComp()
+                        }).offset(y: -10)
+                    }.offset(y: 80)
                         .padding()
                     
                     VStack(alignment: .leading) {
-                        Spacer()
-                        
-                        Button(action: {}, label: { // TODO: action 내에 클릭시 모달을 통해 StoryView 추가 예정
-                            Image("StoryComp") // 스토리 입력
-                        }).offset(x: 20,y: -50)
                         
                         //MARK: - 가사 입력 받는 부분
                         ZStack {
                             Image("LylicComp") // 가사 입력
-                                .offset(y: -30)
+                                .offset(y: 130)
                             HStack{
                                 
                                 if lyrics == "" {
@@ -101,11 +95,16 @@ struct WriteView: View {
                                 .multilineTextAlignment(.center)
                                 .frame(width: 200,alignment: .center)
                             }
-                            .offset(y: -30)
+                            .offset(y: 130)
                         }
+                        
+                        Spacer()
+                        
+                        Button(action: {}, label: { // TODO: action 내에 클릭시 모달을 통해 StoryView 추가 예정
+                            Image("StoryComp") // 스토리 입력
+                        }).offset(x: 20,y: -100)
                         //MARK: - 가사 입력 받는 ZStack 끝
                     }.offset(y: -20)
-                    
                     Spacer()
                     
                 }
