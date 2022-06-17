@@ -34,11 +34,14 @@ struct CdListView: View {
                                 .foregroundColor(.titleGray)
                                 .padding(.bottom, 12)
                                 .padding(.top, 260)
-                            Button("음악 기록하러 가기") {
-                                //go to WriteView
-//                                Spacer()
-//                                Image("ListViewCdPlayer")
+                            
+                            NavigationLink(destination: SearchView()) {
+                                Text("음악 기록하러 가기")
                             }
+                                //go to WriteView
+                                Spacer()
+                                Image("ListViewCdPlayer")
+                            
                         }
                     }
                 }.ignoresSafeArea()
