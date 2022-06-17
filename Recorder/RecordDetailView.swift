@@ -131,7 +131,7 @@ struct CDPlayerComp: View {
                             .shadow(color: .titleDarkgray, radius: 2, x: 3, y: 3)
                     )
             }.offset(x: -10.6, y: -133) // albumArt를 CD모양으로 불러오는 ZStack
-            
+        
             ZStack {
                 Circle()
                     .foregroundColor(.titleLightgray)
