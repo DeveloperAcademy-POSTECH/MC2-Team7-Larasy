@@ -100,6 +100,7 @@ struct SearchView: View {
                     HStack {
                         URLImage(urlString: music.albumArt) // 앨범커버
                             .cornerRadius(5)
+                            .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
                         NavigationLink(destination: WriteView(music: music)) {
@@ -152,7 +153,6 @@ struct URLImage: View {
             Image(uiImage: uiimage) // URL Image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 55, height: 55)
                 .background(.gray)
             
         } else { // 이미지 불러오기 실패
@@ -160,7 +160,6 @@ struct URLImage: View {
             Rectangle() // 회색 박스
                 .foregroundColor(.titleLightgray)
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 55, height: 55)
                 .onAppear() {
                     fetchData()
                 }
