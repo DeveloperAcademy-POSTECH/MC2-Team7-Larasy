@@ -10,8 +10,8 @@ import SwiftUI
 struct PhotoModalView: View {
     
     @Environment(\.presentationMode) var presentation
-    
-    
+    let image: Data
+
     var body: some View {
         ZStack {
             Color.titleBlack //Background Color
@@ -46,7 +46,7 @@ struct PhotoModalView: View {
                         .frame(minWidth: 0, maxWidth: 308, minHeight: 0, maxHeight: 435)
                         .foregroundColor(.white)
                     
-                    Image("MC2") // Photo Image
+                    Image(uiImage: UIImage(data: image)!)
                         .resizable()
                         .scaleEffect()
                         .frame(minWidth: 0, maxWidth: 276, minHeight: 0, maxHeight: 314)
@@ -58,9 +58,9 @@ struct PhotoModalView: View {
         }
     }
 }
-
-struct PhotoModalView_Previews: PreviewProvider {
-    static var previews: some View {
-        PhotoModalView()
-    }
-}
+//
+//struct PhotoModalView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PhotoModalView()
+//    }
+//}

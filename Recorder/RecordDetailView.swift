@@ -52,7 +52,8 @@ struct RecordDetailView: View {
                         ZStack {
                         Image("PhotoComp") // 이미지 삽입
                             .padding()
-                            .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView() } )
+                            .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
+                            
                             Image(uiImage: UIImage(data: item.image!)!)
                                 .resizable()
                                 .frame(width: 95, height: 105)
@@ -89,7 +90,7 @@ struct RecordDetailView: View {
                     }, label: {
                         
                         Image("StoryComp")
-                            .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView() } )
+                            .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
                         Text(item.story!)
                             .font(Font.customBody1())
                             .foregroundColor(.titleDarkgray)
