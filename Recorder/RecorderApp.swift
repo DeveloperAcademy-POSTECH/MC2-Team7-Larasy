@@ -13,7 +13,8 @@ struct RecorderApp: App {
     var body: some Scene {
         WindowGroup {
             //ContentView()
-            RecordUIView()
+            //RecordUIView()
+            HomeView()
         }
     }
 }

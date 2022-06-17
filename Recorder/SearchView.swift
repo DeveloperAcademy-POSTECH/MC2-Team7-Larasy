@@ -63,28 +63,55 @@ struct SearchView: View {
                         musicAPI.getSearchResults(search: search) // 음악 API 불러오기
                     }
                 
-                
-                if search != "" { // X 버튼 활성화
-                    Image(systemName: "xmark.circle.fill") // x버튼 이미지
-                        .imageScale(.medium)
-                        .foregroundColor(.titleGray)
-                        .padding(3)
-                        .onTapGesture {
-                            withAnimation {
-                                self.search = ""
-                            }
+                // result view
+                GeometryReader { geometry in
+                    List {
+                        ForEach(musicAPI.musicList, id: \.self) { music in
+                            HStack {
+                                URLImage(urlString: music.albumArt)
+                                    .cornerRadius(5)
+                                
+                                NavigationLink(destination: WriteView(music: music)) {
+                                    VStack(alignment: .leading) {
+                                        Text(music.title) // 노래제목
+                                            .font(.system(size: 17, weight: .bold))
+                                            .lineLimit(1)
+                                            .padding(.bottom, 2)
+                                        
+                                        Text(music.artist) // 가수명
+                                            .font(.system(size: 15))
+                                            .lineLimit(1)
+                                    }
+                                    .padding(.leading, 10)
+                                    .foregroundColor(.titleDarkgray)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                if search != "" { // X 버튼 활성화
+                                    Image(systemName: "xmark.circle.fill") // x버튼 이미지
+                                        .imageScale(.medium)
+                                        .foregroundColor(.titleGray)
+                                        .padding(3)
+                                        .onTapGesture {
+                                            withAnimation {
+                                                self.search = ""
+                                            }
+                                        }
+                                }
+                                
+                            } // HStack End
+                            .foregroundColor(.titleDarkgray)
+                            .padding(13)
                         }
+                    }
                 }
-            } // HStack End
-            .foregroundColor(.titleDarkgray)
-            .padding(13)
-            
+            }
         } // 배경색 ZStack End
         .frame(height: 40)
         .cornerRadius(10)
         .padding(10)
         
     } // SearchBar View End
+    
     
     
     
@@ -103,7 +130,7 @@ struct SearchView: View {
                             .cornerRadius(5)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: TestSoiView(music: music)) { // 현재 임시뷰로 연결, 추후 작성뷰로 전환
+                        NavigationLink(destination: WriteView(music: music)) { // 현재 임시뷰로 연결, 추후 작성뷰로 전환
                             
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {
@@ -185,3 +212,4 @@ struct SearchView_Previews: PreviewProvider {
         SearchView()
     }
 }
+
