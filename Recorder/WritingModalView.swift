@@ -2,7 +2,8 @@
 //  WritingModalView.swift
 //  Recorder
 //
-//  Created by MINJI on 2022/06/12.
+
+//  Created by 최윤석 on 2022/06/17.
 //
 
 import SwiftUI
@@ -12,7 +13,9 @@ struct WritingModalView: View {
     @Environment(\.presentationMode) var presentation
     
     @State var placeholderText : String = "이 음악과 관련된 짧은 이야기를\n기록해보세요 (글자수 200자 제한)"
-    @State var content : String = ""
+
+    @Binding var content : String
+
     var characterLimit = 200
     
     var body: some View {
@@ -75,9 +78,13 @@ struct WritingModalView: View {
                         
                         // 완료 버튼 시작
                         HStack {
+                            
                             Spacer()
+                            
                             if self.content.isEmpty {
+                                
                                 Button("완료") {
+
                                 }
                                 .font(.customSubhead())
                                 .foregroundColor(.titleGray)
@@ -94,6 +101,7 @@ struct WritingModalView: View {
                         }
                         .padding(20)
                         // 완료 버튼 끝
+
                         
                     }
                     
@@ -107,10 +115,10 @@ struct WritingModalView: View {
     }
 }
 
-
+        
 struct WritingModalView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingModalView()
+        WritingModalView(content: .constant(""))
     }
 }
 
