@@ -9,11 +9,19 @@ import SwiftUI
 
 struct CdListView: View {
     
+    //coredata 관련 변수
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<Content>
+    
     var body: some View {
             ZStack {
                 Color("background")
                     .ignoresSafeArea()
                 VStack {
+                    //TODO: nil일때 보여주는 화면 작성
     //                if(item == nil) {
                     SnapCarousel().environmentObject(UIStateModel())
                     

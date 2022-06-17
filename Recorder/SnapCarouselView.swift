@@ -1,14 +1,14 @@
-//
-//  Carousel.swift
-//  Recorder
-//
-//  Created by 조은비 on 2022/06/16.
-//
-
 import SwiftUI
 
 struct SnapCarousel: View {
-
+    
+    //coredata 관련 변수
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<Content>
+    
     @State private var angle = 0.0 // cd ratation angle 초기값
     @EnvironmentObject var UIState: UIStateModel
     @State var showCd: Bool = false // cd player에 cd 나타나기
@@ -22,15 +22,6 @@ struct SnapCarousel: View {
         let widthOfHiddenCds: CGFloat = 100
         let cdHeight: CGFloat = 300
         
-        // 기록물 id, 곡제목, 가수명, 앨범커버 배열 예시
-        var cds = [
-            Cd(id: 0, musicTitle: "노래제목1", singer: "가수명1", image: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/500x500bb.jpg"),
-            Cd(id: 1, musicTitle: "노래제목2", singer: "가수명2", image: "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/17/ff/63/17ff63de-3aba-0f2d-63e7-50d66f900ebb/21UMGIM43558.rgb.jpg/500x500bb.jpg"),
-            Cd(id: 2, musicTitle: "노래제목3", singer: "가수명3", image: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/500x500bb.jpg"),
-            Cd(id: 3, musicTitle: "노래제목4", singer: "가수명4", image: "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/17/ff/63/17ff63de-3aba-0f2d-63e7-50d66f900ebb/21UMGIM43558.rgb.jpg/500x500bb.jpg"),
-            Cd(id: 4, musicTitle: "노래제목5", singer: "가수명5", image: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/500x500bb.jpg")
-        ]
-        
         // https://gist.github.com/xtabbas/97b44b854e1315384b7d1d5ccce20623.js 의 샘플코드를 참고했습니다.
         return Canvas {
             ZStack {
@@ -40,25 +31,20 @@ struct SnapCarousel: View {
                 // ForEach로 items마다 Item() 뷰를 각각 불러옴
                 VStack {
                     Carousel(
-                        numberOfItems: CGFloat(cds.count),
+                        numberOfItems: CGFloat(items.count),
                         spacing: spacing,
                         widthOfHiddenCds: widthOfHiddenCds
-                    ) {
-                        ForEach(cds, id: \.self.id) { content in
-                            Item(
-                                _id: Int(content.id),
-                                spacing: spacing,
-                                widthOfHiddenCds: widthOfHiddenCds,
-                                cdHeight: cdHeight
-                            ) {
+                    ){
+                        ForEach(items.indices, id: \.self) { content in
+                            Item(_id: content){
                                 // 가운데 cd만 글이 보이게 함
                                 VStack {
-                                    if (content.id == UIState.activeCard) {
-                                        Text("\(content.musicTitle)")
+                                    if (content == UIState.activeCard) {
+                                        Text(items[content].title!)
                                             .foregroundColor(Color.titleBlack)
                                             .font(Font.customTitle3())
                                             .padding(.bottom, 5)
-                                        Text("\(content.singer)")
+                                        Text(items[content].artist!)
                                             .foregroundColor(Color.titleDarkgray)
                                             .font(Font.customBody2())
                                             .padding(.bottom, 30)
@@ -74,16 +60,17 @@ struct SnapCarousel: View {
                                             
                                         } else {
                                             self.showCd = true
-                                            self.selectedCd = content.id
+                                            self.selectedCd = content
                                             self.currentCd = self.selectedCd
                                         }
                                         
                                     }) {
                                         ZStack {
-                                            URLImage(urlString: content.image)
+                                            URLImage(urlString: items[content].albumArt!)
                                                 .aspectRatio(contentMode: .fit)
                                                 .clipShape(Circle())
                                                 .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                                            //.scaleEffect(content == UIState.activeCard ? 1.8 : 1)
                                             Circle()
                                                 .frame(width: 40, height: 40)
                                                 .foregroundColor(.background)
@@ -94,7 +81,7 @@ struct SnapCarousel: View {
                                                 )
                                         }
                                     } // 버튼
-                                    .disabled(UIState.activeCard != content.id)
+                                    .disabled(UIState.activeCard != content)
                                     .onChange(of: UIState.activeCard) { newCd in
                                         if newCd != selectedCd {
                                             self.showCd = false
@@ -104,7 +91,7 @@ struct SnapCarousel: View {
                             }
                             .transition(AnyTransition.slide)
                             .animation(.spring())
-                        } // ForEach
+                        }
                     }
                     .padding(.top, 140)
                     
@@ -113,11 +100,11 @@ struct SnapCarousel: View {
                     ZStack {
                         Image("ListViewCdPlayer")
                         
-                        // cd 클릭시, cdPlayer에 cd 나타남
+                        //cd 클릭시, cdPlayer에 cd 나타남
                         VStack {
                             if showCd == true {
-                                NavigationLink(destination: RecordDetailView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg")), isActive: $showDetailView) {
-                                    URLImage(urlString: cds[selectedCd].image)
+                                NavigationLink(destination: RecordDetailView(item: items[selectedCd]), isActive: $showDetailView) {
+                                    URLImage(urlString: items[selectedCd].albumArt!)
                                         .clipShape(Circle())
                                         .frame(width: 110, height: 110)
                                         .rotationEffect(.degrees(self.angle))
@@ -128,8 +115,8 @@ struct SnapCarousel: View {
                                         }
                                 }
                             } else {
-                                NavigationLink(destination: RecordDetailView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg")), isActive: $showDetailView) {
-                                    URLImage(urlString: cds[selectedCd].image)
+                                NavigationLink(destination: RecordDetailView(item: items[selectedCd]), isActive: $showDetailView) {
+                                    URLImage(urlString: items[selectedCd].albumArt!)
                                         .clipShape(Circle())
                                         .frame(width: 110, height: 110)
                                         .rotationEffect(.degrees(self.angle))

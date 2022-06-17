@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RecordDetailView: View {
     
-    let music: Music
+    let item: Content
     
     var body: some View {
         ZStack {
@@ -19,14 +19,14 @@ struct RecordDetailView: View {
             VStack {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(music.title) // TODO: "music.title"
+                        Text(item.title!)
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 3)
                         
-                        Text(music.artist) // TODO: "music.artist"
+                        Text(item.artist!) // TODO: "music.artist"
                             .font(.body)
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
@@ -48,7 +48,7 @@ struct RecordDetailView: View {
                     }).offset(y: -110)
                     Spacer()
                     
-                        CDPlayerComp(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
+                    CDPlayerComp(music: Music(artist: item.artist!, title: item.title!, albumArt: item.lylic!))
                     .offset(y: -10)
                 }.offset(y: 80)
                     .padding()
@@ -57,12 +57,14 @@ struct RecordDetailView: View {
                     
                     Button(action: {}, label: { // TODO: action 내에 클릭시 모달을 통해 이미지 띄우는 기능 추가 예정
                         Image("LylicComp") // 가사 입력
+                        Text(item.lylic!)
                     }).offset(y: 130)
                     
                     Spacer()
                     
                     Button(action: {}, label: { // TODO: action 내에 클릭시 모달을 통해 StoryView 추가 예정
                         Image("StoryComp") // 스토리 입력
+                        Text(item.story!)
                     }).offset(x: 20,y: -100)
                     
                     
@@ -96,11 +98,6 @@ struct RecordDetailView: View {
     }
 }
 
-struct RecordDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordDetailView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
-    }
-}
 
 struct CDPlayerComp: View {
     

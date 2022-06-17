@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct WriteView: View {
+    
+    // coredata 관련 변수
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Content.id, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<Content>
+    
     @State var music: Music
     @State private var image: Image?                       // 선택된 사진, 어떤 이미지인지
     @State private var showingImagePicker = false           // 이미지 클릭됐는지 확인
@@ -136,10 +144,32 @@ struct WriteView: View {
                     Spacer()
                     
                 }
-            }.navigationBarItems( trailing: NavigationLink(destination: EmptyView(), label: {
-                Text("저장")                              // TODO: 저장 기능 추가 예정
-                    .font(Font.customSubhead())
-            }))
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("저장") {
+                        let newItem = Content(context: viewContext)
+                        newItem.title = music.title
+                        newItem.artist = music.artist
+                        newItem.albumArt = music.albumArt
+                        newItem.story = content
+                        newItem.image = ""
+                        newItem.lylic = lyrics
+                        
+                        do {
+                            try viewContext.save()
+                        } catch { // TODO: error 처리
+                            let nsError = error as NSError
+                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                        }
+                    }
+                }
+            }
+            //TODO: - CdListView로 연결
+//            .navigationBarItems( trailing: NavigationLink(destination: EmptyView(), label: {
+//                Text("저장")                              // TODO: 저장 기능 추가 예정
+//                    .font(Font.customSubhead())
+//            }))
         }.ignoresSafeArea(.keyboard, edges: .bottom)
         
     } // View End
@@ -147,6 +177,24 @@ struct WriteView: View {
     func loadImage() {      // 이미지 저장하는 함수
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
+    }
+    
+    //coredata에 저장
+    private func addItem() {
+        let newItem = Content(context: viewContext)
+        newItem.title = music.title
+        newItem.artist = music.artist
+        newItem.albumArt = music.albumArt
+        newItem.story = content
+        newItem.image = ""
+        newItem.lylic = lyrics
+        
+        do {
+            try viewContext.save()
+        } catch { // TODO: error 처리
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
     
 } // RecordResultView End
