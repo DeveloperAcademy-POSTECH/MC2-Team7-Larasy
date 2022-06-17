@@ -28,17 +28,19 @@ struct CdListView: View {
                     if items.count != 0 {
                         SnapCarousel().environmentObject(UIStateModel())
                     } else {
-                        Text("아직 기록된 음악이 없어요")
-                            .font(Font.customTitle2())
-                            .foregroundColor(.titleGray)
-                            .padding(.bottom, 12)
-                            .padding(.top, 260)
-                        Button("음악 기록하러 가기") {
-                            //go to WriteView
+                        VStack {
+                            Text("아직 기록된 음악이 없어요")
+                                .font(Font.customTitle2())
+                                .foregroundColor(.titleGray)
+                                .padding(.bottom, 12)
+                                .padding(.top, 260)
+                            Button("음악 기록하러 가기") {
+                                //go to WriteView
+//                                Spacer()
+//                                Image("ListViewCdPlayer")
+                            }
                         }
                     }
-                    Spacer()
-                    Image("ListViewCdPlayer")
                 }.ignoresSafeArea()
             }
             .navigationBarTitle("List", displayMode: .inline)
