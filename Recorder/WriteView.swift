@@ -16,6 +16,7 @@ struct WriteView: View {
         animation: .default)
     private var items: FetchedResults<Content>
     
+    @State private var showingAlert = false // 저장 완료
     @State var music: Music
     @State private var image: Image?                       // 선택된 사진, 어떤 이미지인지
     @State private var showingImagePicker = false           // 이미지 클릭됐는지 확인
@@ -148,7 +149,6 @@ struct WriteView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("저장") {
-                            
                         let newItem = Content(context: viewContext)
                         newItem.title = music.title
                         newItem.artist = music.artist
@@ -163,8 +163,18 @@ struct WriteView: View {
                             let nsError = error as NSError
                             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                         }
+                            self.showingAlert = true
                         
                     }
+                    .alert(isPresented: $showingAlert) {
+                        Alert(
+                            title: Text("저장 완료"),
+                            dismissButton: .default(Text("확인")) {
+                                NavigationUtil.popToRootView()
+                            })
+                    }
+                    
+                    
                 }
             }
             //TODO: - CdListView로 연결
@@ -181,10 +191,34 @@ struct WriteView: View {
         image = Image(uiImage: inputImage)
     }
     
+    
 } // RecordResultView End
 
 struct WriteView_Previews: PreviewProvider {
     static var previews: some View {
         WriteView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
+    }
+}
+
+struct NavigationUtil {
+    static func popToRootView() {
+        findNavigationController(viewController: UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController)?
+            .popToRootViewController(animated: true)
+    }
+
+    static func findNavigationController(viewController: UIViewController?) -> UINavigationController? {
+        guard let viewController = viewController else {
+            return nil
+        }
+
+        if let navigationController = viewController as? UINavigationController {
+            return navigationController
+        }
+
+        for childViewController in viewController.children {
+            return findNavigationController(viewController: childViewController)
+        }
+
+        return nil
     }
 }
