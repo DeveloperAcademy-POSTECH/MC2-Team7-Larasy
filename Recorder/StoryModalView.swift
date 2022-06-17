@@ -11,7 +11,7 @@ struct StoryModalView: View {
     
     @Environment(\.presentationMode) var presentation
     @State var content : String = ""
-
+    
     
     var body: some View {
         ZStack {
@@ -46,12 +46,12 @@ struct StoryModalView: View {
                     Rectangle() // 본문 Background
                         .frame(minWidth: 0, maxWidth: 308, minHeight: 0, maxHeight: 350)
                         .foregroundColor(.white)
-
+                    
                     Text("본문뷰에서 보여지는 모달뷰") // 본문내용
                         .foregroundColor(.titleDarkgray)
                         .font(.customBody1())
                         .frame(width:256, alignment: .leading)
-
+                    
                 }
             } // 본문 Frame & Text 끝
         }

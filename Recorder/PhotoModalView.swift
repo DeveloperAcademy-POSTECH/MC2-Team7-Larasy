@@ -10,7 +10,7 @@ import SwiftUI
 struct PhotoModalView: View {
     
     @Environment(\.presentationMode) var presentation
-
+    
     
     var body: some View {
         ZStack {
@@ -52,7 +52,7 @@ struct PhotoModalView: View {
                         .frame(minWidth: 0, maxWidth: 276, minHeight: 0, maxHeight: 314)
                         .padding(.top, 16)
                         .padding(.bottom, 103)
-
+                    
                 }
             } // 본문 Frame & Photo 끝
         }

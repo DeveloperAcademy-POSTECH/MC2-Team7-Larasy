@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 struct WritingModalView: View {
     
@@ -33,12 +32,12 @@ struct WritingModalView: View {
                     
                     Button(action: { // 상단 X 버튼
                         presentation.wrappedValue.dismiss()
-                                }) {
+                    }) {
                         Image(systemName: "xmark")
-                                        .imageScale(.large)
-                                        .foregroundColor(.white)
+                            .imageScale(.large)
+                            .foregroundColor(.white)
                     } // 상단 X 버튼 끝
-                        
+                    
                     
                 }
                 .padding(.horizontal, 48.0)
@@ -76,16 +75,12 @@ struct WritingModalView: View {
                         
                         // 완료 버튼 시작
                         HStack {
-                            
                             Spacer()
-                            
                             if self.content.isEmpty {
-                             
-                            Button("완료") {
-                                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
-                            }
-                            .font(.customSubhead())
-                            .foregroundColor(.titleGray)
+                                Button("완료") {
+                                }
+                                .font(.customSubhead())
+                                .foregroundColor(.titleGray)
                                 
                             }
                             else {
@@ -95,11 +90,11 @@ struct WritingModalView: View {
                                 .font(.customSubhead())
                                 .foregroundColor(.pointBlue)
                             }
-
+                            
                         }
                         .padding(20)
-                        // 완료 버튼 끝(날예정)
-                    
+                        // 완료 버튼 끝
+                        
                     }
                     
                 }

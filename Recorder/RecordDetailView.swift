@@ -11,6 +11,8 @@ import SwiftUI
 struct RecordDetailView: View {
     
     let music: Music
+    @State private var photo = false
+    @State private var story = false
     
     var body: some View {
         ZStack {
@@ -41,28 +43,36 @@ struct RecordDetailView: View {
             ZStack {
                 HStack(alignment: .center) {
                     
-                    Button(action: {}, // TODO: action 내에 클릭시 모달을 통해 이미지 띄우는 기능 추가 예정
+                    Button(action: {
+                        photo.toggle()
+                        UIView.setAnimationsEnabled(false)
+                    },
                            label: {
                         Image("PhotoComp") // 이미지 삽입
                             .padding()
+                            .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView() } )
                     }).offset(y: -110)
                     Spacer()
                     
-                        CDPlayerComp(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
-                    .offset(y: -10)
+                    CDPlayerComp(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
+                        .offset(y: -10)
                 }.offset(y: 80)
                     .padding()
                 
                 VStack(alignment: .leading) {
                     
-                    Button(action: {}, label: { // TODO: action 내에 클릭시 모달을 통해 이미지 띄우는 기능 추가 예정
+                    Button(action: {}, label: {
                         Image("LylicComp") // 가사 입력
                     }).offset(y: 130)
                     
                     Spacer()
                     
-                    Button(action: {}, label: { // TODO: action 내에 클릭시 모달을 통해 StoryView 추가 예정
-                        Image("StoryComp") // 스토리 입력
+                    Button(action: {
+                        story.toggle()
+                        UIView.setAnimationsEnabled(false)
+                    }, label: {
+                        Image("StoryComp")
+                            .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView() } )
                     }).offset(x: 20,y: -100)
                     
                     
@@ -71,20 +81,20 @@ struct RecordDetailView: View {
                 
             }
         }.navigationBarItems(trailing:
-            Menu(content: {
-                Button(action: {}) { // TODO: antion내에 편집 기능 예정
-                    Label("편집", systemImage: "square.and.pencil")
-                }
-                Button(action: {}) { // TODO: Soi코딩 중인 스크린샷 기능 예정
-                    Label("이미지 저장", systemImage: "square.and.arrow.down")
-                }
-                Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
-                    Label("제거", systemImage: "trash")
-                }
-            }, label: {
-                Image(systemName: "ellipsis")
-                    .foregroundColor(.pointBlue)
-            }))
+                                Menu(content: {
+            Button(action: {}) { // TODO: antion내에 편집 기능 예정
+                Label("편집", systemImage: "square.and.pencil")
+            }
+            Button(action: {}) { // TODO: Soi코딩 중인 스크린샷 기능 예정
+                Label("이미지 저장", systemImage: "square.and.arrow.down")
+            }
+            Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
+                Label("제거", systemImage: "trash")
+            }
+        }, label: {
+            Image(systemName: "ellipsis")
+                .foregroundColor(.pointBlue)
+        }))
         // 본문 ZStack End
     }
 }
@@ -103,7 +113,7 @@ struct CDPlayerComp: View {
         ZStack {
             Image("CdPlayer")
                 .padding(.trailing, 20.0)
-                
+            
             ZStack(alignment: .center) {
                 URLImage(urlString: music.albumArt)
                     .aspectRatio(contentMode: .fit)
@@ -114,7 +124,7 @@ struct CDPlayerComp: View {
                     .onTapGesture {
                         self.angle += Double.random(in: 3600..<3960)
                     } // albumArt를 불러오는 URLImage
-    
+                
                 Circle()
                     .frame(width: 30, height: 30)
                     .foregroundColor(.background)
