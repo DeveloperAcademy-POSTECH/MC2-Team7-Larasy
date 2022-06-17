@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0E4A128573795004ABE1D /* RecordDetailView.swift */; };
 		13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E0DA9F285A3764008714A6 /* RecordUIView.swift */; };
-
 		3D49B5AE285A02B50054FDED /* StoryModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D49B5AD285A02B50054FDED /* StoryModalView.swift */; };
 		3D49B5B0285A41570054FDED /* PhotoModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D49B5AF285A41570054FDED /* PhotoModalView.swift */; };
 		3D593E472858530B00E481C7 /* WritingModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D593E462858530B00E481C7 /* WritingModalView.swift */; };

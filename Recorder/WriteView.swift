@@ -148,13 +148,13 @@ struct WriteView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("저장") {
-                        withAnimation {
+                            
                         let newItem = Content(context: viewContext)
                         newItem.title = music.title
                         newItem.artist = music.artist
                         newItem.albumArt = music.albumArt
                         newItem.story = content
-                        newItem.image = ""
+                        newItem.image = inputImage!.pngData()
                         newItem.lylic = lyrics
                         
                         do {
@@ -163,7 +163,7 @@ struct WriteView: View {
                             let nsError = error as NSError
                             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                         }
-                        }
+                        
                     }
                 }
             }
@@ -179,24 +179,6 @@ struct WriteView: View {
     func loadImage() {      // 이미지 저장하는 함수
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
-    }
-    
-    //coredata에 저장
-    private func addItem() {
-        let newItem = Content(context: viewContext)
-        newItem.title = music.title
-        newItem.artist = music.artist
-        newItem.albumArt = music.albumArt
-        newItem.story = content
-        newItem.image = ""
-        newItem.lylic = lyrics
-        
-        do {
-            try viewContext.save()
-        } catch { // TODO: error 처리
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
     }
     
 } // RecordResultView End

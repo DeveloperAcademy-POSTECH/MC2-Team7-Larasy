@@ -49,13 +49,23 @@ struct RecordDetailView: View {
                         UIView.setAnimationsEnabled(false)
                     },
                            label: {
+                        ZStack {
                         Image("PhotoComp") // 이미지 삽입
                             .padding()
                             .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView() } )
+                            Image(uiImage: UIImage(data: item.image!)!)
+                                .resizable()
+                                .frame(width: 95, height: 105)
+                                .scaleEffect()
+                                .offset(y: -15)
+                        }
                     }).offset(y: -110)
+                    //let image = UIImage(data: item.image!)
+                   
+                    
                     Spacer()
                     
-                    CDPlayerComp(music: Music(artist: item.artist!, title: item.title!, albumArt: item.lylic!))
+                    CDPlayerComp(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!))
                         .offset(y: -10)
                 }.offset(y: 80)
                     .padding()
@@ -63,8 +73,12 @@ struct RecordDetailView: View {
                 VStack(alignment: .leading) {
                     
                     Button(action: {}, label: {
-                        Image("LylicComp") // 가사 입력
-                        Text(item.lylic!)
+                        ZStack {
+                            Image("LylicComp") // 가사 입력
+                            Text(item.lylic!)
+                                .foregroundColor(.titleDarkgray)
+                                .font(.customBody2())
+                        }
                     }).offset(y: 130)
                     
                     Spacer()
@@ -73,9 +87,18 @@ struct RecordDetailView: View {
                         story.toggle()
                         UIView.setAnimationsEnabled(false)
                     }, label: {
+                        
                         Image("StoryComp")
                             .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView() } )
-                    }).offset(x: 20,y: -100)
+                        Text(item.story!)
+                            .font(Font.customBody1())
+                            .foregroundColor(.titleDarkgray)
+                            .lineLimit(5)
+                            .truncationMode(.tail)
+                            .frame(width: 130)
+                            .offset(x: -160)
+                    })
+                    .offset(x: 20, y: -100)
                     
                     
                 }.offset(y: -20)
