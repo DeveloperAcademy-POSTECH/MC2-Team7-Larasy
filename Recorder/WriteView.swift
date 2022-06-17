@@ -12,7 +12,7 @@ struct WriteView: View {
     // coredata 관련 변수
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Content.id, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Content>
     
@@ -148,6 +148,7 @@ struct WriteView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("저장") {
+                        withAnimation {
                         let newItem = Content(context: viewContext)
                         newItem.title = music.title
                         newItem.artist = music.artist
@@ -161,6 +162,7 @@ struct WriteView: View {
                         } catch { // TODO: error 처리
                             let nsError = error as NSError
                             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                        }
                         }
                     }
                 }
