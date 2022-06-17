@@ -18,5 +18,8 @@ struct RecorderApp: App {
             HomeView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
+        .onChange(of: scenePhase) { _ in
+            persistenceController.save()
+        }
     }
 }
