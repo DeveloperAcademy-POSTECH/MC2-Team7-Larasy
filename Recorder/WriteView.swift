@@ -101,13 +101,7 @@ struct WriteView: View {
                                 .offset(y: 130)
                             HStack{
                                 
-                                if lyrics == "" {
-                                    Image(systemName: "music.mic")
-                                        .offset(x: 55)
-                                        .foregroundColor(.titleGray)
-                                }
-                                
-                                TextField("기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
+                                TextField("\(Image(systemName: "music.mic"))기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
                                           text: $lyrics)
                                 .font(Font.customBody1())
                                 .disableAutocorrection(true)
