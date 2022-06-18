@@ -25,6 +25,8 @@ struct WriteView: View {
     @State private var lyrics = ""
     @State private var content = ""
     
+    var item: UserStory
+    
     var body: some View {
         
         GeometryReader { _ in
@@ -182,9 +184,17 @@ struct WriteView: View {
                 }
             } // tool bar End
         }.ignoresSafeArea(.keyboard, edges: .bottom)
-        
+            .onAppear {
+                save(music: music, item: item)
+            }
     } // View End
     
+    func save(music: Music, item: UserStory) {
+        self.music = music
+        self.lyrics = item.lylic
+        self.content = item.story
+        self.inputImage = UIImage(data: item.image)
+    }
     func loadImage() {      // 이미지 저장하는 함수
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
@@ -193,10 +203,10 @@ struct WriteView: View {
     
 } // RecordResultView End
 
-struct WriteView_Previews: PreviewProvider {
-    static var previews: some View {
-        WriteView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
-    }
+struct UserStory {
+    var lylic: String
+    var story: String
+    var image: Data
 }
 
 struct NavigationUtil {

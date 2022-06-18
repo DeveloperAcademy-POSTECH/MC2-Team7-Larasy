@@ -104,7 +104,7 @@ struct SearchView: View {
                             .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: WriteView(music: music)) {
+                        NavigationLink(destination: WriteView(music: music, item: UserStory(lylic: "", story: "", image: Data()))) {
                             
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {

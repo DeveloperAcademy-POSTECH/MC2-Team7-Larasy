@@ -20,9 +20,12 @@ struct RecordDetailView: View {
     @State private var photo = false
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
+    @State var edit = false
     
     var body: some View {
+        
         ZStack {
+            NavigationLink(destination: WriteView(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), item: UserStory(lylic: item.lylic!, story: item.story!, image: item.image!)), isActive: $edit){}
             Color.background.edgesIgnoringSafeArea(.all)
             RecordBackground()
             VStack {
@@ -119,7 +122,10 @@ struct RecordDetailView: View {
         }
         .navigationBarItems(trailing: Menu(content: {
             
-            Button(action: {}) { // TODO: antion내에 편집 기능 예정
+            Button(action: {
+                self.edit = true
+                
+            }) { // TODO: antion내에 편집 기능 예정
                 Label("편집", systemImage: "square.and.pencil")
             }
             
@@ -149,7 +155,8 @@ struct RecordDetailView: View {
             }
         } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
-            
+        
+        
     }
     
     
