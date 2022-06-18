@@ -82,6 +82,7 @@ struct SearchView: View {
         .frame(height: 40)
         .cornerRadius(10)
         .padding(10)
+        .padding(.horizontal, 10)
         
     } // SearchBar View End
     
