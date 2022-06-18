@@ -146,42 +146,45 @@ struct WriteView: View {
                     
                 }
             }
+            
+            // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동하게 변경.
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("저장") {
-                        let newItem = Content(context: viewContext)
-                        newItem.title = music.title
-                        newItem.artist = music.artist
-                        newItem.albumArt = music.albumArt
-                        newItem.story = content
-                        newItem.image = inputImage!.pngData()
-                        newItem.lylic = lyrics
+                    
+                    // 하나라도 안 쓰면 저장 버튼 눌리지 않게
+                    if content == "" || inputImage == nil || lyrics == "" {
+                        Text("저장")
+                            .foregroundColor(.titleGray)
                         
-                        do {
-                            try viewContext.save()
-                        } catch { // TODO: error 처리
-                            let nsError = error as NSError
-                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                        }
+                    } else { // 저장버튼 활성화 및 CoreData에 저장
+                        Button("저장") {
+                            let newItem = Content(context: viewContext)
+                            newItem.title = music.title
+                            newItem.artist = music.artist
+                            newItem.albumArt = music.albumArt
+                            newItem.story = content
+                            newItem.image = inputImage!.pngData()
+                            newItem.lylic = lyrics
+                            
+                            do {
+                                try viewContext.save()
+                            } catch { // TODO: error 처리
+                                let nsError = error as NSError
+                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                            }
                             self.showingAlert = true
-                        
-                    }
-                    .alert(isPresented: $showingAlert) {
-                        Alert(
-                            title: Text("저장 완료"),
-                            dismissButton: .default(Text("확인")) {
-                                NavigationUtil.popToRootView()
-                            })
-                    }
-                    
-                    
+                            
+                        }
+                        .alert(isPresented: $showingAlert) {
+                            Alert(
+                                title: Text("저장 완료"),
+                                dismissButton: .default(Text("확인")) {
+                                    NavigationUtil.popToRootView()
+                                })
+                        }
+                    } // if-else End
                 }
-            }
-            //TODO: - CdListView로 연결
-//            .navigationBarItems( trailing: NavigationLink(destination: EmptyView(), label: {
-//                Text("저장")                              // TODO: 저장 기능 추가 예정
-//                    .font(Font.customSubhead())
-//            }))
+            } // tool bar End
         }.ignoresSafeArea(.keyboard, edges: .bottom)
         
     } // View End
@@ -205,20 +208,20 @@ struct NavigationUtil {
         findNavigationController(viewController: UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController)?
             .popToRootViewController(animated: true)
     }
-
+    
     static func findNavigationController(viewController: UIViewController?) -> UINavigationController? {
         guard let viewController = viewController else {
             return nil
         }
-
+        
         if let navigationController = viewController as? UINavigationController {
             return navigationController
         }
-
+        
         for childViewController in viewController.children {
             return findNavigationController(viewController: childViewController)
         }
-
+        
         return nil
     }
 }
