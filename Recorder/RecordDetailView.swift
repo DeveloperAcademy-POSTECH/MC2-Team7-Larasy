@@ -7,14 +7,19 @@
 
 
 import SwiftUI
+import CoreData
 
 struct RecordDetailView: View {
+    
+    //coredata 관련 변수
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.presentationMode) var presentation: Binding<PresentationMode>
     
     let item: Content
     
     @State private var photo = false
     @State private var story = false
-    
+    @State private var deleteItemAlert = false // delete item alert
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
@@ -22,14 +27,14 @@ struct RecordDetailView: View {
             VStack {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(item.title!)
+                        Text(item.title ?? "")
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 3)
                         
-                        Text(item.artist!) // TODO: "music.artist"
+                        Text(item.artist ?? "") // TODO: "music.artist"
                             .font(.body)
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
@@ -50,23 +55,24 @@ struct RecordDetailView: View {
                     },
                            label: {
                         ZStack {
-                        Image("PhotoComp") // 이미지 삽입
-                            .padding()
-                            .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
+                            Image("PhotoComp") // 이미지 삽입
+                                .padding()
+                                .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
                             
-                            Image(uiImage: UIImage(data: item.image!)!)
+                            if let image = item.image {
+                            Image(uiImage: UIImage(data: image)!)
                                 .resizable()
                                 .frame(width: 95, height: 105)
                                 .scaleEffect()
                                 .offset(y: -15)
+                            }
                         }
                     }).offset(y: -110)
                     //let image = UIImage(data: item.image!)
-                   
                     
                     Spacer()
                     
-                    CDPlayerComp(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!))
+                    CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
                         .offset(y: -10)
                 }.offset(y: 80)
                     .padding()
@@ -76,7 +82,7 @@ struct RecordDetailView: View {
                     Button(action: {}, label: {
                         ZStack {
                             Image("LylicComp") // 가사 입력
-                            Text(item.lylic!)
+                            Text(item.lylic ?? "")
                                 .foregroundColor(.titleDarkgray)
                                 .font(.customBody2())
                         }
@@ -84,46 +90,74 @@ struct RecordDetailView: View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        story.toggle()
-                        UIView.setAnimationsEnabled(false)
-                    }, label: {
-                        
-                        Image("StoryComp")
-                            .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
-                        Text(item.story!)
-                            .font(Font.customBody1())
-                            .foregroundColor(.titleDarkgray)
-                            .lineLimit(5)
-                            .truncationMode(.tail)
-                            .frame(width: 130)
-                            .offset(x: -160)
-                    })
-                    .offset(x: 20, y: -100)
-                    
+                    // 삭제 버튼
+                    VStack {
+                        Button(action: {
+                            story.toggle()
+                            UIView.setAnimationsEnabled(false)
+                        }, label: {
+                            
+                            Image("StoryComp")
+                                .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
+                            Text(item.story ?? "")
+                                .font(Font.customBody1())
+                                .foregroundColor(.titleDarkgray)
+                                .lineLimit(5)
+                                .truncationMode(.tail)
+                                .frame(width: 130)
+                                .offset(x: -160)
+                        })
+                        .offset(x: 20, y: -100)
+                    }
+                    .alert("삭제", isPresented: $deleteItemAlert) {
+                        Button("Destruct", role: .destructive) {
+                            self.managedObjectContext.delete(self.item)
+                            do {
+                                try self.managedObjectContext.save()
+                                presentation.wrappedValue.dismiss()
+                                
+                            }catch{
+                                print(error)
+                            }
+                        }
+                    } message: {
+                        Text("정말 삭제하시겠습니까?")
+                    }
                     
                 }.offset(y: -20)
                 Spacer()
                 
             }
-        }.navigationBarItems(trailing:
-                                
-                                Menu(content: {
+            
+        }.navigationBarItems(trailing: Menu(content: {
+            
             Button(action: {}) { // TODO: antion내에 편집 기능 예정
                 Label("편집", systemImage: "square.and.pencil")
             }
+            
             // MARK: 이미지 저장 기능
             Button(action: {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     let image = body.screenshot()
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 }
-            }) {
-                Label("이미지 저장", systemImage: "square.and.arrow.down")
-            }
-            Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
-                Label("제거", systemImage: "trash")
-            }
+            }) { Label("이미지 저장", systemImage: "square.and.arrow.down") }
+            
+            // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
+            
+            Button(role: .destructive, action: {
+                deleteItemAlert = true
+            }, label: {Label("제거", systemImage: "trash")})
+            
+            
+            
+//            Button(role: .destructive, action: {
+//                deleteItemAlert = true
+//            }) { Label("제거", systemImage: "trash") }
+//
+                
+            
+        // Menu 목록 End
         }, label: {
             Image(systemName: "ellipsis")
                 .foregroundColor(.pointBlue)
