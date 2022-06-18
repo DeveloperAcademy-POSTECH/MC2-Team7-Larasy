@@ -8,6 +8,15 @@
 import SwiftUI
 
 struct WriteView: View {
+    
+    // coredata 관련 변수
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<Content>
+    
+    @State private var showingAlert = false // 저장 완료
     @State var music: Music
     @State private var image: Image?                       // 선택된 사진, 어떤 이미지인지
     @State private var showingImagePicker = false           // 이미지 클릭됐는지 확인
@@ -60,7 +69,9 @@ struct WriteView: View {
                             
                             image?                       // 사용자가 가져온 이미지를 보여주는 부분
                                 .resizable()
+                                .scaledToFill()
                                 .frame(width: 95, height: 105)
+                                .clipped()
                                 .scaleEffect()
                                 .offset(y: -15)
                             
@@ -92,13 +103,7 @@ struct WriteView: View {
                                 .offset(y: 130)
                             HStack{
                                 
-                                if lyrics == "" {
-                                    Image(systemName: "music.mic")
-                                        .offset(x: 55)
-                                        .foregroundColor(.titleGray)
-                                }
-                                
-                                TextField("기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
+                                TextField("\(Image(systemName: "music.mic"))기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
                                           text: $lyrics)
                                 .font(Font.customBody1())
                                 .disableAutocorrection(true)
@@ -136,12 +141,48 @@ struct WriteView: View {
                     Spacer()
                     
                 }
-            }.navigationBarItems( trailing: NavigationLink(destination: EmptyView(), label: {
-                Text("저장")                              // TODO: 저장 기능 추가 예정
-                    .font(Font.customSubhead())
-            }))
+            }
+            
+            // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    
+                    // 하나라도 안 쓰면 저장 버튼 눌리지 않게
+                    if content == "" || inputImage == nil || lyrics == "" {
+                        Text("저장")
+                            .foregroundColor(.titleGray)
+                        
+                    } else { // 저장버튼 활성화 및 CoreData에 저장
+                        Button("저장") {
+                            let newItem = Content(context: viewContext)
+                            newItem.title = music.title
+                            newItem.artist = music.artist
+                            newItem.albumArt = music.albumArt
+                            newItem.story = content
+                            newItem.image = inputImage!.pngData()
+                            newItem.lylic = lyrics
+                            
+                            do {
+                                try viewContext.save()
+                            } catch { // TODO: error 처리
+                                let nsError = error as NSError
+                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                            }
+                            self.showingAlert = true
+                            
+                        }
+                        .alert(isPresented: $showingAlert) {
+                            Alert(
+                                title: Text("저장 완료"),
+                                dismissButton: .default(Text("확인")) {
+                                    NavigationUtil.popToRootView()
+                                })
+                        }
+                    } // if-else End
+                }
+            } // tool bar End
         }.ignoresSafeArea(.keyboard, edges: .bottom)
-        
+           
     } // View End
     
     func loadImage() {      // 이미지 저장하는 함수
@@ -149,10 +190,35 @@ struct WriteView: View {
         image = Image(uiImage: inputImage)
     }
     
+    
 } // RecordResultView End
 
-struct WriteView_Previews: PreviewProvider {
-    static var previews: some View {
-        WriteView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
+struct UserStory {
+    var lylic: String
+    var story: String
+    var image: Data
+}
+
+struct NavigationUtil {
+    static func popToRootView() {
+        findNavigationController(viewController: UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController)?
+            .popToRootViewController(animated: true)
+    }
+    
+    
+    static func findNavigationController(viewController: UIViewController?) -> UINavigationController? {
+        guard let viewController = viewController else {
+            return nil
+        }
+        
+        if let navigationController = viewController as? UINavigationController {
+            return navigationController
+        }
+        
+        for childViewController in viewController.children {
+            return findNavigationController(viewController: childViewController)
+        }
+        
+        return nil
     }
 }

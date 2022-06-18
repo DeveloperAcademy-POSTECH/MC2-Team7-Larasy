@@ -7,28 +7,36 @@
 
 
 import SwiftUI
+import CoreData
 
 struct RecordDetailView: View {
     
-    let music: Music
+    //coredata 관련 변수
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.presentationMode) var presentation: Binding<PresentationMode>
+    
+    let item: Content
+    
     @State private var photo = false
     @State private var story = false
+    @State private var deleteItemAlert = false // delete item alert
     
     var body: some View {
+        
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
             RecordBackground()
             VStack {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(music.title) // TODO: "music.title"
+                        Text(item.title ?? "")
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 3)
                         
-                        Text(music.artist) // TODO: "music.artist"
+                        Text(item.artist ?? "") // TODO: "music.artist"
                             .font(.body)
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
@@ -48,62 +56,115 @@ struct RecordDetailView: View {
                         UIView.setAnimationsEnabled(false)
                     },
                            label: {
-                        Image("PhotoComp") // 이미지 삽입
-                            .padding()
-                            .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView() } )
+                        ZStack {
+                            Image("DetailPhotoComp") // 이미지 삽입
+                                .padding()
+                                .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
+                            
+                            if let image = item.image {
+                                Image(uiImage: UIImage(data: image)!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 95, height: 105)
+                                    .clipped()
+                                    .scaleEffect()
+                                    .offset(y: -15)
+                            }
+                        }
                     }).offset(y: -110)
+                    
                     Spacer()
                     
-                    CDPlayerComp(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
+                    CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
                         .offset(y: -10)
                 }.offset(y: 80)
                     .padding()
                 
                 VStack(alignment: .leading) {
                     
-                    Button(action: {}, label: {
+                    ZStack {
                         Image("LylicComp") // 가사 입력
-                    }).offset(y: 130)
+                        Text(item.lylic ?? "")
+                            .foregroundColor(.titleDarkgray)
+                            .font(.customBody2())
+                    }
+                    .offset(y: 130)
                     
                     Spacer()
                     
-                    Button(action: {
-                        story.toggle()
-                        UIView.setAnimationsEnabled(false)
-                    }, label: {
-                        Image("StoryComp")
-                            .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView() } )
-                    }).offset(x: 20,y: -100)
+                        Button(action: {
+                            story.toggle()
+                            UIView.setAnimationsEnabled(false)
+                        }, label: {
+                            
+                            Image("StoryComp")
+                                .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
+                            Text(item.story ?? "")
+                                .font(Font.customBody1())
+                                .foregroundColor(.titleDarkgray)
+                                .lineLimit(5)
+                                .truncationMode(.tail)
+                                .frame(width: 130)
+                                .offset(x: -160)
+                        })
+                        .offset(x: 20, y: -100)
+                    
                     
                     
                 }.offset(y: -20)
                 Spacer()
                 
             }
-        }.navigationBarItems(trailing:
-                                Menu(content: {
-            Button(action: {}) { // TODO: antion내에 편집 기능 예정
+            
+        }
+        .navigationBarItems(trailing: Menu(content: {
+            
+            Button(action: {
+                
+            }) { // TODO: antion내에 편집 기능 예정
                 Label("편집", systemImage: "square.and.pencil")
             }
-            Button(action: {}) { // TODO: Soi코딩 중인 스크린샷 기능 예정
-                Label("이미지 저장", systemImage: "square.and.arrow.down")
-            }
-            Button(role: .destructive, action: {}) { // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
-                Label("제거", systemImage: "trash")
-            }
+            
+            // MARK: 이미지 저장 기능
+            Button(action: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    let image = body.screenshot()
+                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                }
+            }) { Label("이미지 저장", systemImage: "square.and.arrow.down") }
+            
+            // MARK: 삭제 기능
+            Button(role: .destructive, action: {
+                deleteItemAlert = true
+            }, label: {Label("제거", systemImage: "trash")})
+            
         }, label: {
             Image(systemName: "ellipsis")
                 .foregroundColor(.pointBlue)
-        }))
+        }))// Menu 목록 End
+        
+        .alert("삭제", isPresented: $deleteItemAlert) {
+            Button("삭제", role: .destructive) {
+                deleteItem()
+                NavigationUtil.popToRootView()
+            }
+        } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
+        
+        
+    }
+    
+    
+    func deleteItem() {
+        self.managedObjectContext.delete(self.item)
+        do {
+            try self.managedObjectContext.save()
+        }catch{
+            print(error)
+        }
     }
 }
 
-struct RecordDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordDetailView(music: Music(artist: "sunwoojunga", title: "Cat (feat.IU)", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"))
-    }
-}
 
 struct CDPlayerComp: View {
     
@@ -134,7 +195,7 @@ struct CDPlayerComp: View {
                             .shadow(color: .titleDarkgray, radius: 2, x: 3, y: 3)
                     )
             }.offset(x: -10.6, y: -133) // albumArt를 CD모양으로 불러오는 ZStack
-        
+            
             ZStack {
                 Circle()
                     .foregroundColor(.titleLightgray)

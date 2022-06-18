@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// 이미지 저장 기능을 위한 확장
+// MARK: - 이미지 저장 기능을 위한 확장
 extension View {
     
     func screenshot() -> UIImage {
