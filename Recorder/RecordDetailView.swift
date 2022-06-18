@@ -20,6 +20,7 @@ struct RecordDetailView: View {
     @State private var photo = false
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
+    
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
@@ -81,19 +82,16 @@ struct RecordDetailView: View {
                 
                 VStack(alignment: .leading) {
                     
-                    Button(action: {}, label: {
-                        ZStack {
-                            Image("LylicComp") // 가사 입력
-                            Text(item.lylic ?? "")
-                                .foregroundColor(.titleDarkgray)
-                                .font(.customBody2())
-                        }
-                    }).offset(y: 130)
+                    ZStack {
+                        Image("LylicComp") // 가사 입력
+                        Text(item.lylic ?? "")
+                            .foregroundColor(.titleDarkgray)
+                            .font(.customBody2())
+                    }
+                    .offset(y: 130)
                     
                     Spacer()
                     
-                    // 삭제 버튼
-                    VStack {
                         Button(action: {
                             story.toggle()
                             UIView.setAnimationsEnabled(false)
@@ -110,28 +108,16 @@ struct RecordDetailView: View {
                                 .offset(x: -160)
                         })
                         .offset(x: 20, y: -100)
-                    }
-                    .alert("삭제", isPresented: $deleteItemAlert) {
-                        Button("Destruct", role: .destructive) {
-                            self.managedObjectContext.delete(self.item)
-                            do {
-                                try self.managedObjectContext.save()
-                                presentation.wrappedValue.dismiss()
-                                
-                            }catch{
-                                print(error)
-                            }
-                        }
-                    } message: {
-                        Text("정말 삭제하시겠습니까?")
-                    }
+                    
+                    
                     
                 }.offset(y: -20)
                 Spacer()
                 
             }
             
-        }.navigationBarItems(trailing: Menu(content: {
+        }
+        .navigationBarItems(trailing: Menu(content: {
             
             Button(action: {}) { // TODO: antion내에 편집 기능 예정
                 Label("편집", systemImage: "square.and.pencil")
@@ -145,26 +131,35 @@ struct RecordDetailView: View {
                 }
             }) { Label("이미지 저장", systemImage: "square.and.arrow.down") }
             
-            // TODO: action에 삭제 Alert띄우기 및 삭제 기능 예정
-            
+            // MARK: 삭제 기능
             Button(role: .destructive, action: {
                 deleteItemAlert = true
             }, label: {Label("제거", systemImage: "trash")})
             
-            
-            
-//            Button(role: .destructive, action: {
-//                deleteItemAlert = true
-//            }) { Label("제거", systemImage: "trash") }
-//
-                
-            
-        // Menu 목록 End
         }, label: {
             Image(systemName: "ellipsis")
                 .foregroundColor(.pointBlue)
-        }))
+        }))// Menu 목록 End
+        
+        .alert("삭제", isPresented: $deleteItemAlert) {
+            Button("Destruct", role: .destructive) {
+                deleteItem()
+                
+                NavigationUtil.popToRootView()
+            }
+        } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
+            
+    }
+    
+    
+    func deleteItem() {
+        self.managedObjectContext.delete(self.item)
+        do {
+            try self.managedObjectContext.save()
+        }catch{
+            print(error)
+        }
     }
 }
 

@@ -17,6 +17,8 @@ struct SnapCarousel: View {
     @State var selectedCd: Int = 0
     @State var currentCd: Int = 0
     
+    @Binding var selection: Int?
+    
     var body: some View {
         let spacing: CGFloat = -10
         let widthOfHiddenCds: CGFloat = 100
@@ -57,20 +59,22 @@ struct SnapCarousel: View {
                                         if self.showCd {
                                             self.showCd = false
                                             self.selectedCd = self.currentCd
+                        
+                                                
                                             
                                         } else {
                                             self.showCd = true
                                             self.selectedCd = content
                                             self.currentCd = self.selectedCd
                                         }
-                                        
+                                            
                                     }) {
                                         ZStack {
                                             URLImage(urlString: items[content].albumArt!)
                                                 .aspectRatio(contentMode: .fit)
                                                 .clipShape(Circle())
                                                 .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
-                                            //.scaleEffect(content == UIState.activeCard ? 1.8 : 1)
+                                            
                                             Circle()
                                                 .frame(width: 40, height: 40)
                                                 .foregroundColor(.background)
