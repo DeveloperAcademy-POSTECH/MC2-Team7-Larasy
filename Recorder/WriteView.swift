@@ -25,8 +25,6 @@ struct WriteView: View {
     @State private var lyrics = ""
     @State private var content = ""
     
-    var item: UserStory
-    
     var body: some View {
         
         GeometryReader { _ in
@@ -184,17 +182,9 @@ struct WriteView: View {
                 }
             } // tool bar End
         }.ignoresSafeArea(.keyboard, edges: .bottom)
-            .onAppear {
-                save(music: music, item: item)
-            }
+           
     } // View End
     
-    func save(music: Music, item: UserStory) {
-        self.music = music
-        self.lyrics = item.lylic
-        self.content = item.story
-        self.inputImage = UIImage(data: item.image)
-    }
     func loadImage() {      // 이미지 저장하는 함수
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
