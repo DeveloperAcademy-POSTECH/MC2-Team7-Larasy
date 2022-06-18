@@ -69,7 +69,9 @@ struct WriteView: View {
                             
                             image?                       // 사용자가 가져온 이미지를 보여주는 부분
                                 .resizable()
+                                .scaledToFill()
                                 .frame(width: 95, height: 105)
+                                .clipped()
                                 .scaleEffect()
                                 .offset(y: -15)
                             
@@ -141,7 +143,7 @@ struct WriteView: View {
                 }
             }
             
-            // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동하게 변경.
+            // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     

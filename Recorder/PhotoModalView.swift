@@ -46,12 +46,15 @@ struct PhotoModalView: View {
                         .frame(minWidth: 0, maxWidth: 308, minHeight: 0, maxHeight: 435)
                         .foregroundColor(.white)
                     
+                    
                     Image(uiImage: UIImage(data: image)!)
                         .resizable()
-                        .scaleEffect()
-                        .frame(minWidth: 0, maxWidth: 276, minHeight: 0, maxHeight: 314)
+                        .scaledToFill()
+                        .frame(minWidth: 0, maxWidth: 276 , minHeight: 0, maxHeight: 314)
+                        .clipped()
                         .padding(.top, 16)
                         .padding(.bottom, 103)
+                    
                     
                 }
             } // 본문 Frame & Photo 끝

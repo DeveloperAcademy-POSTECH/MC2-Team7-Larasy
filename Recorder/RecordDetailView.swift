@@ -55,16 +55,18 @@ struct RecordDetailView: View {
                     },
                            label: {
                         ZStack {
-                            Image("PhotoComp") // 이미지 삽입
+                            Image("DetailPhotoComp") // 이미지 삽입
                                 .padding()
                                 .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
                             
                             if let image = item.image {
-                            Image(uiImage: UIImage(data: image)!)
-                                .resizable()
-                                .frame(width: 95, height: 105)
-                                .scaleEffect()
-                                .offset(y: -15)
+                                Image(uiImage: UIImage(data: image)!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 95, height: 105)
+                                    .clipped()
+                                    .scaleEffect()
+                                    .offset(y: -15)
                             }
                         }
                     }).offset(y: -110)
