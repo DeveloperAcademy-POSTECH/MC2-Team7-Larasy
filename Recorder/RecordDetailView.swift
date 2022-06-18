@@ -72,7 +72,6 @@ struct RecordDetailView: View {
                             }
                         }
                     }).offset(y: -110)
-                    //let image = UIImage(data: item.image!)
                     
                     Spacer()
                     
@@ -145,9 +144,8 @@ struct RecordDetailView: View {
         }))// Menu 목록 End
         
         .alert("삭제", isPresented: $deleteItemAlert) {
-            Button("Destruct", role: .destructive) {
+            Button("삭제", role: .destructive) {
                 deleteItem()
-                
                 NavigationUtil.popToRootView()
             }
         } message: { Text("정말 삭제하시겠습니까?") }
