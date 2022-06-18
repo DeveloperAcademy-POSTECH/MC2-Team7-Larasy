@@ -145,8 +145,8 @@ struct RecordDetailView: View {
         
         .alert("삭제", isPresented: $deleteItemAlert) {
             Button("삭제", role: .destructive) {
-                deleteItem()
-                NavigationUtil.popToRootView()
+//                deleteItem()
+//                NavigationUtil.popToRootView()
             }
         } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
