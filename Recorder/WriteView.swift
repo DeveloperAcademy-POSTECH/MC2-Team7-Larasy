@@ -39,14 +39,14 @@ struct WriteView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("\(music.title)") // MARK: "music.title"
-                            .font(.title2)
+                            .font(.customTitle2())
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 3)
                         
                         Text("\(music.artist)") //MARK: "music.artist"
-                            .font(.body)
+                            .font(.customBody1())
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
                         Spacer()
@@ -91,7 +91,7 @@ struct WriteView: View {
                         //MARK: - CD 플레어이 뷰 시작
                         
                         CDPlayerComp(music: music) //MARK: SearchView에서 music 받아옴
-                            .offset(y: -10)
+                            .offset(x: 25, y: -10)
                     }.offset(y: 80)
                         .padding()
                     
@@ -103,12 +103,13 @@ struct WriteView: View {
                                 .offset(y: 130)
                             HStack{
                                 
-                                TextField("\(Image(systemName: "music.mic"))기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
+                                TextField("\(Image(systemName: "music.mic")) 기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
                                           text: $lyrics)
-                                .font(Font.customBody1())
+                                .font(Font.customBody2())
                                 .disableAutocorrection(true)
                                 .multilineTextAlignment(.center)
                                 .frame(width: 240,alignment: .center)
+                                .foregroundColor(.titleDarkgray)
                                 
                             }
                             .offset(y: 130)
@@ -126,12 +127,26 @@ struct WriteView: View {
                                 })
                             if !content.isEmpty {
                                 Text(content)
-                                    .font(Font.customBody1())
+                                    .font(Font.customBody2())
                                     .foregroundColor(.titleDarkgray)
                                     .lineLimit(5)
                                     .truncationMode(.tail)
                                     .frame(width: 130)
                                     .offset(x: -160)
+                                    .multilineTextAlignment(.leading)
+                                    .lineSpacing(5)
+                                
+                            } else {
+                                VStack {
+                                    Image(systemName: "plus")
+                                        .offset(x: -150)
+                                        .foregroundColor(.titleGray)
+                                        .padding(5)
+                                    Text("나의 음악 이야기")
+                                        .offset(x: -150)
+                                        .foregroundColor(.titleGray)
+                                        .font(.customBody1())
+                                }
                             }
                         })
                         .offset(x: 20,y: -100)

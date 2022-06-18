@@ -76,7 +76,7 @@ struct RecordDetailView: View {
                     Spacer()
                     
                     CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
-                        .offset(y: -10)
+                        .offset(x: 25, y: -10)
                 }.offset(y: 80)
                     .padding()
                 
@@ -100,12 +100,14 @@ struct RecordDetailView: View {
                             Image("StoryComp")
                                 .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
                             Text(item.story ?? "")
-                                .font(Font.customBody1())
+                                .font(Font.customBody2())
                                 .foregroundColor(.titleDarkgray)
                                 .lineLimit(5)
                                 .truncationMode(.tail)
                                 .frame(width: 130)
                                 .offset(x: -160)
+                                .multilineTextAlignment(.leading)
+                                .lineSpacing(5)
                         })
                         .offset(x: 20, y: -100)
                     

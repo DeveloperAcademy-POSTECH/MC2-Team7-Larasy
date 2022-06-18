@@ -30,7 +30,7 @@ struct SearchView: View {
                     .font(.customTitle2())
                     .lineSpacing(7)
                     .foregroundColor(.titleBlack)
-                    .padding(.top, 40)
+                    .padding(.top, 30)
                     .padding(.leading, 20)
                 
                 SearchBar // 중앙 서치바,
@@ -56,12 +56,18 @@ struct SearchView: View {
             HStack {
                 Image(systemName: "magnifyingglass") // 돋보기 Symbol
                 
-                TextField(placeholer, text: $search) // 입력창
-                    .foregroundColor(.titleDarkgray)
+                TextField("", text: $search) // 입력창
+                    .foregroundColor(.titleBlack)
                     .font(.customBody2())
                     .onSubmit { // keyboard Return Button 클릭 시
                         musicAPI.getSearchResults(search: search) // 음악 API 불러오기
                     }
+                    .placeholder(when: search.isEmpty) {
+                        Text(placeholer)
+                            .foregroundColor(.titleDarkgray)
+                            .font(.customBody2())
+                    }
+                    
                 
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지

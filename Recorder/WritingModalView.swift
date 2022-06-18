@@ -49,7 +49,7 @@ struct WritingModalView: View {
                 // Modal Background Frame & Color 시작
                 ZStack {
                     
-                    VStack{
+                    VStack {
                         
                         // 이야기 작성 TextEditor & PlaceHolder 시작
                         ZStack {
@@ -57,8 +57,10 @@ struct WritingModalView: View {
                                 TextEditor (text: $placeholderText)
                                     .font(.customBody1())
                                     .foregroundColor(.titleGray)
+                                    .lineSpacing(5)
                                     .disabled(true)
                                     .padding()
+                                    .multilineTextAlignment(.leading)
                             }
                             TextEditor (text: $content) // TextEditor 출력
                                 .onReceive(content.publisher.collect()) {
@@ -69,11 +71,15 @@ struct WritingModalView: View {
                                 .foregroundColor(.titleDarkgray)
                                 .opacity(self.content.isEmpty ? 0.25 :1)
                                 .padding()
+                                .multilineTextAlignment(.leading)
+                                .lineSpacing(7)
+                                
                             
                         }
-                        .padding(.horizontal, 15)
+                        .padding(.horizontal, 10)
                         .padding(.top, 30)
-                        .padding(.bottom, 50.0)
+                        //.padding(.bottom, 50.0)
+                        .frame(width: 320, height: 310)
                         // 이야기 작성 TextEditor & PlaceHoler 끝
                         
                         // 완료 버튼 시작
@@ -81,30 +87,21 @@ struct WritingModalView: View {
                             
                             Spacer()
                             
-                            if self.content.isEmpty {
-                                
-                                Button("완료") {
-
-                                }
-                                .font(.customSubhead())
-                                .foregroundColor(.titleGray)
-                                
+                            Button("완료") {
+                                presentation.wrappedValue.dismiss()
                             }
-                            else {
-                                Button("완료") {
-                                    presentation.wrappedValue.dismiss()
-                                }
-                                .font(.customSubhead())
-                                .foregroundColor(.pointBlue)
-                            }
-                            
+                            .font(.customSubhead())
+                            .disabled(content.isEmpty)
+                            .foregroundColor(content.isEmpty ? .titleGray : .pointBlue)
+                            .padding(.bottom, 20)
+        
                         }
                         .padding(20)
                         // 완료 버튼 끝
 
                         
                     }
-                    
+                    .frame(height: 400)
                 }
                 .frame(minWidth: 0, maxWidth: 308, minHeight: 0, maxHeight: 350)
                 .background(Color.white)

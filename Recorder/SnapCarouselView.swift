@@ -31,7 +31,9 @@ struct SnapCarousel: View {
                     .ignoresSafeArea()
                 // Carousel 슬라이더 기능
                 // ForEach로 items마다 Item() 뷰를 각각 불러옴
+              
                 VStack {
+                  
                     Carousel(
                         numberOfItems: CGFloat(items.count),
                         spacing: spacing,
@@ -40,12 +42,13 @@ struct SnapCarousel: View {
                         ForEach(items.indices, id: \.self) { content in
                             Item(_id: content){
                                 // 가운데 cd만 글이 보이게 함
+                                
                                 VStack {
                                     if (content == UIState.activeCard) {
                                         Text(items[content].title!)
                                             .foregroundColor(Color.titleBlack)
                                             .font(Font.customTitle3())
-                                            .padding(.bottom, 5)
+                                            .padding(.bottom, 2)
                                         Text(items[content].artist!)
                                             .foregroundColor(Color.titleDarkgray)
                                             .font(Font.customBody2())
@@ -75,6 +78,7 @@ struct SnapCarousel: View {
                                                 .clipShape(Circle())
                                                 .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
                                             
+                                            
                                             Circle()
                                                 .frame(width: 40, height: 40)
                                                 .foregroundColor(.background)
@@ -83,6 +87,10 @@ struct SnapCarousel: View {
                                                         .stroke(.background, lineWidth: 0.1)
                                                         .shadow(color: .titleDarkgray, radius: 2, x: 3, y: 3)
                                                 )
+//                                            Circle()
+//                                                .fill(.white)
+//                                                .frame(width: 35, height: 35)
+//                                                .shadow(color: .black, radius: 4, x: -4, y: 4)
                                         }
                                     } // 버튼
                                     .disabled(UIState.activeCard != content)
@@ -91,6 +99,7 @@ struct SnapCarousel: View {
                                             self.showCd = false
                                         }
                                     }
+                                    
                                 } // V 스택
                             }
                             .transition(AnyTransition.slide)
@@ -101,8 +110,19 @@ struct SnapCarousel: View {
                     
                     Spacer()
                     // CdPlayer
+                    
+                    VStack {
+                        
+                        Text("CD를 선택하고 플레이어를 재생해보세요")
+                            .foregroundColor(.titleGray)
+                            .font(.customBody2())
+                            .frame(width: 300)
+                            .padding(.bottom, -20)
+                            .padding(.top, 45)
+                        
                     ZStack {
                         Image("ListViewCdPlayer")
+                            .offset(y: 30)
                         
                         //cd 클릭시, cdPlayer에 cd 나타남
                         VStack {
@@ -132,7 +152,7 @@ struct SnapCarousel: View {
                                 }
                             } // else문
                         } // V스택
-                        .padding(.bottom, 180)
+                        .padding(.bottom, 120)
                         .padding(.leading, 2) // CdPlayer를 그림자 포함해서 뽑아서 전체 CdPlayer와 정렬 맞추기 위함
                         
                         // cdPlayer 가운데 원
@@ -150,9 +170,10 @@ struct SnapCarousel: View {
                                     .frame(width: 3 , height: 3)
                             } // Z스택
                         } // V스택
-                        .padding(.bottom, 180)
+                        .padding(.bottom, 120)
                         .padding(.leading, 4)
                     } // Z스택
+                }
                 } // V스택
                 .ignoresSafeArea()
             } // Z스택
