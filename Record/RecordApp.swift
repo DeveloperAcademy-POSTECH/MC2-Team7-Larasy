@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct RecorderApp: App {
+struct RecordApp: App {
     
     @Environment(\.scenePhase) var scenePhase
     let persistenceController = PersistenceController.shared

@@ -13,7 +13,7 @@ struct OnboardingLastPageView: View {
     //이미지 fadein 애니메이션
     @State var isShown = false
     //앱최초 실행 바인딩
-    @Binding var isFriestLaunching: Bool
+    @Binding var isFirstLaunching: Bool
 
     
     var body: some View {
@@ -23,7 +23,7 @@ struct OnboardingLastPageView: View {
                 .font(Font.customTitle2())
                 .frame(width:330, alignment: .leading)
                 .padding(.bottom,500)
-            //TODO: 행간 수정
+                .lineSpacing(3)
             //Image Fadein Animation Start
             VStack {
                 if isShown {
@@ -38,7 +38,7 @@ struct OnboardingLastPageView: View {
             //Image Fadein Animation End
             //Button Start
             Button(action: {
-                isFriestLaunching.toggle()
+                isFirstLaunching.toggle()
             }) {
                 Text("음악 기록 시작하기")
                     .foregroundColor(.white)
@@ -58,7 +58,7 @@ struct OnboardingLastPageView: View {
 
 struct OnboardingLastPageView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingLastPageView(isFriestLaunching: .constant(false))
+        OnboardingLastPageView(isFirstLaunching: .constant(false))
     }
 }
 

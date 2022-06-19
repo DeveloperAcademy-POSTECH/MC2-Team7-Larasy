@@ -16,7 +16,7 @@
 		790FF14B285B008A00931CCF /* MusicList.json in Resources */ = {isa = PBXBuildFile; fileRef = 790FF14A285B008A00931CCF /* MusicList.json */; };
 		79418F7B2858C17C00F844BD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79418F7A2858C17C00F844BD /* ImagePicker.swift */; };
 		7949F34E285B88120093579B /* WritingModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7949F34D285B88120093579B /* WritingModalView.swift */; };
-		794AD0072851EEA700414667 /* RecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0062851EEA700414667 /* RecorderApp.swift */; };
+		794AD0072851EEA700414667 /* RecordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0062851EEA700414667 /* RecordApp.swift */; };
 		794AD0092851EEA700414667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0082851EEA700414667 /* ContentView.swift */; };
 		794AD00B2851EEA900414667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794AD00A2851EEA900414667 /* Assets.xcassets */; };
 		794AD00E2851EEA900414667 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794AD00D2851EEA900414667 /* Preview Assets.xcassets */; };
@@ -26,7 +26,7 @@
 		8715A79F2855B775001AB4F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8715A79E2855B775001AB4F5 /* Extension.swift */; };
 		876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876BC4A22857189D009ACC90 /* TestSoiView.swift */; };
 		87A0D9B1285BAEF8006D0D3B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A0D9B0285BAEF8006D0D3B /* Persistence.swift */; };
-		87A0D9B4285BAF42006D0D3B /* Recorder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87A0D9B2285BAF42006D0D3B /* Recorder.xcdatamodeld */; };
+		87A0D9B4285BAF42006D0D3B /* Record.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87A0D9B2285BAF42006D0D3B /* Record.xcdatamodeld */; };
 		87FB281D285A04680036A5BB /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB281C285A04680036A5BB /* Screenshot.swift */; };
 		A01413222855F4E60000EA59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01413212855F4E60000EA59 /* HomeView.swift */; };
 		A0AA39BB285A4936009EE3EA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AA39BA285A4936009EE3EA /* OnboardingView.swift */; };
@@ -47,8 +47,8 @@
 		790FF14A285B008A00931CCF /* MusicList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MusicList.json; sourceTree = "<group>"; };
 		79418F7A2858C17C00F844BD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7949F34D285B88120093579B /* WritingModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingModalView.swift; sourceTree = "<group>"; };
-		794AD0032851EEA700414667 /* Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		794AD0062851EEA700414667 /* RecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderApp.swift; sourceTree = "<group>"; };
+		794AD0032851EEA700414667 /* Record.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Record.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		794AD0062851EEA700414667 /* RecordApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordApp.swift; sourceTree = "<group>"; };
 		794AD0082851EEA700414667 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		794AD00A2851EEA900414667 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		794AD00D2851EEA900414667 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 			children = (
 				8715A79E2855B775001AB4F5 /* Extension.swift */,
 				8715A7992855477D001AB4F5 /* Model */,
-				794AD0052851EEA700414667 /* Recorder */,
+				794AD0052851EEA700414667 /* Record */,
 				794AD0042851EEA700414667 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,16 +100,16 @@
 		794AD0042851EEA700414667 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				794AD0032851EEA700414667 /* Recorder.app */,
+				794AD0032851EEA700414667 /* Record.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		794AD0052851EEA700414667 /* Recorder */ = {
+		794AD0052851EEA700414667 /* Record */ = {
 			isa = PBXGroup;
 			children = (
 				3D7E7941285B81860019ED45 /* Info.plist */,
-				794AD0062851EEA700414667 /* RecorderApp.swift */,
+				794AD0062851EEA700414667 /* RecordApp.swift */,
 				B277EC162859A679001A97B1 /* CdListView.swift */,
 				B29723AF285B192C0065FD36 /* SnapCarouselView.swift */,
 				B277EC142859A671001A97B1 /* Carousel.swift */,
@@ -132,7 +132,7 @@
 				8715A79C2855B5AC001AB4F5 /* Colors.xcassets */,
 				13E0DA9F285A3764008714A6 /* RecordUIView.swift */,
 			);
-			path = Recorder;
+			path = Record;
 			sourceTree = "<group>";
 		};
 		794AD00C2851EEA900414667 /* Preview Content */ = {
@@ -149,7 +149,7 @@
 				8715A79A2855479E001AB4F5 /* MusicAPI.swift */,
 				87FB281C285A04680036A5BB /* Screenshot.swift */,
 				87A0D9B0285BAEF8006D0D3B /* Persistence.swift */,
-				87A0D9B2285BAF42006D0D3B /* Recorder.xcdatamodeld */,
+				87A0D9B2285BAF42006D0D3B /* Record.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,9 +157,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		794AD0022851EEA700414667 /* Recorder */ = {
+		794AD0022851EEA700414667 /* Record */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 794AD0112851EEA900414667 /* Build configuration list for PBXNativeTarget "Recorder" */;
+			buildConfigurationList = 794AD0112851EEA900414667 /* Build configuration list for PBXNativeTarget "Record" */;
 			buildPhases = (
 				794ACFFF2851EEA700414667 /* Sources */,
 				794AD0002851EEA700414667 /* Frameworks */,
@@ -169,9 +169,9 @@
 			);
 			dependencies = (
 			);
-			name = Recorder;
+			name = Record;
 			productName = Recorder;
-			productReference = 794AD0032851EEA700414667 /* Recorder.app */;
+			productReference = 794AD0032851EEA700414667 /* Record.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -189,7 +189,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 794ACFFE2851EEA700414667 /* Build configuration list for PBXProject "Recorder" */;
+			buildConfigurationList = 794ACFFE2851EEA700414667 /* Build configuration list for PBXProject "Record" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -202,7 +202,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				794AD0022851EEA700414667 /* Recorder */,
+				794AD0022851EEA700414667 /* Record */,
 			);
 		};
 /* End PBXProject section */
@@ -234,7 +234,7 @@
 				B29723B0285B192C0065FD36 /* SnapCarouselView.swift in Sources */,
 				87FB281D285A04680036A5BB /* Screenshot.swift in Sources */,
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
-				87A0D9B4285BAF42006D0D3B /* Recorder.xcdatamodeld in Sources */,
+				87A0D9B4285BAF42006D0D3B /* Record.xcdatamodeld in Sources */,
 				13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */,
 				876BC4A32857189D009ACC90 /* TestSoiView.swift in Sources */,
 				A0AA39BB285A4936009EE3EA /* OnboardingView.swift in Sources */,
@@ -248,7 +248,7 @@
 				13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */,
 				79418F7B2858C17C00F844BD /* ImagePicker.swift in Sources */,
 				7949F34E285B88120093579B /* WritingModalView.swift in Sources */,
-				794AD0072851EEA700414667 /* RecorderApp.swift in Sources */,
+				794AD0072851EEA700414667 /* RecordApp.swift in Sources */,
 				7906EFED28577D950064056F /* WriteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,11 +377,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Recorder/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Record/Preview Content\"";
 				DEVELOPMENT_TEAM = 8HXUXMV396;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Recorder/Info.plist;
+				INFOPLIST_FILE = Record/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "please access photo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -392,7 +392,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yung.Recorder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yung.Record;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -407,11 +407,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Recorder/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Record/Preview Content\"";
 				DEVELOPMENT_TEAM = 8HXUXMV396;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Recorder/Info.plist;
+				INFOPLIST_FILE = Record/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "please access photo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -422,7 +422,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yung.Recorder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yung.Record;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -433,7 +433,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		794ACFFE2851EEA700414667 /* Build configuration list for PBXProject "Recorder" */ = {
+		794ACFFE2851EEA700414667 /* Build configuration list for PBXProject "Record" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				794AD00F2851EEA900414667 /* Debug */,
@@ -442,7 +442,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		794AD0112851EEA900414667 /* Build configuration list for PBXNativeTarget "Recorder" */ = {
+		794AD0112851EEA900414667 /* Build configuration list for PBXNativeTarget "Record" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				794AD0122851EEA900414667 /* Debug */,
@@ -454,13 +454,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		87A0D9B2285BAF42006D0D3B /* Recorder.xcdatamodeld */ = {
+		87A0D9B2285BAF42006D0D3B /* Record.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				87A0D9B3285BAF42006D0D3B /* Recored.xcdatamodel */,
 			);
 			currentVersion = 87A0D9B3285BAF42006D0D3B /* Recored.xcdatamodel */;
-			path = Recorder.xcdatamodeld;
+			path = Record.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
