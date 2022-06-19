@@ -115,9 +115,9 @@ struct Item<Content: View>: View {
     
     @inlinable public init(
         _id: Int,
-        spacing: CGFloat,
-        widthOfHiddenCds: CGFloat,
-        cdHeight: CGFloat,
+        spacing: CGFloat = -10,
+        widthOfHiddenCds: CGFloat = 100,
+        cdHeight: CGFloat = 300,
         @ViewBuilder _ content: () -> Content
     ) {
         self.content = content()

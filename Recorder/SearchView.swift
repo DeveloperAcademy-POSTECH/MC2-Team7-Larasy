@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 
-// MA 음악 검색 View
+// MARK: - 음악 검색 View
 struct SearchView: View {
     
     @StateObject var musicAPI = MusicAPI()
@@ -63,7 +63,6 @@ struct SearchView: View {
                         musicAPI.getSearchResults(search: search) // 음악 API 불러오기
                     }
                 
-                
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지
                         .imageScale(.medium)
@@ -83,6 +82,7 @@ struct SearchView: View {
         .frame(height: 40)
         .cornerRadius(10)
         .padding(10)
+        .padding(.horizontal, 10)
         
     } // SearchBar View End
     
@@ -101,9 +101,10 @@ struct SearchView: View {
                     HStack {
                         URLImage(urlString: music.albumArt) // 앨범커버
                             .cornerRadius(5)
+                            .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: TestSoiView(music: music)) { // 현재 임시뷰로 연결, 추후 작성뷰로 전환
+                        NavigationLink(destination: WriteView(music: music)) {
                             
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {
@@ -153,7 +154,6 @@ struct URLImage: View {
             Image(uiImage: uiimage) // URL Image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-//                .frame(width: 55, height: 55)
                 .background(.gray)
             
         } else { // 이미지 불러오기 실패
@@ -161,7 +161,6 @@ struct URLImage: View {
             Rectangle() // 회색 박스
                 .foregroundColor(.titleLightgray)
                 .aspectRatio(contentMode: .fit)
-//                .frame(width: 55, height: 55)
                 .onAppear() {
                     fetchData()
                 }

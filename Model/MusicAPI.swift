@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-// MARK: 음악 API 불러오기
+// MARK: - 음악 API 불러오기
 class MusicAPI: ObservableObject {
     @Published var musicList: [Music] = []
     
@@ -40,10 +40,11 @@ class MusicAPI: ObservableObject {
                     let searchResults = jsonObject["results"] as! [NSDictionary]
                     searchResults.forEach { result in
                         
+                        
                         // Music 객체에 저장
                         let searchResult = Music(artist: result["artistName"] as! String,
                                                  title: result["trackName"] as! String,
-                                                 albumArt: result["artworkUrl100"] as! String)
+                                                 albumArt: (result["artworkUrl100"] as! String).replacingOccurrences(of: "100x100bb", with: "500x500bb"))
                         
                         self.musicList.append(searchResult)
                     }

@@ -10,10 +10,14 @@ import SwiftUI
 @main
 struct RecorderApp: App {
     
+    @Environment(\.scenePhase) var scenePhase
+    let persistenceController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
             //ContentView()
             OnboardingStartView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
