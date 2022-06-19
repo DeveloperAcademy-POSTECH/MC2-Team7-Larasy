@@ -20,6 +20,7 @@ struct RecordDetailView: View {
     @State private var photo = false
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
+    @State private var saveImage = false
     
     var body: some View {
         
@@ -132,6 +133,7 @@ struct RecordDetailView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     let image = body.screenshot()
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                    saveImage.toggle()
                 }
             }) { Label("이미지 저장", systemImage: "square.and.arrow.down") }
             
@@ -152,6 +154,12 @@ struct RecordDetailView: View {
             }
         } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
+            .alert("저장완료", isPresented: $saveImage) {
+                Button("확인") {
+                }
+            } message: {  }
+        // 본문 ZStack End
+        
         
         
     }
