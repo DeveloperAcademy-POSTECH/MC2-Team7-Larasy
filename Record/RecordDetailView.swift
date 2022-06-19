@@ -20,6 +20,7 @@ struct RecordDetailView: View {
     @State private var photo = false
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
+    @State private var saveImage = false
     
     var body: some View {
         
@@ -76,7 +77,7 @@ struct RecordDetailView: View {
                     Spacer()
                     
                     CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
-                        .offset(y: -10)
+                        .offset(x: 25, y: -10)
                 }.offset(y: 80)
                     .padding()
                 
@@ -100,12 +101,14 @@ struct RecordDetailView: View {
                             Image("StoryComp")
                                 .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
                             Text(item.story ?? "")
-                                .font(Font.customBody1())
+                                .font(Font.customBody2())
                                 .foregroundColor(.titleDarkgray)
                                 .lineLimit(5)
                                 .truncationMode(.tail)
                                 .frame(width: 130)
                                 .offset(x: -160)
+                                .multilineTextAlignment(.leading)
+                                .lineSpacing(5)
                         })
                         .offset(x: 20, y: -100)
                     
@@ -130,6 +133,7 @@ struct RecordDetailView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     let image = body.screenshot()
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                    saveImage.toggle()
                 }
             }) { Label("이미지 저장", systemImage: "square.and.arrow.down") }
             
@@ -145,11 +149,17 @@ struct RecordDetailView: View {
         
         .alert("삭제", isPresented: $deleteItemAlert) {
             Button("삭제", role: .destructive) {
-                deleteItem()
-                NavigationUtil.popToRootView()
+//                deleteItem()
+//                NavigationUtil.popToRootView()
             }
         } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
+            .alert("저장완료", isPresented: $saveImage) {
+                Button("확인") {
+                }
+            } message: {  }
+        // 본문 ZStack End
+        
         
         
     }

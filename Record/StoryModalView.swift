@@ -50,6 +50,9 @@ struct StoryModalView: View {
                         .foregroundColor(.titleDarkgray)
                         .font(.customBody1())
                         .frame(width:256, alignment: .leading)
+                        .padding()
+                        .multilineTextAlignment(.leading)
+                        .lineSpacing(7)
                     
                 }
             } // 본문 Frame & Text 끝
