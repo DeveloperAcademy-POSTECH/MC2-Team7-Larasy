@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "794AD0022851EEA700414667"
-               BuildableName = "Recorder.app"
-               BlueprintName = "Recorder"
-               ReferencedContainer = "container:Recorder.xcodeproj">
+               BuildableName = "Record.app"
+               BlueprintName = "Record"
+               ReferencedContainer = "container:Record.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "794AD0022851EEA700414667"
-            BuildableName = "Recorder.app"
-            BlueprintName = "Recorder"
-            ReferencedContainer = "container:Recorder.xcodeproj">
+            BuildableName = "Record.app"
+            BlueprintName = "Record"
+            ReferencedContainer = "container:Record.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "794AD0022851EEA700414667"
-            BuildableName = "Recorder.app"
-            BlueprintName = "Recorder"
-            ReferencedContainer = "container:Recorder.xcodeproj">
+            BuildableName = "Record.app"
+            BlueprintName = "Record"
+            ReferencedContainer = "container:Record.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
