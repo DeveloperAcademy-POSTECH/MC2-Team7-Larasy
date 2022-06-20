@@ -11,3 +11,17 @@
 ## :people_hugging: Authors
 
 - [@100seo](https://github.com/100seo) | [@boskim22](https://github.com/boskim22) | [@Eunbi-Cho](https://github.com/Eunbi-Cho) | [@JIWON1923](https://github.com/JIWON1923) | [@mxnxxii](https://github.com/mxnxxii) | [@YunSeok-Choi](https://github.com/YunSeok-Choi)
+
+## :fireworks: Screenshots
+
+## :sparkles: Skills & Tech Stack
+<img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=Swift&logoColor=white">
+
+## :books: Documentation
+
+[Documentation](https://developer.apple.com/xcode/swiftui/)
+
+
+## :lock_with_ink_pen: License
+
+[MIT](https://choosealicense.com/licenses/mit/)
