@@ -10,10 +10,15 @@
 
 ## :people_hugging: Authors
 
+[@Soi](https://www.github.com/JIWON1923 ) | [@Anna](https://www.github.com/Eunbi-Cho) | [@Romi](https://www.github.com/4mxnxxii) | [@Yungsix](https://www.github.com/YunSeok-Choi) | [@Louie](https://www.github.com/100seo) | [@Anders](https://www.github.com/boskim22)
+|:—:|:—:|:—:|:—:|:—:|:—:|
+|사과|사과|사과|사과|사과|사과|
+
 - [@100seo](https://github.com/100seo) | [@boskim22](https://github.com/boskim22) | [@Eunbi-Cho](https://github.com/Eunbi-Cho) | [@JIWON1923](https://github.com/JIWON1923) | [@mxnxxii](https://github.com/mxnxxii) | [@YunSeok-Choi](https://github.com/YunSeok-Choi)
 
 ## :fireworks: Screenshots
 
+<
 ![Larasy_Home](https://user-images.githubusercontent.com/66102708/174543890-98e388ff-a25e-41fd-b439-cf074e10f378.png)
 
 
