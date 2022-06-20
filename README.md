@@ -13,8 +13,7 @@
 - [@100seo](https://github.com/100seo) | [@boskim22](https://github.com/boskim22) | [@Eunbi-Cho](https://github.com/Eunbi-Cho) | [@JIWON1923](https://github.com/JIWON1923) | [@mxnxxii](https://github.com/mxnxxii) | [@YunSeok-Choi](https://github.com/YunSeok-Choi)
 
 ## :fireworks: Screenshots
-![Home2](https://user-images.githubusercontent.com/66102708/174543191-d9fb2388-a816-43d1-854f-025e36d16779.png)
-
+[Home3.pdf](https://github.com/DeveloperAcademy-POSTECH/MC2-Team7-Larasy/files/8938260/Home3.pdf)
 
 
 
