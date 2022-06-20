@@ -17,9 +17,11 @@
 - [@100seo](https://github.com/100seo) | [@boskim22](https://github.com/boskim22) | [@Eunbi-Cho](https://github.com/Eunbi-Cho) | [@JIWON1923](https://github.com/JIWON1923) | [@mxnxxii](https://github.com/mxnxxii) | [@YunSeok-Choi](https://github.com/YunSeok-Choi)
 
 ## :fireworks: Screenshots
+<img width="250"  src="https://user-images.githubusercontent.com/66102708/174544688-6371ceb7-d950-4639-8948-67141f86b31e.png">
 
-<
-![Larasy_Home](https://user-images.githubusercontent.com/66102708/174543890-98e388ff-a25e-41fd-b439-cf074e10f378.png)
+
+![home최종](https://user-images.githubusercontent.com/66102708/174544688-6371ceb7-d950-4639-8948-67141f86b31e.png)
+
 
 
 
