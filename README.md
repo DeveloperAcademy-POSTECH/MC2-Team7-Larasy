@@ -13,8 +13,7 @@
 - [@100seo](https://github.com/100seo) | [@boskim22](https://github.com/boskim22) | [@Eunbi-Cho](https://github.com/Eunbi-Cho) | [@JIWON1923](https://github.com/JIWON1923) | [@mxnxxii](https://github.com/mxnxxii) | [@YunSeok-Choi](https://github.com/YunSeok-Choi)
 
 ## :fireworks: Screenshots
-
-![image](https://user-images.githubusercontent.com/66102708/174543117-c153f4b1-efc0-4c66-bd2c-e70360a7caf9.png)
+![Home2](https://user-images.githubusercontent.com/66102708/174543191-d9fb2388-a816-43d1-854f-025e36d16779.png)
 
 
 
