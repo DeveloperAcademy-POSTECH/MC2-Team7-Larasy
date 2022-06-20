@@ -13,9 +13,8 @@
 - [@100seo](https://github.com/100seo) | [@boskim22](https://github.com/boskim22) | [@Eunbi-Cho](https://github.com/Eunbi-Cho) | [@JIWON1923](https://github.com/JIWON1923) | [@mxnxxii](https://github.com/mxnxxii) | [@YunSeok-Choi](https://github.com/YunSeok-Choi)
 
 ## :fireworks: Screenshots
---------------------------------
+
 |![Larasy_Home](https://user-images.githubusercontent.com/66102708/174542403-12a5d639-0b16-436a-804f-8503f12aa2ad.png)|
----------
 
 
 
