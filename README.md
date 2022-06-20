@@ -19,8 +19,7 @@
 ## :fireworks: Screenshots
 <img width="250"  src="https://user-images.githubusercontent.com/66102708/174544688-6371ceb7-d950-4639-8948-67141f86b31e.png">
 
-
-![home최종](https://user-images.githubusercontent.com/66102708/174544688-6371ceb7-d950-4639-8948-67141f86b31e.png)
+![home최종](https://user-images.githubusercontent.com/66102708/174545211-ad6cb2d6-a1c1-401f-a158-bcfe91319275.png)
 
 
 
