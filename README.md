@@ -14,7 +14,8 @@
 
 ## :fireworks: Screenshots
 
-|![Larasy_Home](https://user-images.githubusercontent.com/66102708/174542403-12a5d639-0b16-436a-804f-8503f12aa2ad.png)|
+![image](https://user-images.githubusercontent.com/66102708/174543117-c153f4b1-efc0-4c66-bd2c-e70360a7caf9.png)
+
 
 
 
