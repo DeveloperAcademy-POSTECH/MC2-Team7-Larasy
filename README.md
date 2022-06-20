@@ -13,7 +13,8 @@
 - [@100seo](https://github.com/100seo) | [@boskim22](https://github.com/boskim22) | [@Eunbi-Cho](https://github.com/Eunbi-Cho) | [@JIWON1923](https://github.com/JIWON1923) | [@mxnxxii](https://github.com/mxnxxii) | [@YunSeok-Choi](https://github.com/YunSeok-Choi)
 
 ## :fireworks: Screenshots
-![image](https://user-images.githubusercontent.com/66102708/174542193-8844e514-7681-4c39-b03b-5cab2ecb3124.png)
+![image](https://user-images.githubusercontent.com/66102708/174542249-d250cd20-113e-4c32-8c2c-655b266c3397.png)
+
 
 ## :sparkles: Skills & Tech Stack
 <img src="https://img.shields.io/badge/Swift-F05138?style=for-the-badge&logo=Swift&logoColor=white">
