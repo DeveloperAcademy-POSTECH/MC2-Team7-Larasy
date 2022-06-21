@@ -30,8 +30,6 @@
 - <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
 
 
-#000000
-
 ## :books: Documentation
 
 [Documentation](https://developer.apple.com/xcode/swiftui/)
