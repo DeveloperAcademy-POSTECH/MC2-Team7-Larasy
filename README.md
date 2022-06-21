@@ -35,6 +35,5 @@
 [Documentation](https://developer.apple.com/xcode/swiftui/)
 
 
-## :lock_with_ink_pen: License
-
+## :lock_with_ink_pen: Licenseㄹ
 [MIT](https://choosealicense.com/licenses/mit/)
