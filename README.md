@@ -12,7 +12,8 @@
 
 [@Soi](https://www.github.com/JIWON1923 ) | [@Anna](https://www.github.com/Eunbi-Cho) | [@Romi](https://www.github.com/4mxnxxii) | [@Yungsix](https://www.github.com/YunSeok-Choi) | [@Louie](https://www.github.com/100seo) | [@Anders](https://www.github.com/boskim22)
 :---|:---|:---|:---|:---|:---
- ![SoiE](https://user-images.githubusercontent.com/66102708/174729842-16446042-47ad-483d-b77f-4aea0644b792.png)| ![AnnaE](https://user-images.githubusercontent.com/66102708/174729927-3640b70e-76d3-4754-a099-0f07d5af15be.png) |![RomiE2](https://user-images.githubusercontent.com/66102708/174729976-df8fdf32-7dfb-465f-9083-47afbffc4e76.png) | ![YungE](https://user-images.githubusercontent.com/66102708/174730087-a38e00f5-dbeb-4c02-b591-05e06d31c2ad.png) | ![LuiE](https://user-images.githubusercontent.com/66102708/174730126-b74d2163-b10e-417e-a877-9bbd371f8622.png) | Anders
+ ![SoiE](https://user-images.githubusercontent.com/66102708/174729842-16446042-47ad-483d-b77f-4aea0644b792.png)| ![AnnaE](https://user-images.githubusercontent.com/66102708/174729927-3640b70e-76d3-4754-a099-0f07d5af15be.png) |![RomiE2](https://user-images.githubusercontent.com/66102708/174729976-df8fdf32-7dfb-465f-9083-47afbffc4e76.png) | ![YungE](https://user-images.githubusercontent.com/66102708/174730087-a38e00f5-dbeb-4c02-b591-05e06d31c2ad.png) | ![LuiE](https://user-images.githubusercontent.com/66102708/174730126-b74d2163-b10e-417e-a877-9bbd371f8622.png) | ![AndersE](https://user-images.githubusercontent.com/66102708/174735481-c9590a26-c7eb-40c3-93f5-9df77a6780d1.png)
+
 
 ## :fireworks: Screenshots
 
