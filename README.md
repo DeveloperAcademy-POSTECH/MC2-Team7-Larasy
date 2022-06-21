@@ -12,8 +12,7 @@
 
 [@Soi](https://www.github.com/JIWON1923 ) | [@Anna](https://www.github.com/Eunbi-Cho) | [@Romi](https://www.github.com/4mxnxxii)
 :---|:---|:---
- ![SoiE](https://user-images.githubusercontent.com/66102708/174729842-16446042-47ad-483d-b77f-4aea0644b792.png)| ![AnnaE](https://user-images.githubusercontent.com/66102708/174729927-3640b70e-76d3-4754-a099-0f07d5af15be.png)
- |![RomiE2](https://user-images.githubusercontent.com/66102708/174729976-df8fdf32-7dfb-465f-9083-47afbffc4e76.png)
+ ![SoiE](https://user-images.githubusercontent.com/66102708/174729842-16446042-47ad-483d-b77f-4aea0644b792.png)| ![AnnaE](https://user-images.githubusercontent.com/66102708/174729927-3640b70e-76d3-4754-a099-0f07d5af15be.png) |![RomiE2](https://user-images.githubusercontent.com/66102708/174729976-df8fdf32-7dfb-465f-9083-47afbffc4e76.png)
 
 
 [@Yungsix](https://www.github.com/YunSeok-Choi) | [@Louie](https://www.github.com/100seo) | [@Anders](https://www.github.com/boskim22)
