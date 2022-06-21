@@ -19,12 +19,14 @@ Soi|Anna|Romi
 Yungsix|Louie|Anders
 
 ## :fireworks: Screenshots
-<img width="250" src="https://user-images.githubusercontent.com/66102708/174544688-6371ceb7-d950-4639-8948-67141f86b31e.png">
-<img width="250" src="https://user-images.githubusercontent.com/66102708/174726802-c4c506ab-66e8-4673-8b25-1ffa1d6e60d3.png">
-<img width="250" src="https://user-images.githubusercontent.com/66102708/174727035-e4ae757e-9921-4fa0-8745-7bb17a325dba.png">
-<img width="250" src="https://user-images.githubusercontent.com/66102708/174727502-593f3b1f-b0ea-424c-9093-4d1d89e7df50.png">
-<img width="250" src="https://user-images.githubusercontent.com/66102708/174727678-30744a1b-22bd-4baa-9eca-34fe5345937f.png">
-<img width="250" src="https://user-images.githubusercontent.com/66102708/174728020-8399f932-c378-40f5-a3cc-dadc0d402f68.png">
+
+<img width="250" src="https://user-images.githubusercontent.com/66102708/174544688-6371ceb7-d950-4639-8948-67141f86b31e.png"> |
+<img width="250" src="https://user-images.githubusercontent.com/66102708/174726802-c4c506ab-66e8-4673-8b25-1ffa1d6e60d3.png"> |
+<img width="250" src="https://user-images.githubusercontent.com/66102708/174727035-e4ae757e-9921-4fa0-8745-7bb17a325dba.png"> |
+---|---|---
+<img width="250" src="https://user-images.githubusercontent.com/66102708/174727502-593f3b1f-b0ea-424c-9093-4d1d89e7df50.png"> |
+<img width="250" src="https://user-images.githubusercontent.com/66102708/174727678-30744a1b-22bd-4baa-9eca-34fe5345937f.png"> |
+<img width="250" src="https://user-images.githubusercontent.com/66102708/174728020-8399f932-c378-40f5-a3cc-dadc0d402f68.png"> |
 
 
 ## :sparkles: Skills & Tech Stack
