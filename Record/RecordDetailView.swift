@@ -21,6 +21,7 @@ struct RecordDetailView: View {
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
     @State private var saveImage = false
+    @State var clickEdit = false
     
     var body: some View {
         
@@ -123,6 +124,7 @@ struct RecordDetailView: View {
         .navigationBarItems(trailing: Menu(content: {
             
             Button(action: {
+                clickEdit.toggle()
                 
             }) { // TODO: antion내에 편집 기능 예정
                 Label("편집", systemImage: "square.and.pencil")
@@ -160,7 +162,9 @@ struct RecordDetailView: View {
             } message: {  }
         // 본문 ZStack End
         
-        
+            .background(
+                NavigationLink(destination: WriteView(userContent: getUserContent(item), item: item), isActive: $clickEdit){ EmptyView() }.hidden()
+            )
         
     }
     
@@ -172,6 +176,11 @@ struct RecordDetailView: View {
         }catch{
             print(error)
         }
+    }
+    
+    func getUserContent(_ item: Content) -> UserContent {
+        let img = Image(uiImage: UIImage(data: item.image!)!)
+        return UserContent(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), lyric: item.lylic ?? "", image: img, story: item.story ?? "")
     }
 }
 

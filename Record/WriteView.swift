@@ -17,13 +17,15 @@ struct WriteView: View {
     private var items: FetchedResults<Content>
     
     @State private var showingAlert = false // 저장 완료
-    @State var music: Music
+    @State var userContent: UserContent
     @State private var image: Image?                       // 선택된 사진, 어떤 이미지인지
     @State private var showingImagePicker = false           // 이미지 클릭됐는지 확인
     @State private var savestory = false                    // 이야기 클릭됐는지 확인
     @State private var inputImage: UIImage?
     @State private var lyrics = ""
     @State private var content = ""
+
+    let item: Content?
     
     var body: some View {
         
@@ -38,14 +40,14 @@ struct WriteView: View {
                 }
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("\(music.title)") // MARK: "music.title"
+                        Text("\(userContent.music.title)") // MARK: "music.title"
                             .font(.customTitle2())
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 3)
                         
-                        Text("\(music.artist)") //MARK: "music.artist"
+                        Text("\(userContent.music.artist)") //MARK: "music.artist"
                             .font(.customBody1())
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
@@ -90,7 +92,7 @@ struct WriteView: View {
                         
                         //MARK: - CD 플레어이 뷰 시작
                         
-                        CDPlayerComp(music: music) //MARK: SearchView에서 music 받아옴
+                        CDPlayerComp(music: userContent.music) //MARK: SearchView에서 music 받아옴
                             .offset(x: 25, y: -10)
                     }.offset(y: 80)
                         .padding()
@@ -110,6 +112,7 @@ struct WriteView: View {
                                 .multilineTextAlignment(.center)
                                 .frame(width: 240,alignment: .center)
                                 .foregroundColor(.titleDarkgray)
+                                
                                 
                             }
                             .offset(y: 130)
@@ -163,19 +166,29 @@ struct WriteView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
                     // 하나라도 안 쓰면 저장 버튼 눌리지 않게
-                    if content == "" || inputImage == nil || lyrics == "" {
+                    if content == "" || (inputImage == nil && item == nil) || lyrics == "" {
                         Text("저장")
                             .foregroundColor(.titleGray)
                         
                     } else { // 저장버튼 활성화 및 CoreData에 저장
                         Button("저장") {
-                            let newItem = Content(context: viewContext)
-                            newItem.title = music.title
-                            newItem.artist = music.artist
-                            newItem.albumArt = music.albumArt
-                            newItem.story = content
-                            newItem.image = inputImage!.pngData()
-                            newItem.lylic = lyrics
+                            
+                            if item != nil { // 편집하는 경우
+                                item!.story = content
+                                item!.lylic = lyrics
+                                if let inputIMG = inputImage { // image를 변경한 경우만 저장.
+                                    item!.image = inputIMG.pngData()
+                                }
+                                
+                            } else { // 새로 만드는 경우
+                                let newItem = Content(context: viewContext)
+                                newItem.title = userContent.music.title
+                                newItem.artist = userContent.music.artist
+                                newItem.albumArt = userContent.music.albumArt
+                                newItem.story = content
+                                newItem.image = inputImage!.pngData()
+                                newItem.lylic = lyrics
+                            }
                             
                             do {
                                 try viewContext.save()
@@ -197,7 +210,12 @@ struct WriteView: View {
                 }
             } // tool bar End
         }.ignoresSafeArea(.keyboard, edges: .bottom)
-           
+            .onAppear {
+                self.lyrics = userContent.lyric
+                self.content = userContent.story
+                self.image = userContent.image
+            }
+        
     } // View End
     
     func loadImage() {      // 이미지 저장하는 함수
