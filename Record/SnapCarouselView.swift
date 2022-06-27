@@ -16,6 +16,7 @@ struct SnapCarousel: View {
     @State var value: Int = 0
     @State var selectedCd: Int = 0
     @State var currentCd: Int = 0
+    @State var updateCd = false
     
     @Binding var selection: Int?
     
@@ -26,6 +27,7 @@ struct SnapCarousel: View {
         
         // https://gist.github.com/xtabbas/97b44b854e1315384b7d1d5ccce20623.js 의 샘플코드를 참고했습니다.
         return Canvas {
+            if items.count > 0 {
             ZStack {
                 Color("background")
                     .ignoresSafeArea()
@@ -44,7 +46,7 @@ struct SnapCarousel: View {
                                 // 가운데 cd만 글이 보이게 함
                                 
                                 VStack {
-                                    if (content == UIState.activeCard) {
+                                    if content == UIState.activeCard {
                                         Text(items[content].title!)
                                             .foregroundColor(Color.titleBlack)
                                             .font(Font.customTitle3())
@@ -57,28 +59,15 @@ struct SnapCarousel: View {
                                         Spacer()
                                             .frame(height: 70)
                                     }
-                                    // cd자체가 버튼으로 기능해 선택된 id값 저장
-                                    Button(action: {
-                                        if self.showCd {
-                                            self.showCd = false
-                                            self.selectedCd = self.currentCd
-                        
-                                                
-                                            
-                                        } else {
-                                            self.showCd = true
-                                            self.selectedCd = content
-                                            self.currentCd = self.selectedCd
-                                        }
-                                            
-                                    }) {
-                                        ZStack {
-                                            URLImage(urlString: items[content].albumArt!)
-                                                .aspectRatio(contentMode: .fit)
-                                                .clipShape(Circle())
-                                                .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
-                                            
-                                            
+                                    Spacer()
+                                    // CdPlayer
+                                    
+                                    ZStack {
+                                        URLImage(urlString: items[content].albumArt!)
+                                            .aspectRatio(contentMode: .fit)
+                                            .clipShape(Circle())
+                                            .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                                        
                                             Circle()
                                                 .frame(width: 40, height: 40)
                                                 .foregroundColor(.background)
@@ -87,30 +76,26 @@ struct SnapCarousel: View {
                                                         .stroke(.background, lineWidth: 0.1)
                                                         .shadow(color: .titleDarkgray, radius: 2, x: 3, y: 3)
                                                 )
-//                                            Circle()
-//                                                .fill(.white)
-//                                                .frame(width: 35, height: 35)
-//                                                .shadow(color: .black, radius: 4, x: -4, y: 4)
                                         }
-                                    } // 버튼
                                     .disabled(UIState.activeCard != content)
                                     .onChange(of: UIState.activeCard) { newCd in
-                                        if newCd != selectedCd {
-                                            self.showCd = false
-                                        }
+                                        self.currentCd = content
+                                        self.selection = content
+                                        print("changed!!!, \(content), \(UIState.activeCard)")
+                                        self.updateCd.toggle()
+                                       
                                     }
                                     
+                                
                                 } // V 스택
                             }
                             .transition(AnyTransition.slide)
                             .animation(.spring())
                         }
+                        .padding(.top, 140)
+                        
+                        
                     }
-                    .padding(.top, 140)
-                    
-                    Spacer()
-                    // CdPlayer
-                    
                     VStack {
                         
                         Text("CD를 선택하고 플레이어를 재생해보세요")
@@ -120,68 +105,64 @@ struct SnapCarousel: View {
                             .padding(.bottom, -20)
                             .padding(.top, 45)
                         
-                    ZStack {
-                        Image("ListViewCdPlayer")
-                            .offset(y: 30)
-                        
-                        //cd 클릭시, cdPlayer에 cd 나타남
-                        VStack {
-                            if showCd == true {
-                                NavigationLink(destination: RecordDetailView(item: items[selectedCd]), isActive: $showDetailView) {
-                                    URLImage(urlString: items[selectedCd].albumArt!)
-                                        .clipShape(Circle())
-                                        .frame(width: 110, height: 110)
-                                        .rotationEffect(.degrees(self.angle))
-                                        .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
-                                        .onTapGesture {
-                                            self.angle += Double.random(in: 1000..<1980)
-                                            timeCount()
-                                        }
+                        ZStack {
+                            Image("ListViewCdPlayer")
+                                .offset(y: 30)
+                            
+                            ForEach(items.indices, id: \.self) { content in
+                                if (content == UIState.activeCard) {
+                                    NavigationLink(destination: RecordDetailView(item: items[UIState.activeCard]), isActive: $showDetailView) {
+                                        URLImage(urlString: items[UIState.activeCard].albumArt!)
+                                            .clipShape(Circle())
+                                            .frame(width: 110, height: 110)
+                                            .rotationEffect(.degrees(self.angle))
+                                            .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
+                                            .onTapGesture {
+                                                self.angle += Double.random(in: 1000..<1980)
+                                                timeCount()
+                                                print(UIState.activeCard)
+                                            }
+                                            .padding(.bottom, 120)
+                                            .padding(.leading, 2) // CdPlayer를 그림자 포함해서 뽑아서 전체 CdPlayer와 정렬 맞추기 위함
+                                    }
                                 }
-                            } else {
-                                NavigationLink(destination: RecordDetailView(item: items[selectedCd]), isActive: $showDetailView) {
-                                    URLImage(urlString: items[selectedCd].albumArt!)
-                                        .clipShape(Circle())
-                                        .frame(width: 110, height: 110)
-                                        .rotationEffect(.degrees(self.angle))
-                                        .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
-                                        .onTapGesture {
-                                            self.angle += Double.random(in: 1000..<1980)
-                                            timeCount()
-                                        }
-                                }
-                            } // else문
-                        } // V스택
-                        .padding(.bottom, 120)
-                        .padding(.leading, 2) // CdPlayer를 그림자 포함해서 뽑아서 전체 CdPlayer와 정렬 맞추기 위함
-                        
-                        // cdPlayer 가운데 원
-                        VStack {
-                            ZStack {
-                                Circle()
-                                    .foregroundColor(.titleLightgray)
-                                    .frame(width: 30 , height: 30)
-                                Circle()
-                                    .foregroundColor(.titleDarkgray)
-                                    .frame(width: 15 , height: 15)
-                                    .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
-                                Circle()
-                                    .foregroundColor(.background)
-                                    .frame(width: 3 , height: 3)
-                            } // Z스택
-                        } // V스택
-                        .padding(.bottom, 120)
-                        .padding(.leading, 4)
-                    } // Z스택
-                }
+                            }
+//
+                            // cdPlayer 가운데 원
+                            VStack {
+                                ZStack {
+                                    Circle()
+                                        .foregroundColor(.titleLightgray)
+                                        .frame(width: 30 , height: 30)
+                                    Circle()
+                                        .foregroundColor(.titleDarkgray)
+                                        .frame(width: 15 , height: 15)
+                                        .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                                    Circle()
+                                        .foregroundColor(.background)
+                                        .frame(width: 3 , height: 3)
+                                } // Z스택
+                            } // V스택
+                            .padding(.bottom, 120)
+                            .padding(.leading, 4)
+                        } // Z스택
+                    }
+                    
+                    
                 } // V스택
                 .ignoresSafeArea()
             } // Z스택
+                
+                .navigationBarTitle("List", displayMode: .inline)
+            } else {
+                EmptyView()
         } // Canvas
-        .navigationBarTitle("List", displayMode: .inline)
         
         
     } // 바디 뷰
+    }
+        
+    
     
     // 네비게이션 링크로 이동되는 RecordResultView를 딜레이시키고 애니메이션을 보여주기 위한 타임 카운터
     func timeCount() {

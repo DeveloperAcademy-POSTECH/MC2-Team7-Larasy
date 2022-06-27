@@ -13,7 +13,7 @@ struct RecordDetailView: View {
     
     //coredata 관련 변수
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.presentationMode) var presentation: Binding<PresentationMode>
+    @Environment(\.presentationMode) var presentation
     
     let item: Content
     
@@ -151,8 +151,8 @@ struct RecordDetailView: View {
         
         .alert("삭제", isPresented: $deleteItemAlert) {
             Button("삭제", role: .destructive) {
-//                deleteItem()
-//                NavigationUtil.popToRootView()
+                deleteItem()
+                presentation.wrappedValue.dismiss()
             }
         } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
@@ -173,14 +173,15 @@ struct RecordDetailView: View {
         self.managedObjectContext.delete(self.item)
         do {
             try self.managedObjectContext.save()
+            self.presentation.wrappedValue.dismiss()
         }catch{
             print(error)
         }
     }
     
     func getUserContent(_ item: Content) -> UserContent {
-        let img = Image(uiImage: UIImage(data: item.image!)!)
-        return UserContent(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), lyric: item.lylic ?? "", image: img, story: item.story ?? "")
+        let img = Image(uiImage: UIImage(data: item.image ?? Data()) ?? UIImage())
+        return UserContent(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""), lyric: item.lylic ?? "", image: img, story: item.story ?? "")
     }
 }
 

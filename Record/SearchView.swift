@@ -161,6 +161,7 @@ struct URLImage: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .background(.gray)
+                .onAppear() { fetchData() }
             
         } else { // 이미지 불러오기 실패
             
