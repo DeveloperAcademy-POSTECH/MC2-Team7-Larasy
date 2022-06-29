@@ -68,7 +68,7 @@ struct SearchView: View {
                             .font(.customBody2())
                     }
                     
-                
+                    
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지
                         .imageScale(.medium)

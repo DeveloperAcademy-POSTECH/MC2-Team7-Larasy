@@ -197,7 +197,10 @@ struct WriteView: View {
                 }
             } // tool bar End
         }.ignoresSafeArea(.keyboard, edges: .bottom)
-           
+            .onTapGesture {                         // keyboard dismiss
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+            }
+        
     } // View End
     
     func loadImage() {      // 이미지 저장하는 함수
