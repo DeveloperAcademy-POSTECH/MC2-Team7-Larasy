@@ -53,7 +53,7 @@ struct HomeView: View {
                         //cdcase img 클릭시 CDListView로 이동하는 Navlink
                         NavigationLink(destination: CdListView()){
                             Image("cdcase")     //cdcase Image
-                        }.navigationBarTitle("Home")
+                        }.navigationBarTitle("홈")
 
                     }
                     .padding(.bottom, 105)
