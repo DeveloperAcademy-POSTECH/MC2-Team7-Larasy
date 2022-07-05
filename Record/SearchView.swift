@@ -68,7 +68,6 @@ struct SearchView: View {
                             .font(.customBody2())
                     }
                     
-                
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지
                         .imageScale(.medium)
@@ -110,7 +109,7 @@ struct SearchView: View {
                             .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: WriteView(userContent: UserContent(music: music, lyric: "", image: nil, story: ""), item: nil)) {
+                        NavigationLink(destination: WriteView(userContent: UserContent(music: music, lyric: "", image: nil, story: ""), isEdit: .constant(false), item: .constant(nil))) {
                          
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {

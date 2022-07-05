@@ -23,9 +23,7 @@ struct SnapCarousel: View {
     var body: some View {
         let spacing: CGFloat = -10
         let widthOfHiddenCds: CGFloat = 100
-        let cdHeight: CGFloat = 300
-        
-        // https://gist.github.com/xtabbas/97b44b854e1315384b7d1d5ccce20623.js 의 샘플코드를 참고했습니다.
+        //  https://gist.github.com/xtabbas/97b44b854e1315384b7d1d5ccce20623.js 의 샘플코드를 참고했습니다.
         return Canvas {
             if items.count > 0 {
                 ZStack {
@@ -106,7 +104,11 @@ struct SnapCarousel: View {
                                 
                                 ForEach(items.indices, id: \.self) { content in
                                     if content == UIState.activeCard {
-                                        NavigationLink(destination: RecordDetailView(item: items[UIState.activeCard]), isActive: $showDetailView) { // 상세 뷰로 이동
+                                        NavigationLink(destination:
+                                                        RecordDetailView(item: items[UIState.activeCard],
+                                                                         index: UIState.activeCard),
+                                                       isActive: $showDetailView) { // 상세 뷰로 이동
+                                            
                                             URLImage(urlString: items[UIState.activeCard].albumArt!)
                                                 .clipShape(Circle())
                                                 .frame(width: 110, height: 110)

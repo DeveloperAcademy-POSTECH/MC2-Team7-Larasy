@@ -12,16 +12,23 @@ import CoreData
 struct RecordDetailView: View {
     
     //coredata 관련 변수
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<Content>
+    
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentation
     
-    let item: Content
-    
+    @State var item: Content?
     @State private var photo = false
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
     @State private var saveImage = false
     @State var clickEdit = false
+    @State var isEdit = true
+    let index: Int
     
     var body: some View {
         
@@ -31,14 +38,14 @@ struct RecordDetailView: View {
             VStack {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(item.title ?? "")
+                        Text(items[index].title ?? "") // 노래 제목
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 3)
-                        
-                        Text(item.artist ?? "") // TODO: "music.artist"
+                            
+                        Text(items[index].artist ?? "") // 가수 명
                             .font(.body)
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
@@ -59,25 +66,29 @@ struct RecordDetailView: View {
                     },
                            label: {
                         ZStack {
-                            Image("DetailPhotoComp") // 이미지 삽입
+                            Image("DetailPhotoComp") // 이미지
                                 .padding()
-                                .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
+                                .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: {
+                                    PhotoModalView(image: items[index].image!) } )
                             
-                            if let image = item.image {
+                            if let image = items[index].image {
                                 Image(uiImage: UIImage(data: image)!)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 95, height: 105)
                                     .clipped()
                                     .scaleEffect()
-                                    .offset(y: -15)
                             }
                         }
-                    }).offset(y: -110)
+                    })
+                    .padding(.bottom, 240)
                     
                     Spacer()
                     
-                    CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
+                    CDPlayerComp(music:
+                                    Music(artist: item!.artist ?? "",
+                                          title: item!.title ?? "",
+                                          albumArt: item!.albumArt ?? ""))
                         .offset(x: 25, y: -10)
                 }.offset(y: 80)
                     .padding()
@@ -86,7 +97,8 @@ struct RecordDetailView: View {
                     
                     ZStack {
                         Image("LylicComp") // 가사 입력
-                        Text(item.lylic ?? "")
+                        //Text(lyric)
+                        Text(item!.lylic ?? "")
                             .foregroundColor(.titleDarkgray)
                             .font(.customBody2())
                     }
@@ -100,8 +112,11 @@ struct RecordDetailView: View {
                         }, label: {
                             
                             Image("StoryComp")
-                                .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
-                            Text(item.story ?? "")
+                                .fullScreenCover(isPresented: $story,
+                                                 onDismiss: { story = false },
+                                                 content: { StoryModalView(content: item!.story!) } )
+                            
+                            Text(item!.story ?? "") // 이야기
                                 .font(Font.customBody2())
                                 .foregroundColor(.titleDarkgray)
                                 .lineLimit(5)
@@ -112,9 +127,6 @@ struct RecordDetailView: View {
                                 .lineSpacing(5)
                         })
                         .offset(x: 20, y: -100)
-                    
-                    
-                    
                 }.offset(y: -20)
                 Spacer()
                 
@@ -123,10 +135,10 @@ struct RecordDetailView: View {
         }
         .navigationBarItems(trailing: Menu(content: {
             
+            // MARK: 글 편집 기능
             Button(action: {
                 clickEdit.toggle()
-                
-            }) { // TODO: antion내에 편집 기능 예정
+            }) {
                 Label("편집", systemImage: "square.and.pencil")
             }
             
@@ -162,15 +174,19 @@ struct RecordDetailView: View {
             } message: {  }
         // 본문 ZStack End
         
-            .background(
-                NavigationLink(destination: WriteView(userContent: getUserContent(item), item: item), isActive: $clickEdit){ EmptyView() }.hidden()
-            )
+        // 편집화면으로 이동
+            .fullScreenCover(isPresented: $clickEdit) {
+                NavigationView{
+                    WriteView(userContent: getUserContent(item!), isEdit: $clickEdit, item: $item)
+                        .padding(.top, -40)
+                }
+            }
         
     }
     
     
     func deleteItem() {
-        self.managedObjectContext.delete(self.item)
+        self.managedObjectContext.delete(self.item!)
         do {
             try self.managedObjectContext.save()
             self.presentation.wrappedValue.dismiss()
@@ -181,7 +197,13 @@ struct RecordDetailView: View {
     
     func getUserContent(_ item: Content) -> UserContent {
         let img = Image(uiImage: UIImage(data: item.image ?? Data()) ?? UIImage())
-        return UserContent(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""), lyric: item.lylic ?? "", image: img, story: item.story ?? "")
+        return UserContent(music:
+                            Music(artist: item.artist ?? "",
+                                  title: item.title ?? "",
+                                  albumArt: item.albumArt ?? ""),
+                           lyric: item.lylic ?? "",
+                           image: img,
+                           story: item.story ?? "")
     }
 }
 

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WriteView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     // coredata 관련 변수
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
@@ -24,8 +26,8 @@ struct WriteView: View {
     @State private var inputImage: UIImage?
     @State private var lyrics = ""
     @State private var content = ""
-
-    let item: Content?
+    @Binding var isEdit: Bool
+    @Binding var item: Content?
     
     var body: some View {
         
@@ -163,24 +165,29 @@ struct WriteView: View {
             
             // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if isEdit {
+                        Button("닫기", action: { dismiss() })
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
-                    // 하나라도 안 쓰면 저장 버튼 눌리지 않게
+                    // 저장 버튼 비활성화 조건
                     if content == "" || (inputImage == nil && item == nil) || lyrics == "" {
                         Text("저장")
                             .foregroundColor(.titleGray)
                         
                     } else { // 저장버튼 활성화 및 CoreData에 저장
                         Button("저장") {
-                            
-                            if item != nil { // 편집하는 경우
+                            // 편집화면에서 접근한 경우
+                            if item != nil {
                                 item!.story = content
                                 item!.lylic = lyrics
                                 if let inputIMG = inputImage { // image를 변경한 경우만 저장.
                                     item!.image = inputIMG.pngData()
                                 }
                                 
-                            } else { // 새로 만드는 경우
+                            } else { // search view에서 접근한 경우
                                 let newItem = Content(context: viewContext)
                                 newItem.title = userContent.music.title
                                 newItem.artist = userContent.music.artist
@@ -203,26 +210,30 @@ struct WriteView: View {
                             Alert(
                                 title: Text("저장 완료"),
                                 dismissButton: .default(Text("확인")) {
-                                    NavigationUtil.popToRootView()
+                                    if isEdit { isEdit.toggle() }
+                                    else { NavigationUtil.popToRootView() }
                                 })
                         }
                     } // if-else End
                 }
             } // tool bar End
+    
         }.ignoresSafeArea(.keyboard, edges: .bottom)
             .onAppear {
                 self.lyrics = userContent.lyric
                 self.content = userContent.story
                 self.image = userContent.image
             }
-        
+            
     } // View End
     
     func loadImage() {      // 이미지 저장하는 함수
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
     }
-    
+    private func dismiss() {
+        presentationMode.wrappedValue.dismiss()
+    }
     
 } // RecordResultView End
 
