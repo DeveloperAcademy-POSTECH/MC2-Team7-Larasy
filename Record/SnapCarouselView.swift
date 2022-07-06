@@ -105,8 +105,7 @@ struct SnapCarousel: View {
                                 ForEach(items.indices, id: \.self) { content in
                                     if content == UIState.activeCard {
                                         NavigationLink(destination:
-                                                        RecordDetailView(item: items[UIState.activeCard],
-                                                                         index: UIState.activeCard),
+                                                        RecordDetailView(index: UIState.activeCard, item: items[UIState.activeCard]),
                                                        isActive: $showDetailView) { // 상세 뷰로 이동
                                             
                                             URLImage(urlString: items[UIState.activeCard].albumArt!)

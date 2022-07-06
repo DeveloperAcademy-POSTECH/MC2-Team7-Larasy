@@ -21,7 +21,7 @@ struct RecordDetailView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentation
     
-    @State var item: Content?
+    //@State var item: Content?
     @State private var photo = false
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
@@ -29,6 +29,7 @@ struct RecordDetailView: View {
     @State var clickEdit = false
     @State var isEdit = true
     let index: Int
+    let item: Content
     
     var body: some View {
         
@@ -38,14 +39,16 @@ struct RecordDetailView: View {
             VStack {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(items[index].title ?? "") // 노래 제목
+                        Text(item.title ?? "") // 노래 제목
+                        //Text("test")
                             .font(.title2)
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                             .padding(.bottom, 3)
                             
-                        Text(items[index].artist ?? "") // 가수 명
+                        Text(item.artist ?? "") // 가수 명
+                        //Text("Test")
                             .font(.body)
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
@@ -69,9 +72,9 @@ struct RecordDetailView: View {
                             Image("DetailPhotoComp") // 이미지
                                 .padding()
                                 .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: {
-                                    PhotoModalView(image: items[index].image!) } )
+                                    PhotoModalView(image: item.image ?? Data()) } )
                             
-                            if let image = items[index].image {
+                            if let image = item.image {
                                 Image(uiImage: UIImage(data: image)!)
                                     .resizable()
                                     .scaledToFill()
@@ -86,9 +89,9 @@ struct RecordDetailView: View {
                     Spacer()
                     
                     CDPlayerComp(music:
-                                    Music(artist: item!.artist ?? "",
-                                          title: item!.title ?? "",
-                                          albumArt: item!.albumArt ?? ""))
+                                    Music(artist: item.artist ?? "",
+                                          title: item.title ?? "",
+                                          albumArt: item.albumArt ?? ""))
                         .offset(x: 25, y: -10)
                 }.offset(y: 80)
                     .padding()
@@ -97,8 +100,7 @@ struct RecordDetailView: View {
                     
                     ZStack {
                         Image("LylicComp") // 가사 입력
-                        //Text(lyric)
-                        Text(item!.lylic ?? "")
+                        Text(item.lylic ?? "")
                             .foregroundColor(.titleDarkgray)
                             .font(.customBody2())
                     }
@@ -114,9 +116,9 @@ struct RecordDetailView: View {
                             Image("StoryComp")
                                 .fullScreenCover(isPresented: $story,
                                                  onDismiss: { story = false },
-                                                 content: { StoryModalView(content: item!.story!) } )
+                                                 content: { StoryModalView(content: items[index].story ?? "") } )
                             
-                            Text(item!.story ?? "") // 이야기
+                            Text(item.story ?? "") // 이야기
                                 .font(Font.customBody2())
                                 .foregroundColor(.titleDarkgray)
                                 .lineLimit(5)
@@ -177,7 +179,7 @@ struct RecordDetailView: View {
         // 편집화면으로 이동
             .fullScreenCover(isPresented: $clickEdit) {
                 NavigationView{
-                    WriteView(userContent: getUserContent(item!), isEdit: $clickEdit, item: $item)
+                    WriteView(userContent: getUserContent(item), isEdit: $clickEdit, item: item)
                         .padding(.top, -40)
                 }
             }
@@ -186,7 +188,7 @@ struct RecordDetailView: View {
     
     
     func deleteItem() {
-        self.managedObjectContext.delete(self.item!)
+            managedObjectContext.delete(items[index])
         do {
             try self.managedObjectContext.save()
             self.presentation.wrappedValue.dismiss()

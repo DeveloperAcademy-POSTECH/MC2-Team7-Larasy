@@ -27,7 +27,7 @@ struct CdListView: View {
                 VStack {
                     //TODO: nil일때 보여주는 화면 작성
                     
-                    if items.count != 0 {
+                    if items.count > 0 {
                         SnapCarousel(selection: $selection)
                             .environmentObject(UIStateModel())
                     } else {

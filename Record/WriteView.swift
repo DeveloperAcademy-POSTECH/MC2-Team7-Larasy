@@ -27,7 +27,7 @@ struct WriteView: View {
     @State private var lyrics = ""
     @State private var content = ""
     @Binding var isEdit: Bool
-    @Binding var item: Content?
+    let item: Content?
     
     var body: some View {
         
