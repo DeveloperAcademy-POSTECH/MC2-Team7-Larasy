@@ -178,7 +178,7 @@ struct SnapCarousel: View {
                 .ignoresSafeArea()
             } // Z스택
         } // Canvas
-        .navigationBarTitle("List", displayMode: .inline)
+        .navigationBarTitle("리스트", displayMode: .inline)
         
         
     } // 바디 뷰
