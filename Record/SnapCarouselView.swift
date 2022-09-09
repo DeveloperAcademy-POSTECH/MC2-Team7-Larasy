@@ -2,13 +2,7 @@ import SwiftUI
 
 struct SnapCarousel: View {
     
-    //coredata 관련 변수
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Content>
-    
+    @State private var items = PersistenceController.shared.fetchContent()
     @State private var angle = 0.0 // cd ratation angle 초기값
     @EnvironmentObject var UIState: UIStateModel
     @State var showCd: Bool = false // cd player에 cd 나타나기
@@ -33,7 +27,6 @@ struct SnapCarousel: View {
                 // ForEach로 items마다 Item() 뷰를 각각 불러옴
               
                 VStack {
-                  
                     Carousel(
                         numberOfItems: CGFloat(items.count),
                         spacing: spacing,
@@ -176,6 +169,9 @@ struct SnapCarousel: View {
                 }
                 } // V스택
                 .ignoresSafeArea()
+                .onAppear {
+                    items = PersistenceController.shared.fetchContent()
+                }
             } // Z스택
         } // Canvas
         .navigationBarTitle("List", displayMode: .inline)

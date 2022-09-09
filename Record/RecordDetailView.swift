@@ -85,7 +85,7 @@ struct RecordDetailView: View {
                     
                     ZStack {
                         Image("LylicComp") // 가사 입력
-                        Text(item.lylic ?? "")
+                        Text(item.lyrics ?? "")
                             .foregroundColor(.titleDarkgray)
                             .font(.customBody2())
                     }
@@ -151,6 +151,8 @@ struct RecordDetailView: View {
             Button("삭제", role: .destructive) {
 //                deleteItem()
 //                NavigationUtil.popToRootView()
+                PersistenceController.shared.deleteContent(item: item)
+                presentation.wrappedValue.dismiss()
             }
         } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
@@ -163,16 +165,16 @@ struct RecordDetailView: View {
         
         
     }
-    
-    
-    func deleteItem() {
-        self.managedObjectContext.delete(self.item)
-        do {
-            try self.managedObjectContext.save()
-        }catch{
-            print(error)
-        }
-    }
+//
+//
+//    func deleteItem() {
+//        self.managedObjectContext.delete(self.item)
+//        do {
+//            try self.managedObjectContext.save()
+//        }catch{
+//            print(error)
+//        }
+//    }
 }
 
 

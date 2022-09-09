@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WriteView: View {
     
+    
+    
     // coredata 관련 변수
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
@@ -169,20 +171,22 @@ struct WriteView: View {
                         
                     } else { // 저장버튼 활성화 및 CoreData에 저장
                         Button("저장") {
-                            let newItem = Content(context: viewContext)
-                            newItem.title = music.title
-                            newItem.artist = music.artist
-                            newItem.albumArt = music.albumArt
-                            newItem.story = content
-                            newItem.image = inputImage!.pngData()
-                            newItem.lylic = lyrics
+                            PersistenceController.shared.createContent(title: music.title, artist: music.artist, albumArt: music.albumArt, story: content, image: inputImage!, lyrics: lyrics, date: Date())
                             
-                            do {
-                                try viewContext.save()
-                            } catch { // TODO: error 처리
-                                let nsError = error as NSError
-                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                            }
+//                            let newItem = Content(context: viewContext)
+//                            newItem.title = music.title
+//                            newItem.artist = music.artist
+//                            newItem.albumArt = music.albumArt
+//                            newItem.story = content
+//                            newItem.image = inputImage!.pngData()
+//                            newItem.lyrics = lyrics
+//
+//                            do {
+//                                try viewContext.save()
+//                            } catch { // TODO: error 처리
+//                                let nsError = error as NSError
+//                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//                            }
                             self.showingAlert = true
                             
                         }
