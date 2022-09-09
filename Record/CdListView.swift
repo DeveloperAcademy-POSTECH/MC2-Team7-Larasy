@@ -9,18 +9,11 @@ import SwiftUI
 
 struct CdListView: View {
     
-    //coredata 관련 변수
-//    let persistenceController = PersistenceController.shared
-//    @Environment(\.managedObjectContext) private var viewContext
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
-//        animation: .default)
-//    private var items: FetchedResults<Content>
     @State var items = PersistenceController.shared.fetchContent()
     @State var selection: Int? = nil
     
     var body: some View {
-        
+//        if items.count > 0 {
             ZStack {
                 Color("background")
                     .ignoresSafeArea()
@@ -56,4 +49,5 @@ struct CdListView: View {
             }
            
     }
+//    }
 }
