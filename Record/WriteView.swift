@@ -30,7 +30,7 @@ struct WriteView: View {
     @State private var content = ""
     
     @Binding var isEdit: Bool
-    let item: Content?
+    @State var item: Content?
     @State var index: Int = -1
     
     var body: some View {
@@ -186,7 +186,12 @@ struct WriteView: View {
                         
                     } else { // 저장버튼 활성화 및 CoreData에 저장
                         Button("저장") {
-                            PersistenceController.shared.createContent(title: music.title, artist: music.artist, albumArt: music.albumArt, story: content, image: inputImage!, lyrics: lyrics, date: Date())
+                            
+                            item!.story = content
+                            item!.image = inputImage!.pngData()
+                            item!.lyrics = lyrics
+                            
+                            PersistenceController.shared.saveContent()
                             self.showingAlert = true
                             
                         }
@@ -194,7 +199,11 @@ struct WriteView: View {
                             Alert(
                                 title: Text("저장 완료"),
                                 dismissButton: .default(Text("확인")) {
-                                    NavigationUtil.popToRootView()
+                                    if isEdit {
+                                        presentationMode.wrappedValue.dismiss()
+                                    } else {
+                                        NavigationUtil.popToRootView()
+                                    }
                                 })
                         }
                     } // if-else End
@@ -202,12 +211,19 @@ struct WriteView: View {
             } // tool bar End
         }.ignoresSafeArea(.keyboard, edges: .bottom)
             .onAppear {
-                if let data = item {
-                    let img = Image(uiImage: UIImage(data: data.image ?? Data()) ?? UIImage())
-                    self.lyrics = data.lyrics!
-                    self.content = data.story!
-                    self.image = img
+                if item == nil {
+                    item = Content(context: viewContext)
+                    item?.id = UUID()
+                    item?.date = Date()
+                } else {
+                    self.lyrics = item!.lyrics!
+                    self.content = item!.story!
+                    self.inputImage = UIImage(data: item!.image!)
                 }
+                item!.title = music.title
+                item!.artist = music.artist
+                item!.albumArt = music.albumArt
+                
             }
     } // View End
     
@@ -215,7 +231,6 @@ struct WriteView: View {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
     }
-    
     
 } // RecordResultView End
 

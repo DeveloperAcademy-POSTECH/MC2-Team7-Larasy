@@ -62,21 +62,6 @@ struct PersistenceController {
         
     }
     
-    func createContent(title: String, artist: String, albumArt: String,
-                       story: String, image: UIImage, lyrics: String, date: Date) {
-        let newItem = Content(context: container.viewContext)
-        newItem.id = UUID()
-        newItem.date = date
-        newItem.title = title
-        newItem.artist = artist
-        newItem.albumArt = albumArt
-        newItem.story = story
-        newItem.image = image.pngData()
-        newItem.lyrics = lyrics
-        
-        saveContent()
-    }
-    
     func deleteContent(item: Content) {
         self.context.delete(item)
         
