@@ -13,6 +13,8 @@ struct WriteView: View {
     
     // coredata 관련 변수
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
         animation: .default)
@@ -26,6 +28,10 @@ struct WriteView: View {
     @State private var inputImage: UIImage?
     @State private var lyrics = ""
     @State private var content = ""
+    
+    @Binding var isEdit: Bool
+    let item: Content?
+    @State var index: Int = -1
     
     var body: some View {
         
@@ -162,6 +168,15 @@ struct WriteView: View {
             
             // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동
             .toolbar {
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if isEdit {
+                        Button("닫기", action: {
+                            presentationMode.wrappedValue.dismiss()
+                        })
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
                     // 하나라도 안 쓰면 저장 버튼 눌리지 않게
@@ -172,21 +187,6 @@ struct WriteView: View {
                     } else { // 저장버튼 활성화 및 CoreData에 저장
                         Button("저장") {
                             PersistenceController.shared.createContent(title: music.title, artist: music.artist, albumArt: music.albumArt, story: content, image: inputImage!, lyrics: lyrics, date: Date())
-                            
-//                            let newItem = Content(context: viewContext)
-//                            newItem.title = music.title
-//                            newItem.artist = music.artist
-//                            newItem.albumArt = music.albumArt
-//                            newItem.story = content
-//                            newItem.image = inputImage!.pngData()
-//                            newItem.lyrics = lyrics
-//
-//                            do {
-//                                try viewContext.save()
-//                            } catch { // TODO: error 처리
-//                                let nsError = error as NSError
-//                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//                            }
                             self.showingAlert = true
                             
                         }
@@ -201,7 +201,14 @@ struct WriteView: View {
                 }
             } // tool bar End
         }.ignoresSafeArea(.keyboard, edges: .bottom)
-           
+            .onAppear {
+                if let data = item {
+                    let img = Image(uiImage: UIImage(data: data.image ?? Data()) ?? UIImage())
+                    self.lyrics = data.lyrics!
+                    self.content = data.story!
+                    self.image = img
+                }
+            }
     } // View End
     
     func loadImage() {      // 이미지 저장하는 함수

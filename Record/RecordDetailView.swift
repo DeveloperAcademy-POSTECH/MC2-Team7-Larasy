@@ -21,6 +21,7 @@ struct RecordDetailView: View {
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
     @State private var saveImage = false
+    @State private var clickEdit = false
     
     var body: some View {
         
@@ -123,7 +124,7 @@ struct RecordDetailView: View {
         .navigationBarItems(trailing: Menu(content: {
             
             Button(action: {
-                
+                clickEdit.toggle()
             }) { // TODO: antion내에 편집 기능 예정
                 Label("편집", systemImage: "square.and.pencil")
             }
@@ -146,11 +147,14 @@ struct RecordDetailView: View {
             Image(systemName: "ellipsis")
                 .foregroundColor(.pointBlue)
         }))// Menu 목록 End
-        
+        .fullScreenCover(isPresented: $clickEdit) {
+            NavigationView {
+                WriteView(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), isEdit: .constant(true), item: item)
+                    .padding(.top, -40)
+            }
+        }
         .alert("삭제", isPresented: $deleteItemAlert) {
             Button("삭제", role: .destructive) {
-//                deleteItem()
-//                NavigationUtil.popToRootView()
                 PersistenceController.shared.deleteContent(item: item)
                 presentation.wrappedValue.dismiss()
             }
@@ -162,19 +166,11 @@ struct RecordDetailView: View {
             } message: {  }
         // 본문 ZStack End
         
+            
         
         
     }
-//
-//
-//    func deleteItem() {
-//        self.managedObjectContext.delete(self.item)
-//        do {
-//            try self.managedObjectContext.save()
-//        }catch{
-//            print(error)
-//        }
-//    }
+    
 }
 
 
