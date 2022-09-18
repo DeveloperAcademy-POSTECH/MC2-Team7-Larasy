@@ -9,8 +9,12 @@ import SwiftUI
 
 struct WriteView: View {
     
+    
+    
     // coredata 관련 변수
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
         animation: .default)
@@ -24,6 +28,10 @@ struct WriteView: View {
     @State private var inputImage: UIImage?
     @State private var lyrics = ""
     @State private var content = ""
+    
+    @Binding var isEdit: Bool
+    @State var item: Content?
+    @State var index: Int = -1
     
     var body: some View {
         
@@ -160,6 +168,15 @@ struct WriteView: View {
             
             // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동
             .toolbar {
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if isEdit {
+                        Button("닫기", action: {
+                            presentationMode.wrappedValue.dismiss()
+                        })
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
                     // 하나라도 안 쓰면 저장 버튼 눌리지 않게
@@ -169,20 +186,12 @@ struct WriteView: View {
                         
                     } else { // 저장버튼 활성화 및 CoreData에 저장
                         Button("저장") {
-                            let newItem = Content(context: viewContext)
-                            newItem.title = music.title
-                            newItem.artist = music.artist
-                            newItem.albumArt = music.albumArt
-                            newItem.story = content
-                            newItem.image = inputImage!.pngData()
-                            newItem.lylic = lyrics
                             
-                            do {
-                                try viewContext.save()
-                            } catch { // TODO: error 처리
-                                let nsError = error as NSError
-                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                            }
+                            item!.story = content
+                            item!.image = inputImage!.pngData()
+                            item!.lyrics = lyrics
+                            
+                            PersistenceController.shared.saveContent()
                             self.showingAlert = true
                             
                         }
@@ -190,21 +199,38 @@ struct WriteView: View {
                             Alert(
                                 title: Text("저장 완료"),
                                 dismissButton: .default(Text("확인")) {
-                                    NavigationUtil.popToRootView()
+                                    if isEdit {
+                                        presentationMode.wrappedValue.dismiss()
+                                    } else {
+                                        NavigationUtil.popToRootView()
+                                    }
                                 })
                         }
                     } // if-else End
                 }
             } // tool bar End
         }.ignoresSafeArea(.keyboard, edges: .bottom)
-           
+            .onAppear {
+                if item == nil {
+                    item = Content(context: viewContext)
+                    item?.id = UUID()
+                    item?.date = Date()
+                } else {
+                    self.lyrics = item!.lyrics!
+                    self.content = item!.story!
+                    self.inputImage = UIImage(data: item!.image!)
+                }
+                item!.title = music.title
+                item!.artist = music.artist
+                item!.albumArt = music.albumArt
+                
+            }
     } // View End
     
     func loadImage() {      // 이미지 저장하는 함수
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
     }
-    
     
 } // RecordResultView End
 

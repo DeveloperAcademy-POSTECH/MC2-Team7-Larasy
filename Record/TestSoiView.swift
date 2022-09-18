@@ -25,7 +25,7 @@ struct TestSoiView: View {
                         Text("Item at \(items[item].title!)")
                     } label: {
                         Text(items[item].title!)
-                        Text(items[item].lylic!)
+                        Text(items[item].lyrics!)
                         Text(items[item].story!)
                     }
                 }
