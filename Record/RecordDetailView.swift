@@ -143,8 +143,10 @@ struct RecordDetailView: View {
                 deleteItemAlert = true
             }, label: {Label("제거", systemImage: "trash")})
             
-        }, label: {
+        }
+                                           , label: {
             Image(systemName: "ellipsis")
+                .padding(.vertical, 10)
                 .foregroundColor(.pointBlue)
         }))// Menu 목록 End
         .fullScreenCover(isPresented: $clickEdit) {

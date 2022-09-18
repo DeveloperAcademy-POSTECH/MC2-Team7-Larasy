@@ -43,11 +43,10 @@ struct CdListView: View {
                 }.ignoresSafeArea()
                     
             }
-            .navigationBarTitle("List", displayMode: .inline)
+            .navigationBarTitle("리스트", displayMode: .inline)
             .onAppear {
                 items = PersistenceController.shared.fetchContent()
             }
            
     }
-//    }
 }

@@ -163,6 +163,7 @@ struct SnapCarousel: View {
                                 .padding(.bottom, 120)
                                 .padding(.leading, 4)
                             } // Z스택
+<<<<<<< HEAD
                         }
                     } // V스택
                     .ignoresSafeArea()
@@ -170,7 +171,7 @@ struct SnapCarousel: View {
                         items = PersistenceController.shared.fetchContent()
                     }
                 } // Z스택
-                .navigationBarTitle("List", displayMode: .inline)
+                .navigationBarTitle("리스트", displayMode: .inline)
             } else {
                 EmptyView()
             } // Canvas
