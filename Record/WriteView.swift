@@ -85,7 +85,9 @@ struct WriteView: View {
                             
                         }
                         .onTapGesture {
-                            showingImagePicker = true
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                            
+                                showingImagePicker = true
                         }
                         .offset(y: -110)
                         .zIndex(1)
@@ -209,7 +211,10 @@ struct WriteView: View {
                     } // if-else End
                 }
             } // tool bar End
-        }.ignoresSafeArea(.keyboard, edges: .bottom)
+        }.onTapGesture {                         // keyboard dismiss
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+        }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
             .onAppear {
                 if item == nil {
                     item = Content(context: viewContext)

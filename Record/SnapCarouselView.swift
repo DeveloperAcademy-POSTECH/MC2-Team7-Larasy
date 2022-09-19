@@ -163,7 +163,6 @@ struct SnapCarousel: View {
                                 .padding(.bottom, 120)
                                 .padding(.leading, 4)
                             } // Z스택
-<<<<<<< HEAD
                         }
                     } // V스택
                     .ignoresSafeArea()
