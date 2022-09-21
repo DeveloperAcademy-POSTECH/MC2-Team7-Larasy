@@ -72,7 +72,7 @@ struct HomeView: View {
                                 .frame(maxWidth: .infinity)
                             
                             Image("polaroid")
-                                .padding(.bottom, UIScreen.getHeight(120))
+                                .padding(.bottom, UIScreen.getHeight(55))
 
                             // MARK: Lamp
                             HStack(alignment: .bottom, spacing: 45) {
