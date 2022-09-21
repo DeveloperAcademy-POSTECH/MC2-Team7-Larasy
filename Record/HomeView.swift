@@ -39,7 +39,7 @@ struct HomeView: View {
                                         .padding(.top, UIScreen.getHeight(50))
                                     
                                     NavigationLink(destination: CdListView()) {
-                                        Image("cdcase")
+                                        Image("album")
                                     }
                                     .navigationBarTitle("홈")
                                     
@@ -71,6 +71,9 @@ struct HomeView: View {
                             Spacer()
                                 .frame(maxWidth: .infinity)
                             
+                            Image("polaroid")
+                                .padding(.bottom, UIScreen.getHeight(120))
+
                             // MARK: Lamp
                             HStack(alignment: .bottom, spacing: 45) {
                                 ZStack(alignment: .top) {
