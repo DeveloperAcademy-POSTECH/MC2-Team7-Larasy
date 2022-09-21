@@ -85,7 +85,7 @@ struct HomeView: View {
                                 }
                                 
                                 // MARK: Link to SearchView
-                                VStack {
+                                VStack(spacing: 0) {
                                     Text("음악 기록하기")
                                         .foregroundColor(.titleDarkgray)
                                         .font(Font.customHeadline())
