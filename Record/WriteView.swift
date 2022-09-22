@@ -45,7 +45,7 @@ struct WriteView: View {
                 VStack {
                     
                     // MARK: 노래 정보
-                    VStack(alignment: .leading, spacing: 15) {
+                    VStack(alignment: .leading, spacing: UIScreen.getHeight(15)) {
                         Text(music.title) // MARK: "music.title"
                             .font(.customTitle2())
                             .fontWeight(.bold)
@@ -70,25 +70,25 @@ struct WriteView: View {
                         .font(Font.customBody2())
                         .disableAutocorrection(true)
                         .multilineTextAlignment(.center)
-                        .frame(width: 240 ,alignment: .center)
+                        .frame(width: UIScreen.getWidth(240), alignment: .center)
                         .foregroundColor(.titleDarkgray)
                         
                     }
-                    .padding(.vertical, 25)
+                    .padding(.vertical, UIScreen.getHeight(20))
                     HStack(alignment: .bottom) {
                         //MARK: - // 클릭시 모달을 통해 이미지 띄우는 부분
                         
-                        VStack(spacing: 40) {
+                        VStack(spacing: UIScreen.getHeight(40)) {
                             ZStack {
                                 Image("PhotoComp")
                                 
                                 image?                       // 사용자가 가져온 이미지를 보여주는 부분
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 95, height: 105)
+                                    .frame(width: UIScreen.getWidth(95), height: UIScreen.getHeight(105))
                                     .clipped()
                                     .scaleEffect()
-                                    .offset(y: -15)
+                                    .offset(y: UIScreen.getHeight(-15))
                                 
                             }
                             .onTapGesture {
@@ -114,12 +114,12 @@ struct WriteView: View {
                                         .truncationMode(.tail)
                                         .multilineTextAlignment(.leading)
                                         .lineSpacing(5)
-                                        .frame(width: 130)
+                                        .frame(width: UIScreen.getWidth(130))
                                 } else {
                                     VStack {
                                         Image(systemName: "plus")
                                             .foregroundColor(.titleGray)
-                                            .padding(5)
+                                            .padding(UIScreen.getHeight(5))
                                         Text("나의 음악 이야기")
                                             .foregroundColor(.titleGray)
                                             .font(.customBody1())
