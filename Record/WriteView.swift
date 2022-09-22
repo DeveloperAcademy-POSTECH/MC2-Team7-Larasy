@@ -70,81 +70,81 @@ struct WriteView: View {
                         .font(Font.customBody2())
                         .disableAutocorrection(true)
                         .multilineTextAlignment(.center)
-                        .frame(width: 240,alignment: .center)
+                        .frame(width: 240 ,alignment: .center)
                         .foregroundColor(.titleDarkgray)
                         
                     }
-                    
-                    HStack {
+                    .padding(.vertical, 25)
+                    HStack(alignment: .bottom) {
                         //MARK: - // 클릭시 모달을 통해 이미지 띄우는 부분
-                        ZStack {
-                            Image("PhotoComp")
+                        
+                        VStack(spacing: 40) {
+                            ZStack {
+                                Image("PhotoComp")
+                                
+                                image?                       // 사용자가 가져온 이미지를 보여주는 부분
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 95, height: 105)
+                                    .clipped()
+                                    .scaleEffect()
+                                    .offset(y: -15)
+                                
+                            }
+                            .onTapGesture {
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                                
+                                showingImagePicker = true
+                            }
+                            .zIndex(1)
+                            .onChange(of: inputImage) { _ in loadImage() }
+                            .sheet(isPresented: $showingImagePicker) {
+                                ImagePicker(image: $inputImage)
+                            }
                             
-                            image?                       // 사용자가 가져온 이미지를 보여주는 부분
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 95, height: 105)
-                                .clipped()
-                                .scaleEffect()
-                                .offset(y: -15)
-                            
-                        }
-                        .onTapGesture {
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
-                            
-                            showingImagePicker = true
+                            // MARK: 이야기 작성 모달뷰로 이동
+                            ZStack {
+                                Image("StoryComp")
+                                
+                                if !content.isEmpty {
+                                    Text(content)
+                                        .font(Font.customBody2())
+                                        .foregroundColor(.titleDarkgray)
+                                        .lineLimit(5)
+                                        .truncationMode(.tail)
+                                        .multilineTextAlignment(.leading)
+                                        .lineSpacing(5)
+                                        .frame(width: 130)
+                                } else {
+                                    VStack {
+                                        Image(systemName: "plus")
+                                            .foregroundColor(.titleGray)
+                                            .padding(5)
+                                        Text("나의 음악 이야기")
+                                            .foregroundColor(.titleGray)
+                                            .font(.customBody1())
+                                    }
+                                }
+                            }
+                            .onTapGesture {
+                                savestory.toggle()
+                                UIView.setAnimationsEnabled(false)
+                            }
+                            .fullScreenCover(isPresented: $savestory, onDismiss: { savestory = false }, content: {
+                                WritingModalView(content: $content)
+                            })
+                            //MARK: - 이야기 입력 받는 Button 끝
+                            .offset(x: 62)
                         }
                         
-                        .zIndex(1)
-                        .onChange(of: inputImage) { _ in loadImage() }
-                        .sheet(isPresented: $showingImagePicker) {
-                            ImagePicker(image: $inputImage)
-                        }
                         //MARK: - 이미지 가져오는 부분 끝
                         
                         CDPlayerComp(music: music) //MARK: SearchView에서 music 받아옴
                         //MARK: - CD 플레어이 뷰 시작
                         
                     }
-                    
-                    ZStack(alignment: .leading) {
-                        
-                        // MARK: - 모달을 통해 이야기 작성하는 뷰 시작
-                        Button(action: { savestory.toggle()
-                            UIView.setAnimationsEnabled(false)},
-                               label: {
-                            Image("StoryComp") // 스토리 입력
-                                .fullScreenCover(isPresented: $savestory, onDismiss: { savestory = false }, content: {
-                                    WritingModalView(content: $content)
-                                })
-                            
-                            if !content.isEmpty {
-                                Text(content)
-                                    .font(Font.customBody2())
-                                    .foregroundColor(.titleDarkgray)
-                                    .lineLimit(5)
-                                    .truncationMode(.tail)
-                                    .frame(width: 130)
-                                    .offset(x: -160)
-                                    .multilineTextAlignment(.leading)
-                                    .lineSpacing(5)
-                                
-                            } else {
-                                VStack {
-                                    Image(systemName: "plus")
-                                        .offset(x: -150)
-                                        .foregroundColor(.titleGray)
-                                        .padding(5)
-                                    Text("나의 음악 이야기")
-                                        .offset(x: -150)
-                                        .foregroundColor(.titleGray)
-                                        .font(.customBody1())
-                                }
-                            }
-                        })
-                        //MARK: - 이야기 입력 받는 Button 끝
-                    }
                 }
+                .frame(maxHeight: .infinity, alignment: .topLeading)
             }
             
             // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동
