@@ -14,7 +14,7 @@ struct WriteView: View {
     // coredata 관련 변수
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Content.date, ascending: true)],
         animation: .default)
@@ -38,42 +38,47 @@ struct WriteView: View {
         GeometryReader { _ in
             ZStack {
                 Color.background.edgesIgnoringSafeArea(.all)
-                RecordBackground()
-                VStack{
-                    HStack{
-                        Spacer()
-                    }.padding(.trailing)
-                }
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(music.title)") // MARK: "music.title"
+                
+                Image("backwindow")
+                    .padding(.leading, UIScreen.getWidth(90))
+                
+                VStack {
+                    
+                    // MARK: 노래 정보
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text(music.title) // MARK: "music.title"
                             .font(.customTitle2())
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
-                            .padding(.bottom, 3)
                         
-                        Text("\(music.artist)") //MARK: "music.artist"
+                        Text(music.artist) //MARK: "music.artist"
                             .font(.customBody1())
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
-                        Spacer()
-                    }// MusicInform VStack End
-                    .padding(.top, 10)
-                    Spacer()
-                } // MusicImform HStack End
-                .padding(.leading, 28)
-                
-                ZStack {
-                    HStack(alignment: .center) {
+                        
+                    }
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .padding([.top, .leading], UIScreen.getWidth(38))
+                    
+                    //MARK: - 가사 입력 받는 뷰 시작
+                    ZStack {
+                        Image("LylicComp") // 가사 입력
+                        
+                        TextField("\(Image(systemName: "music.mic")) 기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
+                                  text: $lyrics)
+                        .font(Font.customBody2())
+                        .disableAutocorrection(true)
+                        .multilineTextAlignment(.center)
+                        .frame(width: 240,alignment: .center)
+                        .foregroundColor(.titleDarkgray)
+                        
+                    }
+                    
+                    HStack {
                         //MARK: - // 클릭시 모달을 통해 이미지 띄우는 부분
-                        ZStack{
+                        ZStack {
                             Image("PhotoComp")
-                                .padding()
-                            
-                            Image(systemName: "photo")
-                                .foregroundColor(.white)
-                                .offset(y: -15)
                             
                             image?                       // 사용자가 가져온 이미지를 보여주는 부분
                                 .resizable()
@@ -85,47 +90,24 @@ struct WriteView: View {
                             
                         }
                         .onTapGesture {
-                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                             
-                                showingImagePicker = true
+                            showingImagePicker = true
                         }
-                        .offset(y: -110)
+                        
                         .zIndex(1)
                         .onChange(of: inputImage) { _ in loadImage() }
                         .sheet(isPresented: $showingImagePicker) {
                             ImagePicker(image: $inputImage)
                         }
                         //MARK: - 이미지 가져오는 부분 끝
-                        Spacer()
-                        
-                        //MARK: - CD 플레어이 뷰 시작
                         
                         CDPlayerComp(music: music) //MARK: SearchView에서 music 받아옴
-                            .offset(x: 25, y: -10)
-                    }.offset(y: 80)
-                        .padding()
+                        //MARK: - CD 플레어이 뷰 시작
+                        
+                    }
                     
-                    VStack(alignment: .leading) {
-                        
-                        //MARK: - 가사 입력 받는 뷰 시작
-                        ZStack {
-                            Image("LylicComp") // 가사 입력
-                                .offset(y: 130)
-                            HStack{
-                                
-                                TextField("\(Image(systemName: "music.mic")) 기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
-                                          text: $lyrics)
-                                .font(Font.customBody2())
-                                .disableAutocorrection(true)
-                                .multilineTextAlignment(.center)
-                                .frame(width: 240,alignment: .center)
-                                .foregroundColor(.titleDarkgray)
-                                
-                            }
-                            .offset(y: 130)
-                        }
-                        
-                        Spacer()
+                    ZStack(alignment: .leading) {
                         
                         // MARK: - 모달을 통해 이야기 작성하는 뷰 시작
                         Button(action: { savestory.toggle()
@@ -135,6 +117,7 @@ struct WriteView: View {
                                 .fullScreenCover(isPresented: $savestory, onDismiss: { savestory = false }, content: {
                                     WritingModalView(content: $content)
                                 })
+                            
                             if !content.isEmpty {
                                 Text(content)
                                     .font(Font.customBody2())
@@ -159,12 +142,8 @@ struct WriteView: View {
                                 }
                             }
                         })
-                        .offset(x: 20,y: -100)
                         //MARK: - 이야기 입력 받는 Button 끝
-                    }.offset(y: -20)
-                    
-                    Spacer()
-                    
+                    }
                 }
             }
             
@@ -215,21 +194,21 @@ struct WriteView: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
-            .onAppear {
-                if item == nil {
-                    item = Content(context: viewContext)
-                    item?.id = UUID()
-                    item?.date = Date()
-                } else {
-                    self.lyrics = item!.lyrics!
-                    self.content = item!.story!
-                    self.inputImage = UIImage(data: item!.image!)
-                }
-                item!.title = music.title
-                item!.artist = music.artist
-                item!.albumArt = music.albumArt
-                
+        .onAppear {
+            if item == nil {
+                item = Content(context: viewContext)
+                item?.id = UUID()
+                item?.date = Date()
+            } else {
+                self.lyrics = item!.lyrics!
+                self.content = item!.story!
+                self.inputImage = UIImage(data: item!.image!)
             }
+            item!.title = music.title
+            item!.artist = music.artist
+            item!.albumArt = music.albumArt
+            
+        }
     } // View End
     
     func loadImage() {      // 이미지 저장하는 함수
@@ -266,5 +245,11 @@ struct NavigationUtil {
         }
         
         return nil
+    }
+}
+
+struct WriteView_Previews: PreviewProvider {
+    static var previews: some View {
+        WriteView(music: Music(artist: "가수이름", title: "노래제목", albumArt: ""), isEdit: .constant(false))
     }
 }
