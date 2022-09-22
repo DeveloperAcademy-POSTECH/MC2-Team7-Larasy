@@ -45,7 +45,7 @@ struct WriteView: View {
                 VStack {
                     
                     // MARK: 노래 정보
-                    VStack(alignment: .leading, spacing: UIScreen.getHeight(15)) {
+                    VStack(alignment: .leading, spacing: UIScreen.getHeight(10)) {
                         Text(music.title) // MARK: "music.title"
                             .font(.customTitle2())
                             .fontWeight(.bold)
@@ -59,7 +59,8 @@ struct WriteView: View {
                         
                     }
                     .frame(maxWidth: .infinity, alignment: .topLeading)
-                    .padding([.top, .leading], UIScreen.getWidth(38))
+                    .padding(.leading, UIScreen.getWidth(35))
+                    .padding(.top, UIScreen.getHeight(15))
                     
                     //MARK: - 가사 입력 받는 뷰 시작
                     ZStack {
@@ -74,7 +75,7 @@ struct WriteView: View {
                         .foregroundColor(.titleDarkgray)
                         
                     }
-                    .padding(.vertical, UIScreen.getHeight(20))
+                    .padding(.bottom, UIScreen.getHeight(15))
                     HStack(alignment: .bottom) {
                         //MARK: - // 클릭시 모달을 통해 이미지 띄우는 부분
                         
