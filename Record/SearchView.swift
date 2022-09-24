@@ -91,10 +91,6 @@ struct SearchView: View {
                         }
                 }
                 
-                if progress && musicAPI.musicList.count == 0 {
-                    ProgressView()
-                        .scaleEffect(1.5, anchor: .center)
-                }
                 
             } // HStack End
             .foregroundColor(.titleDarkgray)
@@ -114,6 +110,12 @@ struct SearchView: View {
     var ResultView: some View {
         
         GeometryReader { geometry in
+            
+            if progress && musicAPI.musicList.count == 0 {
+                ProgressView()
+                    .scaleEffect(1.5, anchor: .center)
+                    .padding(180)
+            }
             
             // 검색 결과 리스트
             List {
