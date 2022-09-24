@@ -44,16 +44,31 @@ struct OnboardingView: View {
             //OnboardingPage Tab view Start
             TabView(selection: $selected){
                 ForEach(title.indices, id: \.self) { page in
-                    ZStack {
-                        Image(backgroundImage[page])
-                        Text(title[page])
-                            .foregroundColor(.titleBlack)
-                            .font(Font.customTitle2())
-                            .multilineTextAlignment(.leading)
-                            .frame(width:330, alignment: .leading)
-                            .padding(.bottom,500)
-                            .lineSpacing(3)
-                    }.tag(page)
+                    
+                    ZStack(alignment: .top) {
+//                        Color.red
+                            
+                        VStack {
+                            VStack {
+                                Text(title[page])
+                                    .foregroundColor(.titleBlack)
+                                    .font(Font.customTitle2())
+                                    .multilineTextAlignment(.leading)
+                                    .frame(width:330, alignment: .leading)
+                                    .lineSpacing(5)
+                            }.frame(minHeight: 0, maxHeight: .infinity)
+                            
+                            Spacer()
+                                .frame(maxHeight: .infinity)
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .edgesIgnoringSafeArea(.all)
+                        .tag(page)
+//                        .frame(maxHeight: .infinity)
+                    
+                    }
+                    .background(Image(backgroundImage[page]), alignment: .bottom)
+                    .edgesIgnoringSafeArea(.all)
                 }
                 OnboardingLastPageView(isFirstLaunching: $isFirstLaunching)
                     .tag(3)
@@ -68,7 +83,7 @@ struct OnboardingView: View {
                             .foregroundColor(selected == index ? Color.pointYellow : Color.titleLightgray)
                             .frame(width: selected == index ? 7 : 7, height: 7)
                     }
-                    .padding(.bottom,680)
+                    .padding(.bottom, UIScreen.getHeight(680))
                 }
             )
             //PageIndex indicator Custom End
