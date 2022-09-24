@@ -97,46 +97,54 @@ struct SearchView: View {
     // MARK: - 검색 결과 리스트
     var ResultView: some View {
         
-        GeometryReader { geometry in
+        ZStack {
             
-            // 검색 결과 리스트
-            List {
-                ForEach(musicAPI.musicList, id: \.self) { music in
-                    
-                    // 앨범 커버, 제목, 가수 출력
-                    HStack {
-                        URLImage(urlString: music.albumArt) // 앨범커버
-                            .cornerRadius(5)
-                            .frame(width: 55, height: 55)
-                        
-                        // 글 작성 페이지로 전환
-                        NavigationLink(destination: WriteView(music: music, isEdit: .constant(false), item: nil)) {
-                            
-                            // 제목, 가수 출력
-                            VStack(alignment: .leading) {
-                                Text(music.title) // 노래제목
-                                    .font(.customHeadline())
-                                    .lineLimit(1)
-                                    .padding(.bottom, 2)
-                                
-                                Text(music.artist) // 가수명
-                                    .font(.customBody2())
-                                    .lineLimit(1)
-                            }
-                            .padding(.leading, 10)
-                            .foregroundColor(.titleDarkgray)
-                        } // Navigation Link End
-                        
-                        .buttonStyle(PlainButtonStyle())
-                    } // HStack End
-                }
-                .listRowBackground(Color.background)
-                .listRowSeparator(.hidden)
-                .padding([.bottom, .top], 10)
-                .padding([.leading], -20)
+            GeometryReader { geometry in
                 
-            } // List End
-            .onAppear { UITableView.appearance().contentInset.top = -35 }
+                // 검색 결과 리스트
+                List {
+                    ForEach(musicAPI.musicList, id: \.self) { music in
+                        
+                        // 앨범 커버, 제목, 가수 출력
+                        HStack {
+                            URLImage(urlString: music.albumArt) // 앨범커버
+                                .cornerRadius(5)
+                                .frame(width: 55, height: 55)
+                            
+                            // 글 작성 페이지로 전환
+                            NavigationLink(destination: WriteView(music: music, isEdit: .constant(false), item: nil)) {
+                                
+                                // 제목, 가수 출력
+                                VStack(alignment: .leading) {
+                                    Text(music.title) // 노래제목
+                                        .font(.customHeadline())
+                                        .lineLimit(1)
+                                        .padding(.bottom, 2)
+                                    
+                                    Text(music.artist) // 가수명
+                                        .font(.customBody2())
+                                        .lineLimit(1)
+                                }
+                                .padding(.leading, 10)
+                                .foregroundColor(.titleDarkgray)
+                            } // Navigation Link End
+                            
+                            .buttonStyle(PlainButtonStyle())
+                        } // HStack End
+                    }
+                    .listRowBackground(Color.background)
+                    .listRowSeparator(.hidden)
+                    .padding([.bottom, .top], 10)
+                    .padding([.leading], -20)
+                    
+                } // List End
+                .onAppear { UITableView.appearance().contentInset.top = -35 }
+                
+            }
+            
+            ProgressView()
+                .scaleEffect(1.5, anchor: .center)
+
             
         } // GeometryReder End
         
