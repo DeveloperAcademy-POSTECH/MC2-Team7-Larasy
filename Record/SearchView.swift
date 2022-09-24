@@ -12,11 +12,20 @@ import UIKit
 // MARK: - 음악 검색 View
 struct SearchView: View {
     
-    @StateObject var musicAPI = MusicAPI()
+    @ObservedObject var musicAPI: MusicAPI
     @State var search = ""
+    @State var progress: Bool
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
     
-    init() { UITableView.appearance().backgroundColor = UIColor.clear } // 검색 결과 출력 리스트 배경색 초기화
+    init() {
+        // 검색 결과 출력 리스트 배경색 초기화
+        UITableView.appearance().backgroundColor = UIColor.clear
+        
+        // MusicAPI 초기화
+        let state = State(initialValue: false)
+        self._progress = state
+        self.musicAPI = MusicAPI(progress: state.projectedValue)
+    }
     
     var body: some View {
         
@@ -60,6 +69,7 @@ struct SearchView: View {
                     .foregroundColor(.titleBlack)
                     .font(.customBody2())
                     .onSubmit { // keyboard Return Button 클릭 시
+                        progress = true
                         musicAPI.getSearchResults(search: search) // 음악 API 불러오기
                     }
                     .placeholder(when: search.isEmpty) {
@@ -67,7 +77,6 @@ struct SearchView: View {
                             .foregroundColor(.titleDarkgray)
                             .font(.customBody2())
                     }
-                    
                 
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지
@@ -77,9 +86,16 @@ struct SearchView: View {
                         .onTapGesture {
                             withAnimation {
                                 self.search = ""
+                                progress = false
                             }
                         }
                 }
+                
+                if progress && musicAPI.musicList.count == 0 {
+                    ProgressView()
+                        .scaleEffect(1.5, anchor: .center)
+                }
+                
             } // HStack End
             .foregroundColor(.titleDarkgray)
             .padding(13)
@@ -97,54 +113,46 @@ struct SearchView: View {
     // MARK: - 검색 결과 리스트
     var ResultView: some View {
         
-        ZStack {
+        GeometryReader { geometry in
             
-            GeometryReader { geometry in
-                
-                // 검색 결과 리스트
-                List {
-                    ForEach(musicAPI.musicList, id: \.self) { music in
-                        
-                        // 앨범 커버, 제목, 가수 출력
-                        HStack {
-                            URLImage(urlString: music.albumArt) // 앨범커버
-                                .cornerRadius(5)
-                                .frame(width: 55, height: 55)
-                            
-                            // 글 작성 페이지로 전환
-                            NavigationLink(destination: WriteView(music: music, isEdit: .constant(false), item: nil)) {
-                                
-                                // 제목, 가수 출력
-                                VStack(alignment: .leading) {
-                                    Text(music.title) // 노래제목
-                                        .font(.customHeadline())
-                                        .lineLimit(1)
-                                        .padding(.bottom, 2)
-                                    
-                                    Text(music.artist) // 가수명
-                                        .font(.customBody2())
-                                        .lineLimit(1)
-                                }
-                                .padding(.leading, 10)
-                                .foregroundColor(.titleDarkgray)
-                            } // Navigation Link End
-                            
-                            .buttonStyle(PlainButtonStyle())
-                        } // HStack End
-                    }
-                    .listRowBackground(Color.background)
-                    .listRowSeparator(.hidden)
-                    .padding([.bottom, .top], 10)
-                    .padding([.leading], -20)
+            // 검색 결과 리스트
+            List {
+                ForEach(musicAPI.musicList, id: \.self) { music in
                     
-                } // List End
-                .onAppear { UITableView.appearance().contentInset.top = -35 }
+                    // 앨범 커버, 제목, 가수 출력
+                    HStack {
+                        URLImage(urlString: music.albumArt) // 앨범커버
+                            .cornerRadius(5)
+                            .frame(width: 55, height: 55)
+                        
+                        // 글 작성 페이지로 전환
+                        NavigationLink(destination: WriteView(music: music, isEdit: .constant(false), item: nil)) {
+                            
+                            // 제목, 가수 출력
+                            VStack(alignment: .leading) {
+                                Text(music.title) // 노래제목
+                                    .font(.customHeadline())
+                                    .lineLimit(1)
+                                    .padding(.bottom, 2)
+                                
+                                Text(music.artist) // 가수명
+                                    .font(.customBody2())
+                                    .lineLimit(1)
+                            }
+                            .padding(.leading, 10)
+                            .foregroundColor(.titleDarkgray)
+                        } // Navigation Link End
+                        
+                        .buttonStyle(PlainButtonStyle())
+                    } // HStack End
+                }
+                .listRowBackground(Color.background)
+                .listRowSeparator(.hidden)
+                .padding([.bottom, .top], 10)
+                .padding([.leading], -20)
                 
-            }
-            
-            ProgressView()
-                .scaleEffect(1.5, anchor: .center)
-
+            } // List End
+            .onAppear { UITableView.appearance().contentInset.top = -35 }
             
         } // GeometryReder End
         
