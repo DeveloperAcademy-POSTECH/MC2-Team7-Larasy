@@ -27,99 +27,91 @@ struct RecordDetailView: View {
         
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
-            RecordBackground()
-            VStack {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(item.title ?? "")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.titleBlack)
-                            .multilineTextAlignment(.leading)
-                            .padding(.bottom, 3)
-                        
-                        Text(item.artist ?? "") // TODO: "music.artist"
-                            .font(.body)
-                            .fontWeight(.regular)
-                            .foregroundColor(.titleDarkgray)
-                        Spacer()
-                    }// MusicInform VStack End
-                    .padding(.top, 10)
-                    Spacer()
-                } // MusicImform HStack End
-                .padding(.leading, 28)
-            }
             
-            ZStack {
-                HStack(alignment: .center) {
+            Image("backwindow")
+                .padding(.leading, UIScreen.getWidth(90))
+            
+            VStack {
+                
+                // MARK: 노래 정보
+                VStack(alignment: .leading, spacing: UIScreen.getHeight(10)) {
+                    Text(item.title ?? "")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.titleBlack)
+                        .multilineTextAlignment(.leading)
+                    Text(item.artist ?? "")
+                        .font(.customBody1())
+                        .fontWeight(.regular)
+                        .foregroundColor(.titleDarkgray)
+                }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .padding(.leading, UIScreen.getWidth(35))
+                .padding(.top, UIScreen.getHeight(15))
+                
+                // MARK: - 가사
+                ZStack {
+                    Image("LylicComp")
                     
-                    Button(action: {
-                        photo.toggle()
-                        UIView.setAnimationsEnabled(false)
-                    },
-                           label: {
-                        ZStack {
+                    Text(item.lyrics ?? "")
+                        .foregroundColor(.titleDarkgray)
+                        .font(.customBody2())
+                        .frame(width: UIScreen.getWidth(240), alignment: .center)
+                }
+                .padding(.bottom, UIScreen.getHeight(15))
+                
+                HStack(alignment: .bottom) {
+                    
+                    // MARK: Image
+                    VStack(spacing: UIScreen.getHeight(40)) {
+                        ZStack(alignment: .top) {
                             Image("DetailPhotoComp") // 이미지 삽입
-                                .padding()
+                            //                                .padding()
                                 .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
                             
                             if let image = item.image {
                                 Image(uiImage: UIImage(data: image)!)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 95, height: 105)
+                                    .frame(width: UIScreen.getWidth(95), height: UIScreen.getHeight(105))
                                     .clipped()
                                     .scaleEffect()
-                                    .offset(y: -15)
+                                    .padding(.top, UIScreen.getHeight(15))
                             }
                         }
-                    }).offset(y: -110)
-                    
-                    Spacer()
-                    
-                    CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
-                        .offset(x: 25, y: -10)
-                }.offset(y: 80)
-                    .padding()
-                
-                VStack(alignment: .leading) {
-                    
-                    ZStack {
-                        Image("LylicComp") // 가사 입력
-                        Text(item.lyrics ?? "")
-                            .foregroundColor(.titleDarkgray)
-                            .font(.customBody2())
-                    }
-                    .offset(y: 130)
-                    
-                    Spacer()
-                    
-                        Button(action: {
-                            story.toggle()
+                        .onTapGesture {
+                            photo.toggle()
                             UIView.setAnimationsEnabled(false)
-                        }, label: {
+                        }
+                        
+                        // MARK: Story
+                        ZStack {
                             
+//                            Color.red
                             Image("StoryComp")
-                                .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
+                            
                             Text(item.story ?? "")
                                 .font(Font.customBody2())
                                 .foregroundColor(.titleDarkgray)
                                 .lineLimit(5)
                                 .truncationMode(.tail)
-                                .frame(width: 130)
-                                .offset(x: -160)
                                 .multilineTextAlignment(.leading)
                                 .lineSpacing(5)
-                        })
-                        .offset(x: 20, y: -100)
+                                .frame(width: UIScreen.getWidth(130))
+                        }
+                        .padding(.leading, UIScreen.getWidth(30))
+                        .onTapGesture {
+                            story.toggle()
+                            UIView.setAnimationsEnabled(false)
+                        }
+                        .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
+                        .fixedSize()
+                    }
                     
-                    
-                    
-                }.offset(y: -20)
-                Spacer()
-                
+                    CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
+                }
             }
-            
+            .frame(maxHeight: .infinity, alignment: .topLeading)
         }
         .navigationBarItems(trailing: Menu(content: {
             
@@ -167,8 +159,6 @@ struct RecordDetailView: View {
                 }
             } message: {  }
         // 본문 ZStack End
-        
-            
         
         
     }
