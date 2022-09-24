@@ -32,7 +32,6 @@ struct RecordDetailView: View {
                 .padding(.leading, UIScreen.getWidth(90))
             
             VStack {
-                
                 // MARK: 노래 정보
                 VStack(alignment: .leading, spacing: UIScreen.getHeight(10)) {
                     Text(item.title ?? "")
@@ -61,9 +60,8 @@ struct RecordDetailView: View {
                 .padding(.bottom, UIScreen.getHeight(15))
                 
                 HStack(alignment: .bottom) {
-                    
-                    // MARK: Image
                     VStack(spacing: UIScreen.getHeight(40)) {
+                        // MARK: Image
                         ZStack(alignment: .top) {
                             Image("DetailPhotoComp") // 이미지 삽입
                             //                                .padding()
@@ -86,7 +84,6 @@ struct RecordDetailView: View {
                         
                         // MARK: Story
                         ZStack {
-                            
 //                            Color.red
                             Image("StoryComp")
                             
@@ -107,7 +104,6 @@ struct RecordDetailView: View {
                         .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
                         .fixedSize()
                     }
-                    
                     CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
                 }
             }
@@ -123,12 +119,8 @@ struct RecordDetailView: View {
             
             // MARK: 이미지 저장 기능
             Button(action: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    let image = body.screenshot()
-                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                    saveImage.toggle()
-                }
-            }) { Label("이미지 저장", systemImage: "square.and.arrow.down") }
+                actionSheet()
+            }) { Label("이미지 공유", systemImage: "square.and.arrow.up") }
             
             // MARK: 삭제 기능
             Button(role: .destructive, action: {
@@ -162,6 +154,13 @@ struct RecordDetailView: View {
         
         
     }
+    func actionSheet() {
+        
+        let shareImage = self.snapShot()
+        let activitiViewController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        windowScene?.windows.first?.rootViewController?.present(activitiViewController, animated: true, completion: nil)
+    }
     
 }
 
@@ -176,7 +175,9 @@ struct CDPlayerComp: View {
                 .padding(.trailing, 20.0)
             
             ZStack(alignment: .center) {
-                URLImage(urlString: music.albumArt)
+                Image(uiImage: getImage())
+                    .resizable()
+                    .frame(width: 200, height: 200)
                     .aspectRatio(contentMode: .fit)
                     .clipShape(Circle())
                     .scaleEffect(0.46)
@@ -185,7 +186,6 @@ struct CDPlayerComp: View {
                     .onTapGesture {
                         self.angle += Double.random(in: 3600..<3960)
                     } // albumArt를 불러오는 URLImage
-                
                 Circle()
                     .frame(width: 30, height: 30)
                     .foregroundColor(.background)
@@ -210,5 +210,16 @@ struct CDPlayerComp: View {
             }.offset(x: -10.6, y: -133)
             
         }// ZStack End
+    }
+    func getImage() -> UIImage {
+        if let url = URL(string: music.albumArt) {
+            if let data = try? Data(contentsOf: url ) {
+                return UIImage(data: data)!
+            } else {
+                return UIImage(systemName: "xmark")!
+            }
+        } else {
+            return UIImage(systemName: "xmark")!
+        }
     }
 }
