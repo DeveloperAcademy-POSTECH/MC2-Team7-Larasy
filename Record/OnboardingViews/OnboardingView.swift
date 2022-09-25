@@ -38,42 +38,38 @@ struct OnboardingView: View {
     
     
     var body: some View {
-        ZStack {
-            Color.background
-                .ignoresSafeArea(.all)
-            //OnboardingPage Tab view Start
-            TabView(selection: $selected){
-                ForEach(title.indices, id: \.self) { page in
-                    ZStack {
-                        Image(backgroundImage[page])
-                        Text(title[page])
-                            .foregroundColor(.titleBlack)
-                            .font(Font.customTitle2())
-                            .multilineTextAlignment(.leading)
-                            .frame(width:330, alignment: .leading)
-                            .padding(.bottom,500)
-                            .lineSpacing(3)
-                    }.tag(page)
+        
+        GeometryReader { geometry in
+            ZStack {
+                
+                Color.background
+                    .ignoresSafeArea(.all)
+                
+                //OnboardingPage Tab view Start
+                TabView(selection: $selected){
+                    FirstPage().tag(0)
+                    SecondPage().tag(1)
+                    ThirdPage().tag(2)
+                    FourthPage(isFirstLaunching: $isFirstLaunching).tag(3)
                 }
-                OnboardingLastPageView(isFirstLaunching: $isFirstLaunching)
-                    .tag(3)
-            }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            //OnboardingPage Tab View End
-            //PageIndex indicator Custom Start
-            .overlay(
-                HStack(spacing: 15) {
-                    ForEach(pageIndex.indices,id: \.self){index in
-                        Capsule()
-                            .foregroundColor(selected == index ? Color.pointYellow : Color.titleLightgray)
-                            .frame(width: selected == index ? 7 : 7, height: 7)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                
+                
+                // Tab View Indicator
+                VStack {
+                    HStack(spacing: 15) {
+                        ForEach(0 ..< 4) {index in
+                            Capsule()
+                                .foregroundColor(selected == index ? Color.pointYellow : Color.titleLightgray)
+                                .frame(width: selected == index ? 7 : 7, height: 7)
+                        }
                     }
-                    .padding(.bottom,680)
+                    .padding(.top, geometry.safeAreaInsets.top + 15)
+                    Spacer()
+                        .frame(maxWidth: .infinity)
                 }
-            )
-            //PageIndex indicator Custom End
-        }.ignoresSafeArea()
-        //Zstack End
+            }.ignoresSafeArea()
+        }
     }
 }
 
