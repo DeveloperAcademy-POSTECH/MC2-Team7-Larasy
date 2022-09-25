@@ -27,12 +27,13 @@ struct FourthPage: View {
                 VStack {
                     if isShown {
                         Image("onboarding4")
-                        //                        .frame(width: UIScreen.getWidth(450), height: UIScreen.getHeight(362))
-                            .transition(.opacity)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: UIScreen.getWidth(390), height: UIScreen.getHeight(362))
                     }
                 }
-                .frame(maxHeight: UIScreen.getHeight(362))
-                .animation(Animation.easeInOut(duration: 1).delay(0.3),value: isShown)
+                .transition(.opacity)
+                .animation(Animation.easeInOut(duration: 1).delay(0.5), value: isShown)
                 .onAppear() {
                     self.isShown = true
                 }
