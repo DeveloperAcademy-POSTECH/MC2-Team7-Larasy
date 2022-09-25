@@ -39,7 +39,7 @@ extension View {
         let view = controller.view
         
         let targetSize = controller.view.intrinsicContentSize
-        let size = CGSize(width: targetSize.width, height: targetSize.height * 1.1)
+        let size = CGSize(width: targetSize.width, height: targetSize.height * 1.2)
         view?.bounds = CGRect(origin: .zero, size: size)
         view?.backgroundColor = .clear
         
