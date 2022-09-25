@@ -12,11 +12,20 @@ import UIKit
 // MARK: - 음악 검색 View
 struct SearchView: View {
     
-    @StateObject var musicAPI = MusicAPI()
+    @ObservedObject var musicAPI: MusicAPI
     @State var search = ""
+    @State var progress: Bool
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
     
-    init() { UITableView.appearance().backgroundColor = UIColor.clear } // 검색 결과 출력 리스트 배경색 초기화
+    init() {
+        // 검색 결과 출력 리스트 배경색 초기화
+        UITableView.appearance().backgroundColor = UIColor.clear
+        
+        // MusicAPI 초기화
+        let state = State(initialValue: false)
+        self._progress = state
+        self.musicAPI = MusicAPI(progress: state.projectedValue)
+    }
     
     var body: some View {
         
@@ -60,6 +69,7 @@ struct SearchView: View {
                     .foregroundColor(.titleBlack)
                     .font(.customBody2())
                     .onSubmit { // keyboard Return Button 클릭 시
+                        progress = true
                         musicAPI.getSearchResults(search: search) // 음악 API 불러오기
                     }
                     .placeholder(when: search.isEmpty) {
@@ -67,7 +77,6 @@ struct SearchView: View {
                             .foregroundColor(.titleDarkgray)
                             .font(.customBody2())
                     }
-                    
                 
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지
@@ -77,9 +86,12 @@ struct SearchView: View {
                         .onTapGesture {
                             withAnimation {
                                 self.search = ""
+                                progress = false
                             }
                         }
                 }
+                
+                
             } // HStack End
             .foregroundColor(.titleDarkgray)
             .padding(13)
@@ -98,6 +110,12 @@ struct SearchView: View {
     var ResultView: some View {
         
         GeometryReader { geometry in
+            
+            if progress && musicAPI.musicList.count == 0 {
+                ProgressView()
+                    .scaleEffect(1.5, anchor: .center)
+                    .padding(180)
+            }
             
             // 검색 결과 리스트
             List {
