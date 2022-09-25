@@ -22,6 +22,9 @@ struct FirstPage: View {
                 Spacer()
                     .frame(maxWidth: .infinity)
                 Image("onboarding1_2")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: UIScreen.getWidth(150), height: UIScreen.getHeight(103))
                 Image("onboarding1_3")
             }
             

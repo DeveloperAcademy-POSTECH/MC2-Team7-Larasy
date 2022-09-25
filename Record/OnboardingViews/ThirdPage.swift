@@ -24,13 +24,24 @@ struct ThirdPage: View {
                 HStack(spacing: UIScreen.getWidth(70)) {
                     VStack {
                         Image("onboarding3_1")
-                            .offset(x: UIScreen.getWidth(-30), y: UIScreen.getHeight(8))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: UIScreen.getWidth(50), height: UIScreen.getHeight(130))
+                            .offset(x: UIScreen.getWidth(0), y: UIScreen.getHeight(23))
+                            
+                        
                         Image("onboarding3_3")
-                            .offset(x:UIScreen.getWidth(25), y: UIScreen.getHeight(100))
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: UIScreen.getWidth(30), height: UIScreen.getHeight(130))
+                            .offset(x:UIScreen.getWidth(50), y: UIScreen.getHeight(100))
                     }
+                    
                     Image("onboarding3_2")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.getWidth(113), height: UIScreen.getHeight(400))
                                             .padding(.bottom, UIScreen.getHeight(50))
-                        .offset(x: UIScreen.getWidth(-60))
                 }
                 
                 VStack(alignment: .leading) {

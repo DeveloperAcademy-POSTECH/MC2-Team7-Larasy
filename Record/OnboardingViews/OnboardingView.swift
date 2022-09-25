@@ -50,7 +50,7 @@ struct OnboardingView: View {
                     FirstPage().tag(0)
                     SecondPage().tag(1)
                     ThirdPage().tag(2)
-                    OnboardingLastPageView(isFirstLaunching: $isFirstLaunching).tag(3)
+                    FourthPage(isFirstLaunching: $isFirstLaunching).tag(3)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 
