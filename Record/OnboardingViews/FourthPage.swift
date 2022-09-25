@@ -14,7 +14,16 @@ struct FourthPage: View {
     @State var isShown = false
     //앱최초 실행 바인딩
     @Binding var isFirstLaunching: Bool
-
+    
+    let text: Text = {
+        var t = Text("음악 기록가")
+            .foregroundColor(.pointBlue)
+            .font(Font.customTitle2())
+        t = t + Text("가 되신 것을\n환영합니다.")
+            .foregroundColor(.titleBlack)
+            .font(Font.customTitle2())
+        return t
+    }()
     
     var body: some View {
         
@@ -58,14 +67,14 @@ struct FourthPage: View {
                 
                 // MARK: Text
                 VStack(alignment: .leading) {
-                    Text("음악기록가가 되신것을\n환영합니다!")
-                        .foregroundColor(.titleBlack)
-                        .font(Font.customTitle2())
-                        .lineSpacing(5)
-                        .frame(width:330, alignment: .leading)
-                        .padding(.leading, UIScreen.getWidth(30))
-                        .padding(.top, UIScreen.getHeight(100))
                     
+                    HStack {
+                        text
+                            .frame(width: UIScreen.getWidth(300), alignment: .leading)
+                            .lineSpacing(5)
+                            .padding(.leading, UIScreen.getWidth(30))
+                            .padding(.top, UIScreen.getHeight(100))
+                    }
                     Spacer()
                         .frame(maxWidth: .infinity)
                 }
