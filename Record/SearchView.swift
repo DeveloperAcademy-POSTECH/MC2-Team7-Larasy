@@ -59,9 +59,9 @@ struct SearchView: View {
                 TextField("", text: $search) // 입력창
                     .foregroundColor(.titleBlack)
                     .font(.customBody2())
-                    .onSubmit { // keyboard Return Button 클릭 시
+                    .onChange(of: search, perform: { newValue in
                         musicAPI.getSearchResults(search: search) // 음악 API 불러오기
-                    }
+                    })
                     .placeholder(when: search.isEmpty) {
                         Text(placeholer)
                             .foregroundColor(.titleDarkgray)
