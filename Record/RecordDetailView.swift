@@ -160,7 +160,7 @@ struct RecordDetailView: View {
         .fullScreenCover(isPresented: $clickEdit) {
             NavigationView {
                 WriteView(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), isEdit: .constant(true), item: item)
-                    .padding(.top, -40)
+                    .navigationBarTitleDisplayMode(.inline)
             }
         }
         .alert("삭제", isPresented: $deleteItemAlert) {
@@ -175,10 +175,6 @@ struct RecordDetailView: View {
                 }
             } message: {  }
         // 본문 ZStack End
-        
-        
-        
-        
     }
     
 }
