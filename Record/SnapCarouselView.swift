@@ -44,12 +44,11 @@ struct SnapCarousel: View {
                                             Text(items[content].artist!)
                                                 .foregroundColor(Color.titleDarkgray)
                                                 .font(Font.customBody2())
-                                                .padding(.bottom, 30)
+                                                .padding(.bottom, UIScreen.getHeight(20))
                                         } else {
                                             Spacer()
                                                 .frame(height: 70)
                                         }
-                                        Spacer()
                                         
                                         // MARK: - Carousel로 움직이는 Cd
                                         ZStack {
@@ -74,7 +73,7 @@ struct SnapCarousel: View {
                                 }
                                 .transition(AnyTransition.slide)
                                 .animation(.spring(), value: UIState.activeCard)
-                                .padding(.top, 140)
+                                .padding(.top, UIScreen.getHeight(140))
 
                             }
                         }
@@ -86,7 +85,7 @@ struct SnapCarousel: View {
                                     .font(.customBody2())
                                     .frame(width: 300)
                                     .padding(.bottom, -20)
-                                    .padding(.top, 45)
+                                    .padding(.top, UIScreen.getHeight(45))
                                 ZStack {
                                     Image("ListViewCdPlayer")
                                         .offset(y: 30)
