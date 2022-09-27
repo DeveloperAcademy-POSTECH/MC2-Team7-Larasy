@@ -21,7 +21,15 @@ struct RecordDetailView: View {
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
     @State private var saveImage = false
-    @State private var clickEdit = false
+    @State private var clickEdit = false {
+        willSet {
+            UIView.setAnimationsEnabled(true)
+        } didSet {
+            DispatchQueue.main.async {
+                UIView.setAnimationsEnabled(true)
+            }
+        }
+    }
     
     var body: some View {
         
@@ -55,7 +63,7 @@ struct RecordDetailView: View {
                     
                     Button(action: {
                         photo.toggle()
-                        UIView.setAnimationsEnabled(false)
+                        UIView.setAnimationsEnabled(    false)
                     },
                            label: {
                         ZStack {
@@ -94,24 +102,24 @@ struct RecordDetailView: View {
                     
                     Spacer()
                     
-                        Button(action: {
-                            story.toggle()
-                            UIView.setAnimationsEnabled(false)
-                        }, label: {
-                            
-                            Image("StoryComp")
-                                .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
-                            Text(item.story ?? "")
-                                .font(Font.customBody2())
-                                .foregroundColor(.titleDarkgray)
-                                .lineLimit(5)
-                                .truncationMode(.tail)
-                                .frame(width: 130)
-                                .offset(x: -160)
-                                .multilineTextAlignment(.leading)
-                                .lineSpacing(5)
-                        })
-                        .offset(x: 20, y: -100)
+                    Button(action: {
+                        story.toggle()
+                        UIView.setAnimationsEnabled(false)
+                    }, label: {
+                        
+                        Image("StoryComp")
+                            .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
+                        Text(item.story ?? "")
+                            .font(Font.customBody2())
+                            .foregroundColor(.titleDarkgray)
+                            .lineLimit(5)
+                            .truncationMode(.tail)
+                            .frame(width: 130)
+                            .offset(x: -160)
+                            .multilineTextAlignment(.leading)
+                            .lineSpacing(5)
+                    })
+                    .offset(x: 20, y: -100)
                     
                     
                     
