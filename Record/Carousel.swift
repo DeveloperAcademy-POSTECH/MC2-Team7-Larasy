@@ -73,13 +73,13 @@ struct Carousel<Items : View> : View {
         }.onEnded { value in
             self.UIState.screenDrag = 0
             // 뒤로 스크롤
-            if (value.translation.width < -10 && CGFloat(self.UIState.activeCard) < numberOfItems - 1) {
+            if (value.translation.width < -5 && CGFloat(self.UIState.activeCard) < numberOfItems - 1) {
                 self.UIState.activeCard = self.UIState.activeCard + 1
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                 impactMed.impactOccurred() // haptic 피드백
             }
             // 앞으로 스크롤
-            if (value.translation.width > 10 && CGFloat(self.UIState.activeCard) > 0) {
+            if (value.translation.width > 5 && CGFloat(self.UIState.activeCard) > 0) {
                 self.UIState.activeCard = self.UIState.activeCard - 1
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                 impactMed.impactOccurred() // haptic 피드백
