@@ -35,32 +35,42 @@ struct RecordDetailView: View {
         
         ZStack {
             Color.background.edgesIgnoringSafeArea(.all)
-            RecordBackground()
-            VStack {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(item.title ?? "")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.titleBlack)
-                            .multilineTextAlignment(.leading)
-                            .padding(.bottom, 3)
-                        
-                        Text(item.artist ?? "") // TODO: "music.artist"
-                            .font(.body)
-                            .fontWeight(.regular)
-                            .foregroundColor(.titleDarkgray)
-                        Spacer()
-                    }// MusicInform VStack End
-                    .padding(.top, 10)
-                    Spacer()
-                } // MusicImform HStack End
-                .padding(.leading, 28)
-            }
             
-            ZStack {
-                HStack(alignment: .center) {
+            Image("backwindow")
+                .padding(.leading, UIScreen.getWidth(90))
+            
+            VStack {
+                // MARK: 노래 정보
+                VStack(alignment: .leading, spacing: UIScreen.getHeight(10)) {
+                    Text(item.title ?? "")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.titleBlack)
+                        .multilineTextAlignment(.leading)
+                    Text(item.artist ?? "")
+                        .font(.customBody1())
+                        .fontWeight(.regular)
+                        .foregroundColor(.titleDarkgray)
+                }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .padding(.leading, UIScreen.getWidth(35))
+                .padding(.top, UIScreen.getHeight(15))
+                
+                // MARK: - 가사
+                ZStack {
+                    Image("LylicComp")
                     
+                    Text(item.lyrics ?? "")
+                        .foregroundColor(.titleDarkgray)
+                        .font(.customBody2())
+                        .frame(width: UIScreen.getWidth(240), alignment: .center)
+                }
+                .padding(.bottom, UIScreen.getHeight(15))
+                
+                HStack(alignment: .bottom) {
+                    VStack(spacing: UIScreen.getHeight(40)) {
+                        // MARK: Image
+                        ZStack(alignment: .top) {
                     Button(action: {
                         photo.toggle()
                         UIView.setAnimationsEnabled(    false)
@@ -68,19 +78,48 @@ struct RecordDetailView: View {
                            label: {
                         ZStack {
                             Image("DetailPhotoComp") // 이미지 삽입
-                                .padding()
+                            //                                .padding()
                                 .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
                             
                             if let image = item.image {
                                 Image(uiImage: UIImage(data: image)!)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 95, height: 105)
+                                    .frame(width: UIScreen.getWidth(95), height: UIScreen.getHeight(105))
                                     .clipped()
                                     .scaleEffect()
-                                    .offset(y: -15)
+                                    .padding(.top, UIScreen.getHeight(15))
                             }
                         }
+                        .onTapGesture {
+                            photo.toggle()
+                            UIView.setAnimationsEnabled(false)
+                        }
+                        
+                        // MARK: Story
+                        ZStack {
+//                            Color.red
+                            Image("StoryComp")
+                            
+                            Text(item.story ?? "")
+                                .font(Font.customBody2())
+                                .foregroundColor(.titleDarkgray)
+                                .lineLimit(5)
+                                .truncationMode(.tail)
+                                .multilineTextAlignment(.leading)
+                                .lineSpacing(5)
+                                .frame(width: UIScreen.getWidth(130))
+                        }
+                        .padding(.leading, UIScreen.getWidth(30))
+                        .onTapGesture {
+                            story.toggle()
+                            UIView.setAnimationsEnabled(false)
+                        }
+                        .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
+                        .fixedSize()
+                    }
+                    CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
+                }
                     }).offset(y: -110)
                     
                     Spacer()
@@ -125,9 +164,9 @@ struct RecordDetailView: View {
                     
                 }.offset(y: -20)
                 Spacer()
-                
+              
             }
-            
+            .frame(maxHeight: .infinity, alignment: .topLeading)
         }
         .navigationBarItems(trailing: Menu(content: {
             
@@ -139,12 +178,8 @@ struct RecordDetailView: View {
             
             // MARK: 이미지 저장 기능
             Button(action: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    let image = body.screenshot()
-                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                    saveImage.toggle()
-                }
-            }) { Label("이미지 저장", systemImage: "square.and.arrow.down") }
+                actionSheet()
+            }) { Label("이미지 공유", systemImage: "square.and.arrow.up") }
             
             // MARK: 삭제 기능
             Button(role: .destructive, action: {
@@ -175,6 +210,15 @@ struct RecordDetailView: View {
                 }
             } message: {  }
         // 본문 ZStack End
+        
+        
+    }
+    func actionSheet() {
+        
+        let shareImage = self.snapShot()
+        let activitiViewController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        windowScene?.windows.first?.rootViewController?.present(activitiViewController, animated: true, completion: nil)
     }
     
 }
@@ -190,7 +234,9 @@ struct CDPlayerComp: View {
                 .padding(.trailing, 20.0)
             
             ZStack(alignment: .center) {
-                URLImage(urlString: music.albumArt)
+                Image(uiImage: getImage())
+                    .resizable()
+                    .frame(width: 200, height: 200)
                     .aspectRatio(contentMode: .fit)
                     .clipShape(Circle())
                     .scaleEffect(0.46)
@@ -199,7 +245,6 @@ struct CDPlayerComp: View {
                     .onTapGesture {
                         self.angle += Double.random(in: 3600..<3960)
                     } // albumArt를 불러오는 URLImage
-                
                 Circle()
                     .frame(width: 30, height: 30)
                     .foregroundColor(.background)
@@ -224,5 +269,16 @@ struct CDPlayerComp: View {
             }.offset(x: -10.6, y: -133)
             
         }// ZStack End
+    }
+    func getImage() -> UIImage {
+        if let url = URL(string: music.albumArt) {
+            if let data = try? Data(contentsOf: url ) {
+                return UIImage(data: data)!
+            } else {
+                return UIImage(systemName: "xmark")!
+            }
+        } else {
+            return UIImage(systemName: "xmark")!
+        }
     }
 }
