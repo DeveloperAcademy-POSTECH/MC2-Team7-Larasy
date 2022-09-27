@@ -25,14 +25,15 @@ struct HomeView: View {
                     
                     Image("Logo")
                         .padding(.top, UIScreen.getHeight(47))
-                        .padding(.leading, UIScreen.getWidth(34))
+                        .padding(.leading, UIScreen.getWidth(50))
                     
                     ZStack {
                         VStack {
                             HStack(spacing: 5) {
                                 
                                 // MARK: link to CDListView
-                                VStack(spacing: 0) {
+                                
+                                VStack {
                                     Text("내 음악 보러 가기")
                                         .foregroundColor(.titleDarkgray)
                                         .font(Font.customHeadline())
@@ -40,6 +41,9 @@ struct HomeView: View {
                                     
                                     NavigationLink(destination: CdListView()) {
                                         Image("album")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: UIScreen.getWidth(130), height: UIScreen.getHeight(134))
                                     }
                                     .navigationBarTitle("홈")
                                     
@@ -50,9 +54,16 @@ struct HomeView: View {
                                 
                                 // MARK: CD Player
                                 ZStack(alignment: .top) {
+                                    
                                     Image("CdPlayer")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: UIScreen.getWidth(144))
                                     
                                     Image("HomeCD")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: UIScreen.getWidth(130), height: UIScreen.getWidth(130))
                                         .rotationEffect(.degrees(angle))
                                         .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
                                         .onTapGesture { angle += Double.random(in: 3600 ..< 3960) }
@@ -72,35 +83,53 @@ struct HomeView: View {
                                 .frame(maxWidth: .infinity)
                             
                             Image("polaroid")
-                                .padding(.bottom, UIScreen.getHeight(55))
-
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: UIScreen.getWidth(60), height: UIScreen.getHeight(80))
+                                .padding(.bottom, UIScreen.getHeight(80))
+                            
                             // MARK: Lamp
                             HStack(alignment: .bottom, spacing: 45) {
                                 ZStack(alignment: .top) {
                                     Image("lampTop")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: UIScreen.getWidth(120), height: UIScreen.getHeight(30))
                                         .blur(radius: isLighting ? 25 : 0)
                                         .animation(.spring(), value: isLighting)
                                     
                                     Image("lamp")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: UIScreen.getWidth(120), height: UIScreen.getHeight(83))
                                 }
                                 .onTapGesture {
                                     isLighting.toggle()
                                 }
                                 
+                                
                                 // MARK: Link to SearchView
+                                
                                 VStack(spacing: 0) {
                                     Text("음악 기록하기")
                                         .foregroundColor(.titleDarkgray)
                                         .font(Font.customHeadline())
+                                        .padding()
                                     
-                                    NavigationLink(destination: SearchView()) {
-                                        Image("note")
+                                    VStack(spacing: 0) {
+                                        NavigationLink(destination: SearchView()) {
+                                            Image("note")
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: UIScreen.getWidth(170), height: UIScreen.getHeight(156))
+                                        }
                                     }
+                                    
                                 }
                             }
                             
                             Image("desk")
-                                .padding(.leading, UIScreen.getWidth(40))
+                                .padding(.leading)
                         }
                         
                     }
