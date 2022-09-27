@@ -21,7 +21,15 @@ struct RecordDetailView: View {
     @State private var story = false
     @State private var deleteItemAlert = false // delete item alert
     @State private var saveImage = false
-    @State private var clickEdit = false
+    @State private var clickEdit = false {
+        willSet {
+            UIView.setAnimationsEnabled(true)
+        } didSet {
+            DispatchQueue.main.async {
+                UIView.setAnimationsEnabled(true)
+            }
+        }
+    }
     
     var body: some View {
         
@@ -63,6 +71,12 @@ struct RecordDetailView: View {
                     VStack(spacing: UIScreen.getHeight(40)) {
                         // MARK: Image
                         ZStack(alignment: .top) {
+                    Button(action: {
+                        photo.toggle()
+                        UIView.setAnimationsEnabled(    false)
+                    },
+                           label: {
+                        ZStack {
                             Image("DetailPhotoComp") // 이미지 삽입
                             //                                .padding()
                                 .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
@@ -106,6 +120,51 @@ struct RecordDetailView: View {
                     }
                     CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
                 }
+                    }).offset(y: -110)
+                    
+                    Spacer()
+                    
+                    CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
+                        .offset(x: 25, y: -10)
+                }.offset(y: 80)
+                    .padding()
+                
+                VStack(alignment: .leading) {
+                    
+                    ZStack {
+                        Image("LylicComp") // 가사 입력
+                        Text(item.lyrics ?? "")
+                            .foregroundColor(.titleDarkgray)
+                            .font(.customBody2())
+                    }
+                    .offset(y: 130)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        story.toggle()
+                        UIView.setAnimationsEnabled(false)
+                    }, label: {
+                        
+                        Image("StoryComp")
+                            .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
+                        Text(item.story ?? "")
+                            .font(Font.customBody2())
+                            .foregroundColor(.titleDarkgray)
+                            .lineLimit(5)
+                            .truncationMode(.tail)
+                            .frame(width: 130)
+                            .offset(x: -160)
+                            .multilineTextAlignment(.leading)
+                            .lineSpacing(5)
+                    })
+                    .offset(x: 20, y: -100)
+                    
+                    
+                    
+                }.offset(y: -20)
+                Spacer()
+              
             }
             .frame(maxHeight: .infinity, alignment: .topLeading)
         }
@@ -136,7 +195,7 @@ struct RecordDetailView: View {
         .fullScreenCover(isPresented: $clickEdit) {
             NavigationView {
                 WriteView(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), isEdit: .constant(true), item: item)
-                    .padding(.top, -40)
+                    .navigationBarTitleDisplayMode(.inline)
             }
         }
         .alert("삭제", isPresented: $deleteItemAlert) {
