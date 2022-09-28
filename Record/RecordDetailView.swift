@@ -68,15 +68,11 @@ struct RecordDetailView: View {
                 .padding(.bottom, UIScreen.getHeight(15))
                 
                 HStack(alignment: .bottom) {
+                    
                     VStack(spacing: UIScreen.getHeight(40)) {
                         // MARK: Image
                         ZStack(alignment: .top) {
-                    Button(action: {
-                        photo.toggle()
-                        UIView.setAnimationsEnabled(    false)
-                    },
-                           label: {
-                        ZStack {
+                            
                             Image("DetailPhotoComp") // 이미지 삽입
                             //                                .padding()
                                 .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
@@ -98,7 +94,7 @@ struct RecordDetailView: View {
                         
                         // MARK: Story
                         ZStack {
-//                            Color.red
+                            
                             Image("StoryComp")
                             
                             Text(item.story ?? "")
@@ -120,51 +116,7 @@ struct RecordDetailView: View {
                     }
                     CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
                 }
-                    }).offset(y: -110)
-                    
-                    Spacer()
-                    
-                    CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
-                        .offset(x: 25, y: -10)
-                }.offset(y: 80)
-                    .padding()
                 
-                VStack(alignment: .leading) {
-                    
-                    ZStack {
-                        Image("LylicComp") // 가사 입력
-                        Text(item.lyrics ?? "")
-                            .foregroundColor(.titleDarkgray)
-                            .font(.customBody2())
-                    }
-                    .offset(y: 130)
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        story.toggle()
-                        UIView.setAnimationsEnabled(false)
-                    }, label: {
-                        
-                        Image("StoryComp")
-                            .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
-                        Text(item.story ?? "")
-                            .font(Font.customBody2())
-                            .foregroundColor(.titleDarkgray)
-                            .lineLimit(5)
-                            .truncationMode(.tail)
-                            .frame(width: 130)
-                            .offset(x: -160)
-                            .multilineTextAlignment(.leading)
-                            .lineSpacing(5)
-                    })
-                    .offset(x: 20, y: -100)
-                    
-                    
-                    
-                }.offset(y: -20)
-                Spacer()
-              
             }
             .frame(maxHeight: .infinity, alignment: .topLeading)
         }
