@@ -135,7 +135,7 @@ struct WriteView: View {
                                 WritingModalView(content: $content)
                             })
                             //MARK: - 이야기 입력 받는 Button 끝
-                            .offset(x: 62)
+                            .offset(x: UIScreen.getWidth(62))
                         }
                         
                         //MARK: - 이미지 가져오는 부분 끝

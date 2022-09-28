@@ -113,6 +113,7 @@ struct RecordDetailView: View {
                         }
                         .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
                         .fixedSize()
+                        .offset(x: UIScreen.getWidth(62))
                     }
                     CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
                 }
