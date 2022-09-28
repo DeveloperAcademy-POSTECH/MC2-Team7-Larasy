@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import LinkPresentation
 
 struct RecordDetailView: View {
     
@@ -167,8 +168,9 @@ struct RecordDetailView: View {
     }
     func actionSheet() {
         
+        let activityItemMetadata = LinkMetadataManager()
         let shareImage = self.snapShot()
-        let activitiViewController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+        let activitiViewController = UIActivityViewController(activityItems: [activityItemMetadata, shareImage], applicationActivities: nil)
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         windowScene?.windows.first?.rootViewController?.present(activitiViewController, animated: true, completion: nil)
     }
@@ -232,5 +234,38 @@ struct CDPlayerComp: View {
         } else {
             return UIImage(systemName: "xmark")!
         }
+    }
+}
+
+
+final class LinkMetadataManager: NSObject, UIActivityItemSource {
+
+  var linkMetadata: LPLinkMetadata
+
+  let appTitle = "RE:CORD"
+
+  init(linkMetadata: LPLinkMetadata = LPLinkMetadata()) {
+    self.linkMetadata = linkMetadata
+  }
+}
+
+// MARK: - Setup
+extension LinkMetadataManager {
+    /// Creating metadata to population in the share sheet.
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        
+        linkMetadata.title = appTitle
+        
+        return linkMetadata
+    }
+    /// Showing empty string returns a share sheet with the minimum requirement.
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return String()
+    }
+    
+    /// Sharing url of the application.
+    func activityViewController(_ activityViewController: UIActivityViewController,
+                                itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return linkMetadata.url
     }
 }
