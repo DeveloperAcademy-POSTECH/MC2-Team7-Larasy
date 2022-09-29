@@ -150,11 +150,10 @@ struct SearchView: View {
                 }
                 .listRowBackground(Color.background)
                 .listRowSeparator(.hidden)
-                .padding([.bottom, .top], 10)
-                .padding([.leading], -20)
+                .padding([.bottom, .top, .trailing], 10)
                 
             } // List End
-            .onAppear { UITableView.appearance().contentInset.top = -35 }
+            .listStyle(.plain)
             
         } // GeometryReder End
         
