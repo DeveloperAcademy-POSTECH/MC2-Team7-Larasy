@@ -19,7 +19,7 @@ struct SearchView: View {
     
     init() {
         // 검색 결과 출력 리스트 배경색 초기화
-        UITableView.appearance().backgroundColor = UIColor.clear
+        UITableView.appearance().backgroundColor = UIColor(Color.background)
         
         // MusicAPI 초기화
         let state = State(initialValue: false)
@@ -148,13 +148,12 @@ struct SearchView: View {
                         .buttonStyle(PlainButtonStyle())
                     } // HStack End
                 }
-                .listRowBackground(Color.background)
                 .listRowSeparator(.hidden)
-                .padding([.bottom, .top], 10)
-                .padding([.leading], -20)
+                .padding([.bottom, .top, .trailing], 10)
+                .listRowBackground(Color.background)
                 
             } // List End
-            .onAppear { UITableView.appearance().contentInset.top = -35 }
+            .listStyle(.plain)
             
         } // GeometryReder End
         
