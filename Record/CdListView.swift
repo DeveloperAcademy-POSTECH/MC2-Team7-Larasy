@@ -28,8 +28,8 @@ struct CdListView: View {
                             Text("아직 기록된 음악이 없어요")
                                 .font(Font.customTitle2())
                                 .foregroundColor(.titleGray)
-                                .padding(.bottom, 12)
-                                .padding(.top, 260)
+                                .padding(.bottom, UIScreen.getHeight(12))
+                                .padding(.top, UIScreen.getHeight(260))
                             
                             NavigationLink(destination: SearchView()) {
                                 Text("음악 기록하러 가기")

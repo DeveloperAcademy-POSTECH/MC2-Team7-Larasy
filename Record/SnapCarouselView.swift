@@ -36,18 +36,18 @@ struct SnapCarousel: View {
                                 Item(_id: content){
                                     // 가운데 cd만 글이 보이게 함
                                     VStack {
-                                        if (content == UIState.activeCard) {
+                                        if content == UIState.activeCard {
                                             Text(items[content].title!)
                                                 .foregroundColor(Color.titleBlack)
                                                 .font(Font.customTitle3())
-                                                .padding(.bottom, 2)
+                                                .padding(.bottom, UIScreen.getHeight(2))
                                             Text(items[content].artist!)
                                                 .foregroundColor(Color.titleDarkgray)
                                                 .font(Font.customBody2())
                                                 .padding(.bottom, UIScreen.getHeight(20))
                                         } else {
                                             Spacer()
-                                                .frame(height: 70)
+                                                .frame(height: UIScreen.getHeight(70))
                                         }
                                         
                                         // MARK: - Carousel로 움직이는 Cd
@@ -83,8 +83,8 @@ struct SnapCarousel: View {
                                 Text("CD를 선택하고 플레이어를 재생해보세요")
                                     .foregroundColor(.titleGray)
                                     .font(.customBody2())
-                                    .frame(width: 300)
-                                    .padding(.bottom, -20)
+                                    .frame(width: UIScreen.getWidth(300))
+                                    .padding(.bottom, UIScreen.getHeight(-20))
                                     .padding(.top, UIScreen.getHeight(45))
                                 ZStack {
                                     Image("ListViewCdPlayer")
@@ -105,7 +105,7 @@ struct SnapCarousel: View {
                                                         self.angle += Double.random(in: 1000..<1980)
                                                         timeCount()
                                                     }
-                                                    .padding(.bottom, 120)
+                                                    .padding(.bottom,120)
                                                     .padding(.leading, 2) // CdPlayer를 그림자 포함해서 뽑아서 전체 CdPlayer와 정렬 맞추기 위함
                                             }
                                         }
@@ -116,14 +116,14 @@ struct SnapCarousel: View {
                                         ZStack {
                                             Circle()
                                                 .foregroundColor(.titleLightgray)
-                                                .frame(width: 30 , height: 30)
+                                                .frame(width: UIScreen.getHeight(30) , height: UIScreen.getHeight(30))
                                             Circle()
                                                 .foregroundColor(.titleDarkgray)
-                                                .frame(width: 15 , height: 15)
+                                                .frame(width: UIScreen.getHeight(15) , height: UIScreen.getHeight(15))
                                                 .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
                                             Circle()
                                                 .foregroundColor(.background)
-                                                .frame(width: 3 , height: 3)
+                                                .frame(width: UIScreen.getHeight(3) , height: UIScreen.getHeight(3))
                                         }
                                     }
                                     .padding(.bottom, 120)
