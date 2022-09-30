@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import LinkPresentation
 
 struct RecordDetailView: View {
     
@@ -178,9 +179,9 @@ struct RecordDetailView: View {
         
     }
     func actionSheet() {
-        
         let shareImage = self.snapShot()
-        let activitiViewController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+        let activityItemMetadata = MyActivityItemSource(text: "\(item.title!) - \(item.artist!)" , image: shareImage)
+        let activitiViewController = UIActivityViewController(activityItems: [activityItemMetadata, shareImage], applicationActivities: nil)
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         windowScene?.windows.first?.rootViewController?.present(activitiViewController, animated: true, completion: nil)
     }
@@ -244,5 +245,38 @@ struct CDPlayerComp: View {
         } else {
             return UIImage(systemName: "xmark")!
         }
+    }
+}
+
+//출처: https://developer.apple.com/forums/thread/687916
+class MyActivityItemSource: NSObject, UIActivityItemSource {
+    var title: String = "RE:CORD"
+    var text: String
+    var image: UIImage
+    
+    init(text: String, image: UIImage) {
+        self.text = text
+        self.image = image
+        super.init()
+    }
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return text
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return text
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+        return title
+    }
+
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        let metadata = LPLinkMetadata()
+        metadata.title = title
+        metadata.iconProvider = NSItemProvider(object: UIImage(imageLiteralResourceName: "AppIcon") )
+        metadata.originalURL = URL(fileURLWithPath: text)
+        return metadata
     }
 }
