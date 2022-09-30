@@ -12,11 +12,21 @@ import UIKit
 // MARK: - 음악 검색 View
 struct SearchView: View {
     
-    @StateObject var musicAPI = MusicAPI()
+    @ObservedObject var musicAPI: MusicAPI
     @State var search = ""
+    @State var progress: Bool
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
+    @FocusState private var isSearchbarFocused: Bool?
     
-    init() { UITableView.appearance().backgroundColor = UIColor.clear } // 검색 결과 출력 리스트 배경색 초기화
+    init() {
+        // 검색 결과 출력 리스트 배경색 초기화
+        UITableView.appearance().backgroundColor = UIColor.clear
+        
+        // MusicAPI 초기화
+        let state = State(initialValue: false)
+        self._progress = state
+        self.musicAPI = MusicAPI(progress: state.projectedValue)
+    }
     
     var body: some View {
         
@@ -59,15 +69,22 @@ struct SearchView: View {
                 TextField("", text: $search) // 입력창
                     .foregroundColor(.titleBlack)
                     .font(.customBody2())
-                    .onSubmit { // keyboard Return Button 클릭 시
-                        musicAPI.getSearchResults(search: search) // 음악 API 불러오기
+                    .focused($isSearchbarFocused, equals: true)
+                    .disableAutocorrection(true)
+                    .task {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                            isSearchbarFocused = true
+                        }
                     }
+                    .onChange(of: search, perform: { _ in
+                        progress = true
+                        musicAPI.getSearchResults(search: search) // 음악 API 불러오기
+                    })
                     .placeholder(when: search.isEmpty) {
                         Text(placeholer)
                             .foregroundColor(.titleDarkgray)
                             .font(.customBody2())
                     }
-                    
                 
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지
@@ -77,9 +94,12 @@ struct SearchView: View {
                         .onTapGesture {
                             withAnimation {
                                 self.search = ""
+                                progress = false
                             }
                         }
                 }
+                
+                
             } // HStack End
             .foregroundColor(.titleDarkgray)
             .padding(13)
@@ -99,6 +119,12 @@ struct SearchView: View {
         
         GeometryReader { geometry in
             
+            if progress && musicAPI.musicList.count == 0 {
+                ProgressView()
+                    .scaleEffect(1.5, anchor: .center)
+                    .padding(180)
+            }
+            
             // 검색 결과 리스트
             List {
                 ForEach(musicAPI.musicList, id: \.self) { music in
@@ -110,7 +136,7 @@ struct SearchView: View {
                             .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: WriteView(music: music)) {
+                        NavigationLink(destination: WriteView(music: music, isEdit: .constant(false), item: nil)) {
                             
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {
@@ -132,11 +158,10 @@ struct SearchView: View {
                 }
                 .listRowBackground(Color.background)
                 .listRowSeparator(.hidden)
-                .padding([.bottom, .top], 10)
-                .padding([.leading], -20)
+                .padding([.bottom, .top, .trailing], 10)
                 
             } // List End
-            .onAppear { UITableView.appearance().contentInset.top = -35 }
+            .listStyle(.plain)
             
         } // GeometryReder End
         

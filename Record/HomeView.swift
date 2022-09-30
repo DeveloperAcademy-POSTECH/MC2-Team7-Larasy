@@ -9,97 +9,143 @@ import SwiftUI
 
 struct HomeView: View {
     
-    //lamp lighting animation control var
     @State var isLighting : Bool = false
-    //cd rotate animation angle var
     @State private var angle = 0.0
     
     var body: some View {
-        //Nav View Start
-        NavigationView{
+        NavigationView {
             ZStack {
-                    Color.background
+                Color.background
                     .ignoresSafeArea()
-                //Contents Start
-                ZStack (alignment: .leading){
-                    Image("HomeBG")     //Background fix Image (창문 및 가구)
-                    //Logo Start
-                    VStack {
-                        Image("Logo")       //Logo Image (RE:CORD)
-                            .padding(.top,94)
-                            .padding(.leading,34)
-                        Spacer()
-                    }
-                    //Logo End
-                    //CD Rotate ani Start
-                    VStack {
-                        Image("HomeCD")     //CD Image
-                            .frame(width: 80, height: 80)
-                            .rotationEffect(.degrees(self.angle))
-                            .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
-                            .onTapGesture {
-                                self.angle += Double.random(in: 3600..<3960)
-                            }
-                        Spacer()
-                    }.padding(.leading,232)
-                        .padding(.top,167)
-                    //CD Rotate ani End
-                    //'CDListView' Navlink Start
-                    VStack{
-                        Text("내 음악 보러 가기")
-                            .foregroundColor(.titleDarkgray)
-                            .font(Font.customHeadline())
-                            .padding(-15)
-                        //cdcase img 클릭시 CDListView로 이동하는 Navlink
-                        NavigationLink(destination: CdListView()){
-                            Image("cdcase")     //cdcase Image
-                        }.navigationBarTitle("Home")
-
-                    }
-                    .padding(.bottom, 105)
-                    .padding(.leading, 30)
-                    //'CDListView' Navlink End
-                    //'SearchView' Navlink Start
-                    VStack(alignment: .trailing) {
-                        Spacer()
-                        Text("음악 기록하기")
-                            .foregroundColor(.titleDarkgray)
-                            .font(Font.customHeadline())
-                            .padding([.top, .trailing], 35.0)
-                            .padding(-5)
-                        //lamp & note Image 배치 Start
-                        HStack {
-                            //lamp lighting ani Start
-                            ZStack{
-                                Image("lampTop")
-                                    .blur(radius: isLighting ? 25 : 0)
-                                    .animation(.spring(), value: isLighting)
-                                    .padding(.bottom,47)
-                                Image("lamp")
-                                    .padding(43)
-                            }.onTapGesture {
-                                isLighting.toggle()
-                            }
-                            //lamp lighting ani End
-                            //note Image 클릭시 SearchView로 이동하는 Navlink
-                            VStack {
-                                NavigationLink(destination: SearchView()){
-                                    Image("note")
+                
+                Image("backwindow")
+                    .padding(.leading, UIScreen.getWidth(90))
+                
+                VStack(alignment: .leading) {
+                    
+                    Image("Logo")
+                        .padding(.top, UIScreen.getHeight(47))
+                        .padding(.leading, UIScreen.getWidth(50))
+                    
+                    ZStack {
+                        VStack {
+                            HStack(spacing: 5) {
+                                
+                                // MARK: link to CDListView
+                                
+                                VStack {
+                                    Text("내 음악 보러 가기")
+                                        .foregroundColor(.titleDarkgray)
+                                        .font(Font.customHeadline())
+                                        .padding(.top, UIScreen.getHeight(50))
+                                    
+                                    NavigationLink(destination: CdListView()) {
+                                        Image("album")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: UIScreen.getWidth(130), height: UIScreen.getHeight(134))
+                                    }
+                                    .navigationBarTitle("홈")
+                                    
+                                    Image("shelf")
                                 }
-                            }.padding(.bottom,73)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                                
+                                
+                                // MARK: CD Player
+                                ZStack(alignment: .top) {
+                                    
+                                    Image("CdPlayer")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: UIScreen.getWidth(144))
+                                    
+                                    Image("HomeCD")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: UIScreen.getWidth(130), height: UIScreen.getWidth(130))
+                                        .rotationEffect(.degrees(angle))
+                                        .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
+                                        .onTapGesture { angle += Double.random(in: 3600 ..< 3960) }
+                                }
+                                .padding(.top, UIScreen.getHeight(25))
+                                .padding(.trailing, UIScreen.getWidth(50))
+                            }
+                            
+                            Spacer()
+                                .frame(maxWidth: .infinity)
                         }
-                        //lamp & note Image 배치 End
+                        
+                        
+                        VStack(alignment: .trailing, spacing: UIScreen.getHeight(-5)) {
+                            
+                            Spacer()
+                                .frame(maxWidth: .infinity)
+                            
+                            Image("polaroid")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: UIScreen.getWidth(60), height: UIScreen.getHeight(80))
+                                .padding(.bottom, UIScreen.getHeight(80))
+                            
+                            // MARK: Lamp
+                            HStack(alignment: .bottom, spacing: 45) {
+                                ZStack(alignment: .top) {
+                                    Image("lampTop")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: UIScreen.getWidth(120), height: UIScreen.getHeight(30))
+                                        .blur(radius: isLighting ? 25 : 0)
+                                        .animation(.spring(), value: isLighting)
+                                    
+                                    Image("lamp")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: UIScreen.getWidth(120), height: UIScreen.getHeight(83))
+                                }
+                                .onTapGesture {
+                                    isLighting.toggle()
+                                }
+                                
+                                
+                                // MARK: Link to SearchView
+                                
+                                VStack(spacing: 0) {
+                                    Text("음악 기록하기")
+                                        .foregroundColor(.titleDarkgray)
+                                        .font(Font.customHeadline())
+                                        .padding()
+                                    
+                                    VStack(spacing: 0) {
+                                        NavigationLink(destination: SearchView()) {
+                                            Image("note")
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: UIScreen.getWidth(170), height: UIScreen.getHeight(156))
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                            Image("desk")
+                                .padding(.leading)
+                        }
+                        
                     }
+                    .ignoresSafeArea()
                 }
-                //Contents End
-            }.navigationBarHidden(true)
-        }.accentColor(.pointBlue)   //Nav button point color
-        //Nav View End
+                .frame(maxHeight: .infinity, alignment: .topLeading)
+                
+            }
+            .navigationBarHidden(true)
+        }
+        .accentColor(.pointBlue)
     }
-    //View End
 }
-//HomeView End
 
+
+// MARK: PreviewProvider
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
