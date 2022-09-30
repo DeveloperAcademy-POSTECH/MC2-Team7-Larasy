@@ -68,8 +68,7 @@ struct SearchView: View {
                 TextField("", text: $search) // 입력창
                     .foregroundColor(.titleBlack)
                     .font(.customBody2())
-                    .onChange(of: search, perform: { newValue in
-                    .onSubmit { // keyboard Return Button 클릭 시
+                    .onChange(of: search, perform: { _ in
                         progress = true
                         musicAPI.getSearchResults(search: search) // 음악 API 불러오기
                     })
