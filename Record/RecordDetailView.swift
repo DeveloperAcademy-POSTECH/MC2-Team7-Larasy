@@ -84,16 +84,13 @@ struct RecordDetailView: View {
                                 // MARK: Image
                                 ZStack {
                                     Image("DetailPhotoComp") // 이미지 삽입
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIScreen.getWidth(100), height: UIScreen.getHeight(153))
                                         .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
                                     
                                     if let image = item.image {
                                         Image(uiImage: UIImage(data: image)!)
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(width: UIScreen.getWidth(80), height: UIScreen.getHeight(90))
+                                            .frame(width: 95, height: 105)
                                             .clipped()
                                             .scaleEffect()
                                             .offset(y: UIScreen.getHeight(-15))
@@ -109,9 +106,6 @@ struct RecordDetailView: View {
                                 ZStack {
                                     
                                     Image("StoryComp")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: UIScreen.getWidth(160), height: UIScreen.getHeight(150))
                                     
                                     Text(item.story ?? "")
                                         .font(Font.customBody2())
@@ -132,7 +126,7 @@ struct RecordDetailView: View {
                             }
                             Spacer()
                         }
-                        .padding(.top, UIScreen.getHeight(130))
+                        .padding(.top, UIScreen.getHeight(150))
                     }
                 }
             }
