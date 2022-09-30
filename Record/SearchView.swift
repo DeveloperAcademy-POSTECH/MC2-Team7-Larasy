@@ -16,6 +16,7 @@ struct SearchView: View {
     @State var search = ""
     @State var progress: Bool
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
+    @FocusState private var isSearchbarFocused: Bool?
     
     init() {
         // 검색 결과 출력 리스트 배경색 초기화
@@ -68,6 +69,13 @@ struct SearchView: View {
                 TextField("", text: $search) // 입력창
                     .foregroundColor(.titleBlack)
                     .font(.customBody2())
+                    .focused($isSearchbarFocused, equals: true)
+                    .disableAutocorrection(true)
+                    .task {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                            isSearchbarFocused = true
+                        }
+                    }
                     .onChange(of: search, perform: { _ in
                         progress = true
                         musicAPI.getSearchResults(search: search) // 음악 API 불러오기
