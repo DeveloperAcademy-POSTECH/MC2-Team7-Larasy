@@ -41,10 +41,14 @@ struct SnapCarousel: View {
                                                 .foregroundColor(Color.titleBlack)
                                                 .font(Font.customTitle3())
                                                 .padding(.bottom, UIScreen.getHeight(2))
+                                                .frame(minWidth: UIScreen.getWidth(340))
+                                            
                                             Text(items[content].artist!)
                                                 .foregroundColor(Color.titleDarkgray)
                                                 .font(Font.customBody2())
                                                 .padding(.bottom, UIScreen.getHeight(20))
+                                                .frame(minWidth: UIScreen.getWidth(340))
+                                            
                                         } else {
                                             Spacer()
                                                 .frame(height: UIScreen.getHeight(70))

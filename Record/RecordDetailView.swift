@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreData
+import LinkPresentation
 
 struct RecordDetailView: View {
     
@@ -56,75 +57,87 @@ struct RecordDetailView: View {
                 .padding(.leading, UIScreen.getWidth(35))
                 .padding(.top, UIScreen.getHeight(15))
                 
-                // MARK: - 가사
-                ZStack {
-                    Image("LylicComp")
-                    
-                    Text(item.lyrics ?? "")
-                        .foregroundColor(.titleDarkgray)
-                        .font(.customBody2())
-                        .frame(width: UIScreen.getWidth(240), alignment: .center)
-                }
-                .padding(.bottom, UIScreen.getHeight(15))
                 
-                HStack(alignment: .bottom) {
-                    
-                    VStack(spacing: UIScreen.getHeight(40)) {
-                        // MARK: Image
-                        ZStack(alignment: .top) {
+                ZStack {
+                    VStack(spacing: 40) {
+                        
+                        // MARK: - 가사
+                        ZStack {
+                            Image("LylicComp")
                             
-                            Image("DetailPhotoComp") // 이미지 삽입
-                            //                                .padding()
-                                .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
-                            
-                            if let image = item.image {
-                                Image(uiImage: UIImage(data: image)!)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: UIScreen.getWidth(95), height: UIScreen.getHeight(105))
-                                    .clipped()
-                                    .scaleEffect()
-                                    .padding(.top, UIScreen.getHeight(15))
-                            }
-                        }
-                        .onTapGesture {
-                            photo.toggle()
-                            UIView.setAnimationsEnabled(false)
+                            Text(item.lyrics ?? "")
+                                .foregroundColor(.titleDarkgray)
+                                .font(.customBody2())
+                                .frame(width: UIScreen.getWidth(240), alignment: .center)
                         }
                         
-                        // MARK: Story
-                        ZStack {
-                            
-                            Image("StoryComp")
-                            
-                            Text(item.story ?? "")
-                                .font(Font.customBody2())
-                                .foregroundColor(.titleDarkgray)
-                                .lineLimit(5)
-                                .truncationMode(.tail)
-                                .multilineTextAlignment(.leading)
-                                .lineSpacing(5)
-                                .frame(width: UIScreen.getWidth(130))
+                        // MARK: CD Player
+                        HStack {
+                            Spacer()
+                            CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
                         }
-                        .padding(.leading, UIScreen.getWidth(30))
-                        .onTapGesture {
-                            story.toggle()
-                            UIView.setAnimationsEnabled(false)
-                        }
-                        .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
-                        .fixedSize()
                     }
-                    CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
+                    
+                    ZStack {
+                        HStack {
+                            VStack(spacing: UIScreen.getHeight(60)) {
+                                
+                                // MARK: Image
+                                ZStack {
+                                    Image("DetailPhotoComp") // 이미지 삽입
+                                        .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
+                                    
+                                    if let image = item.image {
+                                        Image(uiImage: UIImage(data: image)!)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 95, height: 105)
+                                            .clipped()
+                                            .scaleEffect()
+                                            .offset(y: UIScreen.getHeight(-15))
+                                    }
+                                }
+                                .onTapGesture {
+                                    photo.toggle()
+                                    UIView.setAnimationsEnabled(false)
+                                }
+                                .padding(.top, UIScreen.getHeight(30))
+                                
+                                // MARK: Story
+                                ZStack {
+                                    
+                                    Image("StoryComp")
+                                    
+                                    Text(item.story ?? "")
+                                        .font(Font.customBody2())
+                                        .foregroundColor(.titleDarkgray)
+                                        .lineLimit(5)
+                                        .truncationMode(.tail)
+                                        .multilineTextAlignment(.leading)
+                                        .lineSpacing(5)
+                                        .frame(width: UIScreen.getWidth(130))
+                                }
+                                .onTapGesture {
+                                    story.toggle()
+                                    UIView.setAnimationsEnabled(false)
+                                }
+                                .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
+                                .fixedSize()
+                                .offset(x: UIScreen.getWidth(62))
+                            }
+                            Spacer()
+                        }
+                        .padding(.top, UIScreen.getHeight(150))
+                    }
                 }
-                
             }
             .frame(maxHeight: .infinity, alignment: .topLeading)
         }
         .navigationBarItems(trailing: Menu(content: {
             
-            Button(action: {
+            Button(action: { // MARK: 편집 기능
                 clickEdit.toggle()
-            }) { // TODO: antion내에 편집 기능 예정
+            }) {
                 Label("편집", systemImage: "square.and.pencil")
             }
             
@@ -166,9 +179,9 @@ struct RecordDetailView: View {
         
     }
     func actionSheet() {
-        
         let shareImage = self.snapShot()
-        let activitiViewController = UIActivityViewController(activityItems: [shareImage], applicationActivities: nil)
+        let activityItemMetadata = MyActivityItemSource(text: "\(item.title!) - \(item.artist!)" , image: shareImage)
+        let activitiViewController = UIActivityViewController(activityItems: [activityItemMetadata, shareImage], applicationActivities: nil)
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         windowScene?.windows.first?.rootViewController?.present(activitiViewController, animated: true, completion: nil)
     }
@@ -232,5 +245,38 @@ struct CDPlayerComp: View {
         } else {
             return UIImage(systemName: "xmark")!
         }
+    }
+}
+
+//출처: https://developer.apple.com/forums/thread/687916
+class MyActivityItemSource: NSObject, UIActivityItemSource {
+    var title: String = "RE:CORD"
+    var text: String
+    var image: UIImage
+    
+    init(text: String, image: UIImage) {
+        self.text = text
+        self.image = image
+        super.init()
+    }
+    
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return text
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return text
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+        return title
+    }
+
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        let metadata = LPLinkMetadata()
+        metadata.title = title
+        metadata.iconProvider = NSItemProvider(object: UIImage(imageLiteralResourceName: "AppIcon") )
+        metadata.originalURL = URL(fileURLWithPath: text)
+        return metadata
     }
 }
