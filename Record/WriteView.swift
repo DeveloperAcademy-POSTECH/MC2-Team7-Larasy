@@ -46,13 +46,13 @@ struct WriteView: View {
                     
                     // MARK: 노래 정보
                     VStack(alignment: .leading, spacing: UIScreen.getHeight(10)) {
-                        Text(music.title) // MARK: "music.title"
+                        Text(music.title)
                             .font(.customTitle2())
                             .fontWeight(.bold)
                             .foregroundColor(.titleBlack)
                             .multilineTextAlignment(.leading)
                         
-                        Text(music.artist) //MARK: "music.artist"
+                        Text(music.artist)
                             .font(.customBody1())
                             .fontWeight(.regular)
                             .foregroundColor(.titleDarkgray)
@@ -62,90 +62,108 @@ struct WriteView: View {
                     .padding(.leading, UIScreen.getWidth(35))
                     .padding(.top, UIScreen.getHeight(15))
                     
-                    //MARK: - 가사 입력 받는 뷰 시작
                     ZStack {
-                        Image("LylicComp") // 가사 입력
-                        
-                        TextField("\(Image(systemName: "music.mic")) 기억하고 싶은 가사",         // 가사 입력하는 텍스트 필드
-                                  text: $lyrics)
-                        .font(Font.customBody2())
-                        .disableAutocorrection(true)
-                        .multilineTextAlignment(.center)
-                        .frame(width: UIScreen.getWidth(240), alignment: .center)
-                        .foregroundColor(.titleDarkgray)
-                        
-                    }
-                    .padding(.bottom, UIScreen.getHeight(15))
-                    HStack(alignment: .bottom) {
-                        //MARK: - // 클릭시 모달을 통해 이미지 띄우는 부분
-                        
-                        VStack(spacing: UIScreen.getHeight(40)) {
-                            ZStack {
-                                Image("PhotoComp")
-                                
-                                image?                       // 사용자가 가져온 이미지를 보여주는 부분
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: UIScreen.getWidth(95), height: UIScreen.getHeight(105))
-                                    .clipped()
-                                    .scaleEffect()
-                                    .offset(y: UIScreen.getHeight(-15))
-                                
-                            }
-                            .onTapGesture {
-                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
-                                
-                                showingImagePicker = true
-                            }
-                            .zIndex(1)
-                            .onChange(of: inputImage) { _ in loadImage() }
-                            .sheet(isPresented: $showingImagePicker) {
-                                ImagePicker(image: $inputImage)
-                            }
+                        VStack(spacing: 40) {
                             
-                            // MARK: 이야기 작성 모달뷰로 이동
+                            // MARK: 가사 입력
                             ZStack {
-                                Image("StoryComp")
+                                Image("LylicComp")
                                 
-                                if !content.isEmpty {
-                                    Text(content)
-                                        .font(Font.customBody2())
-                                        .foregroundColor(.titleDarkgray)
-                                        .lineLimit(5)
-                                        .truncationMode(.tail)
-                                        .multilineTextAlignment(.leading)
-                                        .lineSpacing(5)
-                                        .frame(width: UIScreen.getWidth(130))
-                                } else {
-                                    VStack {
-                                        Image(systemName: "plus")
-                                            .foregroundColor(.titleGray)
-                                            .padding(UIScreen.getHeight(5))
-                                        Text("나의 음악 이야기")
-                                            .foregroundColor(.titleGray)
-                                            .font(.customBody1())
-                                    }
-                                }
+                                TextField("\(Image(systemName: "music.mic")) 기억하고 싶은 가사", text: $lyrics)
+                                    .font(Font.customBody2())
+                                    .disableAutocorrection(true)
+                                    .multilineTextAlignment(.center)
+                                    .frame(width: UIScreen.getWidth(240), alignment: .center)
+                                    .foregroundColor(.titleDarkgray)
+                                
                             }
-                            .onTapGesture {
-                                savestory.toggle()
-                                UIView.setAnimationsEnabled(false)
+//                            .padding(.vertical, UIScreen.getHeight(15))
+                            
+                            // MARK: CD Player
+                            HStack {
+                                Spacer()
+                                CDPlayerComp(music: music)
                             }
-                            .fullScreenCover(isPresented: $savestory, onDismiss: { savestory = false }, content: {
-                                WritingModalView(content: $content)
-                            })
-                            //MARK: - 이야기 입력 받는 Button 끝
-                            .offset(x: 62)
                         }
                         
-                        //MARK: - 이미지 가져오는 부분 끝
                         
-                        CDPlayerComp(music: music) //MARK: SearchView에서 music 받아옴
-                        //MARK: - CD 플레어이 뷰 시작
-                        
+                        ZStack {
+                            HStack {
+                                VStack(spacing: UIScreen.getHeight(60)) {
+                                    
+                                    //MARK: 폴라로이드
+                                    ZStack {
+                                        Image("PhotoComp")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: UIScreen.getWidth(100), height: UIScreen.getHeight(153))
+                                        
+                                        image?                       // 사용자가 가져온 이미지를 보여주는 부분
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: UIScreen.getWidth(90), height: UIScreen.getHeight(100))
+                                            .clipped()
+                                            .scaleEffect()
+                                            .offset(y: UIScreen.getHeight(-15))
+                                        
+                                    }
+                                    .onTapGesture {
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                                        
+                                        showingImagePicker = true
+                                    }
+                                    .zIndex(1)
+                                    .onChange(of: inputImage) { _ in loadImage() }
+                                    .sheet(isPresented: $showingImagePicker) {
+                                        ImagePicker(image: $inputImage)
+                                    }
+                                    .padding(.top, UIScreen.getHeight(30))
+                                    
+                                    // MARK: 이야기 작성 모달 뷰
+                                    ZStack {
+                                        Image("StoryComp")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: UIScreen.getWidth(160), height: UIScreen.getHeight(150))
+                                        
+                                        if !content.isEmpty {
+                                            Text(content)
+                                                .font(Font.customBody2())
+                                                .foregroundColor(.titleDarkgray)
+                                                .lineLimit(5)
+                                                .truncationMode(.tail)
+                                                .multilineTextAlignment(.leading)
+                                                .lineSpacing(5)
+                                                .frame(width: UIScreen.getWidth(130))
+                                        } else {
+                                            VStack {
+                                                Image(systemName: "plus")
+                                                    .foregroundColor(.titleGray)
+                                                    .padding(UIScreen.getHeight(5))
+                                                Text("나의 음악 이야기")
+                                                    .foregroundColor(.titleGray)
+                                                    .font(.customBody1())
+                                            }
+                                        }
+                                    }
+                                    .onTapGesture {
+                                        savestory.toggle()
+                                        UIView.setAnimationsEnabled(false)
+                                    }
+                                    .fullScreenCover(isPresented: $savestory, onDismiss: { savestory = false }, content: {
+                                        WritingModalView(content: $content)
+                                    })
+                                    .offset(x: UIScreen.getWidth(62))
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(.top, UIScreen.getHeight(130))
+                        }
                     }
                 }
                 .frame(maxHeight: .infinity, alignment: .topLeading)
+                
             }
             
             // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동
@@ -251,6 +269,6 @@ struct NavigationUtil {
 
 struct WriteView_Previews: PreviewProvider {
     static var previews: some View {
-        WriteView(music: Music(artist: "가수이름", title: "노래제목", albumArt: ""), isEdit: .constant(false))
+        WriteView(music: Music(artist: "가수이름", title: "노래제목", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"), isEdit: .constant(false))
     }
 }
