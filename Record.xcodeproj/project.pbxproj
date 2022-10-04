@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		13C0E4A228573795004ABE1D /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C0E4A128573795004ABE1D /* RecordDetailView.swift */; };
-		13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E0DA9F285A3764008714A6 /* RecordUIView.swift */; };
 		3D49B5AE285A02B50054FDED /* StoryModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D49B5AD285A02B50054FDED /* StoryModalView.swift */; };
 		3D49B5B0285A41570054FDED /* PhotoModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D49B5AF285A41570054FDED /* PhotoModalView.swift */; };
 		3D593E472858530B00E481C7 /* WritingModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D593E462858530B00E481C7 /* WritingModalView.swift */; };
 		7906EFED28577D950064056F /* WriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7906EFEC28577D950064056F /* WriteView.swift */; };
-		790FF14B285B008A00931CCF /* MusicList.json in Resources */ = {isa = PBXBuildFile; fileRef = 790FF14A285B008A00931CCF /* MusicList.json */; };
 		79418F7B2858C17C00F844BD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79418F7A2858C17C00F844BD /* ImagePicker.swift */; };
 		7949F34E285B88120093579B /* WritingModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7949F34D285B88120093579B /* WritingModalView.swift */; };
 		794AD0072851EEA700414667 /* RecordApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794AD0062851EEA700414667 /* RecordApp.swift */; };
@@ -43,13 +41,11 @@
 
 /* Begin PBXFileReference section */
 		13C0E4A128573795004ABE1D /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
-		13E0DA9F285A3764008714A6 /* RecordUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUIView.swift; sourceTree = "<group>"; };
 		3D49B5AD285A02B50054FDED /* StoryModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModalView.swift; sourceTree = "<group>"; };
 		3D49B5AF285A41570054FDED /* PhotoModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModalView.swift; sourceTree = "<group>"; };
 		3D593E462858530B00E481C7 /* WritingModalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritingModalView.swift; sourceTree = "<group>"; };
 		3D7E7941285B81860019ED45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7906EFEC28577D950064056F /* WriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteView.swift; sourceTree = "<group>"; };
-		790FF14A285B008A00931CCF /* MusicList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MusicList.json; sourceTree = "<group>"; };
 		79418F7A2858C17C00F844BD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7949F34D285B88120093579B /* WritingModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingModalView.swift; sourceTree = "<group>"; };
 		794AD0032851EEA700414667 /* Record.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Record.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,14 +85,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		790FF149285AFF9100931CCF /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				790FF14A285B008A00931CCF /* MusicList.json */,
-			);
-			path = JSON;
-			sourceTree = "<group>";
-		};
 		794ACFFA2851EEA700414667 = {
 			isa = PBXGroup;
 			children = (
@@ -133,11 +121,9 @@
 				7949F34D285B88120093579B /* WritingModalView.swift */,
 				79418F7A2858C17C00F844BD /* ImagePicker.swift */,
 				13C0E4A128573795004ABE1D /* RecordDetailView.swift */,
-				790FF149285AFF9100931CCF /* JSON */,
 				794AD00A2851EEA900414667 /* Assets.xcassets */,
 				794AD00C2851EEA900414667 /* Preview Content */,
 				8715A79C2855B5AC001AB4F5 /* Colors.xcassets */,
-				13E0DA9F285A3764008714A6 /* RecordUIView.swift */,
 				87C429EA28E37594009B6DA6 /* LaunchScreen.storyboard */,
 			);
 			path = Record;
@@ -245,7 +231,6 @@
 			files = (
 				8715A79D2855B5AC001AB4F5 /* Colors.xcassets in Resources */,
 				794AD00E2851EEA900414667 /* Preview Assets.xcassets in Resources */,
-				790FF14B285B008A00931CCF /* MusicList.json in Resources */,
 				87C429EB28E37594009B6DA6 /* LaunchScreen.storyboard in Resources */,
 				794AD00B2851EEA900414667 /* Assets.xcassets in Resources */,
 			);
@@ -271,7 +256,6 @@
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
 				87B6E3CD28EC9764002D579A /* Color+Extensions.swift in Sources */,
 				87A0D9B4285BAF42006D0D3B /* Record.xcdatamodeld in Sources */,
-				13E0DAA0285A3764008714A6 /* RecordUIView.swift in Sources */,
 				A0AA39BB285A4936009EE3EA /* OnboardingView.swift in Sources */,
 				A0AA39BF285AF643009EE3EA /* FourthPage.swift in Sources */,
 				B277EC152859A671001A97B1 /* Carousel.swift in Sources */,
