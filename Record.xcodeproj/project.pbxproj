@@ -86,8 +86,6 @@
 		794ACFFA2851EEA700414667 = {
 			isa = PBXGroup;
 			children = (
-				87B6E3C828EC963C002D579A /* Extensions */,
-				8715A7992855477D001AB4F5 /* Model */,
 				794AD0052851EEA700414667 /* Record */,
 				794AD0042851EEA700414667 /* Products */,
 			);
@@ -104,13 +102,11 @@
 		794AD0052851EEA700414667 /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				87B6E3DA28EC9C5A002D579A /* Views */,
 				3D7E7941285B81860019ED45 /* Info.plist */,
-				79418F7A2858C17C00F844BD /* ImagePicker.swift */,
-				794AD00A2851EEA900414667 /* Assets.xcassets */,
-				794AD00C2851EEA900414667 /* Preview Content */,
-				8715A79C2855B5AC001AB4F5 /* Colors.xcassets */,
-				87C429EA28E37594009B6DA6 /* LaunchScreen.storyboard */,
+				87B6E3C828EC963C002D579A /* Extensions */,
+				8715A7992855477D001AB4F5 /* Model */,
+				87B6E3DA28EC9C5A002D579A /* Views */,
+				87B6E3DB28EC9D53002D579A /* Resources */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -129,6 +125,7 @@
 				8715A79A2855479E001AB4F5 /* MusicAPI.swift */,
 				87FB281C285A04680036A5BB /* Screenshot.swift */,
 				87A0D9B0285BAEF8006D0D3B /* Persistence.swift */,
+				79418F7A2858C17C00F844BD /* ImagePicker.swift */,
 				87A0D9B2285BAF42006D0D3B /* Record.xcdatamodeld */,
 			);
 			path = Model;
@@ -178,6 +175,7 @@
 		87B6E3DA28EC9C5A002D579A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				87C429EA28E37594009B6DA6 /* LaunchScreen.storyboard */,
 				794AD0062851EEA700414667 /* RecordApp.swift */,
 				A01413212855F4E60000EA59 /* HomeView.swift */,
 				87E96F4728DF9389007D167E /* OnboardingViews */,
@@ -186,6 +184,16 @@
 				87B6E3D928EC9C27002D579A /* CDListView */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		87B6E3DB28EC9D53002D579A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				794AD00C2851EEA900414667 /* Preview Content */,
+				794AD00A2851EEA900414667 /* Assets.xcassets */,
+				8715A79C2855B5AC001AB4F5 /* Colors.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		87E96F4728DF9389007D167E /* OnboardingViews */ = {
