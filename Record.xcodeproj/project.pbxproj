@@ -107,6 +107,7 @@
 				8715A7992855477D001AB4F5 /* Model */,
 				87B6E3DA28EC9C5A002D579A /* Views */,
 				87B6E3DB28EC9D53002D579A /* Resources */,
+				794AD00C2851EEA900414667 /* Preview Content */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -189,7 +190,6 @@
 		87B6E3DB28EC9D53002D579A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				794AD00C2851EEA900414667 /* Preview Content */,
 				794AD00A2851EEA900414667 /* Assets.xcassets */,
 				8715A79C2855B5AC001AB4F5 /* Colors.xcassets */,
 			);
