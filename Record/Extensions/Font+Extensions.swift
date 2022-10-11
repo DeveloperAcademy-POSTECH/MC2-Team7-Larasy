@@ -1,32 +1,11 @@
 //
-//  Extension.swift
-//  Recorder
+//  Font+Extensions.swift
+//  Record
 //
-//  Created by 이지원 on 2022/06/12.
+//  Created by 이지원 on 2022/10/05.
 //
 
 import SwiftUI
-
-extension Color {
-    // 피그마에 등록된 색상 보시고, 사용하시면 됩니다!
-    // foreground(.titleBlack) 이런식으로 사용하시면 돼요!
-    
-    //title 색상
-    static let titleBlack = Color("black")
-    static let titleDarkgray = Color("darkgray")
-    static let titleGray = Color("gray")
-    static let titleLightgray = Color("lightgray")
-    
-    //point color
-    static let pointBlue = Color("blue")
-    static let pointOrange = Color("orange")
-    static let pointYellow = Color("yellow")
-    
-    //etc
-    static let background = Color("background")
-    static let cdplayer = Color("cdplayer")
-
-}
 
 extension Font {
     // 피그마에 사용된 폰트 보시고, 사용하시면 됩니다!
@@ -100,33 +79,5 @@ extension Font {
             break
         }
         return size
-    }
-}
-
-extension View {
-    func placeholder<Content: View>(
-        when shouldShow: Bool,
-        alignment: Alignment = .leading,
-        @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
-        }
-    }
-}
-
-extension UIScreen {
-    
-    static let screenWidth = UIScreen.main.bounds.size.width
-    static let screenHeight = UIScreen.main.bounds.size.height
-    static let screenSize = UIScreen.main.bounds.size
-
-    static func getWidth(_ width: CGFloat) -> CGFloat {
-        screenWidth / 390 * width
-    }
-
-    static func getHeight(_ height: CGFloat) -> CGFloat {
-        screenHeight / 844 * height
     }
 }
