@@ -29,6 +29,7 @@ struct WriteView: View {
     @State private var lyrics = ""
     @State private var content = ""
     
+    @Binding var isWrite: Bool
     @Binding var isEdit: Bool
     @State var item: Content?
     @State var index: Int = -1
@@ -77,7 +78,7 @@ struct WriteView: View {
                                     .foregroundColor(.titleDarkgray)
                                 
                             }
-//                            .padding(.vertical, UIScreen.getHeight(15))
+                            //                            .padding(.vertical, UIScreen.getHeight(15))
                             
                             // MARK: CD Player
                             HStack {
@@ -165,15 +166,28 @@ struct WriteView: View {
                 .frame(maxHeight: .infinity, alignment: .topLeading)
                 
             }
-            
+            .navigationBarBackButtonHidden(true)
             // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동
             .toolbar {
                 
                 ToolbarItem(placement: .navigationBarLeading) {
                     if isEdit {
-                        Button("닫기", action: {
-                            presentationMode.wrappedValue.dismiss()
-                        })
+                        if isWrite {
+                            Button {
+                                PersistenceController.shared.deleteContent(item: item ?? Content())
+                                presentationMode.wrappedValue.dismiss()
+                            } label: {
+                                HStack {
+                                    Image(systemName: "chevron.backward")
+                                        .font(Font.headline.weight(.semibold))
+                                    Text("음악 선택")
+                                }
+                            }
+                        } else {
+                            Button("닫기", action: {
+                                presentationMode.wrappedValue.dismiss()
+                            })
+                        }
                     }
                 }
                 
@@ -199,7 +213,7 @@ struct WriteView: View {
                             Alert(
                                 title: Text("저장 완료"),
                                 dismissButton: .default(Text("확인")) {
-                                    if isEdit {
+                                    if isEdit && !isWrite {
                                         presentationMode.wrappedValue.dismiss()
                                     } else {
                                         NavigationUtil.popToRootView()
@@ -269,6 +283,6 @@ struct NavigationUtil {
 
 struct WriteView_Previews: PreviewProvider {
     static var previews: some View {
-        WriteView(music: Music(artist: "가수이름", title: "노래제목", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"), isEdit: .constant(false))
+        WriteView(music: Music(artist: "가수이름", title: "노래제목", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"), isWrite: .constant(true), isEdit: .constant(false))
     }
 }

@@ -17,8 +17,9 @@ struct SearchView: View {
     @State var progress: Bool
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
     @FocusState private var isSearchbarFocused: Bool?
+    @State var isAcessFirst: Bool
     
-    init() {
+    init(isAccessFirst: Bool) {
         // 검색 결과 출력 리스트 배경색 초기화
         UITableView.appearance().backgroundColor = UIColor.clear
         
@@ -26,6 +27,7 @@ struct SearchView: View {
         let state = State(initialValue: false)
         self._progress = state
         self.musicAPI = MusicAPI(progress: state.projectedValue)
+        self.isAcessFirst = isAccessFirst
     }
     
     var body: some View {
@@ -136,7 +138,7 @@ struct SearchView: View {
                             .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: WriteView(music: music, isEdit: .constant(false), item: nil)) {
+                        NavigationLink(destination: WriteView(music: music, isWrite: .constant(true) ,isEdit: .constant(true), item: nil)) {
                             
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {
@@ -162,6 +164,12 @@ struct SearchView: View {
                 
             } // List End
             .listStyle(.plain)
+            .onAppear() {
+                if isAcessFirst {
+                    self.musicAPI.musicList = []
+                    isAcessFirst = false
+                }
+            }
             
         } // GeometryReder End
         
@@ -212,6 +220,6 @@ struct URLImage: View {
 // MARK: - 현재 뷰 프리뷰
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchView(isAccessFirst: true)
     }
 }

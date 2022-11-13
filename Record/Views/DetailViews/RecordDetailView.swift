@@ -159,7 +159,7 @@ struct RecordDetailView: View {
         }))// Menu 목록 End
         .fullScreenCover(isPresented: $clickEdit) {
             NavigationView {
-                WriteView(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), isEdit: .constant(true), item: item)
+                WriteView(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), isWrite: .constant(false) ,isEdit: .constant(true), item: item)
                     .navigationBarTitleDisplayMode(.inline)
             }
         }

@@ -117,7 +117,7 @@ struct HomeView: View {
                                         .padding()
                                     
                                     VStack(spacing: 0) {
-                                        NavigationLink(destination: SearchView()) {
+                                        NavigationLink(destination: SearchView(isAccessFirst: true)) {
                                             Image("note")
                                                 .resizable()
                                                 .scaledToFill()
