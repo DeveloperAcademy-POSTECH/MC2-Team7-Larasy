@@ -138,7 +138,7 @@ struct SearchView: View {
                             .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: WriteView(music: music, isEdit: .constant(false), item: nil)) {
+                        NavigationLink(destination: WriteView(music: music, isWrite: .constant(true) ,isEdit: .constant(true), item: nil)) {
                             
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {
