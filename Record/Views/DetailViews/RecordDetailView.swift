@@ -16,7 +16,7 @@ struct RecordDetailView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(\.presentationMode) var presentation: Binding<PresentationMode>
     
-    let item: Content
+    @Binding var item: Content
     
     @State private var photo = false
     @State private var story = false
@@ -31,7 +31,7 @@ struct RecordDetailView: View {
             }
         }
     }
-    
+
     var body: some View {
         
         ZStack {
@@ -131,6 +131,11 @@ struct RecordDetailView: View {
                     }
                 }
             }
+            .onChange(of: item, perform: { newValue in
+                item.lyrics = newValue.lyrics
+                item.image = newValue.image
+                item.story = newValue.story
+            })
             .frame(maxHeight: .infinity, alignment: .topLeading)
         }
         .navigationBarItems(trailing: Menu(content: {
@@ -175,9 +180,8 @@ struct RecordDetailView: View {
                 }
             } message: {  }
         // 본문 ZStack End
-        
-        
     }
+    
     func actionSheet() {
         let shareImage = self.snapShot()
         let activityItemMetadata = MyActivityItemSource(text: "\(item.title!) - \(item.artist!)" , image: shareImage)
