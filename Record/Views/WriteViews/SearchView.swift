@@ -178,29 +178,6 @@ struct SearchView: View {
 } //SearchView struct End
 
 
-
-// MARK: - 앨범 커버 불러오기
-struct URLImage: View {
-    
-    var urlString: String
-    
-    var body: some View {
-        
-        AsyncImage(url: URL(string: urlString)) { image in
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .background(.gray)
-            
-        } placeholder: {
-            Rectangle()
-                .foregroundColor(.titleLightgray)
-                .aspectRatio(contentMode: .fit)
-        }
-    }
-}
-
-
 // MARK: - 현재 뷰 프리뷰
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
