@@ -178,45 +178,6 @@ struct SearchView: View {
 } //SearchView struct End
 
 
-
-// MARK: - 앨범 커버 불러오기
-struct URLImage: View {
-    
-    @State var data: Data?
-    let urlString: String
-    
-    var body: some View {
-        
-        // 앨범 커버 불러오기
-        if let data = data, let uiimage = UIImage(data: data) { // 이미지 불러오기 성공
-            
-            Image(uiImage: uiimage) // URL Image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .background(.gray)
-            
-        } else { // 이미지 불러오기 실패
-            
-            Rectangle() // 회색 박스
-                .foregroundColor(.titleLightgray)
-                .aspectRatio(contentMode: .fit)
-                .onAppear() {
-                    fetchData()
-                }
-        }
-    }
-    
-    private func fetchData() {
-        guard let url = URL(string: urlString) else { return }
-        
-        let task = URLSession.shared.dataTask(with: url) { data, _, _ in
-            self.data = data
-        }
-        task.resume()
-    }
-}
-
-
 // MARK: - 현재 뷰 프리뷰
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
