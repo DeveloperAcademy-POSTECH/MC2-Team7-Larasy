@@ -33,17 +33,18 @@ struct HomeView: View {
                                 
                                 // MARK: link to CDListView
                                 
-                                VStack {
+                                VStack(spacing: 0) {
                                     Text("내 음악 보러 가기")
                                         .foregroundColor(.titleDarkgray)
                                         .font(Font.customHeadline())
-                                        .padding(.top, UIScreen.getHeight(50))
+                                        .padding(.top, UIScreen.getHeight(90))
+                                        .padding(.bottom, UIScreen.getHeight(6))
                                     
                                     NavigationLink(destination: CdListView()) {
                                         Image("album")
                                             .resizable()
-                                            .scaledToFill()
-                                            .frame(width: UIScreen.getWidth(130), height: UIScreen.getHeight(134))
+                                            .scaledToFit()
+                                            .frame(width: UIScreen.getWidth(130))
                                     }
                                     .navigationBarTitle("홈")
                                     
@@ -114,14 +115,14 @@ struct HomeView: View {
                                     Text("음악 기록하기")
                                         .foregroundColor(.titleDarkgray)
                                         .font(Font.customHeadline())
-                                        .padding()
+                                        .padding(.bottom, UIScreen.getHeight(6))
                                     
                                     VStack(spacing: 0) {
                                         NavigationLink(destination: SearchView(isAccessFirst: true)) {
                                             Image("note")
                                                 .resizable()
-                                                .scaledToFill()
-                                                .frame(width: UIScreen.getWidth(170), height: UIScreen.getHeight(156))
+                                                .scaledToFit()
+                                                .frame(width: UIScreen.getWidth(170))
                                         }
                                     }
                                     
