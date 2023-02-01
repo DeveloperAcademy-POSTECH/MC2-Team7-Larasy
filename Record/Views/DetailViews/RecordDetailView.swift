@@ -131,11 +131,6 @@ struct RecordDetailView: View {
                     }
                 }
             }
-            .onChange(of: item, perform: { newValue in
-                item.lyrics = newValue.lyrics
-                item.image = newValue.image
-                item.story = newValue.story
-            })
             .frame(maxHeight: .infinity, alignment: .topLeading)
         }
         .navigationBarItems(trailing: Menu(content: {
