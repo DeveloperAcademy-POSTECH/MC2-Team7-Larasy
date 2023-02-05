@@ -202,7 +202,7 @@ struct WriteView: View {
                         Button("저장") {
                             
                             item!.story = content
-                            item!.image = inputImage!.pngData()
+                            item!.image = inputImage!.jpegData(compressionQuality: 1)
                             item!.lyrics = lyrics
                             
                             PersistenceController.shared.saveContent()
