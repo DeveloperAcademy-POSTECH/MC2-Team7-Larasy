@@ -159,6 +159,9 @@ struct CdListView: View {
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.9, blendDuration: 0)) {
                         pointX = -(CGFloat(currentIndex) * cdSize + (CGFloat(currentIndex) * spacing))
                     }
+                    
+                    let haptic = UIImpactFeedbackGenerator(style: .soft)
+                    haptic.impactOccurred()
                 }
     )
         .frame(height: cdSize)
