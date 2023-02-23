@@ -53,6 +53,10 @@ struct CdListView: View {
         .ignoresSafeArea()
         .onAppear {
             items = PersistenceController.shared.fetchContent()
+            currentIndex = min(currentIndex, items.count - 1)
+            withAnimation {
+                pointX = -(CGFloat(currentIndex) * cdSize + (CGFloat(currentIndex) * spacing))
+            }
         }
     }
     
@@ -82,7 +86,7 @@ struct CdListView: View {
         ZStack {
             GeometryReader { proxy in
                 HStack(spacing: spacing) {
-                    ForEach (0 ..< items.count, id: \.self) { i in
+                    ForEach (items.indices, id: \.self) { i in
                         ZStack {
                             URLImage(urlString: items[i].albumArt ?? "")
                                 .aspectRatio(contentMode: .fill)
@@ -181,7 +185,6 @@ struct CdListView: View {
             ZStack {
                 Image("ListViewCdPlayer")
                     .offset(y: 30)
-                
                 NavigationLink(destination: RecordDetailView(item: $items[currentIndex]), isActive: $showDetailView) {
                     URLImage(urlString: items[currentIndex].albumArt ?? "")
                         .clipShape(Circle())
