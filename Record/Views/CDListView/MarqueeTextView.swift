@@ -22,7 +22,7 @@ struct MarqueeTextView: View {
     
     var body: some View {
         
-        if text.textSize(font: font).width < UIScreen.getWidth(340) {
+        if textSize().width < UIScreen.getWidth(340) {
             Text(text)
                 .font(Font(font))
         } else {
