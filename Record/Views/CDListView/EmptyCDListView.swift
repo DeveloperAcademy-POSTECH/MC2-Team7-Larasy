@@ -7,9 +7,13 @@
 
 import SwiftUI
 
+/**
+ data가 비어있을 때, 출력되는 뷰 입니다.
+ */
 struct EmptyCDListView: View {
     var body: some View {
         VStack {
+            
             Text("아직 기록된 음악이 없어요")
                 .font(Font.customTitle2())
                 .foregroundColor(.titleGray)
