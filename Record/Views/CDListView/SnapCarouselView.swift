@@ -37,9 +37,8 @@ struct SnapCarousel: View {
                                     // 가운데 cd만 글이 보이게 함
                                     VStack {
                                         if content == UIState.activeCard {
-                                            Text(items[content].title!)
+                                            MarqueeTextView(text: items[content].title!, font: UIFont.customTitle3())
                                                 .foregroundColor(Color.titleBlack)
-                                                .font(Font.customTitle3())
                                                 .padding(.bottom, UIScreen.getHeight(2))
                                                 .frame(minWidth: UIScreen.getWidth(340))
                                             
@@ -48,6 +47,7 @@ struct SnapCarousel: View {
                                                 .font(Font.customBody2())
                                                 .padding(.bottom, UIScreen.getHeight(20))
                                                 .frame(minWidth: UIScreen.getWidth(340))
+                                                .lineLimit(1)
                                             
                                         } else {
                                             Spacer()
