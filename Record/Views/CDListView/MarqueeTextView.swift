@@ -50,9 +50,7 @@ struct MarqueeTextView: View {
                 
                 let baseText = text
                 
-                (1...15).forEach { _ in
-                    text.append(" ")
-                }
+                text += String(repeating: " ", count: 15)
                 storedSize = textSize()
                 text.append(baseText)
                 
