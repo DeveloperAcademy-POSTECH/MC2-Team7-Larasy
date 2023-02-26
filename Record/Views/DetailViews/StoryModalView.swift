@@ -57,6 +57,9 @@ struct StoryModalView: View {
                 }
             } // 본문 Frame & Text 끝
         }
+        .onDisappear {
+            UIView.setAnimationsEnabled(true)
+        }
     }
 }
 
