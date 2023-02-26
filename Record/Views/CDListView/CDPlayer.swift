@@ -15,7 +15,7 @@ import SwiftUI
  */
 
 
-struct CdPlayer: View {
+struct CDPlayer: View {
     
     @Binding var item: Content
     

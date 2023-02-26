@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CdListView: View {
+struct CDListView: View {
     
     @State private var items = PersistenceController.shared.fetchContent()
     @State private var currentIndex = 0
@@ -27,7 +27,7 @@ struct CdListView: View {
                     VStack(spacing: 0) {
                         MusicInformation(item: $items[currentIndex])
                         CDList(items: $items, currentIndex: $currentIndex)
-                        CdPlayer(item: $items[currentIndex])
+                        CDPlayer(item: $items[currentIndex])
                     }
                 }
             }

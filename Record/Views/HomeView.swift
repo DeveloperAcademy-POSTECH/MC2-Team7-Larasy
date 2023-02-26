@@ -40,7 +40,7 @@ struct HomeView: View {
                                         .padding(.top, UIScreen.getHeight(90))
                                         .padding(.bottom, UIScreen.getHeight(6))
                                     
-                                    NavigationLink(destination: CdListView()) {
+                                    NavigationLink(destination: CDListView()) {
                                         Image("album")
                                             .resizable()
                                             .scaledToFit()
