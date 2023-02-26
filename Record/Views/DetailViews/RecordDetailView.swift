@@ -31,7 +31,7 @@ struct RecordDetailView: View {
             }
         }
     }
-
+    
     var body: some View {
         
         ZStack {
@@ -270,7 +270,7 @@ class MyActivityItemSource: NSObject, UIActivityItemSource {
     func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
         return title
     }
-
+    
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metadata = LPLinkMetadata()
         metadata.title = title
