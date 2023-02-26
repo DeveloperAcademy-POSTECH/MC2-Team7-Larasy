@@ -25,7 +25,12 @@ struct CDListView: View {
                 } else {
                     
                     VStack(spacing: 0) {
-                        MusicInformation(item: $items[currentIndex])
+                        
+                        ForEach (items.indices, id: \.self) { i in
+                            if i == currentIndex {
+                                MusicInformation(item: $items[i])
+                            }
+                        }
                         CDList(items: $items, currentIndex: $currentIndex)
                         CDPlayer(item: $items[currentIndex])
                     }
