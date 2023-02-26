@@ -107,7 +107,10 @@ struct WritingModalView: View {
                 .background(Color.white)
             } // Modal Background Frame & Color 끝
             
-            
+
+        }
+        .onDisappear {
+            UIView.setAnimationsEnabled(true)
         }
     }
 }

@@ -39,7 +39,11 @@
 		A01413222855F4E60000EA59 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01413212855F4E60000EA59 /* HomeView.swift */; };
 		A0AA39BB285A4936009EE3EA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AA39BA285A4936009EE3EA /* OnboardingView.swift */; };
 		A0AA39BF285AF643009EE3EA /* FourthPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AA39BE285AF643009EE3EA /* FourthPage.swift */; };
-		B277EC172859A679001A97B1 /* CDListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC162859A679001A97B1 /* CDListView.swift */; };
+		B277EC152859A671001A97B1 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC142859A671001A97B1 /* Carousel.swift */; };
+		B277EC172859A679001A97B1 /* CdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC162859A679001A97B1 /* CdListView.swift */; };
+		B29723B0285B192C0065FD36 /* SnapCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29723AF285B192C0065FD36 /* SnapCarouselView.swift */; };
+		F9BA11F329A499D500176807 /* MarqueeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BA11F229A499D500176807 /* MarqueeTextView.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,7 +81,10 @@
 		A01413212855F4E60000EA59 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A0AA39BA285A4936009EE3EA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A0AA39BE285AF643009EE3EA /* FourthPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthPage.swift; sourceTree = "<group>"; };
-		B277EC162859A679001A97B1 /* CDListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDListView.swift; sourceTree = "<group>"; };
+		B277EC142859A671001A97B1 /* Carousel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
+		B277EC162859A679001A97B1 /* CdListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CdListView.swift; sourceTree = "<group>"; };
+		B29723AF285B192C0065FD36 /* SnapCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCarouselView.swift; sourceTree = "<group>"; };
+		F9BA11F229A499D500176807 /* MarqueeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +186,7 @@
 				8786B2F429AA5CED000B46A1 /* MusicInformation.swift */,
 				8786B2F229AA5726000B46A1 /* CDList.swift */,
 				8786B2F029AA547C000B46A1 /* CDPlayer.swift */,
+				F9BA11F229A499D500176807 /* MarqueeTextView.swift */,
 			);
 			path = CDListView;
 			sourceTree = "<group>";
@@ -303,6 +311,7 @@
 				B277EC172859A679001A97B1 /* CDListView.swift in Sources */,
 				8786B2F129AA547C000B46A1 /* CDPlayer.swift in Sources */,
 				8786B2F529AA5CED000B46A1 /* MusicInformation.swift in Sources */,
+				F9BA11F329A499D500176807 /* MarqueeTextView.swift in Sources */,
 				87E96F4928DF93C4007D167E /* FirstPage.swift in Sources */,
 				87E96F4B28DF93CC007D167E /* SecondPage.swift in Sources */,
 				A01413222855F4E60000EA59 /* HomeView.swift in Sources */,

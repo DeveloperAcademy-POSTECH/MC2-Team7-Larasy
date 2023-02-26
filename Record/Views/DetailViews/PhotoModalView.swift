@@ -59,6 +59,9 @@ struct PhotoModalView: View {
                 }
             } // 본문 Frame & Photo 끝
         }
+        .onDisappear {
+            UIView.setAnimationsEnabled(true)
+        }
     }
 }
 //

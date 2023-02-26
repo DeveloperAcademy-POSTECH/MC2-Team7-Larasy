@@ -23,7 +23,7 @@ struct MusicInformation: View {
         VStack {
             
             // MARK: - 음악 제목
-            Text(item.title ?? "")
+            MarqueeTextView(text: item.title ?? "", font: UIFont.customTitle3())
                 .foregroundColor(Color.titleBlack)
                 .font(Font.customTitle3())
                 .padding(.bottom, UIScreen.getHeight(2))
