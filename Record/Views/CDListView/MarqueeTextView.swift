@@ -34,14 +34,15 @@ struct MarqueeTextView: View {
             }
             .overlay(content: {
                 HStack {
-                    let color = Color.background
+                    let colors = [Color](repeating: Color.background, count: 4)
+                    let gradientColor = zip(colors, [1, 0.7, 0.5, 0.3]).map { $0.0.opacity($0.1) }
                     
-                    LinearGradient(colors: [color, color.opacity(0.7), color.opacity(0.5), color.opacity(0.3)], startPoint: .leading, endPoint: .trailing)
+                    LinearGradient(colors: gradientColor, startPoint: .leading, endPoint: .trailing)
                         .frame(width: 20)
                     
                     Spacer()
                     
-                    LinearGradient(colors: [color, color.opacity(0.7), color.opacity(0.5), color.opacity(0.3)].reversed(), startPoint: .leading, endPoint: .trailing)
+                    LinearGradient(colors: gradientColor.reversed(), startPoint: .leading, endPoint: .trailing)
                         .frame(width: 20)
                 }
             })
