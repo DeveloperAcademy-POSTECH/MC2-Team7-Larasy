@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PhotoModalView: View {
     
-    @Environment(\.presentationMode) var presentation
+    @Binding var isPresented: Bool
     let image: Data
 
     var body: some View {
@@ -17,7 +17,9 @@ struct PhotoModalView: View {
             Color.titleBlack //Background Color
                 .opacity(0.95)
                 .ignoresSafeArea()
-            
+                .onTapGesture {
+                    self.isPresented = false
+                }
             VStack {
                 
                 // 나의 음악 사진 & x 버튼 시작
@@ -28,7 +30,9 @@ struct PhotoModalView: View {
                     Spacer()
                     
                     Button(action: { // 상단 X 버튼
-                        presentation.wrappedValue.dismiss()
+                        withAnimation {
+                            self.isPresented = false
+                        }
                     }) {
                         Image(systemName: "xmark")
                             .imageScale(.large)
@@ -37,7 +41,6 @@ struct PhotoModalView: View {
                     
                     
                 }
-                .padding(.horizontal, 48.0)
                 // 나의 음악 사진 & x 버튼 시작 끝
                 
                 // 본문 Frame & Photo 시작
@@ -49,24 +52,19 @@ struct PhotoModalView: View {
                     
                     Image(uiImage: UIImage(data: image)!)
                         .resizable()
-                        .scaledToFill()
                         .frame(minWidth: 0, maxWidth: 276 , minHeight: 0, maxHeight: 314)
-                        .clipped()
+                        .scaledToFill()
                         .padding(.top, 16)
                         .padding(.bottom, 103)
                     
                     
                 }
             } // 본문 Frame & Photo 끝
+            .frame(minWidth: 0, maxWidth: 308)
         }
+        .navigationBarBackButtonHidden(isPresented)
         .onDisappear {
             UIView.setAnimationsEnabled(true)
         }
     }
 }
-//
-//struct PhotoModalView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PhotoModalView()
-//    }
-//}

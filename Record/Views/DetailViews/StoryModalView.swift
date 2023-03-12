@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StoryModalView: View {
     
-    @Environment(\.presentationMode) var presentation
+    @Binding var isPresented: Bool
     let content: String
     
     var body: some View {
@@ -17,6 +17,9 @@ struct StoryModalView: View {
             Color.titleBlack //Background Color
                 .opacity(0.95)
                 .ignoresSafeArea()
+                .onTapGesture {
+                    self.isPresented = false
+                }
             
             VStack {
                 
@@ -28,7 +31,10 @@ struct StoryModalView: View {
                     Spacer()
                     
                     Button(action: { // 상단 X 버튼
-                        presentation.wrappedValue.dismiss()
+                        withAnimation {
+                            self.isPresented = false
+                            
+                        }
                     }) {
                         Image(systemName: "xmark")
                             .imageScale(.large)
@@ -57,15 +63,5 @@ struct StoryModalView: View {
                 }
             } // 본문 Frame & Text 끝
         }
-        .onDisappear {
-            UIView.setAnimationsEnabled(true)
-        }
     }
 }
-
-//struct StoryModalView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StoryModalView()
-//            .previewInterfaceOrientation(.portrait)
-//    }
-//}

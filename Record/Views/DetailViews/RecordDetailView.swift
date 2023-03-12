@@ -84,8 +84,7 @@ struct RecordDetailView: View {
                                 
                                 // MARK: Image
                                 ZStack {
-                                    Image("DetailPhotoComp") // 이미지 삽입
-                                        .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
+                                    Image("DetailPhotoComp")
                                     
                                     if let image = item.image {
                                         Image(uiImage: UIImage(data: image)!)
@@ -98,8 +97,9 @@ struct RecordDetailView: View {
                                     }
                                 }
                                 .onTapGesture {
-                                    photo.toggle()
-                                    UIView.setAnimationsEnabled(false)
+                                    withAnimation {
+                                        photo.toggle()
+                                    }
                                 }
                                 .padding(.top, UIScreen.getHeight(30))
                                 
@@ -118,10 +118,10 @@ struct RecordDetailView: View {
                                         .frame(width: UIScreen.getWidth(130))
                                 }
                                 .onTapGesture {
-                                    story.toggle()
-                                    UIView.setAnimationsEnabled(false)
+                                    withAnimation {
+                                        story.toggle()
+                                    }
                                 }
-                                .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
                                 .fixedSize()
                                 .offset(x: UIScreen.getWidth(62))
                             }
@@ -132,7 +132,26 @@ struct RecordDetailView: View {
                 }
             }
             .frame(maxHeight: .infinity, alignment: .topLeading)
+            .onTapGesture {
+                withAnimation {
+                    self.photo = false
+                    self.story = false
+                }
+            }
+            
+            if photo {
+                if let image = item.image {
+                    PhotoModalView(isPresented: $photo, image: image)
+                }
+            }
+            
+            if story {
+                if let story = item.story {
+                    StoryModalView(isPresented: $story, content: story)
+                }
+            }
         }
+        .navigationBarBackButtonHidden(photo || story)
         .navigationBarItems(trailing: Menu(content: {
             
             Button(action: { // MARK: 편집 기능
@@ -151,12 +170,14 @@ struct RecordDetailView: View {
                 deleteItemAlert = true
             }, label: {Label("제거", systemImage: "trash")})
             
+            
         }
                                            , label: {
             Image(systemName: "ellipsis")
                 .padding(.vertical, 10)
-                .foregroundColor(.pointBlue)
-        }))// Menu 목록 End
+                .foregroundColor(photo || story ? .clear : .pointBlue)
+        })
+        )// Menu 목록 End
         .fullScreenCover(isPresented: $clickEdit) {
             NavigationView {
                 WriteView(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), isWrite: .constant(false) ,isEdit: .constant(true), item: item)
