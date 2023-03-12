@@ -29,17 +29,15 @@ struct PhotoModalView: View {
                         .font(.customTitle2())
                     Spacer()
                     
-                    Button(action: { // 상단 X 버튼
+                    Button {
                         withAnimation {
                             self.isPresented = false
                         }
-                    }) {
+                    } label: {
                         Image(systemName: "xmark")
                             .imageScale(.large)
                             .foregroundColor(.white)
-                    } // 상단 X 버튼 끝
-                    
-                    
+                    }
                 }
                 // 나의 음악 사진 & x 버튼 시작 끝
                 
@@ -56,8 +54,6 @@ struct PhotoModalView: View {
                         .scaledToFill()
                         .padding(.top, 16)
                         .padding(.bottom, 103)
-                    
-                    
                 }
             } // 본문 Frame & Photo 끝
             .frame(minWidth: 0, maxWidth: 308)

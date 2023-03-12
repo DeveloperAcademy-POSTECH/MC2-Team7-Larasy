@@ -30,18 +30,15 @@ struct StoryModalView: View {
                         .font(.customTitle2())
                     Spacer()
                     
-                    Button(action: { // 상단 X 버튼
+                    Button {
                         withAnimation {
                             self.isPresented = false
-                            
                         }
-                    }) {
+                    } label: {
                         Image(systemName: "xmark")
                             .imageScale(.large)
                             .foregroundColor(.white)
-                    } // 상단 X 버튼 끝
-                    
-                    
+                    }
                 }
                 .padding(.horizontal, 48.0)
                 // 나의 음악 이야기 & x 버튼 시작 끝

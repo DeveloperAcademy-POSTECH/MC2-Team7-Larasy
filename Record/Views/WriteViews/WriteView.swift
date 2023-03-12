@@ -83,7 +83,7 @@ struct WriteView: View {
                             // MARK: CD Player
                             HStack {
                                 Spacer()
-                                CDPlayerComp(music: music)
+                                CDPlayerComponent(music: music)
                             }
                         }
                         
