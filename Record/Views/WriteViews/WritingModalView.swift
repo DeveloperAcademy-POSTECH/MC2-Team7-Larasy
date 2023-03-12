@@ -10,12 +10,11 @@ import SwiftUI
 
 struct WritingModalView: View {
     
-    @Environment(\.presentationMode) var presentation
-    
     @State var placeholderText : String = "이 음악과 관련된 짧은 이야기를\n기록해보세요 (글자수 200자 제한)"
 
     @Binding var content : String
-
+    @Binding var isPresented: Bool
+    
     var characterLimit = 200
     
     var body: some View {
@@ -23,24 +22,30 @@ struct WritingModalView: View {
             Color.titleBlack //Background Color
                 .opacity(0.95)
                 .ignoresSafeArea()
+                .onTapGesture {
+                    withAnimation {
+                        self.isPresented = false
+                    }
+                }
             
             VStack {
                 
-                // 나의 음악 이야기 & x 버튼 시작
+                // MARK: 상단 텍스트 및 닫기 버튼
                 HStack {
                     Text("나의 음악 이야기") // 상단 나의 음악 이야기 Text 텍스트 출력
                         .foregroundColor(.white)
                         .font(.customTitle2())
                     Spacer()
                     
-                    Button(action: { // 상단 X 버튼
-                        presentation.wrappedValue.dismiss()
-                    }) {
+                    Button {
+                        withAnimation {
+                            self.isPresented = false
+                        }
+                    } label: {
                         Image(systemName: "xmark")
                             .imageScale(.large)
                             .foregroundColor(.white)
-                    } // 상단 X 버튼 끝
-                    
+                    }
                     
                 }
                 .padding(.horizontal, 48.0)
@@ -78,7 +83,6 @@ struct WritingModalView: View {
                         }
                         .padding(.horizontal, 10)
                         .padding(.top, 30)
-                        //.padding(.bottom, 50.0)
                         .frame(width: 320, height: 310)
                         // 이야기 작성 TextEditor & PlaceHoler 끝
                         
@@ -88,7 +92,9 @@ struct WritingModalView: View {
                             Spacer()
                             
                             Button("완료") {
-                                presentation.wrappedValue.dismiss()
+                                withAnimation {
+                                    self.isPresented = false
+                                }
                             }
                             .font(.customSubhead())
                             .disabled(content.isEmpty)
@@ -109,16 +115,13 @@ struct WritingModalView: View {
             
 
         }
-        .onDisappear {
-            UIView.setAnimationsEnabled(true)
-        }
     }
 }
 
-        
+
 struct WritingModalView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingModalView(content: .constant(""))
+        WritingModalView(content: .constant(""), isPresented: .constant(true))
     }
 }
 

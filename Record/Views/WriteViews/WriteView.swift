@@ -78,7 +78,6 @@ struct WriteView: View {
                                     .foregroundColor(.titleDarkgray)
                                 
                             }
-                            //                            .padding(.vertical, UIScreen.getHeight(15))
                             
                             // MARK: CD Player
                             HStack {
@@ -148,12 +147,10 @@ struct WriteView: View {
                                         }
                                     }
                                     .onTapGesture {
-                                        savestory.toggle()
-                                        UIView.setAnimationsEnabled(false)
+                                        withAnimation {
+                                            savestory.toggle()
+                                        }
                                     }
-                                    .fullScreenCover(isPresented: $savestory, onDismiss: { savestory = false }, content: {
-                                        WritingModalView(content: $content)
-                                    })
                                     .offset(x: UIScreen.getWidth(62))
                                 }
                                 
@@ -165,6 +162,9 @@ struct WriteView: View {
                 }
                 .frame(maxHeight: .infinity, alignment: .topLeading)
                 
+                if savestory {
+                    WritingModalView(content: $content, isPresented: $savestory)
+                }
             }
             .navigationBarBackButtonHidden(true)
             // 저장 버튼 누르면 Alert 창이 나오고, 홈으로 이동
@@ -182,14 +182,17 @@ struct WriteView: View {
                                         .font(Font.headline.weight(.semibold))
                                     Text("음악 선택")
                                 }
+                                .foregroundColor(savestory ? .clear : .pointBlue)
                             }
                         } else {
-                            Button("닫기", action: {
+                            Button ("닫기") {
                                 presentationMode.wrappedValue.dismiss()
-                            })
+                            }
+                            .foregroundColor(savestory ? .clear : .pointBlue)
                         }
                     }
                 }
+                
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
@@ -209,6 +212,7 @@ struct WriteView: View {
                             self.showingAlert = true
                             
                         }
+                        .foregroundColor(savestory ? .clear : .pointBlue)
                         .alert(isPresented: $showingAlert) {
                             Alert(
                                 title: Text("저장 완료"),
