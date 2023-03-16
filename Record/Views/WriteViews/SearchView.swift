@@ -12,7 +12,7 @@ import UIKit
 // MARK: - 음악 검색 View
 struct SearchView: View {
     
-    @ObservedObject var musicAPI: MusicAPI
+    @ObservedObject var musicAPI: MusicAPI = .searchMusic
     @State var search = ""
     @State var progress: Bool
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
@@ -23,10 +23,10 @@ struct SearchView: View {
         // 검색 결과 출력 리스트 배경색 초기화
         UITableView.appearance().backgroundColor = UIColor.clear
         
-        // MusicAPI 초기화
-        let state = State(initialValue: false)
-        self._progress = state
-        self.musicAPI = MusicAPI(progress: state.projectedValue)
+        self.progress = false
+//        let state = State(initialValue: false)
+//        self._progress = state
+//        self.musicAPI = MusicAPI(progress: progress)
         self.isAcessFirst = isAccessFirst
     }
     
@@ -138,7 +138,7 @@ struct SearchView: View {
                             .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: WriteView(music: music, isWrite: .constant(true) ,isEdit: .constant(true), item: nil)) {
+                        NavigationLink(destination: WriteView(music: music, isWrite: .constant(true) ,isEdit: .constant(true), item: nil)) { 
                             
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {
