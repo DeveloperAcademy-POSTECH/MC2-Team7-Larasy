@@ -24,9 +24,6 @@ struct SearchView: View {
         UITableView.appearance().backgroundColor = UIColor.clear
         
         self.progress = false
-//        let state = State(initialValue: false)
-//        self._progress = state
-//        self.musicAPI = MusicAPI(progress: progress)
         self.isAcessFirst = isAccessFirst
     }
     
@@ -121,7 +118,7 @@ struct SearchView: View {
         
         GeometryReader { geometry in
             
-            if progress && musicAPI.musicList.count == 0 {
+            if progress && search != "" {
                 ProgressView()
                     .scaleEffect(1.5, anchor: .center)
                     .padding(180)
