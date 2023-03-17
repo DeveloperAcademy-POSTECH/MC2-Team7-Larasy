@@ -118,7 +118,7 @@ struct SearchView: View {
         
         GeometryReader { geometry in
             
-            if progress && search != "" {
+            if progress && search != "", musicAPI.musicList.isEmpty {
                 ProgressView()
                     .scaleEffect(1.5, anchor: .center)
                     .padding(180)
