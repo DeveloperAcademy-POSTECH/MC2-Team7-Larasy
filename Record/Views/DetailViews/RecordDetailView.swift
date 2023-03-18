@@ -133,10 +133,8 @@ struct RecordDetailView: View {
                 }
             }
             
-            if photo {
-                if let image = item.image {
-                    PhotoModalView(isPresented: $photo, image: image)
-                }
+            if photo, let image = item.image {
+                PhotoModalView(isPresented: $photo, image: image)
             }
             
             if story {
