@@ -18,11 +18,11 @@ struct RecordDetailView: View {
     
     @Binding var item: Content
     
-    @State private var photo = false
-    @State private var story = false
-    @State private var deleteItemAlert = false // delete item alert
-    @State private var saveImage = false
-    @State private var clickEdit = false
+    @State private var isPresentedPhotoView = false
+    @State private var isPresentedStoryView = false
+    @State private var isPresentedDeleteAlert = false
+    @State private var isTappedSaveButton = false
+    @State private var isTappedEditButton = false
     
     var body: some View {
         
@@ -92,7 +92,7 @@ struct RecordDetailView: View {
                                 }
                                 .onTapGesture {
                                     withAnimation {
-                                        photo.toggle()
+                                        isPresentedPhotoView.toggle()
                                     }
                                 }
                                 .padding(.top, UIScreen.getHeight(30))
@@ -113,7 +113,7 @@ struct RecordDetailView: View {
                                 }
                                 .onTapGesture {
                                     withAnimation {
-                                        story.toggle()
+                                        isPresentedStoryView.toggle()
                                     }
                                 }
                                 .fixedSize()
@@ -128,25 +128,25 @@ struct RecordDetailView: View {
             .frame(maxHeight: .infinity, alignment: .topLeading)
             .onTapGesture {
                 withAnimation {
-                    self.photo = false
-                    self.story = false
+                    self.isPresentedPhotoView = false
+                    self.isPresentedStoryView = false
                 }
             }
             
-            if photo, let image = item.image {
-                PhotoModalView(isPresented: $photo, image: image)
+            if isPresentedPhotoView, let image = item.image {
+                PhotoModalView(isPresented: $isPresentedPhotoView, image: image)
             }
             
-            if story, let myStory = item.story {
-                StoryModalView(isPresented: $story, content: myStory)
+            if isPresentedStoryView, let myStory = item.story {
+                StoryModalView(isPresented: $isPresentedStoryView, content: myStory)
             }
         }
-        .navigationBarBackButtonHidden(photo || story)
+        .navigationBarBackButtonHidden(isPresentedPhotoView || isPresentedStoryView)
         .toolbar {
             Menu {
                 // MARK: 편집 기능
                 Button {
-                    clickEdit.toggle()
+                    isTappedEditButton.toggle()
                 } label: {
                     Label("편집", systemImage: "square.and.pencil")
                 }
@@ -160,17 +160,17 @@ struct RecordDetailView: View {
                 
                 // MARK: 삭제 기능
                 Button(role: .destructive) {
-                    deleteItemAlert = true
+                    isPresentedDeleteAlert = true
                 } label: {
                     Label("제거", systemImage: "trash")
                 }
             } label: {
                 Image(systemName: "ellipsis")
                     .padding(.vertical, 10)
-                    .foregroundColor(photo || story ? .clear : .pointBlue)
+                    .foregroundColor(isPresentedPhotoView || isPresentedStoryView ? .clear : .pointBlue)
             }
         }
-        .fullScreenCover(isPresented: $clickEdit) {
+        .fullScreenCover(isPresented: $isTappedEditButton) {
             NavigationView {
                 WriteView(music: Music(artist: item.artist!,
                                        title: item.title!,
@@ -181,14 +181,14 @@ struct RecordDetailView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
-        .alert("삭제", isPresented: $deleteItemAlert) {
+        .alert("삭제", isPresented: $isPresentedDeleteAlert) {
             Button("삭제", role: .destructive) {
                 PersistenceController.shared.deleteContent(item: item)
                 presentation.wrappedValue.dismiss()
             }
         } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
-            .alert("저장완료", isPresented: $saveImage) {
+            .alert("저장완료", isPresented: $isTappedSaveButton) {
                 Button("확인") {
                 }
             } message: {  }
