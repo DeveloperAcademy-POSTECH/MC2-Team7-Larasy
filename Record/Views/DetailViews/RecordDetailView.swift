@@ -137,10 +137,8 @@ struct RecordDetailView: View {
                 PhotoModalView(isPresented: $photo, image: image)
             }
             
-            if story {
-                if let story = item.story {
-                    StoryModalView(isPresented: $story, content: story)
-                }
+            if story, let myStory = item.story {
+                StoryModalView(isPresented: $story, content: myStory)
             }
         }
         .navigationBarBackButtonHidden(photo || story)
