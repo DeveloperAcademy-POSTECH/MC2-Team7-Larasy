@@ -14,8 +14,14 @@ struct SearchView: View {
     
     @ObservedObject var musicAPI: MusicAPI = .searchMusic
     @State var search = ""
+    @State var searchChecker = true
     @State var progress: Bool
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
+    private let notMusic = "검색 결과가 없습니다."
+    private let notMusicDescription = """
+     ∙철자와 띄어쓰기를 확인해주세요.
+     ∙새로운 검색을 시도해주세요.
+    """
     @FocusState private var isSearchbarFocused: Bool?
     @State var isAcessFirst: Bool
     
@@ -112,16 +118,40 @@ struct SearchView: View {
     } // SearchBar View End
     
     
-    
     // MARK: - 검색 결과 리스트
     var ResultView: some View {
         
         GeometryReader { geometry in
             
             if progress && search != "" && musicAPI.musicList.isEmpty {
-                ProgressView()
-                    .scaleEffect(1.5, anchor: .center)
-                    .padding(180)
+                if searchChecker {
+                    ProgressView()
+                        .scaleEffect(1.5, anchor: .center)
+                        .padding(180)
+                        .onAppear {
+                            self.searchChecker = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                self.searchChecker = false
+                            }
+                        }
+                } else {
+                    VStack {
+                        HStack {
+                            Text(notMusic)
+                            Spacer()
+                        }
+                        .font(.customSubhead())
+                        .padding([.leading, .bottom], 10)
+                        
+                        Text(notMusicDescription)
+                            .font(.customBody2())
+                            .padding(.trailing, 100)
+                    }
+                    .padding(20)
+                    .onDisappear{
+                        self.searchChecker = true
+                    }
+                }
             }
             
             // 검색 결과 리스트
@@ -135,7 +165,7 @@ struct SearchView: View {
                             .frame(width: 55, height: 55)
                         
                         // 글 작성 페이지로 전환
-                        NavigationLink(destination: WriteView(music: music, isWrite: .constant(true) ,isEdit: .constant(true), item: nil)) { 
+                        NavigationLink(destination: WriteView(music: music, isWrite: .constant(true) ,isEdit: .constant(true), item: nil)) {
                             
                             // 제목, 가수 출력
                             VStack(alignment: .leading) {
