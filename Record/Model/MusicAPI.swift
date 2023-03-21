@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - 음악 API 불러오기
 @MainActor
-class MusicAPI: ObservableObject {
+final class MusicAPI: ObservableObject {
     
     // 네트워크 접근 싱글톤 객체
     static let searchMusic = MusicAPI()
