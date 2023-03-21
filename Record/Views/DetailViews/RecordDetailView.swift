@@ -31,6 +31,7 @@ struct RecordDetailView: View {
             }
         }
     }
+    @State private var isShare = false
     
     var body: some View {
         
@@ -143,7 +144,7 @@ struct RecordDetailView: View {
             
             // MARK: 이미지 저장 기능
             Button(action: {
-                actionSheet()
+                isShare = true
             }) { Label("이미지 공유", systemImage: "square.and.arrow.up") }
             
             // MARK: 삭제 기능
@@ -175,6 +176,12 @@ struct RecordDetailView: View {
                 }
             } message: {  }
         // 본문 ZStack End
+            .sheet(isPresented: $isShare) {
+                NavigationView {
+                    RecordSaveImagePreview(isPresented: $isShare, item: $item)
+                }
+                .navigationBarTitleDisplayMode(.inline)
+            }
     }
     
     func actionSheet() {
