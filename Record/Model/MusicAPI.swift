@@ -28,7 +28,7 @@ final class MusicAPI: ObservableObject {
         guard let url = urlComponents.url else { return }
         
         // Networking 시작
-        let task = URLSession.shared.dataTask(with: url) { [self] data, response, error in
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let e = error {
                 NSLog("error: \(e.localizedDescription)")
                 return
