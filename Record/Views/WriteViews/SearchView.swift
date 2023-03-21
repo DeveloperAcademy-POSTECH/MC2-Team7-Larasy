@@ -140,10 +140,12 @@ struct SearchView: View {
                             Text(notMusic)
                             Spacer()
                         }
+                        .foregroundColor(.titleDarkgray)
                         .font(.customSubhead())
                         .padding([.leading, .bottom], 10)
                         
                         Text(notMusicDescription)
+                            .foregroundColor(.titleDarkgray)
                             .font(.customBody2())
                             .padding(.trailing, 100)
                     }
