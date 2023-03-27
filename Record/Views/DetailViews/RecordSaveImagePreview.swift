@@ -16,19 +16,32 @@ struct RecordSaveImagePreview: View {
     @State private var showShareSheet = false
     
     var body: some View {
-        ZStack() {
-            preview
-                .scaleEffect(UIScreen.getWidth(0.75))
+        VStack(alignment: .center, spacing: 30) {
+            Text("음악과 어울리는 테마를 선택하세요.")
+                .font(.system(size: 24, weight: .regular))
             
-            VStack(alignment: .center) {
-                Text("음악과 어울리는 테마를 선택하세요.")
-                    .padding(.top, 40)
-                Spacer()
-                themePaletteView
-                    .padding(.bottom, 20)
+            preview
+            
+            HStack(spacing: 30) {
+                ForEach(Array(Themes.allCases.enumerated()), id: \.offset) { index, theme in
+                    Button {
+                        isThemeSelected = [Bool](repeating: false, count: 5)
+                        isThemeSelected[index] = true
+                        SelectedTheme = theme.fetchThemes()
+                    } label: {
+                        theme.fetchThemes()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle().stroke(isThemeSelected[index] == true ? .black : .clear, lineWidth: 2)
+                            }
+                    }
+                }
             }
         }
-        .padding(.bottom, UIScreen.getHeight(100))
+        .scaleEffect(UIScreen.getWidth(0.75))
+        .padding(.bottom, 60)
+
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -160,26 +173,6 @@ struct RecordSaveImagePreview: View {
             .frame(maxHeight: .infinity, alignment: .topLeading)
         }
     }
-    
-    var themePaletteView: some View {
-        HStack(spacing: 30) {
-            ForEach(Array(Themes.allCases.enumerated()), id: \.offset) { index, theme in
-                Button {
-                    isThemeSelected = [Bool](repeating: false, count: 5)
-                    isThemeSelected[index] = true
-                    SelectedTheme = theme.fetchThemes()
-                } label: {
-                    theme.fetchThemes()
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
-                        .overlay {
-                            Circle().stroke(isThemeSelected[index] == true ? .black : .clear, lineWidth: 2)
-                        }
-                }
-            }
-        }
-    }
-    
     struct ShareSheet: UIViewControllerRepresentable {
         typealias Callback = (_ activityType: UIActivity.ActivityType?, _ completed: Bool, _ returnedItems: [Any]?, _ error: Error?) -> Void
         
