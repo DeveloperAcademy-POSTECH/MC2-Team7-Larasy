@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecordSaveImagePreview: View {
+struct ImageThemeModalView: View {
     
     @Binding var isPresented: Bool
     @Binding var item: Content

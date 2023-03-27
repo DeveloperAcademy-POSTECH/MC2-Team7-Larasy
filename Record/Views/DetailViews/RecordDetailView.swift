@@ -178,7 +178,7 @@ struct RecordDetailView: View {
         // 본문 ZStack End
             .sheet(isPresented: $isShare) {
                 NavigationView {
-                    RecordSaveImagePreview(isPresented: $isShare, item: $item)
+                    ImageThemeModalView(isPresented: $isShare, item: $item)
                 }
                 .navigationBarTitleDisplayMode(.inline)
             }
