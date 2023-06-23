@@ -85,7 +85,6 @@ struct ImageThemeModalView: View {
             
             Image("backwindow")
                 .padding(.leading, UIScreen.getWidth(90))
-                .opacity(isThemeSelected[0] == true ? 1 : 0.5)
             
             VStack {
                 // MARK: 노래 정보
