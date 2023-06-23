@@ -81,7 +81,7 @@ struct ImageThemeModalView: View {
     var preview: some View {
         ZStack {
             
-            SelectedTheme.edgesIgnoringSafeArea(.all)
+            selectedTheme.fetchThemes().edgesIgnoringSafeArea(.all)
             
             Image("backwindow")
                 .padding(.leading, UIScreen.getWidth(90))
