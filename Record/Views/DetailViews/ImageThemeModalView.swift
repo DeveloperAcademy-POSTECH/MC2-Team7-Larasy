@@ -11,8 +11,7 @@ struct ImageThemeModalView: View {
     
     @Binding var isPresented: Bool
     @Binding var item: Content
-    @State var isThemeSelected = [true, false, false, false, false]
-    @State var SelectedTheme = Themes.background.fetchThemes()
+    @State var selectedTheme: Themes = .spring
     @State private var showShareSheet = false
     
     var body: some View {
