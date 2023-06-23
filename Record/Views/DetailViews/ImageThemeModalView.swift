@@ -24,16 +24,15 @@ struct ImageThemeModalView: View {
             HStack(spacing: 30) {
                 ForEach(Array(Themes.allCases.enumerated()), id: \.offset) { index, theme in
                     Button {
-                        isThemeSelected = [Bool](repeating: false, count: 5)
-                        isThemeSelected[index] = true
-                        SelectedTheme = theme.fetchThemes()
+                        selectedTheme = theme
                     } label: {
                         theme.fetchThemes()
                             .frame(width: 50, height: 50)
                             .clipShape(Circle())
                             .overlay {
-                                Circle().stroke(isThemeSelected[index] == true ? .black : .clear, lineWidth: 2)
+                                Circle().stroke(theme == selectedTheme ? .black : .clear, lineWidth: 2)
                             }
+                    }
                     }
                 }
             }
