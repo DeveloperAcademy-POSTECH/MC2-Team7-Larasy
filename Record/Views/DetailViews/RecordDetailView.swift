@@ -155,7 +155,6 @@ struct RecordDetailView: View {
                 // MARK: 이미지 저장 기능
                 Button {
                     isShare = true
-//                    actionSheet()
                 } label: {
                     Label("이미지 공유", systemImage: "square.and.arrow.up")
                 }
