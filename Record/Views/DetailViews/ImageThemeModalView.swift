@@ -33,7 +33,6 @@ struct ImageThemeModalView: View {
                                 Circle().stroke(theme == selectedTheme ? .black : .clear, lineWidth: 2)
                             }
                     }
-                    }
                 }
             }
         }
@@ -85,6 +84,7 @@ struct ImageThemeModalView: View {
             
             Image("backwindow")
                 .padding(.leading, UIScreen.getWidth(90))
+                .opacity(0.5)
             
             VStack {
                 // MARK: 노래 정보
