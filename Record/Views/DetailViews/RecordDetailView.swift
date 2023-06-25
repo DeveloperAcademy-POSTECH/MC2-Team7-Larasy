@@ -17,20 +17,13 @@ struct RecordDetailView: View {
     @Environment(\.presentationMode) var presentation: Binding<PresentationMode>
     
     @Binding var item: Content
+
+    @State private var isPresentedPhotoView = false
+    @State private var isPresentedStoryView = false
+    @State private var isPresentedDeleteAlert = false
+    @State private var isTappedSaveButton = false
+    @State private var isTappedEditButton = false
     
-    @State private var photo = false
-    @State private var story = false
-    @State private var deleteItemAlert = false // delete item alert
-    @State private var saveImage = false
-    @State private var clickEdit = false {
-        willSet {
-            UIView.setAnimationsEnabled(true)
-        } didSet {
-            DispatchQueue.main.async {
-                UIView.setAnimationsEnabled(true)
-            }
-        }
-    }
     @State private var isShare = false
     
     var body: some View {
@@ -75,7 +68,9 @@ struct RecordDetailView: View {
                         // MARK: CD Player
                         HStack {
                             Spacer()
-                            CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
+                            CDPlayerComponent(music: Music(artist: item.artist ?? "",
+                                                           title: item.title ?? "",
+                                                           albumArt: item.albumArt ?? ""))
                         }
                     }
                     
@@ -85,8 +80,7 @@ struct RecordDetailView: View {
                                 
                                 // MARK: Image
                                 ZStack {
-                                    Image("DetailPhotoComp") // 이미지 삽입
-                                        .fullScreenCover(isPresented: $photo, onDismiss: { photo = false }, content: { PhotoModalView(image: item.image!) } )
+                                    Image("DetailPhotoComp")
                                     
                                     if let image = item.image {
                                         Image(uiImage: UIImage(data: image)!)
@@ -99,8 +93,9 @@ struct RecordDetailView: View {
                                     }
                                 }
                                 .onTapGesture {
-                                    photo.toggle()
-                                    UIView.setAnimationsEnabled(false)
+                                    withAnimation {
+                                        isPresentedPhotoView.toggle()
+                                    }
                                 }
                                 .padding(.top, UIScreen.getHeight(30))
                                 
@@ -119,10 +114,10 @@ struct RecordDetailView: View {
                                         .frame(width: UIScreen.getWidth(130))
                                 }
                                 .onTapGesture {
-                                    story.toggle()
-                                    UIView.setAnimationsEnabled(false)
+                                    withAnimation {
+                                        isPresentedStoryView.toggle()
+                                    }
                                 }
-                                .fullScreenCover(isPresented: $story, onDismiss: { story = false }, content: { StoryModalView(content: item.story!) } )
                                 .fixedSize()
                                 .offset(x: UIScreen.getWidth(62))
                             }
@@ -133,45 +128,69 @@ struct RecordDetailView: View {
                 }
             }
             .frame(maxHeight: .infinity, alignment: .topLeading)
-        }
-        .navigationBarItems(trailing: Menu(content: {
-            
-            Button(action: { // MARK: 편집 기능
-                clickEdit.toggle()
-            }) {
-                Label("편집", systemImage: "square.and.pencil")
+            .onTapGesture {
+                withAnimation {
+                    self.isPresentedPhotoView = false
+                    self.isPresentedStoryView = false
+                }
+            }
+            if isPresentedPhotoView, let image = item.image {
+                PhotoModalView(isPresented: $isPresentedPhotoView, image: image)
             }
             
-            // MARK: 이미지 저장 기능
-            Button(action: {
-                isShare = true
-            }) { Label("이미지 공유", systemImage: "square.and.arrow.up") }
-            
-            // MARK: 삭제 기능
-            Button(role: .destructive, action: {
-                deleteItemAlert = true
-            }, label: {Label("제거", systemImage: "trash")})
-            
+            if isPresentedStoryView, let myStory = item.story {
+                StoryModalView(isPresented: $isPresentedStoryView, content: myStory)
+            }
         }
-                                           , label: {
-            Image(systemName: "ellipsis")
-                .padding(.vertical, 10)
-                .foregroundColor(.pointBlue)
-        }))// Menu 목록 End
-        .fullScreenCover(isPresented: $clickEdit) {
+        .navigationBarBackButtonHidden(isPresentedPhotoView || isPresentedStoryView)
+        .toolbar {
+            Menu {
+                // MARK: 편집 기능
+                Button {
+                    isTappedEditButton.toggle()
+                } label: {
+                    Label("편집", systemImage: "square.and.pencil")
+                }
+                
+                // MARK: 이미지 저장 기능
+                Button {
+                    isShare = true
+//                    actionSheet()
+                } label: {
+                    Label("이미지 공유", systemImage: "square.and.arrow.up")
+                }
+                
+                // MARK: 삭제 기능
+                Button(role: .destructive) {
+                    isPresentedDeleteAlert = true
+                } label: {
+                    Label("제거", systemImage: "trash")
+                }
+            } label: {
+                Image(systemName: "ellipsis")
+                    .padding(.vertical, 10)
+                    .foregroundColor(isPresentedPhotoView || isPresentedStoryView ? .clear : .pointBlue)
+            }
+        }
+        .fullScreenCover(isPresented: $isTappedEditButton) {
             NavigationView {
-                WriteView(music: Music(artist: item.artist!, title: item.title!, albumArt: item.albumArt!), isWrite: .constant(false) ,isEdit: .constant(true), item: item)
-                    .navigationBarTitleDisplayMode(.inline)
+                WriteView(music: Music(artist: item.artist!,
+                                       title: item.title!,
+                                       albumArt: item.albumArt!),
+                          isWrite: .constant(false),
+                          isEdit: .constant(true),
+                          item: item)
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
-        .alert("삭제", isPresented: $deleteItemAlert) {
+        .alert("삭제", isPresented: $isPresentedDeleteAlert) {
             Button("삭제", role: .destructive) {
                 PersistenceController.shared.deleteContent(item: item)
                 presentation.wrappedValue.dismiss()
             }
         } message: { Text("정말 삭제하시겠습니까?") }
         // 본문 ZStack End
-            .alert("저장완료", isPresented: $saveImage) {
+            .alert("저장완료", isPresented: $isTappedSaveButton) {
                 Button("확인") {
                 }
             } message: {  }
@@ -190,67 +209,6 @@ struct RecordDetailView: View {
         let activitiViewController = UIActivityViewController(activityItems: [activityItemMetadata, shareImage], applicationActivities: nil)
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         windowScene?.windows.first?.rootViewController?.present(activitiViewController, animated: true, completion: nil)
-    }
-    
-}
-
-
-struct CDPlayerComp: View {
-    
-    let music: Music
-    @State private var angle = 0.0
-    var body: some View {
-        ZStack {
-            Image("CdPlayer")
-                .padding(.trailing, 20.0)
-            
-            ZStack(alignment: .center) {
-                Image(uiImage: getImage())
-                    .resizable()
-                    .frame(width: 200, height: 200)
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Circle())
-                    .scaleEffect(0.46)
-                    .rotationEffect(.degrees(self.angle))
-                    .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
-                    .onTapGesture {
-                        self.angle += Double.random(in: 3600..<3960)
-                    } // albumArt를 불러오는 URLImage
-                Circle()
-                    .frame(width: 30, height: 30)
-                    .foregroundColor(.background)
-                    .overlay(
-                        Circle()
-                            .stroke(.background, lineWidth: 0.1)
-                            .shadow(color: .titleDarkgray, radius: 2, x: 3, y: 3)
-                    )
-            }.offset(x: -10.6, y: -133) // albumArt를 CD모양으로 불러오는 ZStack
-            
-            ZStack {
-                Circle()
-                    .foregroundColor(.titleLightgray)
-                    .frame(width: 30 , height: 30)
-                Circle()
-                    .foregroundColor(.titleDarkgray)
-                    .frame(width: 15 , height: 15)
-                    .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
-                Circle()
-                    .foregroundColor(.background)
-                    .frame(width: 3 , height: 3)
-            }.offset(x: -10.6, y: -133)
-            
-        }// ZStack End
-    }
-    func getImage() -> UIImage {
-        if let url = URL(string: music.albumArt) {
-            if let data = try? Data(contentsOf: url ) {
-                return UIImage(data: data)!
-            } else {
-                return UIImage(systemName: "xmark")!
-            }
-        } else {
-            return UIImage(systemName: "xmark")!
-        }
     }
 }
 

@@ -120,7 +120,7 @@ struct ImageThemeModalView: View {
                         // MARK: CD Player
                         HStack {
                             Spacer()
-                            CDPlayerComp(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
+                            CDPlayerComponent(music: Music(artist: item.artist ?? "", title: item.title ?? "", albumArt: item.albumArt ?? ""))
                         }
                     }
                     
