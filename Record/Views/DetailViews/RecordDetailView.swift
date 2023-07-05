@@ -17,12 +17,14 @@ struct RecordDetailView: View {
     @Environment(\.presentationMode) var presentation: Binding<PresentationMode>
     
     @Binding var item: Content
-    
+
     @State private var isPresentedPhotoView = false
     @State private var isPresentedStoryView = false
     @State private var isPresentedDeleteAlert = false
     @State private var isTappedSaveButton = false
     @State private var isTappedEditButton = false
+    
+    @State private var isShare = false
     
     var body: some View {
         
@@ -132,7 +134,6 @@ struct RecordDetailView: View {
                     self.isPresentedStoryView = false
                 }
             }
-            
             if isPresentedPhotoView, let image = item.image {
                 PhotoModalView(isPresented: $isPresentedPhotoView, image: image)
             }
@@ -153,7 +154,7 @@ struct RecordDetailView: View {
                 
                 // MARK: 이미지 저장 기능
                 Button {
-                    actionSheet()
+                    isShare = true
                 } label: {
                     Label("이미지 공유", systemImage: "square.and.arrow.up")
                 }
@@ -193,6 +194,12 @@ struct RecordDetailView: View {
                 }
             } message: {  }
         // 본문 ZStack End
+            .sheet(isPresented: $isShare) {
+                NavigationView {
+                    ImageThemeModalView(isPresented: $isShare, item: $item)
+                }
+                .navigationBarTitleDisplayMode(.inline)
+            }
     }
     
     func actionSheet() {
