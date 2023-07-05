@@ -12,10 +12,16 @@ import UIKit
 // MARK: - 음악 검색 View
 struct SearchView: View {
     
-    @ObservedObject var musicAPI: MusicAPI
+    @ObservedObject var musicAPI: MusicAPI = .searchMusic
     @State var search = ""
+    @State var searchChecker = true
     @State var progress: Bool
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
+    private let notMusic = "검색 결과가 없습니다."
+    private let notMusicDescription = """
+     ∙철자와 띄어쓰기를 확인해주세요.
+     ∙새로운 검색을 시도해주세요.
+    """
     @FocusState private var isSearchbarFocused: Bool?
     @State var isAcessFirst: Bool
     
@@ -23,10 +29,7 @@ struct SearchView: View {
         // 검색 결과 출력 리스트 배경색 초기화
         UITableView.appearance().backgroundColor = UIColor.clear
         
-        // MusicAPI 초기화
-        let state = State(initialValue: false)
-        self._progress = state
-        self.musicAPI = MusicAPI(progress: state.projectedValue)
+        self.progress = false
         self.isAcessFirst = isAccessFirst
     }
     
@@ -115,16 +118,42 @@ struct SearchView: View {
     } // SearchBar View End
     
     
-    
     // MARK: - 검색 결과 리스트
     var ResultView: some View {
         
         GeometryReader { geometry in
             
-            if progress && musicAPI.musicList.count == 0 {
-                ProgressView()
-                    .scaleEffect(1.5, anchor: .center)
-                    .padding(180)
+            if progress && search != "" && musicAPI.musicList.isEmpty {
+                if searchChecker {
+                    ProgressView()
+                        .scaleEffect(1.5, anchor: .center)
+                        .padding(180)
+                        .onAppear {
+                            self.searchChecker = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                self.searchChecker = false
+                            }
+                        }
+                } else {
+                    VStack {
+                        HStack {
+                            Text(notMusic)
+                            Spacer()
+                        }
+                        .foregroundColor(.titleDarkgray)
+                        .font(.customSubhead())
+                        .padding([.leading, .bottom], 10)
+                        
+                        Text(notMusicDescription)
+                            .foregroundColor(.titleDarkgray)
+                            .font(.customBody2())
+                            .padding(.trailing, 100)
+                    }
+                    .padding(20)
+                    .onDisappear{
+                        self.searchChecker = true
+                    }
+                }
             }
             
             // 검색 결과 리스트
