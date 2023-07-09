@@ -24,7 +24,7 @@ struct PhotoModalView: View {
                 
                 // 나의 음악 사진 & x 버튼 시작
                 HStack {
-                    Text("나의 음악 사진") // 상단 나의 음악 사진 Text 텍스트 출력
+                    Text("나의 음악 사진".localized) // 상단 나의 음악 사진 Text 텍스트 출력
                         .foregroundColor(.white)
                         .font(.customTitle2())
                     Spacer()

@@ -37,7 +37,7 @@ struct CDListView: View {
                 }
             }
         }
-        .navigationBarTitle("리스트", displayMode: .inline)
+        .navigationBarTitle("리스트".localized, displayMode: .inline)
         .ignoresSafeArea()
         .onAppear {
             items = PersistenceController.shared.fetchContent()

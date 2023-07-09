@@ -15,7 +15,7 @@ struct SearchView: View {
     @ObservedObject var musicAPI: MusicAPI
     @State var search = ""
     @State var progress: Bool
-    private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
+    private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요".localized
     @FocusState private var isSearchbarFocused: Bool?
     @State var isAcessFirst: Bool
     
@@ -37,13 +37,12 @@ struct SearchView: View {
                 .ignoresSafeArea()
             
             VStack(alignment: .leading) {
-                Text("오랫동안 간직하고 싶은 나만의 음악을 알려주세요") // 최상단 title 설정
-                    .frame(width: 250)
+                Text("오랫동안 간직하고 싶은 나만의 음악을 알려주세요".localized) // 최상단 title 설정
                     .font(.customTitle2())
                     .lineSpacing(7)
                     .foregroundColor(.titleBlack)
                     .padding(.top, 30)
-                    .padding(.leading, 20)
+                    .padding(.horizontal, 20)
                 
                 SearchBar // 중앙 서치바,
                 
@@ -52,7 +51,7 @@ struct SearchView: View {
             } //VStack End
             
         } // ZStack End
-        .navigationBarTitle("음악 선택", displayMode: .inline)
+        .navigationBarTitle("음악 선택".localized, displayMode: .inline)
         
     } // body View End
     

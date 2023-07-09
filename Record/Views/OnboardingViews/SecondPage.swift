@@ -61,11 +61,11 @@ struct SecondPage: View {
             
             // MARK: Text
             VStack(alignment: .leading) {
-                Text("음악을 사진과 함께\n짧은 이야기로 기록하고,\n기억하고 싶은 가사를 입력하세요.")
+                Text("온보딩2".localized)
                     .foregroundColor(.titleBlack)
                     .font(Font.customTitle2())
                     .lineSpacing(5)
-                    .padding(.leading, UIScreen.getWidth(30))
+                    .padding(.horizontal, UIScreen.getWidth(30))
                     .padding(.top, UIScreen.getHeight(100))
                 
                 Spacer()

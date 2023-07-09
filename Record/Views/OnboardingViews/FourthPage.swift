@@ -14,16 +14,22 @@ struct FourthPage: View {
     @State var isShown = false
     //앱최초 실행 바인딩
     @Binding var isFirstLaunching: Bool
+    private let isEnglish = Locale.current.languageCode == "en"
     
-    let text: Text = {
-        var t = Text("음악 기록가")
-            .foregroundColor(.pointBlue)
-            .font(Font.customTitle2())
-        t = t + Text("가 되신 것을\n환영합니다.")
-            .foregroundColor(.titleBlack)
-            .font(Font.customTitle2())
-        return t
-    }()
+    var text: Text {
+        if isEnglish {
+            return Text("Welcome to the world of music recorders!")
+                .foregroundColor(.titleBlack)
+                .font(Font.customTitle2())
+        } else {
+            return Text("음악 기록가".localized)
+                .foregroundColor(.pointBlue)
+                .font(Font.customTitle2())
+                + Text("가 되신 것을 환영합니다.".localized)
+                .foregroundColor(.titleBlack)
+                .font(Font.customTitle2())
+        }
+    }
     
     var body: some View {
         
@@ -54,7 +60,7 @@ struct FourthPage: View {
                     Button(action: {
                         isFirstLaunching.toggle()
                     }) {
-                        Text("음악 기록 시작하기")
+                        Text("음악 기록 시작하기".localized)
                             .foregroundColor(.white)
                             .font(Font.customHeadline())
                             .frame(width: 200, height: 60)
@@ -70,9 +76,8 @@ struct FourthPage: View {
                     
                     HStack {
                         text
-                            .frame(width: UIScreen.getWidth(300), alignment: .leading)
                             .lineSpacing(5)
-                            .padding(.leading, UIScreen.getWidth(30))
+                            .padding(.horizontal, UIScreen.getWidth(30))
                             .padding(.top, UIScreen.getHeight(100))
                     }
                     Spacer()
