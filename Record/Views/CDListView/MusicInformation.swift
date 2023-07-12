@@ -15,7 +15,7 @@ import SwiftUI
  */
 
 struct MusicInformation: View {
-    
+    @AppStorage ("isLighting") var isLighting = false
     @Binding var item: Content
     
     var body: some View {
@@ -24,14 +24,14 @@ struct MusicInformation: View {
             
             // MARK: - 음악 제목
             MarqueeTextView(text: item.title ?? "", font: UIFont.customTitle3())
-                .foregroundColor(Color.titleBlack)
+                .foregroundColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))
                 .font(Font.customTitle3())
                 .padding(.bottom, UIScreen.getHeight(2))
                 .frame(minWidth: UIScreen.getWidth(340))
             
             // MARK: - 가수 이름
             Text(item.artist ?? "")
-                .foregroundColor(Color.titleDarkgray)
+                .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                 .font(Font.customBody2())
                 .padding(.bottom, UIScreen.getHeight(20))
                 .frame(minWidth: UIScreen.getWidth(340))

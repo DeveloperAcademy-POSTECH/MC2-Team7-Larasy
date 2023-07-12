@@ -22,6 +22,8 @@ struct CDPlayer: View {
     @State private var angle = 0.0
     @State private var showDetailView = false
     
+    @AppStorage ("isLighting") var isLighting = false
+    
     var body: some View {
         
         VStack {
@@ -36,7 +38,7 @@ struct CDPlayer: View {
             // MARK: - CD Player, 네비게이션 링크
             ZStack {
                 
-                Image("ListViewCdPlayer")
+                Image(RecordImage.listViewCdPlayer.fetchRecordImage(isLighting: isLighting))
                     .offset(y: 30)
                 
                 NavigationLink(destination: RecordDetailView(item: $item), isActive: $showDetailView) {
@@ -56,14 +58,14 @@ struct CDPlayer: View {
                 
                 ZStack {
                     Circle()
-                        .foregroundColor(.titleLightgray)
+                        .foregroundColor(RecordColor.recordDarkCompColor2.fetchColor(isLighting: isLighting))
                         .frame(width: UIScreen.getWidth(30) , height: UIScreen.getHeight(30))
                     Circle()
-                        .foregroundColor(.titleDarkgray)
+                        .foregroundColor(RecordColor.recordDarkCompColor.fetchColor(isLighting: isLighting))
                         .frame(width: UIScreen.getWidth(15) , height: UIScreen.getHeight(15))
-                        .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                        .shadow(color: RecordColor.recordShadowGray.fetchColor(isLighting: isLighting), radius: 4, x: 0, y: 4)
                     Circle()
-                        .foregroundColor(.background)
+                        .foregroundColor(RecordColor.recordBackground.fetchColor(isLighting: isLighting))
                         .frame(width: UIScreen.getWidth(3) , height: UIScreen.getHeight(3))
                 }
                 .padding(.bottom, 120)

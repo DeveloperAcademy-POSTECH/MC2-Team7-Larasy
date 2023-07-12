@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PhotoModalView: View {
+    @AppStorage ("isLighting") var isLighting = false
     
     @Binding var isPresented: Bool
     let image: Data
@@ -45,7 +46,7 @@ struct PhotoModalView: View {
                 ZStack{
                     Rectangle() // 본문 Background
                         .frame(minWidth: 0, maxWidth: 308, minHeight: 0, maxHeight: 435)
-                        .foregroundColor(.white)
+                        .foregroundColor(RecordColor.recordBackgroundWhite.fetchColor(isLighting: isLighting))
                     
                     
                     Image(uiImage: UIImage(data: image)!)

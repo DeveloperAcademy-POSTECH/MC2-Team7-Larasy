@@ -15,6 +15,8 @@ struct WritingModalView: View {
     @Binding var content : String
     @Binding var isPresented: Bool
     
+    @AppStorage ("isLighting") var isLighting = false
+    
     var characterLimit = 200
     
     var body: some View {
@@ -33,7 +35,7 @@ struct WritingModalView: View {
                 // MARK: 상단 텍스트 및 닫기 버튼
                 HStack {
                     Text("나의 음악 이야기") // 상단 나의 음악 이야기 Text 텍스트 출력
-                        .foregroundColor(.white)
+                        .foregroundColor(RecordColor.recordTitleWhite.fetchColor(isLighting: isLighting))
                         .font(.customTitle2())
                     Spacer()
                     
@@ -61,7 +63,7 @@ struct WritingModalView: View {
                             if self.content.isEmpty { // PlaceHolder 출력
                                 TextEditor (text: $placeholderText)
                                     .font(.customBody1())
-                                    .foregroundColor(.titleGray)
+                                    .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                                     .lineSpacing(5)
                                     .disabled(true)
                                     .padding()
@@ -73,7 +75,7 @@ struct WritingModalView: View {
                                     if content != s { content = s }
                                 }
                                 .font(.customBody1())
-                                .foregroundColor(.titleDarkgray)
+                                .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                                 .opacity(self.content.isEmpty ? 0.25 :1)
                                 .padding()
                                 .multilineTextAlignment(.leading)
@@ -81,6 +83,7 @@ struct WritingModalView: View {
                                 
                             
                         }
+                        .textEditorBackground(color: RecordColor.recordTitleWhite.fetchColor(isLighting: isLighting), isLighting: isLighting)
                         .padding(.horizontal, 10)
                         .padding(.top, 30)
                         .frame(width: 320, height: 310)
@@ -110,7 +113,7 @@ struct WritingModalView: View {
                     .frame(height: 400)
                 }
                 .frame(minWidth: 0, maxWidth: 308, minHeight: 0, maxHeight: 350)
-                .background(Color.white)
+                .background(RecordColor.recordBackgroundWhite.fetchColor(isLighting: isLighting))
             } // Modal Background Frame & Color 끝
             
 
@@ -119,9 +122,9 @@ struct WritingModalView: View {
 }
 
 
-struct WritingModalView_Previews: PreviewProvider {
-    static var previews: some View {
-        WritingModalView(content: .constant(""), isPresented: .constant(true))
-    }
-}
+//struct WritingModalView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WritingModalView(content: .constant(""), isPresented: .constant(true))
+//    }
+//}
 

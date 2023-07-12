@@ -34,14 +34,21 @@ struct WriteView: View {
     @State var item: Content?
     @State var index: Int = -1
     
+    @AppStorage ("isLighting") var isLighting = false
+    
     var body: some View {
         
         GeometryReader { _ in
             ZStack {
-                Color.background.edgesIgnoringSafeArea(.all)
+                RecordColor.recordBackground.fetchColor(isLighting: isLighting)
+                    .edgesIgnoringSafeArea(.all)
                 
-                Image("backwindow")
+                Image(RecordImage.backwindow.fetchRecordImage(isLighting: isLighting))
                     .padding(.leading, UIScreen.getWidth(90))
+                
+                Image(RecordImage.moon.fetchRecordImage(isLighting: isLighting))
+                    .padding(.bottom, UIScreen.getHeight(60))
+                    .padding(.trailing, UIScreen.getWidth(40))
                 
                 VStack {
                     
@@ -50,13 +57,13 @@ struct WriteView: View {
                         Text(music.title)
                             .font(.customTitle2())
                             .fontWeight(.bold)
-                            .foregroundColor(.titleBlack)
+                            .foregroundColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))
                             .multilineTextAlignment(.leading)
                         
                         Text(music.artist)
                             .font(.customBody1())
                             .fontWeight(.regular)
-                            .foregroundColor(.titleDarkgray)
+                            .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                         
                     }
                     .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -68,14 +75,14 @@ struct WriteView: View {
                             
                             // MARK: 가사 입력
                             ZStack {
-                                Image("LylicComp")
+                                Image(RecordImage.lylicComp.fetchRecordImage(isLighting: isLighting))
                                 
                                 TextField("\(Image(systemName: "music.mic")) 기억하고 싶은 가사", text: $lyrics)
                                     .font(Font.customBody2())
                                     .disableAutocorrection(true)
                                     .multilineTextAlignment(.center)
                                     .frame(width: UIScreen.getWidth(240), alignment: .center)
-                                    .foregroundColor(.titleDarkgray)
+                                    .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                                 
                             }
                             
@@ -93,7 +100,7 @@ struct WriteView: View {
                                     
                                     //MARK: 폴라로이드
                                     ZStack {
-                                        Image("PhotoComp")
+                                        Image(RecordImage.photoComp.fetchRecordImage(isLighting: isLighting))
                                             .resizable()
                                             .scaledToFill()
                                             .frame(width: UIScreen.getWidth(100), height: UIScreen.getHeight(153))
@@ -121,7 +128,7 @@ struct WriteView: View {
                                     
                                     // MARK: 이야기 작성 모달 뷰
                                     ZStack {
-                                        Image("StoryComp")
+                                        Image(RecordImage.storyComp.fetchRecordImage(isLighting: isLighting))
                                             .resizable()
                                             .scaledToFill()
                                             .frame(width: UIScreen.getWidth(160), height: UIScreen.getHeight(150))
@@ -129,7 +136,7 @@ struct WriteView: View {
                                         if !content.isEmpty {
                                             Text(content)
                                                 .font(Font.customBody2())
-                                                .foregroundColor(.titleDarkgray)
+                                                .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                                                 .lineLimit(5)
                                                 .truncationMode(.tail)
                                                 .multilineTextAlignment(.leading)
@@ -138,10 +145,10 @@ struct WriteView: View {
                                         } else {
                                             VStack {
                                                 Image(systemName: "plus")
-                                                    .foregroundColor(.titleGray)
+                                                    .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                                                     .padding(UIScreen.getHeight(5))
                                                 Text("나의 음악 이야기")
-                                                    .foregroundColor(.titleGray)
+                                                    .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                                                     .font(.customBody1())
                                             }
                                         }
@@ -199,7 +206,7 @@ struct WriteView: View {
                     // 하나라도 안 쓰면 저장 버튼 눌리지 않게
                     if content == "" || inputImage == nil || lyrics == "" {
                         Text("저장")
-                            .foregroundColor(.titleGray)
+                            .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                         
                     } else { // 저장버튼 활성화 및 CoreData에 저장
                         Button("저장") {

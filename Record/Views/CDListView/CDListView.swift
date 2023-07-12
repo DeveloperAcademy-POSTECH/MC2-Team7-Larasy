@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct CDListView: View {
-    
+    @AppStorage ("isLighting") var isLighting = false
     @State private var items = PersistenceController.shared.fetchContent()
     @State private var currentIndex = 0
+    
+    init() {
+        //Use this if NavigationBarTitle is with Large Font
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))]
+        
+        //Use this if NavigationBarTitle is with displayMode = .inline
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))]
+    }
     
     var body: some View {
         
         ZStack {
-            Color("background")
+            RecordColor.recordBackground.fetchColor(isLighting: isLighting)
+                .ignoresSafeArea()
                 
             VStack {
                 if items.isEmpty {

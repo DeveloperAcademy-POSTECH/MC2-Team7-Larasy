@@ -26,13 +26,20 @@ struct RecordDetailView: View {
     
     @State private var isShare = false
     
+    @AppStorage ("isLighting") var isLighting = false
+    
     var body: some View {
         
         ZStack {
-            Color.background.edgesIgnoringSafeArea(.all)
+            RecordColor.recordBackground.fetchColor(isLighting: isLighting)
+                .edgesIgnoringSafeArea(.all)
             
-            Image("backwindow")
+            Image(RecordImage.backwindow.fetchRecordImage(isLighting: isLighting))
                 .padding(.leading, UIScreen.getWidth(90))
+            
+            Image(RecordImage.moon.fetchRecordImage(isLighting: isLighting))
+                .padding(.bottom, UIScreen.getHeight(60))
+                .padding(.trailing, UIScreen.getWidth(40))
             
             VStack {
                 // MARK: 노래 정보
@@ -40,12 +47,12 @@ struct RecordDetailView: View {
                     Text(item.title ?? "")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(.titleBlack)
+                        .foregroundColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))
                         .multilineTextAlignment(.leading)
                     Text(item.artist ?? "")
                         .font(.customBody1())
                         .fontWeight(.regular)
-                        .foregroundColor(.titleDarkgray)
+                        .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .padding(.leading, UIScreen.getWidth(35))
@@ -57,10 +64,10 @@ struct RecordDetailView: View {
                         
                         // MARK: - 가사
                         ZStack {
-                            Image("LylicComp")
+                            Image(RecordImage.lylicComp.fetchRecordImage(isLighting: isLighting))
                             
                             Text(item.lyrics ?? "")
-                                .foregroundColor(.titleDarkgray)
+                                .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                                 .font(.customBody2())
                                 .frame(width: UIScreen.getWidth(240), alignment: .center)
                         }
@@ -80,7 +87,7 @@ struct RecordDetailView: View {
                                 
                                 // MARK: Image
                                 ZStack {
-                                    Image("DetailPhotoComp")
+                                    Image(RecordImage.photoComp.fetchRecordImage(isLighting: isLighting))
                                     
                                     if let image = item.image {
                                         Image(uiImage: UIImage(data: image)!)
@@ -102,11 +109,11 @@ struct RecordDetailView: View {
                                 // MARK: Story
                                 ZStack {
                                     
-                                    Image("StoryComp")
+                                    Image(RecordImage.storyComp.fetchRecordImage(isLighting: isLighting))
                                     
                                     Text(item.story ?? "")
                                         .font(Font.customBody2())
-                                        .foregroundColor(.titleDarkgray)
+                                        .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                                         .lineLimit(5)
                                         .truncationMode(.tail)
                                         .multilineTextAlignment(.leading)

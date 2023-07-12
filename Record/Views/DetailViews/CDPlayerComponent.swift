@@ -9,13 +9,14 @@ import SwiftUI
 
 struct CDPlayerComponent: View {
     
+    @AppStorage ("isLighting") var isLighting = false
     @State private var angle = 0.0
     
     let music: Music
 
     var body: some View {
         ZStack {
-            Image("CdPlayer")
+            Image(RecordImage.cdPlayer.fetchRecordImage(isLighting: isLighting))
                 .padding(.trailing, 20.0)
             
             ZStack(alignment: .center) {
@@ -42,14 +43,14 @@ struct CDPlayerComponent: View {
             
             ZStack {
                 Circle()
-                    .foregroundColor(.titleLightgray)
+                    .foregroundColor(RecordColor.recordDarkCompColor2.fetchColor(isLighting: isLighting))
                     .frame(width: 30 , height: 30)
                 Circle()
-                    .foregroundColor(.titleDarkgray)
+                    .foregroundColor(RecordColor.recordDarkCompColor.fetchColor(isLighting: isLighting))
                     .frame(width: 15 , height: 15)
-                    .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                    .shadow(color: RecordColor.recordShadowGray.fetchColor(isLighting: isLighting), radius: 4, x: 0, y: 4)
                 Circle()
-                    .foregroundColor(.background)
+                    .foregroundColor(RecordColor.recordBackground.fetchColor(isLighting: isLighting))
                     .frame(width: 3 , height: 3)
             }.offset(x: -10.6, y: -133)
             

@@ -43,6 +43,7 @@
 		B277EC172859A679001A97B1 /* CdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC162859A679001A97B1 /* CdListView.swift */; };
 		F9122AE429C6EC3000EFFFA0 /* ImageThemeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9122AE329C6EC3000EFFFA0 /* ImageThemeModalView.swift */; };
 		F918658D29CA2BC00034AF63 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918658C29CA2BC00034AF63 /* Themes.swift */; };
+		F95FFE9C2A5DFF410015B4FF /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95FFE9B2A5DFF410015B4FF /* Image+Extension.swift */; };
 		F9BA11F329A499D500176807 /* MarqueeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BA11F229A499D500176807 /* MarqueeTextView.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		B277EC162859A679001A97B1 /* CdListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CdListView.swift; sourceTree = "<group>"; };
 		F9122AE329C6EC3000EFFFA0 /* ImageThemeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageThemeModalView.swift; sourceTree = "<group>"; };
 		F918658C29CA2BC00034AF63 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
+		F95FFE9B2A5DFF410015B4FF /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 		F9BA11F229A499D500176807 /* MarqueeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 				87B6E3CE28EC978D002D579A /* Font+Extensions.swift */,
 				87B6E3D028EC97B0002D579A /* View+Extensions.swift */,
 				87B6E3D228EC97CE002D579A /* UIScreen+Extensions.swift */,
+				F95FFE9B2A5DFF410015B4FF /* Image+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F95FFE9C2A5DFF410015B4FF /* Image+Extension.swift in Sources */,
 				B277EC172859A679001A97B1 /* CdListView.swift in Sources */,
 				8786B2F129AA547C000B46A1 /* CDPlayer.swift in Sources */,
 				8786B2F529AA5CED000B46A1 /* MusicInformation.swift in Sources */,
