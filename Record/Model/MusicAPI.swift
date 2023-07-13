@@ -48,11 +48,12 @@ final class MusicAPI: ObservableObject {
                     let searchResults = jsonObject["results"] as! [NSDictionary]
                     searchResults.forEach { result in
                         
-                        
                         // Music 객체에 저장
                         let searchResult = Music(artist: result["artistName"] as! String,
                                                  title: result["trackName"] as! String,
-                                                 albumArt: (result["artworkUrl100"] as! String).replacingOccurrences(of: "100x100bb", with: "500x500bb"))
+                                                 albumArt: (result["artworkUrl100"] as! String).replacingOccurrences(of: "100x100bb", with: "500x500bb"),
+                                                 previewUrl: result["previewUrl"] as! String)
+                        
                         
                         self.musicList.append(searchResult)
                     }
@@ -67,6 +68,7 @@ final class MusicAPI: ObservableObject {
         
         task.resume()
     }
+    
 }
 
 
@@ -75,4 +77,5 @@ struct Music: Hashable, Codable {
     var artist: String // 가수
     var title: String // 제목
     var albumArt: String //앨범커버
+    var previewUrl: String? // 1분 미리듣기
 }

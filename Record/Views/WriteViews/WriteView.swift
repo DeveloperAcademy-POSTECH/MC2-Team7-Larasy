@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct WriteView: View {
     
@@ -208,6 +209,7 @@ struct WriteView: View {
                             item!.image = inputImage!.jpegData(compressionQuality: 1)
                             item!.lyrics = lyrics
                             
+                            
                             PersistenceController.shared.saveContent()
                             self.showingAlert = true
                             
@@ -244,6 +246,7 @@ struct WriteView: View {
             item!.title = music.title
             item!.artist = music.artist
             item!.albumArt = music.albumArt
+            item!.previewUrl = music.previewUrl
             
         }
     } // View End
@@ -287,6 +290,6 @@ struct NavigationUtil {
 
 struct WriteView_Previews: PreviewProvider {
     static var previews: some View {
-        WriteView(music: Music(artist: "가수이름", title: "노래제목", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg"), isWrite: .constant(true), isEdit: .constant(false))
+        WriteView(music: Music(artist: "가수이름", title: "노래제목", albumArt: "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/f7/68/9c/f7689ce3-6d41-60cd-62d2-57a91ddf5b9d/196922067341_Cover.jpg/100x100bb.jpg", previewUrl: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/ca/b2/31/cab231b4-58d5-ceba-f895-327365f30e6f/mzaf_6692739326647302071.plus.aac.p.m4a"), isWrite: .constant(true), isEdit: .constant(false))
     }
 }

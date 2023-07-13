@@ -70,7 +70,8 @@ struct RecordDetailView: View {
                             Spacer()
                             CDPlayerComponent(music: Music(artist: item.artist ?? "",
                                                            title: item.title ?? "",
-                                                           albumArt: item.albumArt ?? ""))
+                                                           albumArt: item.albumArt ?? "",
+                                                           previewUrl: item.previewUrl ?? ""))
                         }
                     }
                     
@@ -175,7 +176,8 @@ struct RecordDetailView: View {
             NavigationView {
                 WriteView(music: Music(artist: item.artist!,
                                        title: item.title!,
-                                       albumArt: item.albumArt!),
+                                       albumArt: item.albumArt!,
+                                       previewUrl: item.previewUrl),
                           isWrite: .constant(false),
                           isEdit: .constant(true),
                           item: item)
