@@ -75,7 +75,7 @@ struct CDPlayerComponent: View {
         
     }
     
-    func playMusic() {
+    private func playMusic() {
        
         isPlayMusic.toggle()
         
