@@ -92,7 +92,7 @@ struct CDPlayerComponent: View {
         
     }
     
-    func pauseMusic() {
+    private func pauseMusic() {
         isPlayMusic.toggle()
         player?.pause()
     }
