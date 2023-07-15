@@ -30,12 +30,8 @@ struct CDPlayerComponent: View {
                     .rotationEffect(.degrees(self.angle))
                     .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
                     .onTapGesture {
-                        if isPlayMusic {
-                            pauseMusic()
-                        } else {
-                            playMusic()
-                        }
-                        self.angle += Double.random(in: 3600..<3960)
+                        isPlayMusic ? pauseMusic() : playMusic()
+                        angle += Double.random(in: 3600..<3960)
                     } // albumArt를 불러오는 URLImage
                 Circle()
                     .frame(width: 30, height: 30)
