@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct CDPlayerComponent: View {
     
     @State private var angle = 0.0
-    
+    @State var player: AVPlayer?
+    @State var isPlayMusic: Bool = false
     let music: Music
-
+    
     var body: some View {
         ZStack {
             Image("CdPlayer")
@@ -28,7 +30,8 @@ struct CDPlayerComponent: View {
                     .rotationEffect(.degrees(self.angle))
                     .animation(.timingCurve(0, 0.8, 0.2, 1, duration: 10), value: angle)
                     .onTapGesture {
-                        self.angle += Double.random(in: 3600..<3960)
+                        isPlayMusic ? pauseMusic() : playMusic()
+                        angle += Double.random(in: 3600..<3960)
                     } // albumArt를 불러오는 URLImage
                 Circle()
                     .frame(width: 30, height: 30)
@@ -54,8 +57,8 @@ struct CDPlayerComponent: View {
             }.offset(x: -10.6, y: -133)
             
         }
+        
     }
-    
     
     func getImage() -> UIImage {
         
@@ -65,5 +68,28 @@ struct CDPlayerComponent: View {
         } else {
             return UIImage(systemName: "xmark")!
         }
+        
+    }
+    
+    private func playMusic() {
+       
+        isPlayMusic.toggle()
+        
+        let musicURL = URL.init(string: music.previewUrl ?? "")
+        
+        guard let url = musicURL else {
+            debugPrint("Music url is not valid")
+            return
+        }
+        
+        player = AVPlayer(playerItem: AVPlayerItem(url: url))
+        
+        player?.play()
+        
+    }
+    
+    private func pauseMusic() {
+        isPlayMusic.toggle()
+        player?.pause()
     }
 }
