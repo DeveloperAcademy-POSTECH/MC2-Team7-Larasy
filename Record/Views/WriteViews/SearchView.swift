@@ -25,6 +25,8 @@ struct SearchView: View {
     @FocusState private var isSearchbarFocused: Bool?
     @State var isAcessFirst: Bool
     
+    @AppStorage ("isLighting") var isLighting = false
+    
     init(isAccessFirst: Bool) {
         // 검색 결과 출력 리스트 배경색 초기화
         UITableView.appearance().backgroundColor = UIColor.clear
@@ -36,7 +38,7 @@ struct SearchView: View {
     var body: some View {
         
         ZStack {
-            Color.background // 배경색 설정
+            RecordColor.recordBackground.fetchColor(isLighting: isLighting)
                 .ignoresSafeArea()
             
             VStack(alignment: .leading) {
@@ -44,7 +46,7 @@ struct SearchView: View {
                     .frame(width: 250)
                     .font(.customTitle2())
                     .lineSpacing(7)
-                    .foregroundColor(.titleBlack)
+                    .foregroundColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))
                     .padding(.top, 30)
                     .padding(.leading, 20)
                 
@@ -66,13 +68,13 @@ struct SearchView: View {
         
         ZStack {
             Rectangle() // 서치바 배경
-                .foregroundColor(.titleLightgray)
-            
+                .foregroundColor(RecordColor.recordTitleLightgray.fetchColor(isLighting: isLighting))
+                
             HStack {
                 Image(systemName: "magnifyingglass") // 돋보기 Symbol
                 
                 TextField("", text: $search) // 입력창
-                    .foregroundColor(.titleBlack)
+                    .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                     .font(.customBody2())
                     .focused($isSearchbarFocused, equals: true)
                     .disableAutocorrection(true)
@@ -87,14 +89,14 @@ struct SearchView: View {
                     })
                     .placeholder(when: search.isEmpty) {
                         Text(placeholer)
-                            .foregroundColor(.titleDarkgray)
+                            .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                             .font(.customBody2())
                     }
                 
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지
                         .imageScale(.medium)
-                        .foregroundColor(.titleGray)
+                        .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                         .padding(3)
                         .onTapGesture {
                             withAnimation {
@@ -106,7 +108,7 @@ struct SearchView: View {
                 
                 
             } // HStack End
-            .foregroundColor(.titleDarkgray)
+            .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
             .padding(13)
             
         } // 배경색 ZStack End
@@ -140,12 +142,12 @@ struct SearchView: View {
                             Text(notMusic)
                             Spacer()
                         }
-                        .foregroundColor(.titleDarkgray)
+                        .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                         .font(.customSubhead())
                         .padding([.leading, .bottom], 10)
                         
                         Text(notMusicDescription)
-                            .foregroundColor(.titleDarkgray)
+                            .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                             .font(.customBody2())
                             .padding(.trailing, 100)
                     }
@@ -181,13 +183,13 @@ struct SearchView: View {
                                     .lineLimit(1)
                             }
                             .padding(.leading, 10)
-                            .foregroundColor(.titleDarkgray)
+                            .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                         } // Navigation Link End
                         
                         .buttonStyle(PlainButtonStyle())
                     } // HStack End
                 }
-                .listRowBackground(Color.background)
+                .listRowBackground(RecordColor.recordBackground.fetchColor(isLighting: isLighting))
                 .listRowSeparator(.hidden)
                 .padding([.bottom, .top, .trailing], 10)
                 

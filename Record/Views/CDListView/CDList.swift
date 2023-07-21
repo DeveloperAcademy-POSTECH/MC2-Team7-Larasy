@@ -16,6 +16,7 @@ import SwiftUI
  */
 
 struct CDList: View {
+    @AppStorage ("isLighting") var isLighting = false
     
     @Binding var items: [Content]
     @Binding var currentIndex: Int
@@ -50,15 +51,15 @@ struct CDList: View {
                             URLImage(urlString: items[i].albumArt ?? "")
                                 .aspectRatio(contentMode: .fill)
                                 .clipShape(Circle())
-                                .shadow(color: Color(.gray), radius: 4, x: 0, y: 4)
+                                .shadow(color: RecordColor.recordShadowGray.fetchColor(isLighting: isLighting), radius: 4, x: 0, y: 4)
                             
                             Circle()
                                 .frame(width: UIScreen.getWidth(40), height: UIScreen.getHeight(40))
-                                .foregroundColor(.background)
+                                .foregroundColor(RecordColor.recordBackground.fetchColor(isLighting: isLighting))
                                 .overlay(
                                     Circle()
-                                        .stroke(.background, lineWidth: 0.1)
-                                        .shadow(color: .titleDarkgray, radius: 2, x: 3, y: 3)
+                                        .stroke(RecordColor.recordBackground.fetchColor(isLighting: isLighting), lineWidth: 0.1)
+                                        .shadow(color: RecordColor.recordShadowGray.fetchColor(isLighting: isLighting), radius: 2, x: 3, y: 3)
                                 )
                         }
                         .frame(width: cdSize, height: cdSize)

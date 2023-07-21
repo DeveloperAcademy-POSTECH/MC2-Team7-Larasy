@@ -14,57 +14,65 @@ struct ImageThemeModalView: View {
     @State var selectedTheme: Themes = .spring
     @State private var showShareSheet = false
     
+    @AppStorage ("isLighting") var isLighting = false
+    
     var body: some View {
-        VStack(alignment: .center, spacing: 30) {
-            Text("음악과 어울리는 테마를 선택하세요.")
-                .font(.system(size: 24, weight: .regular))
+        ZStack {
+            RecordColor.recordBackground.fetchColor(isLighting: isLighting)
+                .ignoresSafeArea()
+            VStack(alignment: .center, spacing: 30) {
+                Text("음악과 어울리는 테마를 선택하세요.")
+                    .font(.system(size: 24, weight: .regular))
+                    .foregroundColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))
+                
+                preview
+                
+                HStack(spacing: 30) {
+                    ForEach(Array(Themes.allCases.enumerated()), id: \.offset) { index, theme in
+                        Button {
+                            selectedTheme = theme
+                        } label: {
+                            theme.fetchThemes()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .overlay {
+                                    Circle().stroke(theme == selectedTheme ? RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting) : .clear, lineWidth: 2)
+                                }
+                        }
+                    }
+                }
+            }
+            .scaleEffect(UIScreen.getWidth(0.75))
+            .padding(.bottom, 60)
             
-            preview
-            
-            HStack(spacing: 30) {
-                ForEach(Array(Themes.allCases.enumerated()), id: \.offset) { index, theme in
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        selectedTheme = theme
+                        isPresented = false
                     } label: {
-                        theme.fetchThemes()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                            .overlay {
-                                Circle().stroke(theme == selectedTheme ? .black : .clear, lineWidth: 2)
-                            }
+                        Text("취소")
+                    }
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Text("이미지 공유")
+                        .foregroundColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        isPresented = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            actionSheet()
+                        }
+                    } label: {
+                        Text("완료")
                     }
                 }
             }
-        }
-        .scaleEffect(UIScreen.getWidth(0.75))
-        .padding(.bottom, 60)
-
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    isPresented = false
-                } label: {
-                    Text("취소")
-                }
+            .sheet(isPresented: $showShareSheet) {
+                ShareSheet(activityItems: [self.snapShot()])
             }
-            
-            ToolbarItem(placement: .principal) {
-                Text("이미지 공유")
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    isPresented = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        actionSheet()
-                    }
-                } label: {
-                    Text("완료")
-                }
-            }
-        }
-        .sheet(isPresented: $showShareSheet) {
-            ShareSheet(activityItems: [self.snapShot()])
         }
     }
     
