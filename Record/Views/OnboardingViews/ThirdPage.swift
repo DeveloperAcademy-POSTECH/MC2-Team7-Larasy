@@ -54,11 +54,11 @@ struct ThirdPage: View {
             
             // MARK: Text
             VStack(alignment: .leading) {
-                Text("나만의 방에서\n음악을 플레이어에 재생시키고\n기록을 다시 감상하세요.")
+                Text("온보딩3".localized)
                     .foregroundColor(.titleBlack)
                     .font(Font.customTitle2())
                     .lineSpacing(5)
-                    .padding(.leading, UIScreen.getWidth(30))
+                    .padding(.horizontal, UIScreen.getWidth(30))
                     .padding(.top, UIScreen.getHeight(100))
                 
                 Spacer()

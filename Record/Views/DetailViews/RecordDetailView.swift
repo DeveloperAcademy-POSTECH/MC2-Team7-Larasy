@@ -157,21 +157,21 @@ struct RecordDetailView: View {
                 Button {
                     isTappedEditButton.toggle()
                 } label: {
-                    Label("편집", systemImage: "square.and.pencil")
+                    Label("편집".localized, systemImage: "square.and.pencil")
                 }
                 
                 // MARK: 이미지 저장 기능
                 Button {
                     isShare = true
                 } label: {
-                    Label("이미지 공유", systemImage: "square.and.arrow.up")
+                    Label("이미지 공유".localized, systemImage: "square.and.arrow.up")
                 }
                 
                 // MARK: 삭제 기능
                 Button(role: .destructive) {
                     isPresentedDeleteAlert = true
                 } label: {
-                    Label("제거", systemImage: "trash")
+                    Label("제거".localized, systemImage: "trash")
                 }
             } label: {
                 Image(systemName: "ellipsis")
@@ -191,12 +191,12 @@ struct RecordDetailView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
-        .alert("삭제", isPresented: $isPresentedDeleteAlert) {
-            Button("삭제", role: .destructive) {
+        .alert("삭제".localized, isPresented: $isPresentedDeleteAlert) {
+            Button("삭제".localized, role: .destructive) {
                 PersistenceController.shared.deleteContent(item: item)
                 presentation.wrappedValue.dismiss()
             }
-        } message: { Text("정말 삭제하시겠습니까?") }
+        } message: { Text("정말 삭제하시겠습니까?".localized) }
         // 본문 ZStack End
             .alert("저장완료", isPresented: $isTappedSaveButton) {
                 Button("확인") {

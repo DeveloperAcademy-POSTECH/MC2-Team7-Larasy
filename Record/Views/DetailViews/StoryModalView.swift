@@ -27,7 +27,7 @@ struct StoryModalView: View {
                 
                 // 나의 음악 이야기 & x 버튼 시작
                 HStack {
-                    Text("나의 음악 이야기") // 상단 나의 음악 이야기 Text 텍스트 출력
+                    Text("나의 음악 이야기".localized) // 상단 나의 음악 이야기 Text 텍스트 출력
                         .foregroundColor(RecordColor.recordTitleWhite.fetchColor(isLighting: isLighting))
                         .font(.customTitle2())
                     Spacer()

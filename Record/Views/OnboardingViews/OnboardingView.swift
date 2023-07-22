@@ -33,7 +33,7 @@ struct OnboardingView: View {
     @State var selected = 0
     var pageIndex: [Int] = [0, 1, 2, 3]
     
-    let title: [String] = ["나의 이야기로\n간직하고 싶은 음악이 있나요?","음악을 사진과 함께\n짧은 이야기로 기록하고,\n기억하고 싶은 가사를 입력하세요.","나만의 방에서 \n음악을 플레이어에 재생시키고 \n기록을 다시 감상하세요."]
+    let title: [String] = ["온보딩1".localized, "온보딩2".localized, "온보딩3".localized]
     let backgroundImage: [String] = ["Page1","Page2","Page3"]
     
     

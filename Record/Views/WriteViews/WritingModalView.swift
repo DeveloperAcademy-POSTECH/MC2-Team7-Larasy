@@ -10,7 +10,7 @@ import SwiftUI
 
 struct WritingModalView: View {
     
-    @State var placeholderText : String = "이 음악과 관련된 짧은 이야기를\n기록해보세요 (글자수 200자 제한)"
+    @State var placeholderText : String = "이 음악과 관련된 짧은 이야기를\n기록해보세요 (글자수 200자 제한)".localized
 
     @Binding var content : String
     @Binding var isPresented: Bool
@@ -34,7 +34,7 @@ struct WritingModalView: View {
                 
                 // MARK: 상단 텍스트 및 닫기 버튼
                 HStack {
-                    Text("나의 음악 이야기") // 상단 나의 음악 이야기 Text 텍스트 출력
+                    Text("나의 음악 이야기".localized) // 상단 나의 음악 이야기 Text 텍스트 출력
                         .foregroundColor(RecordColor.recordTitleWhite.fetchColor(isLighting: isLighting))
                         .font(.customTitle2())
                     Spacer()
@@ -94,7 +94,7 @@ struct WritingModalView: View {
                             
                             Spacer()
                             
-                            Button("완료") {
+                            Button("완료".localized) {
                                 withAnimation {
                                     self.isPresented = false
                                 }
@@ -122,9 +122,9 @@ struct WritingModalView: View {
 }
 
 
-//struct WritingModalView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WritingModalView(content: .constant(""), isPresented: .constant(true))
-//    }
-//}
+struct WritingModalView_Previews: PreviewProvider {
+    static var previews: some View {
+        WritingModalView(content: .constant(""), isPresented: .constant(true))
+    }
+}
 

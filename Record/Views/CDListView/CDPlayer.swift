@@ -28,7 +28,7 @@ struct CDPlayer: View {
         
         VStack {
             
-            Text("CD를 선택하고 플레이어를 재생해보세요")
+            Text("CD를 선택하고 플레이어를 재생해보세요".localized)
                 .foregroundColor(.titleGray)
                 .font(.customBody2())
                 .frame(width: UIScreen.getWidth(300))

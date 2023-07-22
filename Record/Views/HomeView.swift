@@ -37,7 +37,7 @@ struct HomeView: View {
                                 // MARK: link to CDListView
                                 
                                 VStack(spacing: 0) {
-                                    Text("내 음악 보러 가기")
+                                    Text("내 음악 보러 가기".localized)
                                         .foregroundColor(.titleDarkgray)
                                         .font(Font.customHeadline())
                                         .padding(.top, UIScreen.getHeight(90))
@@ -115,7 +115,7 @@ struct HomeView: View {
                                 // MARK: Link to SearchView
                                 
                                 VStack(spacing: 0) {
-                                    Text("음악 기록하기")
+                                    Text("음악 기록하기".localized)
                                         .foregroundColor(.titleDarkgray)
                                         .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                                         .font(Font.customHeadline())

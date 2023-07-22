@@ -78,7 +78,7 @@ struct WriteView: View {
                             ZStack {
                                 Image(RecordImage.lylicComp.fetchRecordImage(isLighting: isLighting))
                                 
-                                TextField("\(Image(systemName: "music.mic")) 기억하고 싶은 가사", text: $lyrics)
+                                TextField("\(Image(systemName: "music.mic")) \("기억하고 싶은 가사".localized)", text: $lyrics)
                                     .font(Font.customBody2())
                                     .disableAutocorrection(true)
                                     .multilineTextAlignment(.center)
@@ -148,7 +148,7 @@ struct WriteView: View {
                                                 Image(systemName: "plus")
                                                     .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                                                     .padding(UIScreen.getHeight(5))
-                                                Text("나의 음악 이야기")
+                                                Text("나의 음악 이야기".localized)
                                                     .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                                                     .font(.customBody1())
                                             }
@@ -188,7 +188,7 @@ struct WriteView: View {
                                 HStack {
                                     Image(systemName: "chevron.backward")
                                         .font(Font.headline.weight(.semibold))
-                                    Text("음악 선택")
+                                    Text("음악 선택".localized)
                                 }
                                 .foregroundColor(savestory ? .clear : .pointBlue)
                             }
@@ -206,11 +206,11 @@ struct WriteView: View {
                     
                     // 하나라도 안 쓰면 저장 버튼 눌리지 않게
                     if content == "" || inputImage == nil || lyrics == "" {
-                        Text("저장")
+                        Text("저장".localized)
                             .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                         
                     } else { // 저장버튼 활성화 및 CoreData에 저장
-                        Button("저장") {
+                        Button("저장".localized) {
                             
                             item!.story = content
                             item!.image = inputImage!.jpegData(compressionQuality: 1)
@@ -224,8 +224,8 @@ struct WriteView: View {
                         .foregroundColor(savestory ? .clear : .pointBlue)
                         .alert(isPresented: $showingAlert) {
                             Alert(
-                                title: Text("저장 완료"),
-                                dismissButton: .default(Text("확인")) {
+                                title: Text("저장 완료".localized),
+                                dismissButton: .default(Text("확인".localized)) {
                                     if isEdit && !isWrite {
                                         presentationMode.wrappedValue.dismiss()
                                     } else {

@@ -16,14 +16,14 @@ struct EmptyCDListView: View {
     var body: some View {
         VStack {
             
-            Text("아직 기록된 음악이 없어요")
+            Text("아직 기록된 음악이 없어요".localized)
                 .font(Font.customTitle2())
                 .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                 .padding(.bottom, UIScreen.getHeight(12))
                 .padding(.top, UIScreen.getHeight(260))
             
             NavigationLink(destination: SearchView(isAccessFirst: true)) {
-                Text("음악 기록하러 가기")
+                Text("음악 기록하러 가기".localized)
             }
             
             Spacer()

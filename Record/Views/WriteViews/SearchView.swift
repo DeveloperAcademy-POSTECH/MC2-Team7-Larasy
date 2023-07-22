@@ -16,12 +16,10 @@ struct SearchView: View {
     @State var search = ""
     @State var searchChecker = true
     @State var progress: Bool
-    private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요"
-    private let notMusic = "검색 결과가 없습니다."
-    private let notMusicDescription = """
-     ∙철자와 띄어쓰기를 확인해주세요.
-     ∙새로운 검색을 시도해주세요.
-    """
+    private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요".localized
+    private let notMusic = "검색 결과가 없습니다.".localized
+    private let guideline1 = "철자와 띄어쓰기를 확인해주세요.".localized
+    private let guideline2 = "새로운 검색을 시도해주세요.".localized
     @FocusState private var isSearchbarFocused: Bool?
     @State var isAcessFirst: Bool
     
@@ -42,13 +40,12 @@ struct SearchView: View {
                 .ignoresSafeArea()
             
             VStack(alignment: .leading) {
-                Text("오랫동안 간직하고 싶은 나만의 음악을 알려주세요") // 최상단 title 설정
-                    .frame(width: 250)
+                Text("오랫동안 간직하고 싶은 나만의 음악을 알려주세요".localized) // 최상단 title 설정
                     .font(.customTitle2())
                     .lineSpacing(7)
                     .foregroundColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))
                     .padding(.top, 30)
-                    .padding(.leading, 20)
+                    .padding(.horizontal, 20)
                 
                 SearchBar // 중앙 서치바,
                 
@@ -57,7 +54,7 @@ struct SearchView: View {
             } //VStack End
             
         } // ZStack End
-        .navigationBarTitle("음악 선택", displayMode: .inline)
+        .navigationBarTitle("음악 선택".localized, displayMode: .inline)
         
     } // body View End
     
@@ -137,7 +134,7 @@ struct SearchView: View {
                             }
                         }
                 } else {
-                    VStack {
+                    VStack(alignment: .leading) {
                         HStack {
                             Text(notMusic)
                             Spacer()
@@ -146,10 +143,10 @@ struct SearchView: View {
                         .font(.customSubhead())
                         .padding([.leading, .bottom], 10)
                         
-                        Text(notMusicDescription)
+                        Text("\(guideline1)\n\(guideline2)")
                             .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                             .font(.customBody2())
-                            .padding(.trailing, 100)
+                            .padding(.leading, 16)
                     }
                     .padding(20)
                     .onDisappear{
