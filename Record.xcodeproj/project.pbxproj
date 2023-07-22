@@ -43,6 +43,9 @@
 		A0AA39BB285A4936009EE3EA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AA39BA285A4936009EE3EA /* OnboardingView.swift */; };
 		A0AA39BF285AF643009EE3EA /* FourthPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AA39BE285AF643009EE3EA /* FourthPage.swift */; };
 		B277EC172859A679001A97B1 /* CdListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B277EC162859A679001A97B1 /* CdListView.swift */; };
+		F9122AE429C6EC3000EFFFA0 /* ImageThemeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9122AE329C6EC3000EFFFA0 /* ImageThemeModalView.swift */; };
+		F918658D29CA2BC00034AF63 /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918658C29CA2BC00034AF63 /* Themes.swift */; };
+		F95FFE9C2A5DFF410015B4FF /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95FFE9B2A5DFF410015B4FF /* Image+Extension.swift */; };
 		F9BA11F329A499D500176807 /* MarqueeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BA11F229A499D500176807 /* MarqueeTextView.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +90,9 @@
 		A0AA39BA285A4936009EE3EA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A0AA39BE285AF643009EE3EA /* FourthPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthPage.swift; sourceTree = "<group>"; };
 		B277EC162859A679001A97B1 /* CdListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CdListView.swift; sourceTree = "<group>"; };
+		F9122AE329C6EC3000EFFFA0 /* ImageThemeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageThemeModalView.swift; sourceTree = "<group>"; };
+		F918658C29CA2BC00034AF63 /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
+		F95FFE9B2A5DFF410015B4FF /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 		F9BA11F229A499D500176807 /* MarqueeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +152,7 @@
 				87A0D9B0285BAEF8006D0D3B /* Persistence.swift */,
 				79418F7A2858C17C00F844BD /* ImagePicker.swift */,
 				87A0D9B2285BAF42006D0D3B /* Record.xcdatamodeld */,
+				F918658C29CA2BC00034AF63 /* Themes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -158,6 +165,7 @@
 				87B6E3D028EC97B0002D579A /* View+Extensions.swift */,
 				87B6E3D228EC97CE002D579A /* UIScreen+Extensions.swift */,
 				87AD362B2A5A64C400B74A5F /* String+Extensions.swift */,
+				F95FFE9B2A5DFF410015B4FF /* Image+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -178,6 +186,7 @@
 				13C0E4A128573795004ABE1D /* RecordDetailView.swift */,
 				3D49B5AD285A02B50054FDED /* StoryModalView.swift */,
 				3D49B5AF285A41570054FDED /* PhotoModalView.swift */,
+				F9122AE329C6EC3000EFFFA0 /* ImageThemeModalView.swift */,
 				87268D0129BD6DA600C0CA29 /* CDPlayerComponent.swift */,
 			);
 			path = DetailViews;
@@ -317,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F95FFE9C2A5DFF410015B4FF /* Image+Extension.swift in Sources */,
 				B277EC172859A679001A97B1 /* CdListView.swift in Sources */,
 				87AD362C2A5A64C400B74A5F /* String+Extensions.swift in Sources */,
 				8786B2F129AA547C000B46A1 /* CDPlayer.swift in Sources */,
@@ -328,11 +338,13 @@
 				3D49B5B0285A41570054FDED /* PhotoModalView.swift in Sources */,
 				87D686F229A63B9F00E3707F /* EmptyCDListView.swift in Sources */,
 				8786B2F329AA5726000B46A1 /* CDList.swift in Sources */,
+				F9122AE429C6EC3000EFFFA0 /* ImageThemeModalView.swift in Sources */,
 				3D593E472858530B00E481C7 /* WritingModalView.swift in Sources */,
 				87B6E3CF28EC978D002D579A /* Font+Extensions.swift in Sources */,
 				87E96F4D28DF940A007D167E /* ThirdPage.swift in Sources */,
 				87FB281D285A04680036A5BB /* Screenshot.swift in Sources */,
 				87F1956D295FED74004A1CAF /* URLImage.swift in Sources */,
+				F918658D29CA2BC00034AF63 /* Themes.swift in Sources */,
 				87D686F429A6768900E3707F /* FramePreferenceKey.swift in Sources */,
 				8715A79B2855479E001AB4F5 /* MusicAPI.swift in Sources */,
 				87B6E3CD28EC9764002D579A /* Color+Extensions.swift in Sources */,

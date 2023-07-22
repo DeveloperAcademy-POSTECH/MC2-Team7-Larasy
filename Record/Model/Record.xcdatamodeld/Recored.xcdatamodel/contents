@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Content" representedClassName="Content" syncable="YES" codeGenerationType="class">
         <attribute name="albumArt" attributeType="String"/>
         <attribute name="artist" attributeType="String"/>
@@ -7,10 +7,8 @@
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="image" attributeType="Binary" customClassName="UIImage"/>
         <attribute name="lyrics" attributeType="String"/>
+        <attribute name="previewUrl" optional="YES" attributeType="String"/>
         <attribute name="story" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
     </entity>
-    <elements>
-        <element name="Content" positionX="-54" positionY="-9" width="128" height="149"/>
-    </elements>
 </model>

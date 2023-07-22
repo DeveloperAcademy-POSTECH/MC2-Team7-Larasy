@@ -25,5 +25,48 @@ extension Color {
     //etc
     static let background = Color("background")
     static let cdplayer = Color("cdplayer")
+    
+    static let gray9 = Color("gray9")
+    static let gray8 = Color("gray8")
+    static let gray6 = Color("gray6")
+    static let gray3 = Color("gray3")
+    static let gray2 = Color("gray2")
+}
 
+enum RecordColor {
+    case recordBackground
+    case recordTitleBlack
+    case recordTitleDarkgray
+    case recordTitleGray
+    case recordTitleLightgray
+    case recordBackgroundWhite
+    case recordTitleWhite
+    case recordShadowGray
+    case recordDarkCompColor
+    case recordDarkCompColor2
+    
+    func fetchColor(isLighting: Bool) -> Color {
+        switch self {
+        case .recordBackground:
+            return isLighting ? .gray9 : .background
+        case .recordTitleBlack:
+            return isLighting ? .titleLightgray : .titleBlack
+        case .recordTitleDarkgray:
+            return isLighting ? .titleGray : .titleDarkgray
+        case .recordTitleGray:
+            return isLighting ? .gray3 : .titleGray
+        case .recordTitleLightgray:
+            return isLighting ? .gray8 : .titleLightgray
+        case .recordBackgroundWhite:
+            return isLighting ? .gray9 : .white
+        case .recordTitleWhite:
+            return isLighting ? .titleGray : .white
+        case .recordShadowGray:
+            return isLighting ? .black.opacity(0.4) : .titleDarkgray
+        case .recordDarkCompColor:
+            return isLighting ? .gray6 : .titleDarkgray
+        case .recordDarkCompColor2:
+            return isLighting ? .titleDarkgray : .titleLightgray
+        }
+    }
 }

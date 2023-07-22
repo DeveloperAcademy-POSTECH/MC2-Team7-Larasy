@@ -35,3 +35,21 @@ extension View {
         }
     }
 }
+
+extension View {
+    /// Layers the given views behind this ``TextEditor``.
+    func textEditorBackground(color: Color, isLighting: Bool) -> some View {
+        if #available(iOS 16.0, *) {
+            return self
+                .scrollContentBackground(.hidden) // <- Hide it
+                .background(RecordColor.recordBackgroundWhite.fetchColor(isLighting: isLighting))
+                
+        } else {
+            // Fallback on earlier versions
+            return self
+                .onAppear {
+                    UITextView.appearance().backgroundColor = .clear
+                }
+        }
+    }
+}

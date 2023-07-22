@@ -12,6 +12,8 @@ struct StoryModalView: View {
     @Binding var isPresented: Bool
     let content: String
     
+    @AppStorage ("isLighting") var isLighting = false
+    
     var body: some View {
         ZStack {
             Color.titleBlack //Background Color
@@ -26,7 +28,7 @@ struct StoryModalView: View {
                 // 나의 음악 이야기 & x 버튼 시작
                 HStack {
                     Text("나의 음악 이야기".localized) // 상단 나의 음악 이야기 Text 텍스트 출력
-                        .foregroundColor(.white)
+                        .foregroundColor(RecordColor.recordTitleWhite.fetchColor(isLighting: isLighting))
                         .font(.customTitle2())
                     Spacer()
                     
@@ -47,10 +49,10 @@ struct StoryModalView: View {
                 ZStack{
                     Rectangle() // 본문 Background
                         .frame(minWidth: 0, maxWidth: 308, minHeight: 0, maxHeight: 350)
-                        .foregroundColor(.white)
+                        .foregroundColor(RecordColor.recordBackgroundWhite.fetchColor(isLighting: isLighting))
                     
                     Text(content) // 본문내용
-                        .foregroundColor(.titleDarkgray)
+                        .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                         .font(.customBody1())
                         .frame(width:256, alignment: .leading)
                         .padding()

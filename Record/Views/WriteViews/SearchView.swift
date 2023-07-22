@@ -12,35 +12,40 @@ import UIKit
 // MARK: - 음악 검색 View
 struct SearchView: View {
     
-    @ObservedObject var musicAPI: MusicAPI
+    @ObservedObject var musicAPI: MusicAPI = .searchMusic
     @State var search = ""
+    @State var searchChecker = true
     @State var progress: Bool
     private let placeholer = "기록하고 싶은 음악, 가수를 입력하세요".localized
+    private let notMusic = "검색 결과가 없습니다."
+    private let notMusicDescription = """
+     ∙철자와 띄어쓰기를 확인해주세요.
+     ∙새로운 검색을 시도해주세요.
+    """
     @FocusState private var isSearchbarFocused: Bool?
     @State var isAcessFirst: Bool
+    
+    @AppStorage ("isLighting") var isLighting = false
     
     init(isAccessFirst: Bool) {
         // 검색 결과 출력 리스트 배경색 초기화
         UITableView.appearance().backgroundColor = UIColor.clear
         
-        // MusicAPI 초기화
-        let state = State(initialValue: false)
-        self._progress = state
-        self.musicAPI = MusicAPI(progress: state.projectedValue)
+        self.progress = false
         self.isAcessFirst = isAccessFirst
     }
     
     var body: some View {
         
         ZStack {
-            Color.background // 배경색 설정
+            RecordColor.recordBackground.fetchColor(isLighting: isLighting)
                 .ignoresSafeArea()
             
             VStack(alignment: .leading) {
                 Text("오랫동안 간직하고 싶은 나만의 음악을 알려주세요".localized) // 최상단 title 설정
                     .font(.customTitle2())
                     .lineSpacing(7)
-                    .foregroundColor(.titleBlack)
+                    .foregroundColor(RecordColor.recordTitleBlack.fetchColor(isLighting: isLighting))
                     .padding(.top, 30)
                     .padding(.horizontal, 20)
                 
@@ -62,13 +67,13 @@ struct SearchView: View {
         
         ZStack {
             Rectangle() // 서치바 배경
-                .foregroundColor(.titleLightgray)
-            
+                .foregroundColor(RecordColor.recordTitleLightgray.fetchColor(isLighting: isLighting))
+                
             HStack {
                 Image(systemName: "magnifyingglass") // 돋보기 Symbol
                 
                 TextField("", text: $search) // 입력창
-                    .foregroundColor(.titleBlack)
+                    .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                     .font(.customBody2())
                     .focused($isSearchbarFocused, equals: true)
                     .disableAutocorrection(true)
@@ -83,14 +88,14 @@ struct SearchView: View {
                     })
                     .placeholder(when: search.isEmpty) {
                         Text(placeholer)
-                            .foregroundColor(.titleDarkgray)
+                            .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                             .font(.customBody2())
                     }
                 
                 if search != "" { // X 버튼 활성화
                     Image(systemName: "xmark.circle.fill") // x버튼 이미지
                         .imageScale(.medium)
-                        .foregroundColor(.titleGray)
+                        .foregroundColor(RecordColor.recordTitleGray.fetchColor(isLighting: isLighting))
                         .padding(3)
                         .onTapGesture {
                             withAnimation {
@@ -102,7 +107,7 @@ struct SearchView: View {
                 
                 
             } // HStack End
-            .foregroundColor(.titleDarkgray)
+            .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
             .padding(13)
             
         } // 배경색 ZStack End
@@ -114,16 +119,42 @@ struct SearchView: View {
     } // SearchBar View End
     
     
-    
     // MARK: - 검색 결과 리스트
     var ResultView: some View {
         
         GeometryReader { geometry in
             
-            if progress && musicAPI.musicList.count == 0 {
-                ProgressView()
-                    .scaleEffect(1.5, anchor: .center)
-                    .padding(180)
+            if progress && search != "" && musicAPI.musicList.isEmpty {
+                if searchChecker {
+                    ProgressView()
+                        .scaleEffect(1.5, anchor: .center)
+                        .padding(180)
+                        .onAppear {
+                            self.searchChecker = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                self.searchChecker = false
+                            }
+                        }
+                } else {
+                    VStack {
+                        HStack {
+                            Text(notMusic)
+                            Spacer()
+                        }
+                        .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
+                        .font(.customSubhead())
+                        .padding([.leading, .bottom], 10)
+                        
+                        Text(notMusicDescription)
+                            .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
+                            .font(.customBody2())
+                            .padding(.trailing, 100)
+                    }
+                    .padding(20)
+                    .onDisappear{
+                        self.searchChecker = true
+                    }
+                }
             }
             
             // 검색 결과 리스트
@@ -151,13 +182,13 @@ struct SearchView: View {
                                     .lineLimit(1)
                             }
                             .padding(.leading, 10)
-                            .foregroundColor(.titleDarkgray)
+                            .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                         } // Navigation Link End
                         
                         .buttonStyle(PlainButtonStyle())
                     } // HStack End
                 }
-                .listRowBackground(Color.background)
+                .listRowBackground(RecordColor.recordBackground.fetchColor(isLighting: isLighting))
                 .listRowSeparator(.hidden)
                 .padding([.bottom, .top, .trailing], 10)
                 

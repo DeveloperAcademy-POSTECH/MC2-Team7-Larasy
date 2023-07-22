@@ -13,6 +13,10 @@ struct RecordApp: App {
     @Environment(\.scenePhase) var scenePhase
     let persistenceController = PersistenceController.shared
     
+    init() {
+        UITextView.appearance().backgroundColor = .clear
+    }
+    
     var body: some Scene {
         WindowGroup {
             //ContentView()

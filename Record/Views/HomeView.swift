@@ -9,17 +9,20 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var isLighting : Bool = false
+    @AppStorage ("isLighting") var isLighting = false
     @State private var angle = 0.0
     
     var body: some View {
         NavigationView {
             ZStack {
-                Color.background
+                RecordColor.recordBackground.fetchColor(isLighting: isLighting)
                     .ignoresSafeArea()
                 
-                Image("backwindow")
+                Image(RecordImage.backwindow.fetchRecordImage(isLighting: isLighting))
                     .padding(.leading, UIScreen.getWidth(90))
+                
+                Image(RecordImage.moon.fetchRecordImage(isLighting: isLighting))
+                    .padding(.bottom, UIScreen.getHeight(90))
                 
                 VStack(alignment: .leading) {
                     
@@ -41,14 +44,14 @@ struct HomeView: View {
                                         .padding(.bottom, UIScreen.getHeight(6))
                                     
                                     NavigationLink(destination: CDListView()) {
-                                        Image("album")
+                                        Image(RecordImage.album.fetchRecordImage(isLighting: isLighting))
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: UIScreen.getWidth(130))
                                     }
                                     .navigationBarTitle("홈")
                                     
-                                    Image("shelf")
+                                    Image(RecordImage.shelf.fetchRecordImage(isLighting: isLighting))
                                 }
                                 .frame(maxWidth: .infinity, alignment: .topLeading)
                                 
@@ -56,7 +59,7 @@ struct HomeView: View {
                                 // MARK: CD Player
                                 ZStack(alignment: .top) {
                                     
-                                    Image("CdPlayer")
+                                    Image(RecordImage.cdPlayer.fetchRecordImage(isLighting: isLighting))
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: UIScreen.getWidth(144))
@@ -83,7 +86,7 @@ struct HomeView: View {
                             Spacer()
                                 .frame(maxWidth: .infinity)
                             
-                            Image("polaroid")
+                            Image(RecordImage.polaroid.fetchRecordImage(isLighting: isLighting))
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: UIScreen.getWidth(60), height: UIScreen.getHeight(80))
@@ -114,12 +117,13 @@ struct HomeView: View {
                                 VStack(spacing: 0) {
                                     Text("음악 기록하기".localized)
                                         .foregroundColor(.titleDarkgray)
+                                        .foregroundColor(RecordColor.recordTitleDarkgray.fetchColor(isLighting: isLighting))
                                         .font(Font.customHeadline())
                                         .padding(.bottom, UIScreen.getHeight(6))
                                     
                                     VStack(spacing: 0) {
                                         NavigationLink(destination: SearchView(isAccessFirst: true)) {
-                                            Image("note")
+                                            Image(isLighting ? "note_dark" : "note")
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: UIScreen.getWidth(170))
@@ -129,7 +133,7 @@ struct HomeView: View {
                                 }
                             }
                             
-                            Image("desk")
+                            Image(RecordImage.desk.fetchRecordImage(isLighting: isLighting))
                                 .padding(.leading)
                         }
                         
